@@ -1,0 +1,44 @@
+# Flutter / Dart
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+coverage/
+
+# IDEs and OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+
+# Android
+android/.gradle/
+android/local.properties
+android/app/debug/
+android/app/profile/
+android/app/release/
+
+# iOS
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_export_environment.sh
+ios/Runner.xcworkspace/xcuserdata/
+**/xcuserdata/
+
+# Secrets — never commit (this repository is public)
+*.jks
+*.keystore
+key.properties
+*.p12
+*.p8
+*.mobileprovision
+*.cer
+google-services.json
+GoogleService-Info.plist
+.env
+.env.*
+!*.example
