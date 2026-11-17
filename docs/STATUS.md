@@ -6,7 +6,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 ## Current stage
 
-**Stage 0:** PRs 1 and 2 of 14 ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11). Next: PR 3, the theme from the web's tokens.
+**Stage 0:** PRs 1–3 of 14 ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11). Next: PR 4, Bangla and English.
 
 ## Done
 
@@ -17,11 +17,16 @@ Updated in every pull request, so the owner and the backend session can see wher
 - Wrote the Stage 0 plan.
 - Created the Android test signing key (outside the repo); its four secrets are in the repository's Actions secrets.
 - PR 1: the Flutter project (`academy.instructor.app`, "Instructor", Android 7.0 / API 24, iOS 15.0), lints, a placeholder home, tests, and CI (`ci.yml`: format, analyze, test; `ios-build.yml`: iOS build without signing; Dependabot for actions).
-- PR 2: every merge into `develop` publishes a test APK as a GitHub pre-release ([Releases](https://github.com/Sadiquzzaman/instructor-app/releases)), signed with the test key so it installs over earlier test builds.
+- PR 2: every merge into `develop` publishes a test APK as a GitHub pre-release ([Releases](https://github.com/Sadiquzzaman/instructor-app/releases)), signed with the test key so it installs over earlier test builds. First one: `v0.1.0-dev.3`.
+- PR 3: the theme from the web's design tokens (`tool/tokens.json` → `lib/core/theme/tokens.g.dart`), `AppColors` by role, the type scale with Bangla line height 1.7, the bundled fonts (Instrument Sans, Hind Siliguri; OFL), and shared widgets (button, text field, card, status pill, loading/empty/error states). Tests check the tokens against the web's file, WCAG AA contrast and that no screen hard-codes a colour or font size.
 
 ## In progress
 
-- PR 3: the theme from the web's design tokens.
+- PR 4: Bangla and English (the web's wording, language switch, Bangla digits, organisation time).
+
+## Owner's decisions since the plan
+
+- 17 Nov: the logo the owner sent (green ring with a yellow "i") replaces `logo.png` for the app icon and splash (PR 14). The black background was removed; the transparent version is kept outside the repo until PR 14 adds it.
 
 ## Open `mobile-api` issues
 
