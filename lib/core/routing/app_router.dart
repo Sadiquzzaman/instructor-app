@@ -11,6 +11,7 @@ import 'package:instructor_app/features/auth/screens/signup_form_screen.dart';
 import 'package:instructor_app/features/auth/screens/verify_code_screen.dart';
 import 'package:instructor_app/features/account/screens/account_screen.dart';
 import 'package:instructor_app/features/notifications/screens/inbox_screen.dart';
+import 'package:instructor_app/features/plan/screens/more_features_screen.dart';
 import 'package:instructor_app/features/shell/menu/menu_items.g.dart';
 import 'package:instructor_app/features/shell/screens/app_shell.dart';
 import 'package:instructor_app/features/shell/screens/home_screen.dart';
@@ -90,6 +91,10 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: AppRoutes.account,
             builder: (context, state) => const AccountScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.features,
+            builder: (context, state) => const MoreFeaturesScreen(),
           ),
           // Every page of the web's menu: "use the website for now" until its
           // stage builds it.

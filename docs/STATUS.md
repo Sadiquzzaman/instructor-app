@@ -6,7 +6,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 ## Current stage
 
-**Stage 0:** PRs 1–12 of 14 ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11), plus the #345 error codes. Next: PR 13, "More features".
+**Stage 0:** PRs 1–13 of 14 ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11), plus the #345 error codes. Next: PR 14, the app icon and splash.
 
 ## Done
 
@@ -38,20 +38,27 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 - The #345 error codes: sign-up, the SMS code, forgot password and sign-in now say what went wrong in Bangla or English (phone or email already has an account, under that field; the code could not be sent, the hourly limit; no such account; already verified; wrong, expired or locked code; not verified yet (sign up again with the same number for a new code); account disabled). The server's English message is never shown. Checked on beta: forgot password with a made-up email says "No account was found…".
 
+- PR 13: "More features" (`/features`, from the menu, as on the web). It shows:
+  - the plan's name;
+  - every feature from `GET /subscriptions/feature-catalog`, by group, with the web's name and one-line description in Bangla or English, marked Included or Locked from `GET /me/entitlements`. `tool/import_web_messages.dart` now also writes `feature_names.g.dart`; a feature the messages do not know shows the API's label;
+  - "Request this feature" with an optional note (`POST /me/feature-requests`); the feature is then marked "Requested".
+
+  Only the owner or an admin (a solo teacher in their own workspace) sees it; everyone else is told to ask them. There is no upgrade button (CLAUDE.md "Payments"). The locked-feature sheet now offers owners and admins "See all features and request one", and scrolls on short screens. Checked on beta as the Demo School owner in English and Bangla. No request was sent, because sending one emails the platform admins.
+
 ## In progress
 
-- PR 13: "More features" (the locked features and "Request this feature").
+- PR 14: the app icon and splash from the owner's logo.
 
 ## Owner's decisions since the plan
 
 - 17 Nov: the logo the owner sent (green ring with a yellow "i") replaces `logo.png` for the app icon and splash (PR 14). The black background was removed; the transparent version is kept outside the repo until PR 14 adds it.
 - 17 Nov: `cupertino_ui` approved as a direct dependency (Bangla texts for iOS-style menus; it already came with `material_ui`).
 
-## Open `mobile-api` issues
+## `mobile-api` issues
 
 | Issue | What | Priority | Blocked? |
 | --- | --- | --- | --- |
-| [tes-taker#345](https://github.com/Sadiquzzaman/tes-taker/issues/345) | Error codes for sign-up, OTP and password reset (and login: wrong credentials vs not verified) | Done | No: the codes are on beta and the app uses them; the issue can be closed |
+| [tes-taker#345](https://github.com/Sadiquzzaman/tes-taker/issues/345) | Error codes for sign-up, OTP and password reset (and login: wrong credentials vs not verified) | Done | No: on beta and used by the app; closed by the backend on 17 Nov |
 
 ## Waiting on the backend (planned, no issue needed)
 

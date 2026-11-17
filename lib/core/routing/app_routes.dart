@@ -10,11 +10,12 @@ abstract final class AppRoutes {
   static const forgotPassword = '/forgot-password';
   static const notifications = '/notifications';
   static const account = '/account';
+  static const features = '/features';
 
   /// Pages the app has really built (not "use the website for now"). A
   /// notification's link opens in the app only for these; each stage adds
   /// its pages here.
-  static const built = {home, notifications, account};
+  static const built = {home, notifications, account, features};
 
   static bool isAppPage(String link) {
     final uri = Uri.tryParse(link);

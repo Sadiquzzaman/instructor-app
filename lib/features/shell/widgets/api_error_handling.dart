@@ -1,8 +1,10 @@
+import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'package:instructor_app/core/api/api_exception.dart';
 import 'package:instructor_app/core/auth/session.dart';
 import 'package:instructor_app/core/l10n/l10n.dart';
+import 'package:instructor_app/core/routing/app_routes.dart';
 import 'package:instructor_app/core/theme/app_metrics.dart';
 import 'package:instructor_app/core/widgets/app_button.dart';
 
@@ -61,7 +63,8 @@ Future<void> showLockedFeature(
     final l10n = sheetContext.l10n;
     final text = Theme.of(sheetContext).textTheme;
     return SafeArea(
-      child: Padding(
+      // Scrolls on a short screen or with large text.
+      child: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(
           AppSpacing.xl,
           0,
@@ -87,6 +90,17 @@ Future<void> showLockedFeature(
               style: text.bodyLarge,
               textAlign: TextAlign.center,
             ),
+            // The plan's features and "Request this feature", in the app.
+            if (canManage) ...[
+              const SizedBox(height: AppSpacing.md),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(sheetContext).pop();
+                  context.go(AppRoutes.features);
+                },
+                child: Text(l10n.featuresLockedMoreFeatures),
+              ),
+            ],
             const SizedBox(height: AppSpacing.xl),
             AppButton(
               label: l10n.featuresLockedClose,
