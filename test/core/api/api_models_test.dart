@@ -157,12 +157,12 @@ void main() {
       RequestOptions(
         path: '/auth/forgot-password',
         method: 'POST',
-        queryParameters: {'phone': '01700000000'},
+        queryParameters: {'phone': '01100000000'},
       ),
       200,
     );
     expect(line, 'API POST /auth/forgot-password?phone=… → 200');
-    expect(line, isNot(contains('017')));
+    expect(line, isNot(contains('0110')));
   });
 
   test('errors become a sentence', () {

@@ -23,7 +23,7 @@ void main() {
     final api = FakeApi()
       ..on('POST /auth/login', (r) {
         final body = r.body! as Map;
-        return body['phone'] == '01712345678' && body['password'] == 'right-one'
+        return body['phone'] == '01100000001' && body['password'] == 'right-one'
             ? ok(sessionPayload())
             : apiError(401, message: 'Invalid credentials');
       })
@@ -32,7 +32,7 @@ void main() {
     expect(find.byType(LoginScreen), findsOneWidget);
 
     // A wrong password first.
-    await tester.enterText(field('login-identifier'), '01712345678');
+    await tester.enterText(field('login-identifier'), '01100000001');
     await tester.enterText(field('login-password'), 'wrong-one');
     await tester.tap(find.text('Sign in'));
     await tester.pumpAndSettle();

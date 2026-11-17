@@ -19,11 +19,11 @@ void main() {
     test('identifier', () {
       String? v(String s) => LoginValidation.identifier(s, l10n);
       expect(v('  '), 'Please enter your email or phone number');
-      expect(v('0171234567'), 'Phone number must be 11 digits');
-      expect(v('02123456789'), 'Invalid Bangladeshi phone number');
+      expect(v('0110000000'), 'Phone number must be 11 digits');
+      expect(v('02100000001'), 'Invalid Bangladeshi phone number');
       expect(v('a@b'), 'Invalid email address');
       expect(v('hello'), 'Enter a valid email or phone number');
-      expect(v('01712345678'), isNull);
+      expect(v('01100000001'), isNull);
       expect(v(' Demo@Example.com '), isNull);
     });
 
@@ -40,8 +40,8 @@ void main() {
       expect(LoginValidation.identifierField(' Demo@Example.com '), {
         'email': 'demo@example.com',
       });
-      expect(LoginValidation.identifierField('01712345678'), {
-        'phone': '01712345678',
+      expect(LoginValidation.identifierField('01100000001'), {
+        'phone': '01100000001',
       });
     });
   });
@@ -85,12 +85,12 @@ void main() {
   testWidgets('a phone number is sent as phone', (tester) async {
     final api = FakeApi()..on('POST /auth/login', (_) => ok(sessionPayload()));
     await pumpInstructorApp(tester, api: api);
-    await tester.enterText(field('login-identifier'), '01712345678');
+    await tester.enterText(field('login-identifier'), '01100000001');
     await tester.enterText(field('login-password'), 'a-password');
     await tester.tap(find.text('Sign in'));
     await tester.pumpAndSettle();
     final body = api.to('POST /auth/login').single.body! as Map;
-    expect(body['phone'], '01712345678');
+    expect(body['phone'], '01100000001');
     expect(body.containsKey('email'), isFalse);
   });
 
@@ -115,7 +115,7 @@ void main() {
         (_) => apiError(401, message: 'Invalid credentials'),
       );
     await pumpInstructorApp(tester, api: api, prefs: {'language': 'bn'});
-    await tester.enterText(field('login-identifier'), '01712345678');
+    await tester.enterText(field('login-identifier'), '01100000001');
     await tester.enterText(field('login-password'), 'a-password');
     await tester.tap(find.text('সাইন ইন'));
     await tester.pumpAndSettle();
@@ -138,7 +138,7 @@ void main() {
         ),
       );
     await pumpInstructorApp(tester, api: api);
-    await tester.enterText(field('login-identifier'), '01712345678');
+    await tester.enterText(field('login-identifier'), '01100000001');
     await tester.enterText(field('login-password'), 'a-password');
     await tester.tap(find.text('Sign in'));
     await tester.pumpAndSettle();
@@ -158,7 +158,7 @@ void main() {
       api: api,
       prefs: {LanguageController.prefsKey: 'en'},
     );
-    await tester.enterText(field('login-identifier'), '01712345678');
+    await tester.enterText(field('login-identifier'), '01100000001');
     await tester.enterText(field('login-password'), 'a-password');
     await tester.tap(find.text('Sign in'));
     await tester.pumpAndSettle();
