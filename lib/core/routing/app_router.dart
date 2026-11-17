@@ -12,6 +12,7 @@ import 'package:instructor_app/features/auth/screens/verify_code_screen.dart';
 import 'package:instructor_app/features/account/screens/account_screen.dart';
 import 'package:instructor_app/features/attendance/screens/my_attendance_screen.dart';
 import 'package:instructor_app/features/calendar/screens/calendar_screen.dart';
+import 'package:instructor_app/features/chat/screens/chat_screens.dart';
 import 'package:instructor_app/features/classes/screens/classes_screen.dart';
 import 'package:instructor_app/features/homework/screens/homework_detail_screen.dart';
 import 'package:instructor_app/features/homework/screens/homework_list_screen.dart';
@@ -183,6 +184,10 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: AppRoutes.resources,
             builder: (context, state) => const ResourcesScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.chat,
+            builder: (context, state) => const ChatScreen(),
           ),
           GoRoute(
             path: AppRoutes.account,
