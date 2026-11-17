@@ -41,6 +41,7 @@ const webNamespaces = [
   'routine',
   'homework',
   'classes',
+  'discussions',
 ];
 
 const locales = ['en', 'bn'];

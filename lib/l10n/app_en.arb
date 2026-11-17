@@ -2548,6 +2548,98 @@
   "classesJoinSignUp": "Sign up",
   "classesJoinLogIn": "Log in",
   "classesIntroStudent": "The [[classes]] you study in, with their tests.",
+  "discussionsScoped": "Discussions are kept per subject.",
+  "discussionsSubject": "Subject",
+  "discussionsSelectSubject": "Select a subject",
+  "discussionsLoadingSubjects": "Loading subjects…",
+  "discussionsPickSubject": "Select a subject to open its discussions.",
+  "discussionsPublic": "[[Class]] discussion",
+  "discussionsPrivate": "Private messages",
+  "discussionsSubjectsForbidden": "You do not have access to discussions in this [[class]].",
+  "discussionsSubjectsFailed": "Discussion subjects did not load.",
+  "discussionsPostsForbidden": "You do not have access to this subject's discussion.",
+  "discussionsPostsFailed": "The [[class]] discussion did not load.",
+  "discussionsConversationsForbidden": "You do not have access to private messages for this subject.",
+  "discussionsConversationsFailed": "Private messages did not load.",
+  "discussionsPostedTitle": "Posted",
+  "discussionsPosted": "Your post was added to the [[class]] discussion.",
+  "discussionsFilterAll": "All",
+  "discussionsFilterQuestion": "Questions",
+  "discussionsFilterIdea": "Ideas",
+  "discussionsFilterResource": "Resources",
+  "discussionsCategoryGeneral": "General",
+  "discussionsCategoryQuestion": "Question",
+  "discussionsCategoryIdea": "Idea",
+  "discussionsCategoryResource": "Resource",
+  "discussionsComposerLabel": "New post",
+  "discussionsComposerPlaceholder": "Ask a question or start a discussion…",
+  "discussionsComposerCategory": "Post type",
+  "discussionsComposerPost": "Post",
+  "discussionsComposerPosting": "Posting…",
+  "discussionsComposerImage": "Image",
+  "discussionsComposerFile": "File",
+  "discussionsComposerAttach": "Attach",
+  "discussionsComposerUploading": "Uploading…",
+  "discussionsComposerMaxFiles": "You can attach up to 5 files.",
+  "discussionsComposerUploadFailed": "Upload failed. Please try again.",
+  "discussionsComposerPostFailed": "Could not post. Please try again.",
+  "discussionsComposerSendFailed": "Could not send. Please try again.",
+  "discussionsComposerUploadingProgress": "Uploading… {percent}%",
+  "@discussionsComposerUploadingProgress": {
+    "placeholders": {
+      "percent": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "discussionsComposerStorageWarning": "Your workspace has used 90% of its storage. Uploads stop when it is full.",
+  "discussionsFeedEmpty": "No posts yet",
+  "discussionsFeedEmptyDetail": "Start the conversation.",
+  "discussionsFeedLoadMore": "Load more",
+  "discussionsPostComments": "{count, plural, =0{Comment} one{{count} comment} other{{count} comments}}",
+  "@discussionsPostComments": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "discussionsPostEdit": "Edit",
+  "discussionsPostDelete": "Delete",
+  "discussionsPostSave": "Save",
+  "discussionsPostCancel": "Cancel",
+  "discussionsPostEditLabel": "Edit post",
+  "discussionsPostReply": "Reply",
+  "discussionsPostReplyPlaceholder": "Write a reply…",
+  "discussionsPostDeleteTitle": "Delete this post?",
+  "discussionsPostDeleteDetail": "The post and its comments will be removed for everyone.",
+  "discussionsPostDeleteCommentTitle": "Delete this comment?",
+  "discussionsAttachmentRemove": "Remove {name}",
+  "@discussionsAttachmentRemove": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "discussionsChatTitle": "Private messages",
+  "discussionsChatIntro": "One-to-one messages about this subject.",
+  "discussionsChatStartWithStudent": "Start with a student",
+  "discussionsChatStartWithTeacher": "Start with a teacher",
+  "discussionsChatNoStudents": "No joined students in this [[class]] yet.",
+  "discussionsChatNoTeachers": "No teacher is assigned to this subject yet.",
+  "discussionsChatStart": "Start conversation",
+  "discussionsChatSearch": "Search conversations",
+  "discussionsChatNone": "No conversations yet.",
+  "discussionsChatPick": "Choose a conversation to start chatting.",
+  "discussionsChatNoMessages": "No messages yet. Say hello.",
+  "discussionsChatSelectConversation": "Select a conversation",
+  "discussionsChatMessage": "Message",
+  "discussionsChatPlaceholder": "Type a message…",
+  "discussionsChatSend": "Send",
+  "discussionsChatConversations": "Conversations",
   "appNoConnection": "No internet connection. Check it and try again.",
   "appUpdateRequiredTitle": "Please update Instructor",
   "appUpdateRequiredBody": "This version of the app is no longer supported. Install the new version to continue.",

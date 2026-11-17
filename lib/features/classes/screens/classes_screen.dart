@@ -13,6 +13,7 @@ import 'package:instructor_app/core/time/org_time.dart';
 import 'package:instructor_app/core/widgets/app_card.dart';
 import 'package:instructor_app/core/widgets/state_views.dart';
 import 'package:instructor_app/features/classes/data/classes.dart';
+import 'package:instructor_app/features/classes/screens/class_discussions.dart';
 
 /// The web's /classes for a student: the classes they study in, in the
 /// current workspace. Each opens its page. Teachers' classes (students,
@@ -177,51 +178,94 @@ class ClassDetailScreen extends ConsumerWidget {
                         style: text.bodySmall?.copyWith(color: colors.inkMuted),
                       ),
                     const SizedBox(height: AppSpacing.lg),
-                    AppCard(
-                      key: const Key('classmates'),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Text(
-                            l10n.classesRosterTitle,
-                            style: text.titleMedium,
-                          ),
-                          const SizedBox(height: AppSpacing.sm),
-                          if (c.classmates.isEmpty)
+                    _ClassTabs(
+                      classId: c.id,
+                      students: AppCard(
+                        key: const Key('classmates'),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
                             Text(
-                              l10n.classesRosterEmpty,
-                              style: text.bodyMedium?.copyWith(
-                                color: colors.inkMuted,
-                              ),
-                            )
-                          else
-                            for (final m in c.classmates)
-                              ListTile(
-                                contentPadding: EdgeInsets.zero,
-                                leading: CircleAvatar(
-                                  backgroundColor: colors.primarySoft,
-                                  foregroundColor: colors.primary,
-                                  child: Text(
-                                    m.name.isEmpty
-                                        ? '?'
-                                        : m.name.characters.first.toUpperCase(),
-                                  ),
+                              l10n.classesRosterTitle,
+                              style: text.titleMedium,
+                            ),
+                            const SizedBox(height: AppSpacing.sm),
+                            if (c.classmates.isEmpty)
+                              Text(
+                                l10n.classesRosterEmpty,
+                                style: text.bodyMedium?.copyWith(
+                                  color: colors.inkMuted,
                                 ),
-                                title: Text(m.name),
-                                subtitle: m.joinedAt == null
-                                    ? null
-                                    : Text(
-                                        '${l10n.classesRosterJoined} '
-                                        '${OrgTime.date(m.joinedAt!, language)}',
-                                      ),
-                              ),
-                        ],
+                              )
+                            else
+                              for (final m in c.classmates)
+                                ListTile(
+                                  contentPadding: EdgeInsets.zero,
+                                  leading: CircleAvatar(
+                                    backgroundColor: colors.primarySoft,
+                                    foregroundColor: colors.primary,
+                                    child: Text(
+                                      m.name.isEmpty
+                                          ? '?'
+                                          : m.name.characters.first
+                                                .toUpperCase(),
+                                    ),
+                                  ),
+                                  title: Text(m.name),
+                                  subtitle: m.joinedAt == null
+                                      ? null
+                                      : Text(
+                                          '${l10n.classesRosterJoined} '
+                                          '${OrgTime.date(m.joinedAt!, language)}',
+                                        ),
+                                ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
                 ),
         ),
       ),
+    );
+  }
+}
+
+/// The class page's tabs (the web's Students and Discussions; Tests join
+/// with the tests PR).
+class _ClassTabs extends StatefulWidget {
+  const _ClassTabs({required this.classId, required this.students});
+
+  final String classId;
+  final Widget students;
+
+  @override
+  State<_ClassTabs> createState() => _ClassTabsState();
+}
+
+class _ClassTabsState extends State<_ClassTabs> {
+  int _tab = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        SegmentedButton<int>(
+          segments: [
+            ButtonSegment(value: 0, label: Text(l10n.classesTabsStudents)),
+            ButtonSegment(value: 1, label: Text(l10n.classesTabsDiscussions)),
+          ],
+          selected: {_tab},
+          onSelectionChanged: (s) => setState(() => _tab = s.first),
+        ),
+        const SizedBox(height: AppSpacing.md),
+        if (_tab == 0)
+          widget.students
+        else
+          ClassDiscussions(classId: widget.classId),
+      ],
     );
   }
 }

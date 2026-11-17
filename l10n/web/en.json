@@ -1581,5 +1581,90 @@
       "logIn": "Log in"
     },
     "introStudent": "The [[classes]] you study in, with their tests."
+  },
+  "discussions": {
+    "scoped": "Discussions are kept per subject.",
+    "subject": "Subject",
+    "selectSubject": "Select a subject",
+    "loadingSubjects": "Loading subjects…",
+    "pickSubject": "Select a subject to open its discussions.",
+    "public": "[[Class]] discussion",
+    "private": "Private messages",
+    "subjectsForbidden": "You do not have access to discussions in this [[class]].",
+    "subjectsFailed": "Discussion subjects did not load.",
+    "postsForbidden": "You do not have access to this subject's discussion.",
+    "postsFailed": "The [[class]] discussion did not load.",
+    "conversationsForbidden": "You do not have access to private messages for this subject.",
+    "conversationsFailed": "Private messages did not load.",
+    "postedTitle": "Posted",
+    "posted": "Your post was added to the [[class]] discussion.",
+    "filter": {
+      "all": "All",
+      "question": "Questions",
+      "idea": "Ideas",
+      "resource": "Resources"
+    },
+    "category": {
+      "general": "General",
+      "question": "Question",
+      "idea": "Idea",
+      "resource": "Resource"
+    },
+    "composer": {
+      "label": "New post",
+      "placeholder": "Ask a question or start a discussion…",
+      "category": "Post type",
+      "post": "Post",
+      "posting": "Posting…",
+      "image": "Image",
+      "file": "File",
+      "attach": "Attach",
+      "uploading": "Uploading…",
+      "maxFiles": "You can attach up to 5 files.",
+      "uploadFailed": "Upload failed. Please try again.",
+      "postFailed": "Could not post. Please try again.",
+      "sendFailed": "Could not send. Please try again.",
+      "uploadingProgress": "Uploading… {percent, number}%",
+      "storageWarning": "Your workspace has used 90% of its storage. Uploads stop when it is full."
+    },
+    "feed": {
+      "empty": "No posts yet",
+      "emptyDetail": "Start the conversation.",
+      "loadMore": "Load more"
+    },
+    "post": {
+      "comments": "{count, plural, =0 {Comment} one {# comment} other {# comments}}",
+      "edit": "Edit",
+      "delete": "Delete",
+      "save": "Save",
+      "cancel": "Cancel",
+      "editLabel": "Edit post",
+      "reply": "Reply",
+      "replyPlaceholder": "Write a reply…",
+      "deleteTitle": "Delete this post?",
+      "deleteDetail": "The post and its comments will be removed for everyone.",
+      "deleteCommentTitle": "Delete this comment?"
+    },
+    "attachment": {
+      "remove": "Remove {name}"
+    },
+    "chat": {
+      "title": "Private messages",
+      "intro": "One-to-one messages about this subject.",
+      "startWithStudent": "Start with a student",
+      "startWithTeacher": "Start with a teacher",
+      "noStudents": "No joined students in this [[class]] yet.",
+      "noTeachers": "No teacher is assigned to this subject yet.",
+      "start": "Start conversation",
+      "search": "Search conversations",
+      "none": "No conversations yet.",
+      "pick": "Choose a conversation to start chatting.",
+      "noMessages": "No messages yet. Say hello.",
+      "selectConversation": "Select a conversation",
+      "message": "Message",
+      "placeholder": "Type a message…",
+      "send": "Send",
+      "conversations": "Conversations"
+    }
   }
 }
