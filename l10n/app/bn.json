@@ -40,7 +40,8 @@
     "locationServiceOff": "আপনার ফোনের লোকেশন বন্ধ। চালু করে আবার চেষ্টা করুন।",
     "locationOpenSettings": "সেটিংস খুলুন",
     "attendanceRefresh": "রিফ্রেশ করুন",
-    "resultQuestion": "প্রশ্ন {number, number}",
+    "resultNotPublished": "আপনার শিক্ষক প্রকাশ করলে ফলাফল এখানে দেখাবে।",
+    "resultQuestion":"প্রশ্ন {number, number}",
     "resultYourAnswer": "আপনার উত্তর",
     "resultCorrectAnswer": "সঠিক উত্তর",
     "resultCorrect": "সঠিক",
@@ -48,7 +49,14 @@
     "resultNoAnswer": "উত্তর দেওয়া হয়নি",
     "resultMarks": "{obtained, number} / {points, number} নম্বর",
     "resultSummary": "{correct, number}টি সঠিক, {wrong, number}টি ভুল, {unanswered, number}টির উত্তর দেওয়া হয়নি",
-    "testsStartSoon": "অ্যাপে পরীক্ষা দেওয়ার সুবিধা শিগগির আসছে। আপাতত ওয়েবসাইট ব্যবহার করুন।",
+    "testUseComputer": "এই পরীক্ষাটি কম্পিউটারে দিন",
+    "testUseComputerDetail": "এই পরীক্ষায় ক্যামেরা ও মাইক্রোফোন দিয়ে নজর রাখা হয়, অথবা এটি একটি IELTS পরীক্ষা। অনুগ্রহ করে কম্পিউটারে দিন।",
+    "testRuleLeaveApp": "অ্যাপ থেকে বের হলে (অন্য অ্যাপে গেলে বা হোমে গেলে) তা আপনার শিক্ষকের জন্য রেকর্ড হয়।",
+    "testRuleNoPaste": "উত্তরে কপি ও পেস্ট বন্ধ থাকে।",
+    "testRuleNoScreenshots": "পরীক্ষার সময় স্ক্রিনশট নেওয়া যায় না।",
+    "testLeftApp": "পরীক্ষার সময় আপনি অ্যাপ থেকে বের হয়েছেন। এটি আপনার শিক্ষকের জন্য রেকর্ড হয়েছে।",
+    "testWarnLimit": "আপনার {count, number}টি ফ্ল্যাগ হয়েছে। {limit, number}টি হলে পরীক্ষা শেষ হয়ে যাবে।",
+    "testChooseMatch": "মিল বেছে নিন",
     "savedCopy":"ইন্টারনেট সংযোগ নেই। এটি {time}-এ আপনার ফোনে সংরক্ষণ করা হয়েছিল; আবার চেষ্টা করতে নিচে টানুন।"
   }
 }

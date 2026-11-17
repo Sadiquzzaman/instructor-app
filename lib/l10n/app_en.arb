@@ -2855,6 +2855,246 @@
   "testsPrintCancel": "Cancel",
   "testsPrintNoQuestions": "This test has no questions yet.",
   "testsPrintFailed": "Couldn't make the PDF. Try again.",
+  "examBackToTests": "Back to Tests",
+  "examSubject": "Sub",
+  "examTotalMarks": "Total Marks: {marks}",
+  "@examTotalMarks": {
+    "placeholders": {
+      "marks": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "examCountdown": "{minutes} min {seconds} sec",
+  "@examCountdown": {
+    "placeholders": {
+      "minutes": {
+        "type": "String"
+      },
+      "seconds": {
+        "type": "String"
+      }
+    }
+  },
+  "examSubmit": "Submit Answer",
+  "examSubmitting": "Submitting...",
+  "examQuestionCount": "{count, plural, one{{count} Question} other{{count} Questions}}",
+  "@examQuestionCount": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "examPoints": "Points: {points}",
+  "@examPoints": {
+    "placeholders": {
+      "points": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "examNegativeMarking": "Negative marking: {mark}",
+  "@examNegativeMarking": {
+    "placeholders": {
+      "mark": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "examWordCount": "Word count {count}",
+  "@examWordCount": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "examWordCountLimit": "Word count {count} / {limit}",
+  "@examWordCountLimit": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "limit": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "examWriteAnswer": "Write answer here",
+  "examWriteEssay": "Write your essay here",
+  "examNoAudioSupport": "Your browser does not support the audio element.",
+  "examStartRecording": "Start recording",
+  "examReRecord": "Re-record answer",
+  "examStopRecording": "Stop recording",
+  "examRecordingTimeLeft": "Time left: {seconds}s",
+  "@examRecordingTimeLeft": {
+    "placeholders": {
+      "seconds": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "examMicRequiredToRecord": "Microphone access is required to record your answer.",
+  "examDragToReorder": "Drag to reorder",
+  "examMediaLost": "Camera and microphone access were lost. Please return to permissions and try again.",
+  "examBackToPermissions": "Back to Permissions",
+  "examMediaRequired": "Webcam and microphone access are required before loading the test.",
+  "examUnableToStart": "Unable to start the test.",
+  "examUnableToLoad": "Unable to load the test.",
+  "examReturnToFullscreen": "Click anywhere on the exam page to return to fullscreen.",
+  "examSubmittingTitle": "{reason, select, timeout{Time is up} disqualified{Exam ended} other{Your answer is submitting}}",
+  "@examSubmittingTitle": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "examSubmittingDescription": "{reason, select, timeout{Time is up and your answer is submitting. Please wait a moment.} disqualified{Your session was disqualified and your answers are being submitted.} other{Your answer is submitting. Please wait a moment.}}",
+  "@examSubmittingDescription": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "examMessageNotStartedTitle": "Exam has not started",
+  "examMessageNotStartedDescription": "This exam is not open yet. Please return when the scheduled start time arrives.",
+  "examMessageExamEndedTitle": "Exam has ended",
+  "examMessageExamEndedDescription": "The exam window is closed. You can no longer enter or submit this test.",
+  "examMessageAlreadySubmittedTitle": "Already submitted",
+  "examMessageAlreadySubmittedDescription": "You have already submitted this exam and cannot rejoin it.",
+  "examMessageDisqualifiedTitle": "Exam ended",
+  "examMessageDisqualifiedDescription": "Your session was disqualified. Your answers have been recorded.",
+  "examMessageTimeUpTitle": "Time is up",
+  "examMessageTimeUpDescription": "Your exam time has ended and your answers were submitted automatically.",
+  "examMessageNotAssignedTitle": "Access denied",
+  "examMessageNotAssignedDescription": "You are not assigned to this exam.",
+  "examMessageExamFullTitle": "Exam is full",
+  "examMessageExamFullDescription": "This exam has reached the student limit of your teacher's plan, so no more students can start it. Please contact your teacher.",
+  "examPermissionsLoginSuccessful": "Login Successful",
+  "examPermissionsIntro": "Please allow camera and microphone access before starting the test.",
+  "examPermissionsCameraTitle": "Camera Device",
+  "examPermissionsCameraAction": "Allow Camera Access",
+  "examPermissionsMicrophoneTitle": "Microphone",
+  "examPermissionsMicrophoneAction": "Allow Microphone Access",
+  "examPermissionsStatusGranted": "Granted",
+  "examPermissionsStatusDenied": "Denied",
+  "examPermissionsStatusUnsupported": "Unsupported",
+  "examPermissionsStatusPending": "Please set it up.",
+  "examPermissionsNextStep": "Next Step",
+  "examPermissionsRulesTitle": "Test Rules",
+  "examPermissionsRulesMedia": "Stay camera and mic on.",
+  "examPermissionsRulesRead": "Read the test paper/instructions carefully.",
+  "examPermissionsRulesTabs": "Do not open additional tabs.",
+  "examPermissionsRulesTime": "Finish the test within the allotted time.",
+  "examPermissionsRulesFlags": "Proctor can flag your activity.",
+  "examPermissionsRulesLimit": "If you receive {count} flags, the test will be terminated.",
+  "@examPermissionsRulesLimit": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "examPermissionsRulesWarn": "You will be warned at {count} flags.",
+  "@examPermissionsRulesWarn": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "examPermissionsRulesReview": "Flags are recorded for your teacher to review; you will not be removed automatically.",
+  "examPermissionsAccept": "I read and understand the rules.",
+  "examPermissionsStartTest": "Start Test",
+  "examPermissionsBack": "Back",
+  "examPermissionsWatchedTitle": "Watched during this test",
+  "examPermissionsWatchedNone": "Nothing is watched during this test.",
+  "examRetry": "Retry",
+  "examNavigatorTitle": "Questions",
+  "examNavigatorProgress": "{answered} of {total} answered",
+  "@examNavigatorProgress": {
+    "placeholders": {
+      "answered": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "total": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "examNavigatorGo": "Question {number}{state, select, answered{, answered} flagged{, flagged for review} answeredFlagged{, answered, flagged for review} other{}}",
+  "@examNavigatorGo": {
+    "placeholders": {
+      "number": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "state": {
+        "type": "String"
+      }
+    }
+  },
+  "examNavigatorLegendAnswered": "Answered",
+  "examNavigatorLegendFlagged": "Flagged",
+  "examNavigatorLegendOpen": "Not answered",
+  "examNavigatorOpen": "Question list",
+  "examFlag": "Flag for review",
+  "examFlagged": "Flagged",
+  "examTimeLeftLabel": "Time left",
+  "examSubmitTitle": "Submit your answers?",
+  "examSubmitDetail": "{open, plural, =0{Every question is answered.} one{{open} question is not answered yet.} other{{open} questions are not answered yet.}} You cannot change your answers after submitting.",
+  "@examSubmitDetail": {
+    "placeholders": {
+      "open": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "examSubmitConfirm": "Submit",
+  "examKeepWorking": "Keep working",
+  "examQuestionLabel": "Question {number}",
+  "@examQuestionLabel": {
+    "placeholders": {
+      "number": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "examEndedByTeacher": "Your teacher ended your test: {reason}",
+  "@examEndedByTeacher": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "examTeacherWarningTitle": "A message from your teacher",
+  "examTeacherWarningOk": "I understand",
+  "examSaveStatusDevice": "Saved on this device",
+  "examSaveStatusSaving": "Saving…",
+  "examSaveStatusServer": "Saved to server",
+  "examSaveStatusHint": "Your answers are kept on this device and sent when the connection is back.",
+  "examSubmitWaitingTitle": "Waiting for the connection",
+  "examSubmitWaitingDetail": "Your answers are saved on this device. We'll submit them as soon as the connection is back.",
+  "examSubmitOfflineTitle": "Couldn't reach the server",
+  "examSubmitOfflineDetail": "Try submitting again. Answers already saved to the server are submitted automatically when time is up.",
   "appNoConnection": "No internet connection. Check it and try again.",
   "appUpdateRequiredTitle": "Please update Instructor",
   "appUpdateRequiredBody": "This version of the app is no longer supported. Install the new version to continue.",
@@ -2918,6 +3158,7 @@
   "appLocationServiceOff": "Your phone's location is off. Turn it on, then try again.",
   "appLocationOpenSettings": "Open settings",
   "appAttendanceRefresh": "Refresh",
+  "appResultNotPublished": "Your result shows here once your teacher publishes it.",
   "appResultQuestion": "Question {number}",
   "@appResultQuestion": {
     "placeholders": {
@@ -2962,7 +3203,26 @@
       }
     }
   },
-  "appTestsStartSoon": "Taking tests in the app comes next. Please use the website for now.",
+  "appTestUseComputer": "Use a computer for this test",
+  "appTestUseComputerDetail": "This test is watched with the camera and microphone, or is an IELTS test. Please take it on a computer.",
+  "appTestRuleLeaveApp": "Leaving the app (switching apps or going home) is recorded for your teacher.",
+  "appTestRuleNoPaste": "Copy and paste are turned off in answers.",
+  "appTestRuleNoScreenshots": "Screenshots are blocked during the test.",
+  "appTestLeftApp": "You left the app during the test. This is recorded for your teacher.",
+  "appTestWarnLimit": "You have {count} flags. At {limit} the test ends.",
+  "@appTestWarnLimit": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "limit": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "appTestChooseMatch": "Choose a match",
   "appSavedCopy": "No internet connection. This was saved on your phone at {time}; pull down to try again.",
   "@appSavedCopy": {
     "placeholders": {

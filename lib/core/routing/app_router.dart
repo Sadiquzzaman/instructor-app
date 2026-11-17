@@ -21,6 +21,7 @@ import 'package:instructor_app/features/notifications/screens/inbox_screen.dart'
 import 'package:instructor_app/features/plan/screens/more_features_screen.dart';
 import 'package:instructor_app/features/shell/menu/menu_items.g.dart';
 import 'package:instructor_app/features/shell/screens/app_shell.dart';
+import 'package:instructor_app/features/tests/screens/take_test_screen.dart';
 import 'package:instructor_app/features/tests/screens/test_result_screen.dart';
 import 'package:instructor_app/features/tests/screens/tests_screen.dart';
 import 'package:instructor_app/features/today/screens/today_screen.dart';
@@ -81,6 +82,12 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.forgotPassword,
         builder: (context, state) => const ForgotPasswordScreen(),
+      ),
+      // Taking a test: the whole screen, outside the shell's menu.
+      GoRoute(
+        path: '${AppRoutes.tests}/:id/take',
+        builder: (context, state) =>
+            TakeTestScreen(id: state.pathParameters['id']!),
       ),
       // Everything signed in: the workspace picker first when needed, then
       // the shell (menu, switcher) around the page.

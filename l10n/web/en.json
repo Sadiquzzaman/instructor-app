@@ -1793,5 +1793,127 @@
       "noQuestions": "This test has no questions yet.",
       "failed": "Couldn't make the PDF. Try again."
     }
+  },
+  "exam": {
+    "backToTests": "Back to Tests",
+    "subject": "Sub",
+    "totalMarks": "Total Marks: {marks, number}",
+    "countdown": "{minutes} min {seconds} sec",
+    "submit": "Submit Answer",
+    "submitting": "Submitting...",
+    "questionCount": "{count, plural, one {# Question} other {# Questions}}",
+    "points": "Points: {points, number}",
+    "negativeMarking": "Negative marking: {mark, number}",
+    "wordCount": "Word count {count, number}",
+    "wordCountLimit": "Word count {count, number} / {limit, number}",
+    "writeAnswer": "Write answer here",
+    "writeEssay": "Write your essay here",
+    "noAudioSupport": "Your browser does not support the audio element.",
+    "startRecording": "Start recording",
+    "reRecord": "Re-record answer",
+    "stopRecording": "Stop recording",
+    "recordingTimeLeft": "Time left: {seconds, number}s",
+    "micRequiredToRecord": "Microphone access is required to record your answer.",
+    "dragToReorder": "Drag to reorder",
+    "mediaLost": "Camera and microphone access were lost. Please return to permissions and try again.",
+    "backToPermissions": "Back to Permissions",
+    "mediaRequired": "Webcam and microphone access are required before loading the test.",
+    "unableToStart": "Unable to start the test.",
+    "unableToLoad": "Unable to load the test.",
+    "returnToFullscreen": "Click anywhere on the exam page to return to fullscreen.",
+    "submittingTitle": "{reason, select, timeout {Time is up} disqualified {Exam ended} other {Your answer is submitting}}",
+    "submittingDescription": "{reason, select, timeout {Time is up and your answer is submitting. Please wait a moment.} disqualified {Your session was disqualified and your answers are being submitted.} other {Your answer is submitting. Please wait a moment.}}",
+    "message": {
+      "not-started": {
+        "title": "Exam has not started",
+        "description": "This exam is not open yet. Please return when the scheduled start time arrives."
+      },
+      "exam-ended": {
+        "title": "Exam has ended",
+        "description": "The exam window is closed. You can no longer enter or submit this test."
+      },
+      "already-submitted": {
+        "title": "Already submitted",
+        "description": "You have already submitted this exam and cannot rejoin it."
+      },
+      "disqualified": {
+        "title": "Exam ended",
+        "description": "Your session was disqualified. Your answers have been recorded."
+      },
+      "time-up": {
+        "title": "Time is up",
+        "description": "Your exam time has ended and your answers were submitted automatically."
+      },
+      "not-assigned": {
+        "title": "Access denied",
+        "description": "You are not assigned to this exam."
+      },
+      "exam-full": {
+        "title": "Exam is full",
+        "description": "This exam has reached the student limit of your teacher's plan, so no more students can start it. Please contact your teacher."
+      }
+    },
+    "permissions": {
+      "loginSuccessful": "Login Successful",
+      "intro": "Please allow camera and microphone access before starting the test.",
+      "cameraTitle": "Camera Device",
+      "cameraAction": "Allow Camera Access",
+      "microphoneTitle": "Microphone",
+      "microphoneAction": "Allow Microphone Access",
+      "status": {
+        "granted": "Granted",
+        "denied": "Denied",
+        "unsupported": "Unsupported",
+        "pending": "Please set it up."
+      },
+      "nextStep": "Next Step",
+      "rulesTitle": "Test Rules",
+      "rules": {
+        "media": "Stay camera and mic on.",
+        "read": "Read the test paper/instructions carefully.",
+        "tabs": "Do not open additional tabs.",
+        "time": "Finish the test within the allotted time.",
+        "flags": "Proctor can flag your activity.",
+        "limit": "If you receive {count, number} flags, the test will be terminated.",
+        "warn": "You will be warned at {count, number} flags.",
+        "review": "Flags are recorded for your teacher to review; you will not be removed automatically."
+      },
+      "accept": "I read and understand the rules.",
+      "startTest": "Start Test",
+      "back": "Back",
+      "watchedTitle": "Watched during this test",
+      "watchedNone": "Nothing is watched during this test."
+    },
+    "retry": "Retry",
+    "navigator": {
+      "title": "Questions",
+      "progress": "{answered, number} of {total, number} answered",
+      "go": "Question {number, number}{state, select, answered {, answered} flagged {, flagged for review} answeredFlagged {, answered, flagged for review} other {}}",
+      "legendAnswered": "Answered",
+      "legendFlagged": "Flagged",
+      "legendOpen": "Not answered",
+      "open": "Question list"
+    },
+    "flag": "Flag for review",
+    "flagged": "Flagged",
+    "timeLeftLabel": "Time left",
+    "submitTitle": "Submit your answers?",
+    "submitDetail": "{open, plural, =0 {Every question is answered.} one {# question is not answered yet.} other {# questions are not answered yet.}} You cannot change your answers after submitting.",
+    "submitConfirm": "Submit",
+    "keepWorking": "Keep working",
+    "questionLabel": "Question {number, number}",
+    "endedByTeacher": "Your teacher ended your test: {reason}",
+    "teacherWarningTitle": "A message from your teacher",
+    "teacherWarningOk": "I understand",
+    "saveStatus": {
+      "device": "Saved on this device",
+      "saving": "Saving…",
+      "server": "Saved to server"
+    },
+    "saveStatusHint": "Your answers are kept on this device and sent when the connection is back.",
+    "submitWaitingTitle": "Waiting for the connection",
+    "submitWaitingDetail": "Your answers are saved on this device. We'll submit them as soon as the connection is back.",
+    "submitOfflineTitle": "Couldn't reach the server",
+    "submitOfflineDetail": "Try submitting again. Answers already saved to the server are submitted automatically when time is up."
   }
 }

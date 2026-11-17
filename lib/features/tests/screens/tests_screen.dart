@@ -2,7 +2,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'package:instructor_app/core/api/api_providers.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:instructor_app/core/l10n/l10n.dart';
+import 'package:instructor_app/core/routing/app_routes.dart';
 import 'package:instructor_app/core/theme/app_colors.dart';
 import 'package:instructor_app/core/theme/app_metrics.dart';
 import 'package:instructor_app/core/widgets/state_views.dart';
@@ -72,10 +75,9 @@ class _TestListState extends State<TestList> {
   }
 }
 
-/// "Taking tests in the app comes next" until PR 12.
-void startTestLater(BuildContext context) =>
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(context.l10n.appTestsStartSoon)));
+/// Opens the test over the whole screen (rules, then the questions).
+void startTest(BuildContext context, TestItem test) =>
+    context.push('${AppRoutes.tests}/${test.id}/take');
 
 /// The web's /tests for a student.
 class TestsScreen extends ConsumerWidget {
@@ -121,7 +123,7 @@ class TestsScreen extends ConsumerWidget {
                   style: text.bodyMedium?.copyWith(color: colors.inkMuted),
                 ),
                 const SizedBox(height: AppSpacing.md),
-                TestList(tests: list, onStart: (_) => startTestLater(context)),
+                TestList(tests: list, onStart: (t) => startTest(context, t)),
               ],
             ),
           ),

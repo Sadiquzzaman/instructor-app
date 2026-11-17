@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 
+import 'package:instructor_app/core/api/api_exception.dart';
 import 'package:instructor_app/core/l10n/l10n.dart';
 import 'package:instructor_app/core/theme/app_colors.dart';
 import 'package:instructor_app/core/theme/app_metrics.dart';
@@ -31,11 +32,18 @@ class TestResultScreen extends ConsumerWidget {
         constraints: const BoxConstraints(maxWidth: 720),
         child: result.when(
           loading: () => LoadingView(semanticsLabel: l10n.testsResultsTitle),
-          error: (_, _) => ErrorView(
-            title: l10n.testsResultsFailed,
-            retryLabel: l10n.uiErrorRetry,
-            onRetry: () => ref.invalidate(testResultProvider(id)),
-          ),
+          // 403 "Result has not been published yet" (no code yet, tes-taker issue).
+          error: (e, _) => e is ApiException && e.statusCode == 403
+              ? EmptyView(
+                  icon: Icons.hourglass_empty,
+                  title: l10n.testsResultsTitle,
+                  message: l10n.appResultNotPublished,
+                )
+              : ErrorView(
+                  title: l10n.testsResultsFailed,
+                  retryLabel: l10n.uiErrorRetry,
+                  onRetry: () => ref.invalidate(testResultProvider(id)),
+                ),
           data: (r) => ListView(
             padding: const EdgeInsets.all(AppSpacing.lg),
             children: [

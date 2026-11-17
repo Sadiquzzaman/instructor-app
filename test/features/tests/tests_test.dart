@@ -3,6 +3,7 @@ import 'package:material_ui/material_ui.dart';
 
 import 'package:instructor_app/core/routing/app_router.dart';
 import 'package:instructor_app/features/tests/data/tests.dart';
+import 'package:instructor_app/features/tests/screens/take_test_screen.dart';
 import 'package:instructor_app/features/tests/screens/test_result_screen.dart';
 import 'package:instructor_app/l10n/generated/app_localizations_bn.dart';
 import 'package:instructor_app/l10n/generated/app_localizations_en.dart';
@@ -121,6 +122,10 @@ FakeApi _api() => FakeApi()
   )
   ..on('GET /student/exams/t3/result', (_) => ok(_result))
   ..on(
+    'GET /student/exams/t9/result',
+    (_) => apiError(403, message: 'Result has not been published yet'),
+  )
+  ..on(
     'GET /student/classes/c1',
     (_) => ok({'id': 'c1', 'class_name': 'Class 6', 'classmates': <Object>[]}),
   )
@@ -192,11 +197,11 @@ void main() {
     expect(find.text(_en.appResultMarks(0, 1)), findsOneWidget);
   });
 
-  testWidgets('Start says taking tests comes next', (tester) async {
+  testWidgets('Start opens the test', (tester) async {
     await _open(tester, AppRoutes.tests);
     await tester.tap(find.text(_en.testsCardStart));
-    await tester.pump();
-    expect(find.text(_en.appTestsStartSoon), findsOneWidget);
+    await tester.pumpAndSettle();
+    expect(find.byType(TakeTestScreen), findsOneWidget);
   });
 
   testWidgets('a class\'s Tests tab', (tester) async {
@@ -204,6 +209,12 @@ void main() {
     await tester.tap(find.text(_en.classesTabsTests));
     await tester.pumpAndSettle();
     expect(find.text('Last month'), findsOneWidget);
+  });
+
+  testWidgets('a result not published yet says so', (tester) async {
+    await _open(tester, '${AppRoutes.tests}/t9/results');
+    expect(find.text(_en.appResultNotPublished), findsOneWidget);
+    await tester.pump(const Duration(seconds: 1));
   });
 
   testWidgets('in Bangla', (tester) async {
