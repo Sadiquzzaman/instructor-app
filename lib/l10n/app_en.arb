@@ -3768,6 +3768,230 @@
   "reportCardLoadFailed": "Couldn't load the report cards.",
   "reportCardNone": "No report cards made yet",
   "reportCardNoneHint": "Make the cards on the Report cards page first.",
+  "resourcesTitle": "Resources",
+  "resourcesStaffDescription": "Notes, slides, PDFs, audio and links for your subject classes.",
+  "resourcesStudentDescription": "Notes, slides and links your teachers shared with your classes.",
+  "resourcesAdd": "Add resource",
+  "resourcesAddTitle": "Add a resource",
+  "resourcesEditTitle": "Change the resource",
+  "resourcesSearch": "Search",
+  "resourcesSearchPlaceholder": "Title or description",
+  "resourcesFolder": "Folder",
+  "resourcesAllFolders": "All folders",
+  "resourcesNoFolder": "No folder",
+  "resourcesNewFolder": "New folder",
+  "resourcesDeleteFolder": "Delete this folder",
+  "resourcesFolderName": "Folder name",
+  "resourcesFolderAdded": "Folder added",
+  "resourcesFolderDeleted": "Folder deleted; its resources are now outside folders",
+  "resourcesShowArchived": "Show archived",
+  "resourcesNotAvailable": "The resource library isn't part of your school's plan.",
+  "resourcesLoadFailed": "Couldn't load the resources.",
+  "resourcesEmpty": "No resources yet",
+  "resourcesEmptyHint": "Add a file or a link and share it with your subject classes.",
+  "resourcesNoArchived": "Nothing archived",
+  "resourcesListLabel": "Resources",
+  "resourcesTypesFILE": "File",
+  "resourcesTypesVIDEO": "Video",
+  "resourcesTypesLINK": "Link",
+  "resourcesViewOnly": "View only",
+  "resourcesOpen": "Open",
+  "resourcesWhoOpened": "Who opened it",
+  "resourcesEdit": "Edit",
+  "resourcesArchive": "Archive",
+  "resourcesArchivedDone": "Archived — students no longer see it",
+  "resourcesRestore": "Restore",
+  "resourcesRestored": "Restored",
+  "resourcesDelete": "Delete",
+  "resourcesDeleteTitle": "Delete {title}?",
+  "@resourcesDeleteTitle": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "resourcesDeleteDetail": "Students will no longer see it. The school keeps a record.",
+  "resourcesDeleted": "Deleted",
+  "resourcesSharedWith": "Shared with {classes}",
+  "@resourcesSharedWith": {
+    "placeholders": {
+      "classes": {
+        "type": "String"
+      }
+    }
+  },
+  "resourcesNotShared": "Not shared with any class yet",
+  "resourcesSaved": "Saved",
+  "resourcesCancel": "Cancel",
+  "resourcesSave": "Save",
+  "resourcesKind": "What are you adding?",
+  "resourcesKindFile": "A file",
+  "resourcesKindFileHint": "PDF, Word, PowerPoint, images or audio, up to 20 MB.",
+  "resourcesKindLink": "A link",
+  "resourcesKindLinkHint": "YouTube, Google Drive or any web page.",
+  "resourcesFile": "File",
+  "resourcesFileTypes": "PDF, Word, PowerPoint, images or audio",
+  "resourcesUploadFailed": "Upload failed",
+  "resourcesUrl": "Web address",
+  "resourcesTitleLabel": "Title",
+  "resourcesDescriptionLabel": "Description",
+  "resourcesSubject": "Subject",
+  "resourcesNoSubject": "No subject",
+  "resourcesTags": "Tags",
+  "resourcesDownload": "Students may download it",
+  "resourcesDownloadHint": "Off: students can only view it. This discourages copying but can't stop screenshots.",
+  "resourcesShareWith": "Share with",
+  "resourcesNoClasses": "You don't teach any subject class in an open session.",
+  "resourcesOpenedCount": "{opened} of {total} students opened it",
+  "@resourcesOpenedCount": {
+    "placeholders": {
+      "opened": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "total": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "resourcesOpened": "Opened",
+  "resourcesNobodyYet": "Nobody yet",
+  "resourcesOpenedAt": "{time} · {count, plural, one{{count} time} other{{count} times}}",
+  "@resourcesOpenedAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      },
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "resourcesNotOpened": "Not opened yet",
+  "resourcesType": "Type",
+  "resourcesAllSubjects": "All subjects",
+  "resourcesAllTypes": "All types",
+  "resourcesStudentEmpty": "Nothing shared yet",
+  "resourcesStudentEmptyHint": "Your teachers' notes and links will appear here.",
+  "resourcesNew": "New",
+  "resourcesViewOnlyNote": "View only: your teacher asked that this isn't downloaded.",
+  "chatTitle": "Chat",
+  "chatDescriptionStudent": "A group chat for each of your subject classes.",
+  "chatDescriptionTeacher": "A group chat for each subject class you teach.",
+  "chatNotAvailable": "Chat isn't part of your school's plan.",
+  "chatLoadFailed": "Couldn't load the chats.",
+  "chatEmpty": "No chats yet",
+  "chatEmptyHintStudent": "You'll find a chat here for each of your subject classes.",
+  "chatEmptyHintTeacher": "You'll find a chat here for each subject class you teach.",
+  "chatListLabel": "Your chats",
+  "chatUnread": "{count, plural, one{{count} new} other{{count} new}}",
+  "@chatUnread": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "chatNoMessages": "No messages yet",
+  "chatChoose": "Choose a chat",
+  "chatChooseHint": "Pick a subject class on the left.",
+  "chatBack": "All chats",
+  "chatTeachers": "Teachers: {names}",
+  "@chatTeachers": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "chatAnnouncementOnly": "Only teachers can post",
+  "chatAnnouncementOnlyHint": "Students can still comment on posts.",
+  "chatMute": "Mute",
+  "chatMuteHint": "No notices from this chat; new messages still show here.",
+  "chatReviewNotice": "Messages may be reviewed by {org} administrators.",
+  "@chatReviewNotice": {
+    "placeholders": {
+      "org": {
+        "type": "String"
+      }
+    }
+  },
+  "chatYourSchool": "your school's",
+  "chatPinned": "Pinned",
+  "chatReadOnly": "This class's session is closed, so its chat is read-only.",
+  "chatNewPost": "New post",
+  "chatNewComment": "Comment",
+  "chatTeachersOnly": "Only teachers can post here. You can comment on their posts.",
+  "chatPostsLabel": "Posts",
+  "chatLoadOlder": "Load older posts",
+  "chatTeacher": "Teacher",
+  "chatPinnedBadge": "Pinned",
+  "chatDeleted": "Message deleted",
+  "chatReply": "Reply",
+  "chatPin": "Pin",
+  "chatUnpin": "Unpin",
+  "chatDelete": "Delete",
+  "chatComments": "{count, plural, =0{Comment} one{{count} comment} other{{count} comments}}",
+  "@chatComments": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "chatCommentsLabel": "Comments",
+  "chatReplyingTo": "Replying to {name}: {text}",
+  "@chatReplyingTo": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "text": {
+        "type": "String"
+      }
+    }
+  },
+  "chatCancel": "Cancel",
+  "chatAttached": "Attached files",
+  "chatRemoveFile": "Remove",
+  "chatAttach": "Attach files",
+  "chatSend": "Send",
+  "chatClassChats": "Class chats",
+  "chatPrivateChats": "Private",
+  "chatClosedBySchool": "The school closed this chat; it is read-only.",
+  "chatNewMessage": "New message",
+  "chatNewMessageToStudent": "Message a teacher",
+  "chatNewMessageToTeacher": "Message a student",
+  "chatPickPersonStudent": "Choose one of your teachers",
+  "chatPickPersonTeacher": "Choose one of your students",
+  "chatNoPrivate": "No private chats yet",
+  "chatNoPrivateHintStudent": "You can message the teachers who teach you.",
+  "chatNoPrivateHintTeacher": "You can message the students you teach.",
+  "chatPrivateListLabel": "Your private chats",
+  "chatChoosePrivate": "Choose a chat",
+  "chatChoosePrivateHint": "Pick a chat on the left, or start a new message.",
+  "chatStudent": "Student",
+  "chatMessagesLabel": "Messages",
+  "chatSeen": "Seen {time}",
+  "@chatSeen": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "chatMessage": "Message",
+  "chatReport": "Report",
+  "chatReportTitle": "Report this message",
+  "chatReportDetail": "The school's owners and admins will review it, with the messages around it.",
+  "chatReportReason": "Why are you reporting it?",
+  "chatReportSend": "Report",
+  "chatReported": "Thanks — the school will review it.",
   "appNoConnection": "No internet connection. Check it and try again.",
   "appUpdateRequiredTitle": "Please update Instructor",
   "appUpdateRequiredBody": "This version of the app is no longer supported. Install the new version to continue.",
