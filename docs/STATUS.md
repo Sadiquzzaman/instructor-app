@@ -6,7 +6,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 ## Current stage
 
-**Stage 0:** PRs 1–13 of 14 ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11), plus the #345 error codes. Next: PR 14, the app icon and splash.
+**Stage 0:** all 14 PRs done ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11), plus the #345 error codes. Next: the end-of-stage check on a 360 px phone, a tablet and Jubaer's Mac (iOS), then Stage 1 with the owner.
 
 ## Done
 
@@ -45,13 +45,19 @@ Updated in every pull request, so the owner and the backend session can see wher
 
   Only the owner or an admin (a solo teacher in their own workspace) sees it; everyone else is told to ask them. There is no upgrade button (CLAUDE.md "Payments"). The locked-feature sheet now offers owners and admins "See all features and request one", and scrolls on short screens. Checked on beta as the Demo School owner in English and Bangla. No request was sent, because sending one emails the platform admins.
 
+- PR 14: the app icon and splash from the owner's logo (`assets/brand/`), made by `flutter_launcher_icons` and `flutter_native_splash` (dev only, approved in the plan; settings in `pubspec.yaml`):
+  - **Android:** an adaptive icon (the logo on white, small enough for round masks) and a splash on the canvas colour, including Android 12's.
+  - **iOS:** the icon on white (iOS icons cannot be transparent) and the launch screen.
+
+  `test/brand_test.dart` keeps the splash colour equal to the canvas token. Checked on the emulator: the icon is whole under the round mask, and the splash shows the logo on the canvas colour. iOS was not seen on a device.
+
 ## In progress
 
-- PR 14: the app icon and splash from the owner's logo.
+- Nothing; Stage 0 is waiting for its end-of-stage check.
 
 ## Owner's decisions since the plan
 
-- 17 Nov: the logo the owner sent (green ring with a yellow "i") replaces `logo.png` for the app icon and splash (PR 14). The black background was removed; the transparent version is kept outside the repo until PR 14 adds it.
+- 17 Nov: the logo the owner sent (green ring with a yellow "i") replaces `logo.png` for the app icon and splash (PR 14). The black background was removed; PR 14 added it as `assets/brand/logo.png`.
 - 17 Nov: `cupertino_ui` approved as a direct dependency (Bangla texts for iOS-style menus; it already came with `material_ui`).
 
 ## `mobile-api` issues
