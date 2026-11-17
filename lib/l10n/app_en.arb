@@ -171,11 +171,197 @@
   "validationConfirmNewPasswordRequired": "Please confirm your new password",
   "validationNewPasswordMismatch": "New password and Confirm password do not match",
   "validationOtpIncomplete": "Please enter the complete OTP code",
+  "authOr": "OR",
+  "authWelcomeBack": "Welcome Back",
+  "authTagline": "Manage classes, create tests, and review results the <highlight>most convenient way</highlight>",
+  "authIllustrationAlt": "Login illustration",
+  "authContinueWithGoogle": "Continue with Google",
+  "authShowPassword": "Show password",
+  "authHidePassword": "Hide password",
+  "authHaveAccount": "Already have an account?",
+  "authNoAccount": "Don't have an account?",
+  "authLogIn": "Log In",
+  "authSignUp": "Sign Up",
+  "authSigningUp": "Signing Up...",
+  "authBackToAccountType": "Back to account type",
+  "authAgreeTerms": "I agree to the <terms>Terms of Service</terms> and the <privacy>Privacy Policy</privacy>.",
+  "authFieldsEmailOrPhone": "Email or phone",
+  "authFieldsEmailOrPhonePlaceholder": "Email or 01XXXXXXXXX",
+  "authFieldsEnterEmailOrPhone": "Enter email or phone",
+  "authFieldsPassword": "Password",
+  "authFieldsPasswordPlaceholder": "Enter password",
+  "authFieldsConfirmPassword": "Confirm Password",
+  "authFieldsConfirmPasswordPlaceholder": "Confirm password",
+  "authFieldsNewPassword": "New password",
+  "authFieldsNewPasswordPlaceholder": "Enter new password",
+  "authFieldsConfirmNewPasswordPlaceholder": "Confirm new password",
+  "authFieldsFullName": "Full name",
+  "authFieldsFullNamePlaceholder": "e.g., John Doe",
+  "authFieldsOwnerFullName": "Owner full name",
+  "authFieldsPhone": "Phone",
+  "authFieldsPhonePlaceholder": "Enter phone number",
+  "authFieldsEmail": "Email",
+  "authFieldsEmailPlaceholder": "Enter email address",
+  "authFieldsOrganizationName": "Organization / school name",
+  "authFieldsOrganizationNamePlaceholder": "e.g., ABC School",
+  "authLoginTitle": "Login",
+  "authLoginForgotPassword": "Forgot password?",
+  "authLoginSubmit": "Sign in",
+  "authLoginSubmitting": "Logging in...",
+  "authLoginSuccessTitle": "Login Successful",
+  "authLoginSuccessDescription": "You are signed in.",
+  "authLoginFailedTitle": "Login Failed",
+  "authLoginFailedDescription": "Login failed. Please try again.",
+  "authSignupTitle": "Sign Up",
+  "authSignupChoose": "Choose how you want to join Instructor.",
+  "authSignupStudent": "Student",
+  "authSignupStudentDescription": "Create a student account to join classes and take tests.",
+  "authSignupTeacher": "Sign Up as Teacher",
+  "authSignupTeacherDescription": "Create an account and request teacher access. An admin must approve before you can teach.",
+  "authSignupOrganization": "Organization",
+  "authSignupOrganizationDescription": "Register a school or organization. An admin will approve before you can use it.",
+  "authSignupStudentTitle": "Student Sign Up",
+  "authSignupTeacherTitle": "Teacher Sign Up",
+  "authSignupTeacherNote": "You will register as a student first. After an administrator approves your teacher request, you will receive teacher permissions.",
+  "authSignupTeacherPending": "Your teacher request is pending admin approval. You can sign in as a student until it is approved.",
+  "authSignupOrganizationTitle": "Organization Sign Up",
+  "authSignupOrganizationRegistered": "Organization registered",
+  "authSignupOrganizationRegisteredDescription": "Save your organization number from the confirmation toast. After SUPER_ADMIN approval, sign in with your phone and password.",
+  "authSignupOrganizationNumber": "Your organization number is {number}. It is awaiting SUPER_ADMIN approval. Sign in with your phone and password after approval.",
+  "@authSignupOrganizationNumber": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "authSignupOtpSentTitle": "OTP Sent",
+  "authSignupOtpSentDescription": "A verification code has been sent.",
+  "authSignupFailedTitle": "Sign Up Failed",
+  "authSignupOrganizationFailed": "Organization signup failed. Please try again.",
+  "authSignupKind": "What are you registering?",
+  "authSignupKindSchool": "School, college or coaching centre",
+  "authSignupKindSchoolHint": "Classes and sections, GPA, report cards.",
+  "authSignupKindIelts": "IELTS centre",
+  "authSignupKindIeltsHint": "Courses and batches, IELTS tests in the computer-delivered format, band scores.",
+  "authSignupTeachKind": "What do you teach?",
+  "authSignupTeachAcademic": "Academic subjects",
+  "authSignupTeachAcademicHint": "Classes and subjects, marks and report cards.",
+  "authSignupTeachIelts": "IELTS",
+  "authSignupTeachIeltsHint": "Courses, IELTS tests in the computer-delivered format, band scores.",
+  "authOtpTitle": "Verify code",
+  "authOtpSentTo": "We've sent a 6-digit code to <target>{value}</target>.",
+  "@authOtpSentTo": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "authOtpSent": "We've sent a 6-digit code.",
+  "authOtpCheckSpam": "Don't forget to check the spam folder.",
+  "authOtpCheckEmail": "Please check your email inbox.",
+  "authOtpCheckSms": "Please check your SMS inbox.",
+  "authOtpCheckInbox": "Please check your inbox.",
+  "authOtpResendIn": "Resend available in {time}",
+  "@authOtpResendIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "authOtpResend": "Resend code",
+  "authOtpSubmit": "Verify & Continue",
+  "authOtpSubmitting": "Verifying...",
+  "authOtpVerifiedTitle": "Code Verified",
+  "authOtpVerifiedDescription": "OTP verified successfully.",
+  "authOtpFailedTitle": "Verification Failed",
+  "authOtpFailedDescription": "OTP verification failed. Please try again.",
+  "authOtpCode": "Verification code",
+  "authOtpDigit": "Digit {number} of {total}",
+  "@authOtpDigit": {
+    "placeholders": {
+      "number": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "total": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "authForgotTitle": "Forgot password",
+  "authForgotIntro": "Enter your email or phone number and we'll send you a verification code to reset your password.",
+  "authForgotSend": "Send code",
+  "authForgotSending": "Sending code...",
+  "authForgotResetTitle": "Set new password",
+  "authForgotReset": "Reset password",
+  "authForgotResetting": "Updating...",
+  "authForgotRemember": "Remember your password?",
+  "authForgotCodeSentTitle": "Code sent",
+  "authForgotCodeSentEmail": "We've sent a reset code to your email.",
+  "authForgotCodeSentSms": "We've sent a reset code to your phone.",
+  "authForgotCodeSent": "We've sent a reset code.",
+  "authForgotCodeVerifiedTitle": "Code verified",
+  "authForgotCodeVerifiedDescription": "Set your new password to continue.",
+  "authForgotUpdatedTitle": "Password updated",
+  "authForgotUpdatedDescription": "Your password has been reset. Please login.",
+  "authForgotAnd": "and",
+  "authChangePasswordDoneTitle": "Password changed",
+  "authChangePasswordDoneDescription": "Your password has been updated successfully.",
+  "authJoinHeaderLoginClass": "Login Required to Join {name}",
+  "@authJoinHeaderLoginClass": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "authJoinHeaderLoginTest": "Login Required to participate in {name} test",
+  "@authJoinHeaderLoginTest": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "authJoinHeaderSignupClass": "Sign Up Required to Join {name}",
+  "@authJoinHeaderSignupClass": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "authJoinHeaderSignupTest": "Sign Up Required to participate in {name} test",
+  "@authJoinHeaderSignupTest": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "authGoogleSigningIn": "Signing you in with Google…",
+  "authGoogleFailedTitle": "Google sign-in failed",
+  "authGoogleMissingData": "Google did not send the sign-in details. Please try again.",
+  "authGoogleFailed": "Sign-in could not be completed. Please try again.",
+  "authGoogleDoneDescription": "Signed in with Google.",
+  "authHome": "Instructor home",
+  "shellOrganization": "Organization",
+  "shellSignOut": "Sign out",
+  "shellWorkspaceTitle": "Workspaces",
+  "shellWorkspaceMyTeaching": "My Teaching",
+  "shellWorkspaceClasses": "[[Classes]]",
+  "shellWorkspaceFallback": "Workspace",
+  "shellWorkspaceReview": "Review",
   "appNoConnection": "No internet connection. Check it and try again.",
   "appUpdateRequiredTitle": "Please update Instructor",
   "appUpdateRequiredBody": "This version of the app is no longer supported. Install the new version to continue.",
   "appUpdateNoLink": "Get the new version from your institution or the app store.",
   "appUpdateAvailable": "A new version of Instructor is available.",
   "appUpdateNow": "Update",
-  "appUpdateLater": "Later"
+  "appUpdateLater": "Later",
+  "appLoginInvalid": "The email, phone number or password is not right."
 }

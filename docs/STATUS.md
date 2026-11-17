@@ -6,7 +6,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 ## Current stage
 
-**Stage 0:** PRs 1–6 of 14 ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11). Next: PR 7, log in and log out.
+**Stage 0:** PRs 1–7 of 14 ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11). Next: PR 8, sign up, OTP and forgot password.
 
 ## Done
 
@@ -24,9 +24,11 @@ Updated in every pull request, so the owner and the backend session can see wher
 - PR 5: the API client (`lib/core/api/`, `lib/core/auth/`): the answer envelope and `ApiException` (codes, features, limits, every shape of `message`); the session in secure storage (Keychain "this device only" / Keystore); bearer and `X-Organization-Id` headers; one refresh at a time with the rotated pair stored before any retry; sign-out when a refresh is refused, but not when the connection drops; `device` (make and model, never the owner's phone name) on refresh; a debug log that never shows headers, bodies or query values.
 - PR 6: the version check (PM-03). At start-up and when the app comes back after an hour, `GET /app/version` with this build's platform and version: REQUIRED replaces the app with "Please update Instructor" (button opens `update_url`, https only), OPTIONAL shows a banner with "Update" and "Later", any failure lets the app start. The backend sets `APP_MIN_VERSION`, `APP_LATEST_VERSION` and `APP_UPDATE_URL_ANDROID/IOS` (nothing set on beta yet, so every build is fine).
 
+- PR 7: log in and out. The login screen (the web's wording and checks; email or 01XXXXXXXXX and a password; the app's own sentence for a wrong password, as the API sends no code), `POST /auth/login` with this device, the account's language applied after sign-in; go_router sends signed-out people to login and signed-in people home; the session is restored before the first frame; "Sign out" ends this device's session (`POST /auth/logout`) and works offline; a refused refresh returns to login. Tested on beta from the emulator as a test student (sign in, restart, sign out). Android lint's release check is skipped for a lint crash on url_launcher (docs/TODO.md).
+
 ## In progress
 
-- PR 7: log in (phone or email), session restore at start-up, log out; integration test against a fake API.
+- PR 8: sign up (student, teacher, organisation; Academic or IELTS), OTP, the waiting-for-approval states, forgot password.
 
 ## Owner's decisions since the plan
 

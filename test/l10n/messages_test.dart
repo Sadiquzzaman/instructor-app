@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:instructor_app/core/l10n/level_labels.dart';
+
 import '../../tool/import_web_messages.dart';
 
 /// Mirrors the web's frontend/i18n/messages.test.ts, plus a check that the
@@ -44,7 +46,15 @@ void main() {
       // The real placeholders (not text inside select or plural branches).
       ...convertMessage(s).placeholders.keys.map((p) => '{$p}'),
       ...tag.allMatches(s).map((m) => '<${m[1]}>'),
-      ...RegExp(r'\[\[\w+\]\]').allMatches(s).map((m) => m[0]!.toLowerCase()),
+      // By level only: Bangla has one word per level, so English
+      // [[Classes]] and Bangla [[class]] are the same mark.
+      ...LevelLabels.tokenPattern
+          .allMatches(s)
+          .map(
+            (m) => m[1]!.toLowerCase().startsWith('class')
+                ? '[[class]]'
+                : '[[section]]',
+          ),
     };
     final bn = messages('bn');
     for (final MapEntry(:key, :value) in messages('en').entries) {
@@ -55,7 +65,9 @@ void main() {
   test('every Bangla message is actually in Bangla', () {
     for (final MapEntry(:key, :value) in messages('bn').entries) {
       if (latinInBangla.contains(key)) continue;
-      expect(value, matches(RegExp('[ঀ-৿]')), reason: key);
+      // As shown: level tokens become Bangla words ([[class]] → ক্লাস).
+      final shown = LevelLabels.defaults.apply(value, 'bn');
+      expect(shown, matches(RegExp('[ঀ-৿]')), reason: key);
     }
   });
 

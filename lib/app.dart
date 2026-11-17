@@ -4,27 +4,29 @@ import 'package:material_ui/material_ui.dart';
 import 'package:instructor_app/core/config/app_config.dart';
 import 'package:instructor_app/core/l10n/l10n.dart';
 import 'package:instructor_app/core/l10n/language_controller.dart';
+import 'package:instructor_app/core/routing/app_router.dart';
 import 'package:instructor_app/core/theme/app_theme.dart';
-import 'package:instructor_app/features/shell/screens/placeholder_home.dart';
 import 'package:instructor_app/features/version/screens/version_gate.dart';
 
 /// The root widget: the chosen language picks the messages and the theme
-/// (Bangla fonts and line height). Routing comes with sign-in (PR 7).
+/// (Bangla fonts and line height); the router picks the screen from the
+/// session; the version check sits above everything (PM-03).
 class InstructorApp extends ConsumerWidget {
   const InstructorApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final language = ref.watch(languageProvider);
-    return MaterialApp(
+    return MaterialApp.router(
       title: AppConfig.appName,
       debugShowCheckedModeBanner: false,
       locale: language,
       supportedLocales: AppLanguages.supported,
       localizationsDelegates: AppLanguages.delegates,
       theme: AppTheme.light(bangla: AppLanguages.isBangla(language)),
-      // The version check wraps everything (PM-03).
-      home: const VersionGate(child: PlaceholderHome()),
+      routerConfig: ref.watch(routerProvider),
+      builder: (context, child) =>
+          VersionGate(child: child ?? const SizedBox.shrink()),
     );
   }
 }

@@ -42,7 +42,7 @@ void main() {
     tester,
   ) async {
     final api = FakeApi();
-    await pumpInstructorApp(tester, api: api);
+    await pumpInstructorApp(tester, api: api, session: testSession());
     final r = api.to('GET /app/version').single;
     expect(r.query, {'platform': 'ANDROID', 'current': '0.1.0'});
     expect(r.headers.containsKey('Authorization'), isFalse);
@@ -97,7 +97,7 @@ void main() {
           'update_url': 'https://example.com/instructor.apk',
         }),
       );
-    await pumpInstructorApp(tester, api: api);
+    await pumpInstructorApp(tester, api: api, session: testSession());
 
     expect(
       find.text('A new version of Instructor is available.'),
@@ -116,14 +116,14 @@ void main() {
   testWidgets('a failed check never blocks the app', (tester) async {
     final api = FakeApi()
       ..on('GET /app/version', (_) => apiError(502, message: 'Bad Gateway'));
-    await pumpInstructorApp(tester, api: api);
+    await pumpInstructorApp(tester, api: api, session: testSession());
     expect(find.byType(PlaceholderHome), findsOneWidget);
     expect(find.byType(UpdateRequiredScreen), findsNothing);
   });
 
   testWidgets('coming back within an hour does not ask again', (tester) async {
     final api = FakeApi();
-    await pumpInstructorApp(tester, api: api);
+    await pumpInstructorApp(tester, api: api, session: testSession());
     for (final state in [
       AppLifecycleState.inactive,
       AppLifecycleState.hidden,

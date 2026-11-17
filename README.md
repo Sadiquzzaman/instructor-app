@@ -29,6 +29,12 @@ flutter test
 
 CI runs the same on every pull request, plus an iOS build without signing.
 
+The sign-in integration test runs the real app on a device or emulator against an in-process fake API (no network, no password):
+
+```sh
+flutter test integration_test -d <device-id>
+```
+
 ## Text in Bangla and English
 
 Every user-facing string comes from `lib/l10n/app_en.arb` and `app_bn.arb`, which are **generated** (never edit them):

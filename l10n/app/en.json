@@ -6,6 +6,7 @@
     "updateNoLink": "Get the new version from your institution or the app store.",
     "updateAvailable": "A new version of Instructor is available.",
     "updateNow": "Update",
-    "updateLater": "Later"
+    "updateLater": "Later",
+    "loginInvalid": "The email, phone number or password is not right."
   }
 }
