@@ -40,6 +40,7 @@ Signed in through the API as a Demo School student, teacher and owner, a Bright 
 | `package_info_plus` | ^10.2.2 | BSD-3 | fluttercommunity.dev | The app's version for `device.app_version` and the version check |
 | `device_info_plus` | ^13.3.0 | BSD-3 | fluttercommunity.dev | The phone's name for `device.name` (shown in the signed-in devices list) |
 | `url_launcher` | ^6.3.3 | BSD-3 | flutter.dev | "Update the app" opens `update_url`; later, links in resources |
+| `material_ui` | ^1.11.1 | BSD-3 | flutter.dev | Flutter's Material widgets. Flutter 3.50 deprecated `package:flutter/material.dart` in favour of this package, and `flutter create` adds it. Approved 17 Nov 2026 with PR 1 |
 | **dev only** | | | | |
 | `flutter_lints` | ^6.0.0 | BSD-3 | flutter.dev | Standard lint rules for `flutter analyze` |
 | `mocktail` | ^1.0.5 | MIT | felangel.dev | Fakes in unit and widget tests |

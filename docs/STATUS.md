@@ -6,7 +6,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 ## Current stage
 
-**Stage 0:** the plan ([STAGE-0-PLAN.md](STAGE-0-PLAN.md)) is approved; the first PR (Flutter project and CI) is next.
+**Stage 0:** the plan ([STAGE-0-PLAN.md](STAGE-0-PLAN.md)) is approved. PR 1 (Flutter project and CI) is in review; PR 2 (Android pre-release APK) is next.
 
 ## Done
 
@@ -15,10 +15,12 @@ Updated in every pull request, so the owner and the backend session can see wher
 - Read the API changelog up to 17 Nov 2026: PM-01 (devices), PM-03 (version check), PM-05 (openapi.json), IELTS courses and branch managers (P12-01 to P12-05).
 - Looked at beta through the API, read-only, as a student, teacher, owner, IELTS student, IELTS owner and solo teacher.
 - Wrote the Stage 0 plan.
+- Created the Android test signing key (outside the repo).
+- PR 1: the Flutter project (`academy.instructor.app`, "Instructor", Android 7.0 / API 24, iOS 15.0), lints, a placeholder home, tests, and CI (`ci.yml`: format, analyze, test; `ios-build.yml`: iOS build without signing; Dependabot for actions).
 
 ## In progress
 
-- PR 1: the Flutter project, lints, folder skeleton, `ci.yml` and `ios-build.yml`.
+- PR 2: Android pre-release APK on every merge into `develop`.
 
 ## Open `mobile-api` issues
 
@@ -35,4 +37,4 @@ Live classes are postponed by the owner and left out of every stage.
 
 ## Decisions needed from the owner
 
-Who creates the Android test signing key (STAGE-0-PLAN.md §12.3); needed before PR 2.
+- Add the four Android signing secrets to the repository (`ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_PASSWORD`, `ANDROID_KEY_ALIAS`); needed by PR 2.
