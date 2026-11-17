@@ -1,5 +1,11 @@
 {
   "app": {
-    "noConnection": "ইন্টারনেট সংযোগ নেই। সংযোগ দেখে আবার চেষ্টা করুন।"
+    "noConnection": "ইন্টারনেট সংযোগ নেই। সংযোগ দেখে আবার চেষ্টা করুন।",
+    "updateRequiredTitle": "Instructor আপডেট করুন",
+    "updateRequiredBody": "অ্যাপের এই সংস্করণ আর চলবে না। চালিয়ে যেতে নতুন সংস্করণ ইনস্টল করুন।",
+    "updateNoLink": "নতুন সংস্করণ আপনার প্রতিষ্ঠান বা অ্যাপ স্টোর থেকে নিন।",
+    "updateAvailable": "Instructor-এর নতুন সংস্করণ এসেছে।",
+    "updateNow": "আপডেট করুন",
+    "updateLater": "পরে"
   }
 }

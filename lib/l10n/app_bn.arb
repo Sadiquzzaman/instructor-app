@@ -66,5 +66,11 @@
   "validationConfirmNewPasswordRequired": "নতুন পাসওয়ার্ড নিশ্চিত করুন",
   "validationNewPasswordMismatch": "নতুন পাসওয়ার্ড ও নিশ্চিত পাসওয়ার্ড মিলছে না",
   "validationOtpIncomplete": "পুরো OTP কোডটি লিখুন",
-  "appNoConnection": "ইন্টারনেট সংযোগ নেই। সংযোগ দেখে আবার চেষ্টা করুন।"
+  "appNoConnection": "ইন্টারনেট সংযোগ নেই। সংযোগ দেখে আবার চেষ্টা করুন।",
+  "appUpdateRequiredTitle": "Instructor আপডেট করুন",
+  "appUpdateRequiredBody": "অ্যাপের এই সংস্করণ আর চলবে না। চালিয়ে যেতে নতুন সংস্করণ ইনস্টল করুন।",
+  "appUpdateNoLink": "নতুন সংস্করণ আপনার প্রতিষ্ঠান বা অ্যাপ স্টোর থেকে নিন।",
+  "appUpdateAvailable": "Instructor-এর নতুন সংস্করণ এসেছে।",
+  "appUpdateNow": "আপডেট করুন",
+  "appUpdateLater": "পরে"
 }
