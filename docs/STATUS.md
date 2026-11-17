@@ -8,7 +8,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 **Stage 0:** all 14 PRs done ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11), plus the #345 error codes; its end-of-stage device check is still to do.
 
-**Stage 1 (students):** plan approved 17 Nov ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)). Done: PRs 1–3 (files, Today, My attendance and check-in). Next: PR 4, the read-only cache.
+**Stage 1 (students):** plan approved 17 Nov ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)). Done: PRs 1–4 (files, Today, My attendance and check-in, read-only cache). Next: PR 5, Leave.
 
 ## Done
 
@@ -59,9 +59,11 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 - Stage 1 PR 3: My attendance and check-in (`/my-attendance`). Today's classes (read again every minute, as the web) with their window and own record, "You teach", paper-register and cancelled notes, and Check in: online classes send nothing; in-person classes ask for location once (Android fine location, iOS "when in use"; reasons in both languages) and send one fresh, accurate fix (`geolocator`). Every server refusal says what happened in the web's words (too far with the distance and radius, not accurate enough, not open yet, closed, already checked in…); location off or refused says how to fix it, with "Open settings". Then the month: attendance rate, present, late, absent, leave, and a Saturday-first calendar with a mark and letter per class and the legend. Checked on beta as an owner (no classes today; the November grid with Fridays off).
 
+- Stage 1 PR 4: the read-only cache (owner's decision 5). Today's week (Today) and today's classes (My attendance) are kept on the phone per user and workspace; with no connection they are shown under "No internet connection. This was saved on your phone at …", never written to, and nobody can check in from them; a copy from another day is not shown; everything is removed when the person signs out. The timetable joins it in PR 6.
+
 ## In progress
 
-- Stage 1 ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)), PR 4 of 15: the read-only cache. Stage 0 still needs its end-of-stage check (360 px phone, tablet, iOS).
+- Stage 1 ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)), PR 5 of 15: Leave. Stage 0 still needs its end-of-stage check (360 px phone, tablet, iOS).
 
 ## Owner's decisions since the plan
 

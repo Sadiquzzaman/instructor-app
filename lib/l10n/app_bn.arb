@@ -815,5 +815,6 @@
   "appLocationDeniedForever": "Instructor-এর জন্য লোকেশন বন্ধ করা আছে। ফোনের সেটিংসে অনুমতি দিয়ে আবার চেষ্টা করুন।",
   "appLocationServiceOff": "আপনার ফোনের লোকেশন বন্ধ। চালু করে আবার চেষ্টা করুন।",
   "appLocationOpenSettings": "সেটিংস খুলুন",
-  "appAttendanceRefresh": "রিফ্রেশ করুন"
+  "appAttendanceRefresh": "রিফ্রেশ করুন",
+  "appSavedCopy": "ইন্টারনেট সংযোগ নেই। এটি {time}-এ আপনার ফোনে সংরক্ষণ করা হয়েছিল; আবার চেষ্টা করতে নিচে টানুন।"
 }

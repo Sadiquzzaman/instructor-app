@@ -39,6 +39,7 @@
     "locationDeniedForever": "Location is turned off for Instructor. Allow it in your phone's settings, then try again.",
     "locationServiceOff": "Your phone's location is off. Turn it on, then try again.",
     "locationOpenSettings": "Open settings",
-    "attendanceRefresh": "Refresh"
+    "attendanceRefresh": "Refresh",
+    "savedCopy": "No internet connection. This was saved on your phone at {time}; pull down to try again."
   }
 }

@@ -2,8 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:instructor_app/core/api/api_client.dart';
+import 'package:instructor_app/core/api/api_exception.dart';
 import 'package:instructor_app/core/api/api_providers.dart';
+import 'package:instructor_app/core/cache/read_cache.dart';
 import 'package:instructor_app/core/location/locator.dart';
+import 'package:instructor_app/core/time/org_time.dart';
 
 /// PRESENT, LATE, ABSENT or LEAVE, with how the person checked in.
 @immutable
@@ -135,6 +138,7 @@ class MyToday {
     required this.classes,
     this.closed,
     this.onLeave = false,
+    this.savedAt,
   });
 
   final String date;
@@ -144,7 +148,11 @@ class MyToday {
   /// On approved leave today: classes count as Leave unless they check in.
   final bool onLeave;
 
-  factory MyToday.fromJson(Object? json) {
+  /// Set when there was no connection and this is the copy saved then:
+  /// shown, but nobody can check in from it.
+  final DateTime? savedAt;
+
+  factory MyToday.fromJson(Object? json, {DateTime? savedAt}) {
     final j = json is Map ? json : const <String, Object?>{};
     final classes = j['classes'];
     return MyToday(
@@ -155,6 +163,7 @@ class MyToday {
       ],
       closed: ClosedDay.fromJson(j['closed']),
       onLeave: j['on_leave'] == true,
+      savedAt: savedAt,
     );
   }
 
@@ -162,6 +171,7 @@ class MyToday {
     date: date,
     closed: closed,
     onLeave: onLeave,
+    savedAt: savedAt,
     classes: [for (final c in classes) c.slotId == saved.slotId ? saved : c],
   );
 }
@@ -257,12 +267,20 @@ String shiftMonth(String month, int by) {
 }
 
 class MyAttendanceRepository {
-  MyAttendanceRepository(this._api);
+  MyAttendanceRepository(this._api, this._cache);
 
   final ApiClient _api;
+  final ReadCache _cache;
 
-  Future<MyToday> today() async =>
-      MyToday.fromJson((await _api.get('/attendance/me/today')).payload);
+  Future<MyToday> today() async {
+    final c = await _cache.get('attendance-today', '/attendance/me/today');
+    final today = MyToday.fromJson(c.payload, savedAt: c.savedAt);
+    // A copy saved on another day is not today's.
+    if (c.isSaved && today.date != OrgTime.today()) {
+      throw const ApiException(kind: ApiErrorKind.network);
+    }
+    return today;
+  }
 
   Future<MyCalendar> calendar(String? month) async => MyCalendar.fromJson(
     (await _api.get(
@@ -289,7 +307,10 @@ class MyAttendanceRepository {
 }
 
 final myAttendanceRepositoryProvider = Provider<MyAttendanceRepository>(
-  (ref) => MyAttendanceRepository(ref.watch(apiClientProvider)),
+  (ref) => MyAttendanceRepository(
+    ref.watch(apiClientProvider),
+    ref.watch(readCacheProvider),
+  ),
 );
 
 /// Today's classes; reloaded when the workspace changes.
