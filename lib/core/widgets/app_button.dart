@@ -45,7 +45,11 @@ class AppButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = AppColors.of(context);
     final enabled = onPressed != null && !loading;
-    final callback = enabled ? onPressed : null;
+    // While loading the button keeps its colour (a disabled grey would hide
+    // the spinner) and ignores taps through IgnorePointer below.
+    final VoidCallback? callback = loading && onPressed != null
+        ? () {}
+        : onPressed;
 
     final spinnerColor = switch (variant) {
       AppButtonVariant.primary || AppButtonVariant.danger => colors.inkInverse,
@@ -102,7 +106,12 @@ class AppButton extends StatelessWidget {
       enabled: enabled,
       label: loading ? label : null,
       excludeSemantics: loading,
-      child: expand ? SizedBox(width: double.infinity, child: button) : button,
+      child: IgnorePointer(
+        ignoring: loading,
+        child: expand
+            ? SizedBox(width: double.infinity, child: button)
+            : button,
+      ),
     );
   }
 }

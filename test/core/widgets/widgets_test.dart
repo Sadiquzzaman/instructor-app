@@ -36,8 +36,11 @@ void main() {
       );
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
       expect(find.text('Sign in'), findsNothing);
-      await tester.tap(find.byType(AppButton));
+      await tester.tap(find.byType(AppButton), warnIfMissed: false);
       expect(taps, 0);
+      // It keeps its brand colour, so the white spinner stays visible.
+      final button = tester.widget<FilledButton>(find.byType(FilledButton));
+      expect(button.onPressed, isNotNull);
       // Screen readers still hear what the button is.
       expect(find.bySemanticsLabel('Sign in'), findsOneWidget);
     });
