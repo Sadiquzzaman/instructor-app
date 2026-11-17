@@ -29,7 +29,7 @@ flutter test
 
 CI runs the same on every pull request, plus an iOS build without signing.
 
-The sign-in integration test runs the real app on a device or emulator against an in-process fake API (no network, no password):
+The integration tests (sign-in, and a student's main flows: Today and check-in, handing in homework, taking a test) run the real app on a device or emulator against an in-process fake API (no network, no password). The student flows also run on the host with the rest of `flutter test` (`test/flows`), so CI covers them:
 
 ```sh
 flutter test integration_test -d <device-id>
