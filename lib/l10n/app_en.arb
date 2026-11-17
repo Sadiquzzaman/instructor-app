@@ -1493,5 +1493,13 @@
   "appLocationDeniedForever": "Location is turned off for Instructor. Allow it in your phone's settings, then try again.",
   "appLocationServiceOff": "Your phone's location is off. Turn it on, then try again.",
   "appLocationOpenSettings": "Open settings",
-  "appAttendanceRefresh": "Refresh"
+  "appAttendanceRefresh": "Refresh",
+  "appSavedCopy": "No internet connection. This was saved on your phone at {time}; pull down to try again.",
+  "@appSavedCopy": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  }
 }

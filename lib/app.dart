@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 
+import 'package:instructor_app/core/cache/read_cache.dart';
 import 'package:instructor_app/core/config/app_config.dart';
 import 'package:instructor_app/core/l10n/l10n.dart';
 import 'package:instructor_app/core/l10n/language_controller.dart';
@@ -16,6 +17,8 @@ class InstructorApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Saved answers go when the person signs out.
+    ref.watch(readCacheJanitorProvider);
     final language = ref.watch(languageProvider);
     return MaterialApp.router(
       title: AppConfig.appName,

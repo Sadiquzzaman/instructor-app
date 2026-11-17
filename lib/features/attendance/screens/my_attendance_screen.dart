@@ -8,6 +8,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:instructor_app/core/api/api_error_text.dart';
 import 'package:instructor_app/core/api/api_exception.dart';
 import 'package:instructor_app/core/api/api_providers.dart';
+import 'package:instructor_app/core/cache/saved_notice.dart';
 import 'package:instructor_app/core/l10n/l10n.dart';
 import 'package:instructor_app/core/location/locator.dart';
 import 'package:instructor_app/core/routing/app_routes.dart';
@@ -255,6 +256,10 @@ class _MyAttendanceScreenState extends ConsumerState<MyAttendanceScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(title, style: text.titleMedium),
+          if (value?.savedAt != null) ...[
+            const SizedBox(height: AppSpacing.sm),
+            SavedNotice(savedAt: value!.savedAt!),
+          ],
           if (value?.onLeave == true || value?.closed != null) ...[
             const SizedBox(height: AppSpacing.xs),
             Text(
@@ -292,14 +297,18 @@ class _MyAttendanceScreenState extends ConsumerState<MyAttendanceScreen> {
           else
             for (final (i, raw) in value.classes.indexed) ...[
               if (i > 0) const Divider(height: AppSpacing.xl),
-              _classRow(_saved[raw.slotId] ?? raw),
+              _classRow(
+                _saved[raw.slotId] ?? raw,
+                // No check-in from a saved copy (no offline check-in, §6a).
+                offline: value.savedAt != null,
+              ),
             ],
         ],
       ),
     );
   }
 
-  Widget _classRow(MyClass item) {
+  Widget _classRow(MyClass item, {bool offline = false}) {
     final l10n = context.l10n;
     final language = Localizations.localeOf(context).languageCode;
     final text = Theme.of(context).textTheme;
@@ -392,7 +401,7 @@ class _MyAttendanceScreenState extends ConsumerState<MyAttendanceScreen> {
                 tone: _tone(status),
               ),
             ),
-            if (item.canCheckIn)
+            if (item.canCheckIn && !offline)
               Semantics(
                 label: l10n.myAttendanceCheckInTo(item.label),
                 button: true,

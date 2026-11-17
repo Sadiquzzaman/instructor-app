@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'package:instructor_app/core/api/api_providers.dart';
+import 'package:instructor_app/core/cache/saved_notice.dart';
 import 'package:instructor_app/core/l10n/l10n.dart';
 import 'package:instructor_app/core/routing/app_routes.dart';
 import 'package:instructor_app/core/theme/app_colors.dart';
@@ -170,7 +171,11 @@ class _TodayScreenState extends ConsumerState<TodayScreen> {
     final muted = Theme.of(context).textTheme.bodyMedium
         ?.copyWith(color: AppColors.of(context).inkMuted);
     return [
-      if (checkInOpen.isNotEmpty) ...[
+      if (feed.savedAt != null) ...[
+        SavedNotice(savedAt: feed.savedAt!),
+        const SizedBox(height: AppSpacing.lg),
+      ],
+      if (checkInOpen.isNotEmpty && feed.savedAt == null) ...[
         AppCard(
           key: const Key('check-in-open'),
           child: Column(

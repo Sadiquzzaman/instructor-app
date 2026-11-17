@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:instructor_app/core/api/api_exception.dart';
 import 'package:instructor_app/core/api/api_providers.dart';
+import 'package:instructor_app/core/cache/read_cache.dart';
 import 'package:instructor_app/core/auth/session.dart';
 import 'package:instructor_app/core/time/org_time.dart';
 
@@ -167,6 +169,7 @@ class CalendarFeed {
     required this.items,
     this.workspaces,
     this.timeZone = OrgTime.timeZone,
+    this.savedAt,
   });
 
   final List<CalendarItem> items;
@@ -176,7 +179,10 @@ class CalendarFeed {
   final List<CalendarWorkspace>? workspaces;
   final String timeZone;
 
-  factory CalendarFeed.fromJson(Object? json) {
+  /// Set when there was no connection and this is the copy saved then.
+  final DateTime? savedAt;
+
+  factory CalendarFeed.fromJson(Object? json, {DateTime? savedAt}) {
     final j = json is Map ? json : const <String, Object?>{};
     final items = j['items'];
     final ws = j['workspaces'];
@@ -189,6 +195,7 @@ class CalendarFeed {
           ? [for (final w in ws) ?CalendarWorkspace.fromJson(w)]
           : null,
       timeZone: (j['time_zone'] as String?) ?? OrgTime.timeZone,
+      savedAt: savedAt,
     );
   }
 }
@@ -220,8 +227,21 @@ typedef CalendarRange = ({String from, String to});
 final calendarFeedProvider = FutureProvider.autoDispose
     .family<CalendarFeed, CalendarRange>((ref, range) async {
       ref.watch(workspaceKeyProvider);
-      final r = await ref
-          .read(apiClientProvider)
-          .get('/calendar/me', query: {'from': range.from, 'to': range.to});
-      return CalendarFeed.fromJson(r.payload);
+      final query = {'from': range.from, 'to': range.to};
+      // The week from today is kept for when there is no connection (Today).
+      if (range.from != OrgTime.today()) {
+        final r = await ref
+            .read(apiClientProvider)
+            .get('/calendar/me', query: query);
+        return CalendarFeed.fromJson(r.payload);
+      }
+      final c = await ref
+          .read(readCacheProvider)
+          .get('calendar-week', '/calendar/me', query: query);
+      final p = c.payload;
+      // A copy saved on another day is not today's.
+      if (c.isSaved && (p is! Map || p['from'] != range.from)) {
+        throw const ApiException(kind: ApiErrorKind.network);
+      }
+      return CalendarFeed.fromJson(p, savedAt: c.savedAt);
     }, retry: (retryCount, error) => null);
