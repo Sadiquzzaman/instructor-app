@@ -6,6 +6,7 @@ import 'package:instructor_app/core/l10n/l10n.dart';
 import 'package:instructor_app/core/l10n/language_switcher.dart';
 import 'package:instructor_app/core/theme/app_colors.dart';
 import 'package:instructor_app/core/theme/app_metrics.dart';
+import 'package:instructor_app/features/notifications/widgets/notification_bell.dart';
 import 'package:instructor_app/features/shell/menu/menu_panel.dart';
 import 'package:instructor_app/features/workspace/data/workspace_repository.dart';
 import 'package:instructor_app/features/workspace/screens/workspace_gate.dart';
@@ -32,6 +33,7 @@ class AppShell extends ConsumerWidget {
       titleSpacing: wide ? AppSpacing.lg : 0,
       title: const WorkspaceSwitcher(),
       actions: const [
+        NotificationBell(),
         LanguageSwitcher(),
         SizedBox(width: AppSpacing.sm),
       ],
