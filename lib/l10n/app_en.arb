@@ -171,5 +171,11 @@
   "validationConfirmNewPasswordRequired": "Please confirm your new password",
   "validationNewPasswordMismatch": "New password and Confirm password do not match",
   "validationOtpIncomplete": "Please enter the complete OTP code",
-  "appNoConnection": "No internet connection. Check it and try again."
+  "appNoConnection": "No internet connection. Check it and try again.",
+  "appUpdateRequiredTitle": "Please update Instructor",
+  "appUpdateRequiredBody": "This version of the app is no longer supported. Install the new version to continue.",
+  "appUpdateNoLink": "Get the new version from your institution or the app store.",
+  "appUpdateAvailable": "A new version of Instructor is available.",
+  "appUpdateNow": "Update",
+  "appUpdateLater": "Later"
 }

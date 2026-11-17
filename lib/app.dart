@@ -6,6 +6,7 @@ import 'package:instructor_app/core/l10n/l10n.dart';
 import 'package:instructor_app/core/l10n/language_controller.dart';
 import 'package:instructor_app/core/theme/app_theme.dart';
 import 'package:instructor_app/features/shell/screens/placeholder_home.dart';
+import 'package:instructor_app/features/version/screens/version_gate.dart';
 
 /// The root widget: the chosen language picks the messages and the theme
 /// (Bangla fonts and line height). Routing comes with sign-in (PR 7).
@@ -22,7 +23,8 @@ class InstructorApp extends ConsumerWidget {
       supportedLocales: AppLanguages.supported,
       localizationsDelegates: AppLanguages.delegates,
       theme: AppTheme.light(bangla: AppLanguages.isBangla(language)),
-      home: const PlaceholderHome(),
+      // The version check wraps everything (PM-03).
+      home: const VersionGate(child: PlaceholderHome()),
     );
   }
 }

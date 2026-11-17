@@ -1,5 +1,11 @@
 {
   "app": {
-    "noConnection": "No internet connection. Check it and try again."
+    "noConnection": "No internet connection. Check it and try again.",
+    "updateRequiredTitle": "Please update Instructor",
+    "updateRequiredBody": "This version of the app is no longer supported. Install the new version to continue.",
+    "updateNoLink": "Get the new version from your institution or the app store.",
+    "updateAvailable": "A new version of Instructor is available.",
+    "updateNow": "Update",
+    "updateLater": "Later"
   }
 }
