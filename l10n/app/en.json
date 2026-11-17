@@ -24,6 +24,16 @@
     "codeExpired": "This code has expired. Ask for a new one.",
     "codeLocked": "Too many wrong codes. Please wait up to 15 minutes, then try again.",
     "loginNotVerified": "This phone number is not verified yet. Sign up again with the same number to get a new code.",
-    "loginDisabled": "Your account has been disabled. Please contact support."
+    "loginDisabled": "Your account has been disabled. Please contact support.",
+    "attachTakePhoto": "Take a photo",
+    "attachChoosePhotos": "Choose photos from the gallery",
+    "attachChooseFile": "Choose a file",
+    "attachUploading": "Uploading… {percent, number}%",
+    "attachFailed": "Upload failed. Please try again.",
+    "attachRetry": "Upload again",
+    "attachTypeNotAllowed": "{name} can't be added: this type of file isn't allowed here.",
+    "attachTooMany": "You can add up to {count, number} files.",
+    "attachStorageAlmostFull": "Your organisation's storage is almost full.",
+    "fileOpenFailed": "The file could not be opened."
   }
 }

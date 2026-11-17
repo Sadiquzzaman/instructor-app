@@ -577,5 +577,15 @@
   "appCodeExpired": "এই কোডের মেয়াদ শেষ হয়ে গেছে। নতুন কোড চান।",
   "appCodeLocked": "অনেকবার ভুল কোড দেওয়া হয়েছে। সর্বোচ্চ ১৫ মিনিট অপেক্ষা করে আবার চেষ্টা করুন।",
   "appLoginNotVerified": "এই ফোন নম্বর এখনো যাচাই করা হয়নি। নতুন কোড পেতে একই নম্বর দিয়ে আবার সাইন আপ করুন।",
-  "appLoginDisabled": "আপনার অ্যাকাউন্ট বন্ধ করা হয়েছে। সাহায্যের জন্য যোগাযোগ করুন।"
+  "appLoginDisabled": "আপনার অ্যাকাউন্ট বন্ধ করা হয়েছে। সাহায্যের জন্য যোগাযোগ করুন।",
+  "appAttachTakePhoto": "ছবি তুলুন",
+  "appAttachChoosePhotos": "গ্যালারি থেকে ছবি বেছে নিন",
+  "appAttachChooseFile": "ফাইল বেছে নিন",
+  "appAttachUploading": "আপলোড হচ্ছে… {percent}%",
+  "appAttachFailed": "আপলোড হয়নি। আবার চেষ্টা করুন।",
+  "appAttachRetry": "আবার আপলোড করুন",
+  "appAttachTypeNotAllowed": "{name} যোগ করা যাবে না: এই ধরনের ফাইল এখানে চলে না।",
+  "appAttachTooMany": "সর্বোচ্চ {count}টি ফাইল যোগ করা যাবে।",
+  "appAttachStorageAlmostFull": "আপনার প্রতিষ্ঠানের স্টোরেজ প্রায় ভরে গেছে।",
+  "appFileOpenFailed": "ফাইলটি খোলা গেল না।"
 }

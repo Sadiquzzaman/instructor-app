@@ -8,7 +8,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 **Stage 0:** all 14 PRs done ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11), plus the #345 error codes; its end-of-stage device check is still to do.
 
-**Stage 1 (students):** plan approved 17 Nov ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)). Next: PR 1, files.
+**Stage 1 (students):** plan approved 17 Nov ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)). Done: PR 1 (files). Next: PR 2, Today.
 
 ## Done
 
@@ -53,9 +53,11 @@ Updated in every pull request, so the owner and the backend session can see wher
 
   `test/brand_test.dart` keeps the splash colour equal to the canvas token. Checked on the emulator: the icon is whole under the round mask, and the splash shows the logo on the canvas colour. iOS was not seen on a device.
 
+- Stage 1 PR 1: files. Uploads in three steps (presign, PUT to the signed link with no session headers, complete) with progress, cancel and retry; take a photo, choose photos (resized to 2000 px, JPEG 80) or choose files, limited to the types the server takes for each purpose; 20 MB limit; over the storage quota shows the locked-feature sheet, and 90% full is said; open a file through `/files/:id/content`. Packages `image_picker` and `file_picker` (approved with the plan); iOS camera and photo-library reasons. Used by leave, homework and chat. Found that the server refuses `HOMEWORK` uploads (tes-taker#349).
+
 ## In progress
 
-- Stage 1 ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)), PR 1 of 15: files. Stage 0 still needs its end-of-stage check (360 px phone, tablet, iOS).
+- Stage 1 ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)), PR 2 of 15: Today. Stage 0 still needs its end-of-stage check (360 px phone, tablet, iOS).
 
 ## Owner's decisions since the plan
 
@@ -68,6 +70,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 | Issue | What | Priority | Blocked? |
 | --- | --- | --- | --- |
 | [tes-taker#345](https://github.com/Sadiquzzaman/tes-taker/issues/345) | Error codes for sign-up, OTP and password reset (and login: wrong credentials vs not verified) | Done | No: on beta and used by the app; closed by the backend on 17 Nov |
+| [tes-taker#349](https://github.com/Sadiquzzaman/tes-taker/issues/349) | `POST /files/presign` refuses purpose HOMEWORK (the web's homework uploads fail too) | High | Not yet: needed by Stage 1 PR 7 (homework hand-in) |
 
 ## Waiting on the backend (planned, no issue needed)
 
