@@ -5,7 +5,7 @@ import 'package:instructor_app/core/api/api_providers.dart';
 import 'package:instructor_app/core/auth/session.dart';
 import 'package:instructor_app/core/l10n/language_controller.dart';
 import 'package:instructor_app/core/l10n/level_labels.dart';
-import 'package:instructor_app/features/shell/screens/home_screen.dart';
+import 'package:instructor_app/features/today/screens/today_screen.dart';
 import 'package:instructor_app/features/workspace/data/workspace_repository.dart';
 import 'package:instructor_app/features/workspace/screens/workspace_gate.dart';
 
@@ -101,7 +101,7 @@ void main() {
     });
     final session = container.read(sessionProvider)!;
     expect(session.organizationId, 'org-2');
-    expect(find.byType(HomeScreen), findsOneWidget);
+    expect(find.byType(TodayScreen), findsOneWidget);
     // The new workspace's requests carry its organisation.
     final labels = api.to('GET /workspace/level-labels').last;
     expect(labels.organizationHeader, 'org-2');
@@ -115,7 +115,7 @@ void main() {
     final api = FakeApi()..on('GET /auth/contexts', (_) => ok([_demo]));
     await pumpInstructorApp(tester, api: api, session: _noWorkspace());
     expect(find.byType(WorkspacePickerScreen), findsNothing);
-    expect(find.byType(HomeScreen), findsOneWidget);
+    expect(find.byType(TodayScreen), findsOneWidget);
   });
 
   testWidgets('pending organisations say so', (tester) async {

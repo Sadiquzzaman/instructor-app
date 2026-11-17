@@ -6,7 +6,7 @@ import 'package:instructor_app/core/api/api_providers.dart';
 import 'package:instructor_app/core/l10n/language_controller.dart';
 import 'package:instructor_app/features/auth/data/login_validation.dart';
 import 'package:instructor_app/features/auth/screens/login_screen.dart';
-import 'package:instructor_app/features/shell/screens/home_screen.dart';
+import 'package:instructor_app/features/today/screens/today_screen.dart';
 import 'package:instructor_app/l10n/generated/app_localizations_en.dart';
 
 import '../../helpers/fake_api.dart';
@@ -79,7 +79,7 @@ void main() {
       container.read(sessionHolderProvider).current!.organizationId,
       'org-1',
     );
-    expect(find.byType(HomeScreen), findsOneWidget);
+    expect(find.byType(TodayScreen), findsOneWidget);
   });
 
   testWidgets('a phone number is sent as phone', (tester) async {
@@ -174,7 +174,7 @@ void main() {
       api: api,
       session: testSession(),
     );
-    expect(find.byType(HomeScreen), findsOneWidget);
+    expect(find.byType(TodayScreen), findsOneWidget);
 
     await signOutFromMenu(tester);
     await tester.pumpAndSettle();

@@ -14,7 +14,7 @@ import 'package:instructor_app/features/notifications/screens/inbox_screen.dart'
 import 'package:instructor_app/features/plan/screens/more_features_screen.dart';
 import 'package:instructor_app/features/shell/menu/menu_items.g.dart';
 import 'package:instructor_app/features/shell/screens/app_shell.dart';
-import 'package:instructor_app/features/shell/screens/home_screen.dart';
+import 'package:instructor_app/features/today/screens/today_screen.dart';
 import 'package:instructor_app/features/shell/screens/not_yet_screen.dart';
 import 'package:instructor_app/features/workspace/screens/workspace_gate.dart';
 
@@ -82,7 +82,12 @@ final routerProvider = Provider<GoRouter>((ref) {
         routes: [
           GoRoute(
             path: AppRoutes.home,
-            builder: (context, state) => const HomeScreen(),
+            builder: (context, state) => const TodayScreen(),
+          ),
+          // Today is home; the web's /today link opens it.
+          GoRoute(
+            path: AppRoutes.today,
+            redirect: (context, state) => AppRoutes.home,
           ),
           GoRoute(
             path: AppRoutes.notifications,

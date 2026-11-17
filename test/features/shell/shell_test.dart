@@ -5,7 +5,8 @@ import 'package:material_ui/material_ui.dart';
 
 import 'package:instructor_app/core/api/api_exception.dart';
 import 'package:instructor_app/core/auth/session.dart';
-import 'package:instructor_app/features/shell/screens/home_screen.dart';
+import 'package:instructor_app/features/today/screens/today_screen.dart';
+import 'package:instructor_app/features/shell/menu/menu_panel.dart';
 import 'package:instructor_app/features/shell/screens/not_yet_screen.dart';
 import 'package:instructor_app/features/shell/widgets/api_error_handling.dart';
 
@@ -26,6 +27,9 @@ FakeApi _api({
   ..on('GET /auth/contexts', (_) => ok(<Object>[]))
   ..on('GET /me/entitlements', (_) => ok({'features': features}))
   ..on('GET /workspace/level-labels', (_) => ok({'preset': 'CLASS_SECTION'}));
+
+Finder _inMenu(String label) =>
+    find.descendant(of: find.byType(MenuPanel), matching: find.text(label));
 
 Future<void> _openMenu(WidgetTester tester) async {
   await tester.tap(find.byType(DrawerButton));
@@ -48,15 +52,16 @@ void main() {
   testWidgets('phone: the drawer has the student\'s menu; a page not built '
       'yet says to use the website', (tester) async {
     await pumpInstructorApp(tester, api: _api(), session: testSession());
-    expect(find.byType(HomeScreen), findsOneWidget);
+    expect(find.byType(TodayScreen), findsOneWidget);
     // The workspace in the top bar.
     expect(find.text('Demo School'), findsOneWidget);
 
     await _openMenu(tester);
-    expect(find.text('Today'), findsOneWidget);
+    expect(_inMenu('Today'), findsOneWidget);
     expect(find.text('Sign out'), findsOneWidget);
 
-    await tester.tap(find.text('Today'));
+    // Today is built (Stage 1); Tests is not yet.
+    await tester.tap(_inMenu('Tests'));
     await tester.pumpAndSettle();
     expect(find.byType(NotYetScreen), findsOneWidget);
     expect(
@@ -102,7 +107,7 @@ void main() {
     addTearDown(tester.view.reset);
     await pumpInstructorApp(tester, api: _api(), session: testSession());
     expect(find.byType(DrawerButton), findsNothing);
-    expect(find.text('Today'), findsOneWidget);
+    expect(_inMenu('Today'), findsOneWidget);
     expect(find.text('Sign out'), findsOneWidget);
   });
 
@@ -127,7 +132,7 @@ void main() {
       ApiException error,
     ) async {
       await pumpInstructorApp(tester, api: _api(), session: session);
-      final context = tester.element(find.byType(HomeScreen));
+      final context = tester.element(find.byType(TodayScreen));
       // Not awaited: the locked-feature sheet's future ends only when closed.
       unawaited(handleCommonApiError(context, error, session: session));
       await tester.pumpAndSettle();

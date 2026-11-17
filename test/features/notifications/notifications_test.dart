@@ -5,7 +5,7 @@ import 'package:instructor_app/core/routing/app_routes.dart';
 import 'package:instructor_app/features/notifications/data/notifications_repository.dart';
 import 'package:instructor_app/features/notifications/screens/inbox_screen.dart';
 import 'package:instructor_app/features/notifications/state/unread_count.dart';
-import 'package:instructor_app/features/shell/screens/home_screen.dart';
+import 'package:instructor_app/features/today/screens/today_screen.dart';
 
 import '../../helpers/fake_api.dart';
 import '../../helpers/pump_app.dart';
@@ -150,7 +150,7 @@ void main() {
     await _openInbox(tester);
     await tester.tap(find.text('New test n1'));
     await tester.pumpAndSettle();
-    expect(find.byType(HomeScreen), findsOneWidget);
+    expect(find.byType(TodayScreen), findsOneWidget);
   });
 
   testWidgets('mark all as read', (tester) async {

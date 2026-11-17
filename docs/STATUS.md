@@ -8,7 +8,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 **Stage 0:** all 14 PRs done ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11), plus the #345 error codes; its end-of-stage device check is still to do.
 
-**Stage 1 (students):** plan approved 17 Nov ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)). Done: PR 1 (files). Next: PR 2, Today.
+**Stage 1 (students):** plan approved 17 Nov ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)). Done: PRs 1–2 (files, Today). Next: PR 3, My attendance.
 
 ## Done
 
@@ -55,9 +55,11 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 - Stage 1 PR 1: files. Uploads in three steps (presign, PUT to the signed link with no session headers, complete) with progress, cancel and retry; take a photo, choose photos (resized to 2000 px, JPEG 80) or choose files, limited to the types the server takes for each purpose; 20 MB limit; over the storage quota shows the locked-feature sheet, and 90% full is said; open a file through `/files/:id/content`. Packages `image_picker` and `file_picker` (approved with the plan); iOS camera and photo-library reasons. Used by leave, homework and chat. Found that the server refuses `HOMEWORK` uploads (tes-taker#349).
 
+- Stage 1 PR 2: Today, now the home screen (`/` and `/today`): today's classes, events, exams and homework from `GET /calendar/me` (all the person's workspaces, each item named when there are several), "Check-in is open: …" with a button to My attendance (where the web checks in), homework due this week (not handed in), and the next 5 events and exams; each item opens its details, or says it belongs to another workspace; owners, admins and assistants also get "Your school". Checked on beta as an owner in Bangla, and against a test student's real feed.
+
 ## In progress
 
-- Stage 1 ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)), PR 2 of 15: Today. Stage 0 still needs its end-of-stage check (360 px phone, tablet, iOS).
+- Stage 1 ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)), PR 3 of 15: My attendance. Stage 0 still needs its end-of-stage check (360 px phone, tablet, iOS).
 
 ## Owner's decisions since the plan
 
