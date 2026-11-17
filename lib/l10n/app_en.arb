@@ -965,5 +965,38 @@
   "appCodeExpired": "This code has expired. Ask for a new one.",
   "appCodeLocked": "Too many wrong codes. Please wait up to 15 minutes, then try again.",
   "appLoginNotVerified": "This phone number is not verified yet. Sign up again with the same number to get a new code.",
-  "appLoginDisabled": "Your account has been disabled. Please contact support."
+  "appLoginDisabled": "Your account has been disabled. Please contact support.",
+  "appAttachTakePhoto": "Take a photo",
+  "appAttachChoosePhotos": "Choose photos from the gallery",
+  "appAttachChooseFile": "Choose a file",
+  "appAttachUploading": "Uploading… {percent}%",
+  "@appAttachUploading": {
+    "placeholders": {
+      "percent": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "appAttachFailed": "Upload failed. Please try again.",
+  "appAttachRetry": "Upload again",
+  "appAttachTypeNotAllowed": "{name} can't be added: this type of file isn't allowed here.",
+  "@appAttachTypeNotAllowed": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "appAttachTooMany": "You can add up to {count} files.",
+  "@appAttachTooMany": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "appAttachStorageAlmostFull": "Your organisation's storage is almost full.",
+  "appFileOpenFailed": "The file could not be opened."
 }
