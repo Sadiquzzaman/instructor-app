@@ -38,6 +38,7 @@ const webNamespaces = [
   'calendar',
   'myAttendance',
   'leave',
+  'routine',
 ];
 
 const locales = ['en', 'bn'];

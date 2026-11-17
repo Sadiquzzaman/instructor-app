@@ -1673,6 +1673,179 @@
   "leaveErrorsATTENDANCELEAVECANNOTCANCEL": "Leave that has started can't be withdrawn.",
   "leaveErrorsATTENDANCELEAVENOTAPPROVER": "You don't approve this leave.",
   "leaveErrorsATTENDANCELEAVEOWNREQUEST": "You can't answer your own leave.",
+  "routineTitle": "Routine",
+  "routineStudentIntro": "Your [[section]]'s classes each week.",
+  "routineStaffIntro": "Each [[section]]'s weekly routine: who teaches what, where and when.",
+  "routineLoadFailed": "The routine could not be loaded.",
+  "routineSession": "Session",
+  "routineViewBy": "Show by",
+  "routineBySection": "[[Section]]",
+  "routineByTeacher": "Teacher",
+  "routineByRoom": "Room",
+  "routineNothingToChoose": "Nothing yet",
+  "routineNoSections": "This session has no [[sections]] yet",
+  "routineAdd": "Add period",
+  "routineAddTitle": "Add a period",
+  "routineEditTitle": "Change this period",
+  "routineSection": "[[Section]]",
+  "routineDay": "Day",
+  "routineStart": "Start",
+  "routineEnd": "End",
+  "routineSubject": "Subject",
+  "routineNoSubject": "No subject",
+  "routineTeacher": "Teacher",
+  "routineNoTeacher": "No teacher",
+  "routineRoom": "Room",
+  "routineRoomHint": "Filled in from the section's room; change it for a lab or another room.",
+  "routineNoClasses": "No classes",
+  "routineSave": "Save",
+  "routineSaveAnyway": "Save anyway",
+  "routineCancel": "Cancel",
+  "routineSaved": "Routine saved",
+  "routineRemove": "Remove",
+  "routineRemoveTitle": "Remove this period from the routine?",
+  "routineRemoveDetail": "It no longer repeats each week. Attendance already taken for it is kept.",
+  "routineClashTEACHER": "Teacher booked twice",
+  "routineClashROOM": "Room booked twice",
+  "routineClashTitle": "This clashes with another class:",
+  "routineClashWithTEACHER": "Same teacher: {section}, {day} {start}–{end}",
+  "@routineClashWithTEACHER": {
+    "placeholders": {
+      "section": {
+        "type": "String"
+      },
+      "day": {
+        "type": "String"
+      },
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  },
+  "routineClashWithROOM": "Same room: {section}, {day} {start}–{end}",
+  "@routineClashWithROOM": {
+    "placeholders": {
+      "section": {
+        "type": "String"
+      },
+      "day": {
+        "type": "String"
+      },
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  },
+  "routineClashHint": "You can still save it; the clash is then marked in the routine.",
+  "routineClashesInRoutine": "{count, plural, one{{count} class clashes} other{{count} classes clash}} with another class (same teacher or room). They are marked below.",
+  "@routineClashesInRoutine": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "routineDays1": "Monday",
+  "routineDays2": "Tuesday",
+  "routineDays3": "Wednesday",
+  "routineDays4": "Thursday",
+  "routineDays5": "Friday",
+  "routineDays6": "Saturday",
+  "routineDays7": "Sunday",
+  "routineErrorsTIMESREQUIRED": "Choose a start and an end time.",
+  "routineErrorsSCHEDULETIMEINVALID": "The end time must be after the start time.",
+  "routineErrorsSCHEDULEOVERLAP": "This [[section]] already has a class at that time.",
+  "routineErrorsSCHEDULETOOMANY": "A [[section]] can have at most {max} classes a week.",
+  "@routineErrorsSCHEDULETOOMANY": {
+    "placeholders": {
+      "max": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "routineErrorsROUTINESUBJECTINVALID": "Choose one of this [[section]]'s subjects.",
+  "routineErrorsROUTINETEACHERINVALID": "Choose a teacher of your organisation.",
+  "routineErrorsROUTINENOTFOUND": "This class was removed meanwhile. Close and reload.",
+  "routineErrorsDAYSREQUIRED": "Choose at least one day.",
+  "routineErrorsROUTINENOTALLOWED": "You can change the routine of the [[sections]] you teach.",
+  "routineEditorIntro": "Each [[section]]'s weekly routine. Add periods, copy a week from another [[section]], or import a CSV.",
+  "routineCopyFrom": "Copy from another [[section]]",
+  "routineCopyTitle": "Copy a week into {section}",
+  "@routineCopyTitle": {
+    "placeholders": {
+      "section": {
+        "type": "String"
+      }
+    }
+  },
+  "routineCopyIntro": "The other [[section]]'s periods replace this [[section]]'s. Subjects are matched; the subject's teacher is filled in when it has one; rooms are not copied.",
+  "routineCopyFromLabel": "Copy from",
+  "routineChooseSection": "Choose a [[section]]",
+  "routineCopy": "Copy week",
+  "routineCopyConfirmTitle": "Replace this [[section]]'s week?",
+  "routineCopyConfirmDetail": "{count, plural, =0{The [[section]] has no periods yet.} one{Its {count} period is replaced.} other{Its {count} periods are replaced.}} Attendance already taken is kept.",
+  "@routineCopyConfirmDetail": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "routineCopied": "{count, plural, one{{count} period copied} other{{count} periods copied}}",
+  "@routineCopied": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "routineCopiedWithoutTeacher": "{count, plural, one{{count} period has no teacher yet.} other{{count} periods have no teacher yet.}}",
+  "@routineCopiedWithoutTeacher": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "routineImportCsv": "Import CSV",
+  "routineImported": "{count, plural, one{Routine of {count} [[section]] imported} other{Routine of {count} [[sections]] imported}}",
+  "@routineImported": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "routineNoSectionsStudent": "You are not in a [[section]] yet",
+  "routineTeachesSubject": "{name} (teaches this subject)",
+  "@routineTeachesSubject": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "routineDaysLabel": "Days",
+  "routineYou": "{name} (you)",
+  "@routineYou": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "appNoConnection": "No internet connection. Check it and try again.",
   "appUpdateRequiredTitle": "Please update Instructor",
   "appUpdateRequiredBody": "This version of the app is no longer supported. Install the new version to continue.",
