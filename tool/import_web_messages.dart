@@ -22,7 +22,15 @@ import 'dart:convert';
 import 'dart:io';
 
 /// The web namespaces the app uses so far. Add a namespace when a screen needs it.
-const webNamespaces = ['common', 'language', 'ui', 'validation', 'auth', 'shell'];
+const webNamespaces = [
+  'common',
+  'language',
+  'ui',
+  'validation',
+  'auth',
+  'shell',
+  'dashboard',
+];
 
 const locales = ['en', 'bn'];
 

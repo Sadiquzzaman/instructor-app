@@ -46,7 +46,8 @@ void main() {
     await tester.tap(find.text('Sign in'));
     await tester.pumpAndSettle();
     expect(find.byType(PlaceholderHome), findsOneWidget);
-    expect(find.text('Test Student · Demo School'), findsOneWidget);
+    expect(find.text('Test Student'), findsOneWidget);
+    expect(find.text('Demo School'), findsOneWidget);
 
     await tester.tap(find.text('Sign out'));
     await tester.pumpAndSettle();

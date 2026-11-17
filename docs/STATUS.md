@@ -6,7 +6,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 ## Current stage
 
-**Stage 0:** PRs 1–8 of 14 ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11). Next: PR 9, workspaces (picker and switcher).
+**Stage 0:** PRs 1–9 of 14 ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11). Next: PR 10, the app shell and menu (by role, workspace type and plan).
 
 ## Done
 
@@ -28,9 +28,11 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 - PR 8: sign-up and forgot password. Choose student, teacher (Academic or IELTS) or organisation (school or IELTS centre); the web's forms, checks (strong password, terms) and wording; the 6-digit SMS code with a 60 s resend (which repeats the sign-up, as the API sends a new code for an unverified phone); back to login with the web's message (verified, teacher pending approval, or the organisation number); forgot password in three steps (code by SMS or email, masked target, new password). Nothing is sent to beta from tests; the screens were checked on the emulator without submitting.
 
+- PR 9: workspaces. After sign-in with several workspaces and none chosen (`context_type: individual`) the app shows "Your workspaces" (the web's wording; "Pending approval" marked); the home switcher opens the same list; `POST /auth/select-context` gives the new tokens on the same device; everything that belongs to a workspace (level labels so far) reloads or drops by itself when the workspace changes or the person signs out; the organisation's language applies when the person has none. Tested on beta with a Sunrise School teacher who has two schools.
+
 ## In progress
 
-- PR 9: workspaces: the picker after sign-in when several are available (`context_type: individual`), the switcher, new tokens from `select-context`, clearing the old workspace's data.
+- PR 10: the app shell (bottom bar on phones, side rail on tablets) and the menu by role, workspace type and plan (`GET /me/entitlements`), the locked-feature message, "Use the web for this for now", branch managers.
 
 ## Owner's decisions since the plan
 

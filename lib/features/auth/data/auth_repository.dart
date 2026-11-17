@@ -8,7 +8,6 @@ import 'package:instructor_app/core/auth/session_holder.dart';
 import 'package:instructor_app/core/device/device_info.dart';
 import 'package:instructor_app/core/l10n/l10n.dart';
 import 'package:instructor_app/core/l10n/language_controller.dart';
-import 'package:instructor_app/core/l10n/level_labels.dart';
 import 'package:instructor_app/features/auth/data/login_validation.dart';
 
 /// Signing in and out (API guide §3, PM-01).
@@ -90,8 +89,7 @@ Future<Session> signIn(
   return session;
 }
 
-/// Signs out and drops everything that belonged to the session's workspace.
-Future<void> signOut(WidgetRef ref) async {
-  await ref.read(authRepositoryProvider).logout();
-  ref.invalidate(levelLabelsProvider);
-}
+/// Signs out. Everything that belonged to the workspace is dropped by itself:
+/// it watches the session (workspaceKeyProvider), which is now null.
+Future<void> signOut(WidgetRef ref) =>
+    ref.read(authRepositoryProvider).logout();

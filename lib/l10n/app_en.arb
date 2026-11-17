@@ -356,6 +356,230 @@
   "shellWorkspaceClasses": "[[Classes]]",
   "shellWorkspaceFallback": "Workspace",
   "shellWorkspaceReview": "Review",
+  "dashboardWelcome": "Welcome, {name}",
+  "@dashboardWelcome": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "dashboardWelcomeFallback": "Welcome",
+  "dashboardTeacherIntro": "Here is what needs your attention today.",
+  "dashboardLoadFailed": "The dashboard did not load.",
+  "dashboardViewAll": "View all",
+  "dashboardUntitledTest": "Untitled test",
+  "dashboardNoClass": "No [[class]]",
+  "dashboardCreateTest": "Create test",
+  "dashboardCreateClass": "Create [[class]]",
+  "dashboardExamLimitReached": "You have reached your exam limit.",
+  "dashboardUpgrade": "Upgrade",
+  "dashboardTodayLabel": "Today",
+  "dashboardTodayNeedsMarking": "Needs marking",
+  "dashboardTodayNeedsMarkingDetail": "{count, plural, =0{Nothing waiting for review.} one{{count} submission waiting for review.} other{{count} submissions waiting for review.}}",
+  "@dashboardTodayNeedsMarkingDetail": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "dashboardTodayGoToMarking": "Go to marking",
+  "dashboardTodayLiveNow": "Live now",
+  "dashboardTodayNoLive": "No test is running right now.",
+  "dashboardTodayTimeLeft": "{time} left",
+  "@dashboardTodayTimeLeft": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "dashboardTodayParticipants": "{count, plural, one{{count} taking it} other{{count} taking it}}",
+  "@dashboardTodayParticipants": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "dashboardTodaySubmitted": "{count} submitted",
+  "@dashboardTodaySubmitted": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "dashboardTodayPreviousLive": "Previous live test",
+  "dashboardTodayNextLive": "Next live test",
+  "dashboardTodayLiveOf": "{current} of {total}",
+  "@dashboardTodayLiveOf": {
+    "placeholders": {
+      "current": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "total": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "dashboardTodayStartingSoon": "Starting soon",
+  "dashboardTodayNothingScheduled": "No test is scheduled.",
+  "dashboardTodayViewTests": "View tests",
+  "dashboardUpcomingTitle": "Upcoming tests",
+  "dashboardUpcomingCaption": "Upcoming tests",
+  "dashboardUpcomingTest": "Test",
+  "dashboardUpcomingClass": "[[Class]]",
+  "dashboardUpcomingStarts": "Starts",
+  "dashboardUpcomingDuration": "Duration",
+  "dashboardUpcomingStudents": "Students",
+  "dashboardUpcomingEmpty": "No upcoming tests",
+  "dashboardUpcomingEmptyDetail": "Scheduled tests will appear here.",
+  "dashboardDurationMinutes": "{minutes} min",
+  "@dashboardDurationMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "dashboardDurationHours": "{hours} h",
+  "@dashboardDurationHours": {
+    "placeholders": {
+      "hours": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "dashboardDurationHoursMinutes": "{hours} h {minutes} min",
+  "@dashboardDurationHoursMinutes": {
+    "placeholders": {
+      "hours": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "minutes": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "dashboardStudentsTitle": "Students",
+  "dashboardStudentsTotal": "Total",
+  "dashboardStudentsActive": "Active",
+  "dashboardStudentsPending": "Pending",
+  "dashboardStudentsAdd": "Add students",
+  "dashboardStudentsEmpty": "No students yet",
+  "dashboardStudentsEmptyDetail": "Add students to your [[classes]] to start tracking performance.",
+  "dashboardClassesTitle": "My [[classes]]",
+  "dashboardClassesSeries": "Students",
+  "dashboardClassesTooltip": "{count, plural, one{{count} student} other{{count} students}}",
+  "@dashboardClassesTooltip": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "dashboardClassesChartLabel": "Students in each [[class]]",
+  "dashboardClassesEmpty": "No [[classes]] yet",
+  "dashboardClassesEmptyDetail": "Create your first [[class]] to start inviting students.",
+  "dashboardTopTitle": "Top students",
+  "dashboardTopClass": "[[Class]]",
+  "dashboardTopSearch": "Search students",
+  "dashboardTopCaption": "Top students in {className}",
+  "@dashboardTopCaption": {
+    "placeholders": {
+      "className": {
+        "type": "String"
+      }
+    }
+  },
+  "dashboardTopStudent": "Student",
+  "dashboardTopTests": "Tests",
+  "dashboardTopAvgScore": "Avg score",
+  "dashboardTopEmpty": "No results yet",
+  "dashboardTopEmptyDetail": "Top students appear here once submissions are marked.",
+  "dashboardTopNoMatch": "No students match your search.",
+  "dashboardTopMore": "{count, plural, one{and {count} more student} other{and {count} more students}}",
+  "@dashboardTopMore": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "dashboardCalendarTitle": "Calendar",
+  "dashboardCalendarPreviousMonth": "Previous month",
+  "dashboardCalendarNextMonth": "Next month",
+  "dashboardCalendarHasTests": "{count, plural, one{{count} test} other{{count} tests}}",
+  "@dashboardCalendarHasTests": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "dashboardCalendarToday": "Today",
+  "dashboardCalendarNoEvents": "No tests scheduled this month.",
+  "dashboardActivityTitle": "My activity",
+  "dashboardActivityPeriod": "Period",
+  "dashboardActivityMonthly": "Monthly",
+  "dashboardActivityWeekly": "Weekly",
+  "dashboardActivityDaily": "Daily",
+  "dashboardActivityExams": "Exams",
+  "dashboardActivityChartLabel": "Exams over time",
+  "dashboardActivityTooltipExams": "{count, plural, one{{count} exam} other{{count} exams}}",
+  "@dashboardActivityTooltipExams": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "dashboardActivityTooltipParticipants": "{count, plural, one{{count} participant} other{{count} participants}}",
+  "@dashboardActivityTooltipParticipants": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "dashboardActivityEmpty": "Activity appears once students start taking tests.",
+  "dashboardStudentTitle": "Your workspaces",
+  "dashboardStudentIntro": "Choose an organisation or teacher to see your [[classes]] and tests.",
+  "dashboardStudentEmpty": "No workspaces yet",
+  "dashboardStudentEmptyDetail": "Join a [[class]] with an invite link from your teacher or organisation. It will appear here.",
+  "dashboardStudentOrgId": "ID {id}",
+  "@dashboardStudentOrgId": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "dashboardStudentPendingApproval": "Pending approval",
+  "dashboardStudentOrganization": "Organisation",
+  "dashboardStudentTeacher": "Teacher / coaching classes",
+  "dashboardStudentPending": "Pending",
+  "dashboardStudentStudent": "Student",
+  "dashboardStudentOpen": "Open",
+  "dashboardStudentContinue": "Continue",
+  "dashboardStudentOpening": "Opening…",
+  "dashboardStudentUnavailable": "Unavailable",
   "appNoConnection": "No internet connection. Check it and try again.",
   "appUpdateRequiredTitle": "Please update Instructor",
   "appUpdateRequiredBody": "This version of the app is no longer supported. Install the new version to continue.",
