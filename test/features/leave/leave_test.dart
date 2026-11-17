@@ -284,4 +284,128 @@ void main() {
     expect(find.text(bn.leaveApply), findsOneWidget);
     expect(find.text(bn.leaveStatusPENDING), findsOneWidget);
   });
+
+  group('to approve (teachers)', () {
+    Map<String, Object?> waiting(String id) => {
+      ..._request(id),
+      'person': {'id': 's9', 'full_name': 'Karim Hasan'},
+      'applied_by': {'id': 's9', 'full_name': 'Karim Hasan'},
+      'can_decide': true,
+    };
+
+    FakeApi teacher({bool ownLeave = true, FakeHandler? reject}) =>
+        _api(
+            canApply: ownLeave,
+            requests: ownLeave ? [_request('r1', canCancel: true)] : [],
+            mine: (_) => ok({
+              'today': _today,
+              'can_apply': ownLeave,
+              'person_type': 'TEACHER',
+              'can_apply_for_others': false,
+              'can_approve': true,
+              'requests': ownLeave
+                  ? [_request('r1', canCancel: true)]
+                  : <Object>[],
+            }),
+          )
+          ..on(
+            'GET /attendance/leave/approvals',
+            (r) => ok(
+              r.query['status'] == 'PENDING' ? [waiting('w1')] : <Object>[],
+            ),
+          )
+          ..on('POST /attendance/leave/w1/approve', (_) => ok(waiting('w1')))
+          ..on(
+            'POST /attendance/leave/w1/reject',
+            reject ?? (_) => ok(waiting('w1')),
+          );
+
+    testWidgets('the waiting count; approve with no comment', (tester) async {
+      final api = teacher();
+      await _open(tester, api);
+      expect(find.text('${_en.leaveTabsApprovals} · 1'), findsOneWidget);
+      expect(find.byKey(const Key('leave-r1')), findsOneWidget);
+      await tester.tap(find.byKey(const Key('tab-approvals')));
+      await tester.pumpAndSettle();
+      expect(find.textContaining('Class 6 A'), findsOneWidget);
+      expect(find.textContaining('Karim Hasan'), findsOneWidget);
+      expect(find.byKey(const Key('leave-r1')), findsNothing);
+
+      await tester.tap(find.byKey(const Key('approve-w1')));
+      await tester.pumpAndSettle();
+      expect(find.text(_en.leaveApproveTitle('Karim Hasan')), findsOneWidget);
+      await tester.tap(find.byKey(const Key('decision-save')));
+      await tester.pumpAndSettle();
+      expect(
+        api.to('POST /attendance/leave/w1/approve').single.body,
+        <String, Object>{},
+      );
+      expect(find.text(_en.leaveApproved), findsOneWidget);
+      expect(api.to('GET /attendance/leave/approvals').length, greaterThan(1));
+    });
+
+    testWidgets('don\'t approve needs a comment', (tester) async {
+      final api = teacher();
+      await _open(tester, api);
+      await tester.tap(find.byKey(const Key('tab-approvals')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const Key('reject-w1')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const Key('decision-save')));
+      await tester.pumpAndSettle();
+      expect(api.to('POST /attendance/leave/w1/reject'), isEmpty);
+      // The hint and the problem say the same, as on the web.
+      expect(find.text(_en.leaveNoteRequired), findsNWidgets(2));
+
+      await tester.enterText(
+        find.byKey(const Key('decision-note')),
+        '  The exam is on Monday  ',
+      );
+      await tester.tap(find.byKey(const Key('decision-save')));
+      await tester.pumpAndSettle();
+      expect(api.to('POST /attendance/leave/w1/reject').single.body, {
+        'note': 'The exam is on Monday',
+      });
+      expect(find.text(_en.leaveRejected), findsOneWidget);
+    });
+
+    testWidgets('decided by someone else meanwhile: says so', (tester) async {
+      final api = teacher(
+        reject: (_) => apiError(409, code: 'ATTENDANCE_LEAVE_NOT_PENDING'),
+      );
+      await _open(tester, api);
+      await tester.tap(find.byKey(const Key('tab-approvals')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const Key('reject-w1')));
+      await tester.pumpAndSettle();
+      await tester.enterText(
+        find.byKey(const Key('decision-note')),
+        'No, sorry',
+      );
+      await tester.tap(find.byKey(const Key('decision-save')));
+      await tester.pumpAndSettle();
+      expect(
+        find.text(_en.leaveErrorsATTENDANCELEAVENOTPENDING),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('only approving: opens on it; the decided filter', (
+      tester,
+    ) async {
+      final api = teacher(ownLeave: false);
+      await _open(tester, api);
+      expect(find.byKey(const Key('tab-mine')), findsNothing);
+      expect(find.byKey(const Key('approve-w1')), findsOneWidget);
+      await tester.tap(find.byKey(const Key('approvals-filter')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(_en.leaveFiltersDECIDED).last);
+      await tester.pumpAndSettle();
+      expect(
+        api.to('GET /attendance/leave/approvals').last.query['status'],
+        'DECIDED',
+      );
+      expect(find.text(_en.leaveEmptyDecided), findsOneWidget);
+    });
+  });
 }

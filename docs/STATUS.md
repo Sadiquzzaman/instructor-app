@@ -89,6 +89,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 - The end-of-stage checks for Stage 0 and Stage 1, by hand: a 360 px phone, a tablet and iOS (Jubaer's Mac), including taking a test through the app's own screens on a phone. Not done yet: the emulator holds the owner's own signed-in session, which I did not sign out, and the integration tests were not run on a device for the same reason.
 - Stage 2 (teachers): the plan is written ([STAGE-2-PLAN.md](STAGE-2-PLAN.md)) and waits for the owner's approval (its §7 has six questions).
+- Stage 2 PR 3, leave approvals, built ahead because no question in §7 touches it: a draft pull request, not merged until the plan is approved. On Leave, people who approve (`can_approve`) get "To approve" with the waiting count; each request shows who asked and their class, with Approve (an optional comment) and Don't approve (a comment of 3 or more letters, as the web); the Waiting, Decided and All filter; "already decided" and other refusals in the web's words.
 ## Owner's decisions since the plan
 
 - 17 Nov: the Stage 1 plan approved as written: `image_picker`, `file_picker`, `geolocator` and `socket_io_client`; location, camera and photo permissions; Light proctoring in the app (leaving the app reported like a tab switch, screenshots blocked on Android, no copy and paste in answers); reminders read-only; one test exam on beta for demo.student1; class discussions in Stage 1.
