@@ -9,6 +9,7 @@ import 'package:instructor_app/core/routing/app_routes.dart';
 import 'package:instructor_app/core/theme/app_colors.dart';
 import 'package:instructor_app/core/theme/app_metrics.dart';
 import 'package:instructor_app/core/widgets/app_button.dart';
+import 'package:instructor_app/features/auth/data/auth_error_text.dart';
 import 'package:instructor_app/features/auth/data/signup_repository.dart';
 import 'package:instructor_app/features/auth/data/signup_validation.dart';
 import 'package:instructor_app/features/auth/widgets/auth_page.dart';
@@ -68,11 +69,13 @@ class _VerifyCodeScreenState extends ConsumerState<VerifyCodeScreen> {
       context.go(AppRoutes.login);
     } on ApiException catch (e) {
       if (!mounted) return;
+      final l10n = context.l10n;
       setState(
         () => _formError =
-            e.kind == ApiErrorKind.network || e.kind == ApiErrorKind.timeout
-            ? context.l10n.appNoConnection
-            : context.l10n.authOtpFailedDescription,
+            authErrorText(e, l10n) ??
+            (e.kind == ApiErrorKind.network || e.kind == ApiErrorKind.timeout
+                ? l10n.appNoConnection
+                : l10n.authOtpFailedDescription),
       );
     } finally {
       if (mounted) setState(() => _loading = false);
@@ -108,9 +111,16 @@ class _VerifyCodeScreenState extends ConsumerState<VerifyCodeScreen> {
           onResend: () async {
             try {
               await ref.read(signUpRepositoryProvider).resend(widget.pending);
-            } on ApiException {
+            } on ApiException catch (e) {
               if (mounted) {
-                setState(() => _formError = context.l10n.appSignupFailed);
+                setState(
+                  () => _formError =
+                      authErrorText(e, l10n) ??
+                      (e.kind == ApiErrorKind.network ||
+                              e.kind == ApiErrorKind.timeout
+                          ? l10n.appNoConnection
+                          : l10n.appSignupFailed),
+                );
               }
             }
           },
