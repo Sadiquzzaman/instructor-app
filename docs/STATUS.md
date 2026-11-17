@@ -53,7 +53,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 ## In progress
 
-- Nothing; Stage 0 is waiting for its end-of-stage check.
+- The Stage 1 plan ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)), waiting for the owner's approval. Stage 0 still needs its end-of-stage check (360 px phone, tablet, iOS).
 
 ## Owner's decisions since the plan
 
@@ -77,4 +77,4 @@ Live classes are postponed by the owner and left out of every stage.
 
 ## Decisions needed from the owner
 
-None right now.
+The five questions in [STAGE-1-PLAN.md](STAGE-1-PLAN.md) §7: the packages and permissions, Light proctoring in the app, calendar reminders, a test exam on beta, class discussions.
