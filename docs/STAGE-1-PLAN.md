@@ -1,6 +1,6 @@
 # Stage 1 plan: students
 
-**Status: waiting for the owner's approval** (§7). Nothing in this plan is built yet.
+**Approved by the owner on 17 Nov 2026, as written** (§7 records the answers).
 
 Stage 1 ([HANDOVER.md](HANDOVER.md) §4) gives students the app they use every day. They can:
 - see today and check in;
@@ -110,7 +110,9 @@ Push notifications (PM-04) would help (homework due, test starting, chat). Until
 
 About 15 PRs. Tests (PRs 10–11) and chat (PR 13) are the largest. Today to timetable (PRs 2–6) are small to medium.
 
-## 7. Decisions needed from you
+## 7. Decisions (approved by the owner, 17 Nov 2026, as written)
+
+The owner approved the plan as written, so each question below takes the suggestion made in it: the four packages and the permissions; Light proctoring as described; reminders read-only; one small test exam on beta as a Demo School teacher for demo.student1 (made when PR 11 is reached); class discussions in PR 8.
 
 1. **Approve the four packages** in §3, and the new location, camera and photo permissions.
 2. **Light proctoring in the app.** The web's Light level watches the browser (leaving the tab, leaving full screen, refreshing the page, copy and paste). In the app I suggest:
@@ -123,4 +125,3 @@ About 15 PRs. Tests (PRs 10–11) and chat (PR 13) are the largest. Today to tim
 4. **A test exam on beta:** may I create one small test as a demo teacher (Demo School), assigned to demo.student1, with proctoring Off and then Light? It would let me check taking a test end to end on beta. Otherwise PR 11 is checked against the fake API only.
 5. **Class discussions** (reading and replying in a subject's discussion): include them in Stage 1 (PR 8), as on the web? Or leave them for later and give students chat only?
 
-This plan is a PR into `develop` so it is on record. It is merged once you approve it, with your answers written in.

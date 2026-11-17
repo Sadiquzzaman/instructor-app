@@ -6,7 +6,9 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 ## Current stage
 
-**Stage 0:** all 14 PRs done ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11), plus the #345 error codes. Next: the end-of-stage check on a 360 px phone, a tablet and Jubaer's Mac (iOS), then Stage 1 with the owner.
+**Stage 0:** all 14 PRs done ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11), plus the #345 error codes; its end-of-stage device check is still to do.
+
+**Stage 1 (students):** plan approved 17 Nov ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)). Next: PR 1, files.
 
 ## Done
 
@@ -53,10 +55,11 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 ## In progress
 
-- The Stage 1 plan ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)), waiting for the owner's approval. Stage 0 still needs its end-of-stage check (360 px phone, tablet, iOS).
+- Stage 1 ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)), PR 1 of 15: files. Stage 0 still needs its end-of-stage check (360 px phone, tablet, iOS).
 
 ## Owner's decisions since the plan
 
+- 17 Nov: the Stage 1 plan approved as written: `image_picker`, `file_picker`, `geolocator` and `socket_io_client`; location, camera and photo permissions; Light proctoring in the app (leaving the app reported like a tab switch, screenshots blocked on Android, no copy and paste in answers); reminders read-only; one test exam on beta for demo.student1; class discussions in Stage 1.
 - 17 Nov: the logo the owner sent (green ring with a yellow "i") replaces `logo.png` for the app icon and splash (PR 14). The black background was removed; PR 14 added it as `assets/brand/logo.png`.
 - 17 Nov: `cupertino_ui` approved as a direct dependency (Bangla texts for iOS-style menus; it already came with `material_ui`).
 
@@ -77,4 +80,4 @@ Live classes are postponed by the owner and left out of every stage.
 
 ## Decisions needed from the owner
 
-The five questions in [STAGE-1-PLAN.md](STAGE-1-PLAN.md) §7: the packages and permissions, Light proctoring in the app, calendar reminders, a test exam on beta, class discussions.
+None right now.
