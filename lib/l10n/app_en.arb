@@ -1431,6 +1431,248 @@
   "myAttendanceErrorsATTENDANCECHECKINCANCELLED": "This class is cancelled today.",
   "myAttendanceOnLeaveToday": "You're on approved leave today. Your classes count as Leave unless you check in.",
   "myAttendanceLeaveLink": "Leave",
+  "leaveTitle": "Leave",
+  "leaveIntro": "Apply for leave with dates and a reason. Approved days show as Leave (blue) and never count as absent.",
+  "leaveApply": "Apply for leave",
+  "leaveTabsMine": "My leave",
+  "leaveTabsApprovals": "To approve",
+  "leaveLoadFailed": "Couldn't load leave.",
+  "leaveEmptyMine": "No leave yet",
+  "leaveEmptyMineHint": "Your leave requests and their answers appear here.",
+  "leaveEmptyApprovals": "Nothing waiting",
+  "leaveEmptyApprovalsHint": "New leave requests from your students or staff appear here.",
+  "leaveEmptyDecided": "No decided requests yet",
+  "leaveFilter": "Show",
+  "leaveFiltersPENDING": "Waiting",
+  "leaveFiltersDECIDED": "Decided",
+  "leaveFiltersALL": "All",
+  "leaveColumnsDates": "Dates",
+  "leaveColumnsDays": "School days",
+  "leaveColumnsPerson": "Who",
+  "leaveColumnsStatus": "Status",
+  "leaveColumnsReason": "Reason",
+  "leaveColumnsAnswer": "Answer",
+  "leaveColumnsActions": "Actions",
+  "leaveRange": "{from} – {to}",
+  "@leaveRange": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "leaveDays": "{count, plural, one{{count} school day} other{{count} school days}}",
+  "@leaveDays": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "leaveStatusPENDING": "Waiting",
+  "leaveStatusAPPROVED": "Approved",
+  "leaveStatusREJECTED": "Not approved",
+  "leaveStatusCANCELLED": "Withdrawn",
+  "leavePersonTypeSTUDENT": "Student",
+  "leavePersonTypeTEACHER": "Teacher",
+  "leaveAppliedBy": "Applied by {name}",
+  "@leaveAppliedBy": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "leaveDecidedBy": "{name}: {note}",
+  "@leaveDecidedBy": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "note": {
+        "type": "String"
+      }
+    }
+  },
+  "leaveDecidedByNoNote": "By {name}",
+  "@leaveDecidedByNoNote": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "leaveWithdrawnBy": "Withdrawn by {name}",
+  "@leaveWithdrawnBy": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "leaveAttachment": "Attachment",
+  "leaveOpenAttachment": "Open {name}",
+  "@leaveOpenAttachment": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "leaveApprove": "Approve",
+  "leaveReject": "Don't approve",
+  "leaveApproveNamed": "Approve leave for {name}",
+  "@leaveApproveNamed": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "leaveRejectNamed": "Don't approve leave for {name}",
+  "@leaveRejectNamed": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "leaveWithdraw": "Withdraw",
+  "leaveWithdrawNamed": "Withdraw leave {dates}",
+  "@leaveWithdrawNamed": {
+    "placeholders": {
+      "dates": {
+        "type": "String"
+      }
+    }
+  },
+  "leaveWithdrawTitle": "Withdraw this leave?",
+  "leaveWithdrawDescription": "The request for {dates} is kept as withdrawn. You can apply again.",
+  "@leaveWithdrawDescription": {
+    "placeholders": {
+      "dates": {
+        "type": "String"
+      }
+    }
+  },
+  "leaveWithdrawn": "Leave withdrawn",
+  "leaveApproveTitle": "Approve leave for {name}?",
+  "@leaveApproveTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "leaveRejectTitle": "Don't approve leave for {name}?",
+  "@leaveRejectTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "leaveDecisionHint": "{dates}, {days}. {reason}",
+  "@leaveDecisionHint": {
+    "placeholders": {
+      "dates": {
+        "type": "String"
+      },
+      "days": {
+        "type": "String"
+      },
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "leaveNoteLabel": "Comment for {name}",
+  "@leaveNoteLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "leaveNoteOptional": "Optional",
+  "leaveNoteRequired": "Say why, so they know what to do.",
+  "leaveApproved": "Leave approved",
+  "leaveRejected": "Leave not approved",
+  "leaveCancel": "Cancel",
+  "leaveFormTitle": "Apply for leave",
+  "leaveFormHint": "Whole days. Weekly off days and holidays inside the dates don't count.",
+  "leaveFormWho": "Who is on leave",
+  "leaveFormMyself": "Myself",
+  "leaveFormSomeoneElse": "A student or teacher",
+  "leaveFormSearch": "Search by name",
+  "leaveFormSearchHint": "Type at least 2 letters.",
+  "leaveFormPerson": "Person",
+  "leaveFormNoPeople": "No one found",
+  "leaveFormFrom": "First day",
+  "leaveFormTo": "Last day",
+  "leaveFormToHint": "Leave empty for one day.",
+  "leaveFormReason": "Reason",
+  "leaveFormReasonHint": "For example: fever, a family wedding.",
+  "leaveFormFile": "Attachment (optional)",
+  "leaveFormFileTypes": "images or PDF",
+  "leaveFormUploading": "Uploading…",
+  "leaveFormSubmit": "Apply",
+  "leaveFormApplied": "Leave applied for. You'll be told when it's answered.",
+  "leaveFormApprovedAtOnce": "Leave saved and approved.",
+  "leaveErrorsPERSONREQUIRED": "Choose who is on leave.",
+  "leaveErrorsREASONREQUIRED": "Write a reason (at least 3 letters).",
+  "leaveErrorsUPLOADFAILED": "Couldn't upload the attachment. Try again or apply without it.",
+  "leaveErrorsATTENDANCELEAVEDATESINVALID": "Choose a first and a last day, in order.",
+  "leaveErrorsATTENDANCELEAVETOOLONG": "Leave can be at most {days} days at a time.",
+  "@leaveErrorsATTENDANCELEAVETOOLONG": {
+    "placeholders": {
+      "days": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "leaveErrorsATTENDANCELEAVETOOOLD": "Leave can start at most {days} days back.",
+  "@leaveErrorsATTENDANCELEAVETOOOLD": {
+    "placeholders": {
+      "days": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "leaveErrorsATTENDANCELEAVETOOFAR": "Leave can be applied for up to {days} days ahead.",
+  "@leaveErrorsATTENDANCELEAVETOOFAR": {
+    "placeholders": {
+      "days": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "leaveErrorsATTENDANCELEAVENOSCHOOLDAYS": "Every day you chose is a weekly off day or a holiday.",
+  "leaveErrorsATTENDANCELEAVEOVERLAP": "This overlaps another leave request ({from} – {to}).",
+  "@leaveErrorsATTENDANCELEAVEOVERLAP": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "leaveErrorsATTENDANCELEAVENOTALLOWED": "You can't apply for this person's leave.",
+  "leaveErrorsATTENDANCELEAVEPERSONNOTFOUND": "This person isn't a student or teacher here.",
+  "leaveErrorsATTENDANCELEAVEFILEINVALID": "Upload the attachment again.",
+  "leaveErrorsATTENDANCELEAVENOTPENDING": "This request was already answered or withdrawn.",
+  "leaveErrorsATTENDANCELEAVECANNOTCANCEL": "Leave that has started can't be withdrawn.",
+  "leaveErrorsATTENDANCELEAVENOTAPPROVER": "You don't approve this leave.",
+  "leaveErrorsATTENDANCELEAVEOWNREQUEST": "You can't answer your own leave.",
   "appNoConnection": "No internet connection. Check it and try again.",
   "appUpdateRequiredTitle": "Please update Instructor",
   "appUpdateRequiredBody": "This version of the app is no longer supported. Install the new version to continue.",

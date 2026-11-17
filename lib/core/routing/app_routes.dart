@@ -26,6 +26,7 @@ abstract final class AppRoutes {
     home,
     today,
     myAttendance,
+    leave,
     notifications,
     account,
     features,
