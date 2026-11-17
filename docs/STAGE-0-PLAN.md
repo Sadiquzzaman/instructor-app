@@ -19,7 +19,7 @@ Stage 0 (HANDOVER §4): project setup, theme, Bangla/English, API client with re
 
 Signed in through the API as a Demo School student, teacher and owner, a Bright Path IELTS student and owner, and a solo teacher; each signed out afterwards.
 
-- A user with one workspace is **already in it after login** (`session_mode: organization`, `workspace_type` set); the answer also carries `contexts` and `requires_context_selection`. The picker only shows when that flag says so or the user opens the switcher.
+- A user with one workspace is **already in it after login** (`session_mode: organization`, `workspace_type` set); the answer also carries `contexts`. **Correction (PR 5, from the API code):** `requires_context_selection` is always false; with several workspaces the login answer is a plain session with `context_type: individual` and no workspace, and the web lets the user pick one. The app shows the picker when `context_type` is `individual` and more than one context is actionable.
 - `contexts` items carry no `workspace_type`, so the switcher shows the name and role only (the type arrives with the new tokens).
 - `GET /attendance/me/today` already returns everything the Today screen needs (`can_check_in`, `needs_location`, `state`, windows, `time_zone`).
 - Errors come back exactly as api.md says, for example 403 `NOT_IN_IELTS` (IELTS leave) and 403 `FEATURE_NOT_IN_PLAN` with `feature: "attendance"` (solo teacher on Free).
@@ -102,7 +102,7 @@ Each feature folder has `data/` (API calls and models), `state/` (providers) and
 ## 5. State and routing
 
 - **Riverpod** providers per feature. Everything that belongs to a workspace hangs off one `workspaceScope` provider; switching workspace or signing out invalidates it, so no data from the old workspace survives (multi-tenancy rule).
-- **go_router** with one redirect function, in this order: update required → update screen; no session → login; `requires_context_selection` → workspace picker; otherwise the requested page. Routes follow the web's names (`/today`, `/account`, …) so deep links can map later.
+- **go_router** with one redirect function, in this order: update required → update screen; no session → login; `context_type: individual` with several actionable workspaces → workspace picker (§2); otherwise the requested page. Routes follow the web's names (`/today`, `/account`, …) so deep links can map later.
 - **Menu:** a table that mirrors `sidebarList.tsx` (`role`, `memberRoles`, `personalWorkspaceOnly`, `workspaces`, `feature`) and one pure function that filters it; unit-tested per role, workspace type and plan. Items not built yet open the "Use the web for this for now" screen, so the menu is complete from day one.
 - **Branch managers** see only what answers: workspace, profile, notifications, and (IELTS) courses. Any 403 `NOT_FOR_BRANCH_MANAGERS` shows "Not available for branch managers yet".
 - **IELTS before stage 5:** shared features as they are built; IELTS-only items show "Use the web for IELTS for now" (owner's decision 6).

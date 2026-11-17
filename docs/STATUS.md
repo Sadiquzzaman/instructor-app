@@ -6,7 +6,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 ## Current stage
 
-**Stage 0:** PRs 1–4 of 14 ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11). Next: PR 5, the API client (tokens, refresh, errors).
+**Stage 0:** PRs 1–5 of 14 ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11). Next: PR 6, the version check at start-up.
 
 ## Done
 
@@ -20,12 +20,13 @@ Updated in every pull request, so the owner and the backend session can see wher
 - PR 2: every merge into `develop` publishes a test APK as a GitHub pre-release ([Releases](https://github.com/Sadiquzzaman/instructor-app/releases)), signed with the test key so it installs over earlier test builds. First one: `v0.1.0-dev.3`.
 - PR 3: the theme from the web's design tokens (`tool/tokens.json` → `lib/core/theme/tokens.g.dart`), `AppColors` by role, the type scale with Bangla line height 1.7, the bundled fonts (Instrument Sans, Hind Siliguri; OFL), and shared widgets (button, text field, card, status pill, loading/empty/error states). Tests check the tokens against the web's file, WCAG AA contrast and that no screen hard-codes a colour or font size.
 - CI fix: the Android build keeps the NDK (~700 MB) and Gradle's downloads in the Actions cache and stops after 15 minutes (a slow NDK download hung a build for 24 minutes on 17 Nov).
-
 - PR 4: Bangla and English. The web's wording is imported into the ARB files by `tool/import_web_messages.dart` (namespaces so far: `common`, `language`, `ui`, `validation`); a language switch saved on the phone (default: the phone's language if Bangla, else English, until sign-in brings the account's); the theme follows the language; level labels (`[[Classes]]` → the workspace's words), rich-text tags, and `OrgTime` (Asia/Dhaka, Bangla digits).
+
+- PR 5: the API client (`lib/core/api/`, `lib/core/auth/`): the answer envelope and `ApiException` (codes, features, limits, every shape of `message`); the session in secure storage (Keychain "this device only" / Keystore); bearer and `X-Organization-Id` headers; one refresh at a time with the rotated pair stored before any retry; sign-out when a refresh is refused, but not when the connection drops; `device` (make and model, never the owner's phone name) on refresh; a debug log that never shows headers, bodies or query values.
 
 ## In progress
 
-- PR 5: the API client (envelope and error codes, secure token storage, one refresh at a time with rotation, device info).
+- PR 6: the version check at start-up (`GET /app/version`; required update blocks, optional update suggests).
 
 ## Owner's decisions since the plan
 
