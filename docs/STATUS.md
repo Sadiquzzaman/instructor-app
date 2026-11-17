@@ -6,7 +6,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 ## Current stage
 
-**Stage 0:** PRs 1–3 of 14 ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11). Next: PR 4, Bangla and English.
+**Stage 0:** PRs 1–4 of 14 ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11). Next: PR 5, the API client (tokens, refresh, errors).
 
 ## Done
 
@@ -21,13 +21,16 @@ Updated in every pull request, so the owner and the backend session can see wher
 - PR 3: the theme from the web's design tokens (`tool/tokens.json` → `lib/core/theme/tokens.g.dart`), `AppColors` by role, the type scale with Bangla line height 1.7, the bundled fonts (Instrument Sans, Hind Siliguri; OFL), and shared widgets (button, text field, card, status pill, loading/empty/error states). Tests check the tokens against the web's file, WCAG AA contrast and that no screen hard-codes a colour or font size.
 - CI fix: the Android build keeps the NDK (~700 MB) and Gradle's downloads in the Actions cache and stops after 15 minutes (a slow NDK download hung a build for 24 minutes on 17 Nov).
 
+- PR 4: Bangla and English. The web's wording is imported into the ARB files by `tool/import_web_messages.dart` (namespaces so far: `common`, `language`, `ui`, `validation`); a language switch saved on the phone (default: the phone's language if Bangla, else English, until sign-in brings the account's); the theme follows the language; level labels (`[[Classes]]` → the workspace's words), rich-text tags, and `OrgTime` (Asia/Dhaka, Bangla digits).
+
 ## In progress
 
-- PR 4: Bangla and English (the web's wording, language switch, Bangla digits, organisation time).
+- PR 5: the API client (envelope and error codes, secure token storage, one refresh at a time with rotation, device info).
 
 ## Owner's decisions since the plan
 
 - 17 Nov: the logo the owner sent (green ring with a yellow "i") replaces `logo.png` for the app icon and splash (PR 14). The black background was removed; the transparent version is kept outside the repo until PR 14 adds it.
+- 17 Nov: `cupertino_ui` approved as a direct dependency (Bangla texts for iOS-style menus; it already came with `material_ui`).
 
 ## Open `mobile-api` issues
 

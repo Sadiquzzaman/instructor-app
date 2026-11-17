@@ -41,6 +41,7 @@ Signed in through the API as a Demo School student, teacher and owner, a Bright 
 | `device_info_plus` | ^13.3.0 | BSD-3 | fluttercommunity.dev | The phone's name for `device.name` (shown in the signed-in devices list) |
 | `url_launcher` | ^6.3.3 | BSD-3 | flutter.dev | "Update the app" opens `update_url`; later, links in resources |
 | `material_ui` | ^1.11.1 | BSD-3 | flutter.dev | Flutter's Material widgets. Flutter 3.50 deprecated `package:flutter/material.dart` in favour of this package, and `flutter create` adds it. Approved 17 Nov 2026 with PR 1 |
+| `cupertino_ui` | ^1.1.7 | BSD-3 | flutter.dev | Flutter's iOS-style widgets and their translations (moved out of the SDK in 3.47). Already a dependency of `material_ui`; listed directly for its Bangla `GlobalCupertinoLocalizations`. Approved 17 Nov 2026 with PR 4 |
 | **dev only** | | | | |
 | `flutter_lints` | ^6.0.0 | BSD-3 | flutter.dev | Standard lint rules for `flutter analyze` |
 | `mocktail` | ^1.0.5 | MIT | felangel.dev | Fakes in unit and widget tests |

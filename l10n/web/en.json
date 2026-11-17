@@ -1,0 +1,90 @@
+{
+  "common": {
+    "loading": "Loading..."
+  },
+  "language": {
+    "switchTo": "বাংলা",
+    "switchToLabel": "Switch language to Bangla",
+    "saveFailed": "Your language was changed on this device, but could not be saved to your account."
+  },
+  "ui": {
+    "close": "Close",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "loading": "Loading…",
+    "required": "required",
+    "optional": "Optional",
+    "selectPlaceholder": "Select…",
+    "noResults": "No results",
+    "search": "Search",
+    "clearFilters": "Clear filters",
+    "removeTag": "Remove {label}",
+    "fileDrop": {
+      "prompt": "Drag files here or <browse>choose files</browse>",
+      "limits": "{types} up to {size, number} MB",
+      "tooLarge": "{name} is larger than {size, number} MB",
+      "remove": "Remove {name}"
+    },
+    "table": {
+      "selectAll": "Select all rows",
+      "selectRow": "Select row",
+      "sortBy": "Sort by {column}",
+      "empty": "Nothing here yet"
+    },
+    "pagination": {
+      "label": "Pagination",
+      "previous": "Previous page",
+      "next": "Next page",
+      "page": "Page {page, number}"
+    },
+    "breadcrumb": "Breadcrumb",
+    "stepper": {
+      "label": "Progress",
+      "step": "Step {current, number} of {total, number}",
+      "done": "Done"
+    },
+    "error": {
+      "title": "Something went wrong",
+      "retry": "Try again"
+    },
+    "shell": {
+      "openMenu": "Open menu",
+      "closeMenu": "Close menu",
+      "notifications": "Notifications",
+      "navigation": "Main navigation"
+    },
+    "password": {
+      "show": "Show password",
+      "hide": "Hide password"
+    }
+  },
+  "validation": {
+    "identifierRequired": "Please enter your email or phone number",
+    "phoneLength": "Phone number must be 11 digits",
+    "phoneInvalidBd": "Invalid Bangladeshi phone number",
+    "emailInvalidShort": "Invalid email address",
+    "identifierInvalid": "Enter a valid email or phone number",
+    "organizationNumberRequired": "Please enter organization number",
+    "organizationNumberShort": "Organization number must be at least 6 digits",
+    "phoneRequired": "Please enter a phone number",
+    "phoneInvalid": "Please enter a valid 11-digit phone number",
+    "fullNameRequired": "Please enter your full name",
+    "emailRequired": "Please enter your email address",
+    "emailInvalid": "It looks like the email you entered is invalid!",
+    "organizationNameRequired": "Please enter your organization or school name",
+    "termsRequired": "You must agree to the Terms of Service and Privacy Policy",
+    "passwordRequired": "{field, select, newPassword {Please enter a new password} other {Please enter a password}}",
+    "passwordShort": "{field, select, newPassword {New password} other {Password}} must be at least 8 characters.",
+    "passwordUppercase": "{field, select, newPassword {New password} other {Password}} must include at least one uppercase letter.",
+    "passwordLowercase": "{field, select, newPassword {New password} other {Password}} must include at least one lowercase letter.",
+    "passwordNumber": "{field, select, newPassword {New password} other {Password}} must include at least one number.",
+    "passwordSpecial": "{field, select, newPassword {New password} other {Password}} must include at least one special character.",
+    "confirmPasswordRequired": "Please confirm your password",
+    "passwordMismatch": "Password and Confirm password do not match",
+    "currentPasswordRequired": "Please enter your current password",
+    "newPasswordSame": "New password must be different from the current password",
+    "confirmNewPasswordRequired": "Please confirm your new password",
+    "newPasswordMismatch": "New password and Confirm password do not match",
+    "otpIncomplete": "Please enter the complete OTP code"
+  }
+}

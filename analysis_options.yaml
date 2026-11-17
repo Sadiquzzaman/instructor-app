@@ -5,6 +5,7 @@ analyzer:
   exclude:
     - build/**
     - lib/**.g.dart
+    - lib/l10n/generated/**
     - android/**
     - ios/**
   language:
