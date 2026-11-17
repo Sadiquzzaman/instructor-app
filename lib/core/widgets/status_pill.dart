@@ -3,7 +3,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:instructor_app/core/theme/app_colors.dart';
 import 'package:instructor_app/core/theme/app_metrics.dart';
 
-enum StatusTone { neutral, success, warning, danger, info }
+enum StatusTone { neutral, primary, success, warning, danger, info }
 
 /// A small rounded status label. Show statuses with a translated [label],
 /// never the raw API value (design system §P1-05 "Status").
@@ -22,6 +22,7 @@ class StatusPill extends StatelessWidget {
     final c = AppColors.of(context);
     final (foreground, background) = switch (tone) {
       StatusTone.neutral => (c.inkMuted, c.canvas),
+      StatusTone.primary => (c.primary, c.primarySoft),
       StatusTone.success => (c.success, c.successSoft),
       StatusTone.warning => (c.warning, c.warningSoft),
       StatusTone.danger => (c.danger, c.dangerSoft),

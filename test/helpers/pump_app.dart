@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:material_ui/material_ui.dart';
@@ -31,6 +32,9 @@ Future<ProviderContainer> pumpInstructorApp(
   FakeApi? api,
   Session? session,
   List<Uri>? openedLinks,
+
+  /// More stand-ins (the phone's location, pickers).
+  List<Override> overrides = const [],
 }) async {
   SharedPreferences.setMockInitialValues(prefs);
   final instance = await SharedPreferences.getInstance();
@@ -60,6 +64,7 @@ Future<ProviderContainer> pumpInstructorApp(
         openedLinks?.add(uri);
         return true;
       }),
+      ...overrides,
     ],
   );
   addTearDown(container.dispose);

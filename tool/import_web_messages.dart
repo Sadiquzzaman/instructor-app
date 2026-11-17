@@ -36,6 +36,7 @@ const webNamespaces = [
   'account',
   'today',
   'calendar',
+  'myAttendance',
 ];
 
 const locales = ['en', 'bn'];
