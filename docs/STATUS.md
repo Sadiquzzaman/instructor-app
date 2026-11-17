@@ -88,6 +88,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 ## In progress
 
 - The end-of-stage checks for Stage 0 and Stage 1, by hand: a 360 px phone, a tablet and iOS (Jubaer's Mac), including taking a test through the app's own screens on a phone. Not done yet: the emulator holds the owner's own signed-in session, which I did not sign out, and the integration tests were not run on a device for the same reason.
+- Stage 2 (teachers): the plan is written ([STAGE-2-PLAN.md](STAGE-2-PLAN.md)) and waits for the owner's approval (its §7 has six questions).
 ## Owner's decisions since the plan
 
 - 17 Nov: the Stage 1 plan approved as written: `image_picker`, `file_picker`, `geolocator` and `socket_io_client`; location, camera and photo permissions; Light proctoring in the app (leaving the app reported like a tab switch, screenshots blocked on Android, no copy and paste in answers); reminders read-only; one test exam on beta for demo.student1; class discussions in Stage 1.
@@ -113,4 +114,4 @@ Live classes are postponed by the owner and left out of every stage.
 
 ## Decisions needed from the owner
 
-None right now.
+- The Stage 2 plan ([STAGE-2-PLAN.md](STAGE-2-PLAN.md) §7): homework instructions as plain text, the teacher's home, the paper register (grid or file), the live monitor on phones, beta data for the checks, and changing classes in the app.
