@@ -24,6 +24,7 @@ class AppTextField extends StatefulWidget {
     this.showLabel,
     this.hideLabel,
     this.maxLines = 1,
+    this.maxLength,
     super.key,
   }) : assert(
          !obscure || (showLabel != null && hideLabel != null),
@@ -45,6 +46,9 @@ class AppTextField extends StatefulWidget {
   final String? showLabel;
   final String? hideLabel;
   final int maxLines;
+
+  /// A character limit, with a counter under the field.
+  final int? maxLength;
 
   @override
   State<AppTextField> createState() => _AppTextFieldState();
@@ -69,6 +73,7 @@ class _AppTextFieldState extends State<AppTextField> {
         enableSuggestions: !widget.obscure,
         autocorrect: !widget.obscure,
         maxLines: widget.obscure ? 1 : widget.maxLines,
+        maxLength: widget.maxLength,
         decoration: InputDecoration(
           labelText: widget.label,
           hintText: widget.hint,
