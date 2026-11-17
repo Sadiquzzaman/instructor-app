@@ -6,7 +6,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 ## Current stage
 
-**Stage 0:** PRs 1–10 of 14 ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11). Next: PR 11, notifications (inbox and unread badge).
+**Stage 0:** PRs 1–11 of 14 ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11). Next: PR 12, the account screen (name, language, password, signed-in devices).
 
 ## Done
 
@@ -32,9 +32,11 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 - PR 10: the app shell and menu. The menu is generated from the web's `sidebarList.tsx` and `sidebarGroups.ts` (95 items, same rules and order: section by session, role, member role, personal workspace, Academic/IELTS, plan features from `GET /me/entitlements`; groups, "Setup" heading, a group of one as a link; the web-only Admin section left out). Phones: a drawer; screens 840 px and wider: the menu stays open. Every menu page not built yet says "Please use the website for it for now" (IELTS pages: "… for IELTS"). Locked features show the web's "Not in your plan" wording by role, with no upgrade button; NOT_FOR_BRANCH_MANAGERS and NOT_IN_IELTS have short messages. Checked on beta as a student, an owner and an IELTS owner.
 
+- PR 11: notifications. The bell in the top bar with the unread count (`GET /me/notifications/unread-count` at once, every minute while the app is open and when it comes back, as the web; Bangla digits; read aloud as "Notifications, 22 unread"); the inbox (newest first, 20 at a time, more on scroll, pull to refresh, unread marked, times in Dhaka time, "Mark all as read"); opening an item marks it read and opens its page when the app has it. Push waits for PM-04. Checked on beta with a test student's 22 real notifications (none opened).
+
 ## In progress
 
-- PR 11: notifications: the inbox (paged), mark one or all read, the unread badge polled every minute while the app is open.
+- PR 12: the account screen: name, language (saved to the account), change password, signed-in devices (sign out one or the others).
 
 ## Owner's decisions since the plan
 

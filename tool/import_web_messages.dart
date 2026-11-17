@@ -32,6 +32,7 @@ const webNamespaces = [
   'dashboard',
   'nav',
   'features',
+  'notifications',
 ];
 
 const locales = ['en', 'bn'];

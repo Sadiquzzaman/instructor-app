@@ -9,6 +9,7 @@ import 'package:instructor_app/features/auth/screens/login_screen.dart';
 import 'package:instructor_app/features/auth/screens/signup_choice_screen.dart';
 import 'package:instructor_app/features/auth/screens/signup_form_screen.dart';
 import 'package:instructor_app/features/auth/screens/verify_code_screen.dart';
+import 'package:instructor_app/features/notifications/screens/inbox_screen.dart';
 import 'package:instructor_app/features/shell/menu/menu_items.g.dart';
 import 'package:instructor_app/features/shell/screens/app_shell.dart';
 import 'package:instructor_app/features/shell/screens/home_screen.dart';
@@ -80,6 +81,10 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: AppRoutes.home,
             builder: (context, state) => const HomeScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.notifications,
+            builder: (context, state) => const InboxScreen(),
           ),
           // Every page of the web's menu: "use the website for now" until its
           // stage builds it.

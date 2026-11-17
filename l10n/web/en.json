@@ -420,7 +420,8 @@
     "ieltsOverview": "IELTS overview",
     "plagiarismSettings": "Plagiarism settings",
     "ieltsCourses": "Courses",
-    "ieltsMyCourses": "My courses"
+    "ieltsMyCourses": "My courses",
+    "brandHome": "Instructor: go to Today"
   },
   "features": {
     "locked": {
@@ -637,6 +638,29 @@
       "live_max_participants": "People in one live class",
       "recording_retention_days": "Recording retention (days)",
       "ended_course_visible_days": "Ended courses visible (days)"
+    }
+  },
+  "notifications": {
+    "bell": "Notifications",
+    "bellUnread": "{count, plural, one {Notifications, # unread} other {Notifications, # unread}}",
+    "title": "Notifications",
+    "markAllRead": "Mark all as read",
+    "unread": "Unread",
+    "empty": "No notifications yet",
+    "emptyHint": "Tests, SMS credit warnings and other news show up here.",
+    "prefs": {
+      "title": "Notifications",
+      "intro": "Choose how you hear about each kind of message. You always get them here in the app (the bell).",
+      "inAppAlways": "Always in the app",
+      "channels": {
+        "SMS": "SMS",
+        "EMAIL": "Email"
+      },
+      "channelFor": "{channel} for {message}",
+      "saved": "Your notification settings are saved.",
+      "savedTitle": "Saved",
+      "loadFailed": "Your notification settings did not load.",
+      "smsHint": "SMS are paid from your school's or workspace's SMS credits."
     }
   }
 }

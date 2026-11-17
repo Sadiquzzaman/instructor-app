@@ -651,6 +651,7 @@
   "navPlagiarismSettings": "Plagiarism settings",
   "navIeltsCourses": "Courses",
   "navIeltsMyCourses": "My courses",
+  "navBrandHome": "Instructor: go to Today",
   "featuresLockedTitle": "Not in your plan",
   "featuresLockedLimitTitle": "Plan limit reached",
   "featuresLockedOwnerMessage": "This feature is one upgrade away — unlock it today!",
@@ -808,6 +809,41 @@
   "featuresLimitsLiveMaxParticipants": "People in one live class",
   "featuresLimitsRecordingRetentionDays": "Recording retention (days)",
   "featuresLimitsEndedCourseVisibleDays": "Ended courses visible (days)",
+  "notificationsBell": "Notifications",
+  "notificationsBellUnread": "{count, plural, one{Notifications, {count} unread} other{Notifications, {count} unread}}",
+  "@notificationsBellUnread": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "notificationsTitle": "Notifications",
+  "notificationsMarkAllRead": "Mark all as read",
+  "notificationsUnread": "Unread",
+  "notificationsEmpty": "No notifications yet",
+  "notificationsEmptyHint": "Tests, SMS credit warnings and other news show up here.",
+  "notificationsPrefsTitle": "Notifications",
+  "notificationsPrefsIntro": "Choose how you hear about each kind of message. You always get them here in the app (the bell).",
+  "notificationsPrefsInAppAlways": "Always in the app",
+  "notificationsPrefsChannelsSMS": "SMS",
+  "notificationsPrefsChannelsEMAIL": "Email",
+  "notificationsPrefsChannelFor": "{channel} for {message}",
+  "@notificationsPrefsChannelFor": {
+    "placeholders": {
+      "channel": {
+        "type": "String"
+      },
+      "message": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationsPrefsSaved": "Your notification settings are saved.",
+  "notificationsPrefsSavedTitle": "Saved",
+  "notificationsPrefsLoadFailed": "Your notification settings did not load.",
+  "notificationsPrefsSmsHint": "SMS are paid from your school's or workspace's SMS credits.",
   "appNoConnection": "No internet connection. Check it and try again.",
   "appUpdateRequiredTitle": "Please update Instructor",
   "appUpdateRequiredBody": "This version of the app is no longer supported. Install the new version to continue.",
