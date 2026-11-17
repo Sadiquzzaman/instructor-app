@@ -6,7 +6,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 ## Current stage
 
-**Stage 0:** PRs 1–7 of 14 ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11). Next: PR 8, sign up, OTP and forgot password.
+**Stage 0:** PRs 1–8 of 14 ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11). Next: PR 9, workspaces (picker and switcher).
 
 ## Done
 
@@ -26,9 +26,11 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 - PR 7: log in and out. The login screen (the web's wording and checks; email or 01XXXXXXXXX and a password; the app's own sentence for a wrong password, as the API sends no code), `POST /auth/login` with this device, the account's language applied after sign-in; go_router sends signed-out people to login and signed-in people home; the session is restored before the first frame; "Sign out" ends this device's session (`POST /auth/logout`) and works offline; a refused refresh returns to login. Tested on beta from the emulator as a test student (sign in, restart, sign out). Android lint's release check is skipped for a lint crash on url_launcher (docs/TODO.md).
 
+- PR 8: sign-up and forgot password. Choose student, teacher (Academic or IELTS) or organisation (school or IELTS centre); the web's forms, checks (strong password, terms) and wording; the 6-digit SMS code with a 60 s resend (which repeats the sign-up, as the API sends a new code for an unverified phone); back to login with the web's message (verified, teacher pending approval, or the organisation number); forgot password in three steps (code by SMS or email, masked target, new password). Nothing is sent to beta from tests; the screens were checked on the emulator without submitting.
+
 ## In progress
 
-- PR 8: sign up (student, teacher, organisation; Academic or IELTS), OTP, the waiting-for-approval states, forgot password.
+- PR 9: workspaces: the picker after sign-in when several are available (`context_type: individual`), the switcher, new tokens from `select-context`, clearing the old workspace's data.
 
 ## Owner's decisions since the plan
 
@@ -37,7 +39,9 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 ## Open `mobile-api` issues
 
-None. Not blocked.
+| Issue | What | Priority | Blocked? |
+| --- | --- | --- | --- |
+| [tes-taker#345](https://github.com/Sadiquzzaman/tes-taker/issues/345) | Error codes for sign-up, OTP and password reset (and login: wrong credentials vs not verified) | Soon | No: the app shows a general message meanwhile |
 
 ## Waiting on the backend (planned, no issue needed)
 
