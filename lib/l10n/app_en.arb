@@ -941,6 +941,331 @@
       }
     }
   },
+  "todayTitle": "Today",
+  "todayLoadFailed": "Today's schedule could not be loaded.",
+  "todaySchedule": "Your day",
+  "todayCheckInOpen": "Check-in is open: {classes}",
+  "@todayCheckInOpen": {
+    "placeholders": {
+      "classes": {
+        "type": "String"
+      }
+    }
+  },
+  "todayCheckIn": "Check in",
+  "todayDueTitle": "Due this week",
+  "todayNothingDue": "Nothing due this week.",
+  "todayComingUpTitle": "Coming up",
+  "todayNothingComingUp": "No events or exams in the next 7 days.",
+  "todayOpenCalendar": "Open the calendar",
+  "todayNoCalendar": "Your schedule shows here once the calendar is on",
+  "todayNoCalendarHint": "Your school's plan includes the calendar? Ask an owner or admin to turn it on.",
+  "todaySchoolTitle": "Your school",
+  "todaySchoolIntro": "Setup, people and numbers are on the overview.",
+  "todayOpenOverview": "Open the overview",
+  "calendarTitle": "Calendar",
+  "calendarIntro": "Your own classes, events, exams, homework and holidays, from every school and class you belong to.",
+  "calendarAddEvent": "Add event",
+  "calendarPrevious": "Previous",
+  "calendarNext": "Next",
+  "calendarToday": "Today",
+  "calendarViewLabel": "View",
+  "calendarViewsMonth": "Month",
+  "calendarViewsWeek": "Week",
+  "calendarViewsDay": "Day",
+  "calendarFilterLabel": "Show",
+  "calendarFiltersCLASS": "Classes",
+  "calendarFiltersEVENT": "Events",
+  "calendarFiltersEXAM": "Exams",
+  "calendarFiltersHOMEWORK": "Homework",
+  "calendarFiltersHOLIDAY": "Holidays",
+  "calendarKindsCLASS": "Class",
+  "calendarKindsEVENT": "Event",
+  "calendarKindsEXAM": "Exam",
+  "calendarKindsHOMEWORK": "Homework",
+  "calendarKindsHOLIDAY": "Holiday",
+  "calendarOpenItem": "{kind}: {title} at {time}",
+  "@calendarOpenItem": {
+    "placeholders": {
+      "kind": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "calendarOpenDay": "Open {date}",
+  "@calendarOpenDay": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "calendarMonthLabel": "Month",
+  "calendarMore": "+{count} more",
+  "@calendarMore": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "calendarNothing": "Nothing",
+  "calendarNothingThisDay": "Nothing on this day.",
+  "calendarCancelled": "Cancelled",
+  "calendarLoadFailed": "The calendar could not be loaded.",
+  "calendarSaved": "Calendar saved",
+  "calendarClosedWEEKLYOFF": "Weekly off",
+  "calendarClosedHOLIDAY": "Holiday",
+  "calendarTypesEXAM": "Exam",
+  "calendarTypesMEETING": "Meeting",
+  "calendarTypesPARENTMEETING": "Parent meeting",
+  "calendarTypesACTIVITY": "Activity",
+  "calendarTypesOTHER": "Other",
+  "calendarEventTitle": "Event",
+  "calendarEventAddTitle": "Add an event",
+  "calendarEventType": "Type",
+  "calendarEventTitleLabel": "Title",
+  "calendarEventDate": "Date",
+  "calendarEventStart": "Start",
+  "calendarEventEndDate": "End date",
+  "calendarEventEnd": "End",
+  "calendarEventPlace": "Place",
+  "calendarEventDescription": "Details (optional)",
+  "calendarEventAttendees": "Who attends",
+  "calendarEventWholeOrg": "Everyone in the organisation",
+  "calendarEventSectionsHint": "Sections (their students):",
+  "calendarEventTeachersHint": "People:",
+  "calendarEventSave": "Save",
+  "calendarEventClose": "Close",
+  "calendarEventEdit": "Change",
+  "calendarEventCancel": "Cancel event",
+  "calendarEventCancelTitle": "Cancel this event?",
+  "calendarEventCancelDetail": "It stays on the calendar as cancelled. If it is within 48 hours, everyone attending is told.",
+  "calendarEventPlaceIs": "Place: {place}",
+  "@calendarEventPlaceIs": {
+    "placeholders": {
+      "place": {
+        "type": "String"
+      }
+    }
+  },
+  "calendarEventForEveryone": "For everyone in the organisation",
+  "calendarEventForList": "For: {list}",
+  "@calendarEventForList": {
+    "placeholders": {
+      "list": {
+        "type": "String"
+      }
+    }
+  },
+  "calendarEventMadeBy": "Added by {name}",
+  "@calendarEventMadeBy": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "calendarErrorsTITLEREQUIRED": "Give the event a title.",
+  "calendarErrorsEVENTTIMEINVALID": "The end must be after the start, within 14 days, and not over yet.",
+  "calendarErrorsEVENTNOATTENDEES": "Choose who attends.",
+  "calendarErrorsEVENTATTENDEEINVALID": "Choose sections you teach and people of your organisation.",
+  "calendarErrorsEVENTWHOLEORGFORBIDDEN": "Only owners, admins and staff invite everyone.",
+  "calendarErrorsEVENTCANCELLED": "This event is cancelled.",
+  "calendarErrorsEVENTNOTFOUND": "This event is no longer available.",
+  "calendarSubscribeTitle": "Add to Google or Apple Calendar",
+  "calendarSubscribeIntro": "One private link shows your whole calendar, from every school and class you belong to, in Google or Apple Calendar and keeps it up to date. Anyone with the link can see your schedule, so keep it to yourself.",
+  "calendarSubscribeMake": "Make my link",
+  "calendarSubscribeNewLink": "Make a new link",
+  "calendarSubscribeCopy": "Copy link",
+  "calendarSubscribeCopied": "Link copied",
+  "calendarSubscribeLink": "Your private link",
+  "calendarSubscribeLinkHint": "Shown only now. Making a new link stops this one.",
+  "calendarSubscribeStepGoogle": "Google Calendar: Other calendars → + → From URL, and paste the link.",
+  "calendarSubscribeStepApple": "Apple Calendar: File → New Calendar Subscription, and paste the link.",
+  "calendarSubscribeActiveSince": "Your link is on (made {when}). To see it again, make a new one.",
+  "@calendarSubscribeActiveSince": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "calendarSubscribeNone": "You have no link yet.",
+  "calendarSubscribeTurnOff": "Turn off",
+  "calendarSubscribeTurnOffTitle": "Turn off your calendar link?",
+  "calendarSubscribeTurnOffDetail": "Calendars that use it stop updating.",
+  "calendarRemindersTitle": "My reminders",
+  "calendarRemindersIntro": "When we remind you before your classes, exams and events.",
+  "calendarRemindersDefaultsTitle": "Reminders for everyone",
+  "calendarRemindersDefaultsIntro": "The reminders people get unless they set their own. SMS reminders use your SMS credits.",
+  "calendarRemindersTargetsCLASS": "Classes",
+  "calendarRemindersTargetsEXAM": "Exams",
+  "calendarRemindersTargetsEVENT": "Events",
+  "calendarRemindersChannelsINAPP": "in the app",
+  "calendarRemindersChannelsSMS": "by SMS",
+  "calendarRemindersItem": "{before} before, {channel}",
+  "@calendarRemindersItem": {
+    "placeholders": {
+      "before": {
+        "type": "String"
+      },
+      "channel": {
+        "type": "String"
+      }
+    }
+  },
+  "calendarRemindersMinutes": "{count, plural, one{{count} minute} other{{count} minutes}}",
+  "@calendarRemindersMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "calendarRemindersHours": "{count, plural, one{{count} hour} other{{count} hours}}",
+  "@calendarRemindersHours": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "calendarRemindersDays": "{count, plural, one{{count} day} other{{count} days}}",
+  "@calendarRemindersDays": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "calendarRemindersOff": "Off",
+  "calendarRemindersUsingDefault": "As set for everyone",
+  "calendarRemindersUseDefault": "Use the default",
+  "calendarRemindersChange": "Change",
+  "calendarRemindersChangeFor": "Change reminders for {kind}",
+  "@calendarRemindersChangeFor": {
+    "placeholders": {
+      "kind": {
+        "type": "String"
+      }
+    }
+  },
+  "calendarRemindersChangeDefaultFor": "Change everyone's reminders for {kind}",
+  "@calendarRemindersChangeDefaultFor": {
+    "placeholders": {
+      "kind": {
+        "type": "String"
+      }
+    }
+  },
+  "calendarRemindersEditMine": "My reminders: {kind}",
+  "@calendarRemindersEditMine": {
+    "placeholders": {
+      "kind": {
+        "type": "String"
+      }
+    }
+  },
+  "calendarRemindersEditDefaults": "Reminders for everyone: {kind}",
+  "@calendarRemindersEditDefaults": {
+    "placeholders": {
+      "kind": {
+        "type": "String"
+      }
+    }
+  },
+  "calendarRemindersEditorHint": "Up to {max} reminders.",
+  "@calendarRemindersEditorHint": {
+    "placeholders": {
+      "max": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "calendarRemindersNoneSet": "No reminders: they are off.",
+  "calendarRemindersWhen": "When",
+  "calendarRemindersChannel": "How",
+  "calendarRemindersRemove": "Remove reminder {number}",
+  "@calendarRemindersRemove": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "calendarRemindersAdd": "Add a reminder",
+  "calendarRemindersTurnOff": "Turn all off",
+  "calendarRemindersDuplicate": "Each time can be used once.",
+  "calendarRemindersSmsHint": "SMS reminders go to the phone number on the account and use the organisation's SMS credits.",
+  "calendarRemindersSave": "Save",
+  "calendarRemindersCancel": "Cancel",
+  "calendarRemindersSaved": "Reminders saved",
+  "calendarDue": "Due: {title}",
+  "@calendarDue": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "calendarDueAt": "due at {time}",
+  "@calendarDueAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "calendarHandedIn": "Handed in",
+  "calendarNotHandedIn": "Not handed in yet",
+  "calendarClassCount": "{count, plural, one{{count} class} other{{count} classes}}",
+  "@calendarClassCount": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "calendarAllDay": "All day",
+  "calendarOpenDayView": "Day view",
+  "calendarWorkspace": "Workspace",
+  "calendarAllWorkspaces": "All workspaces",
+  "calendarSettingsOpenLink": "Add to Google Calendar",
+  "calendarSettingsOpenReminders": "Reminders",
+  "calendarSettingsRemindersTitle": "Reminders",
+  "calendarSettingsRemindersIntro": "For the workspace you are in now.",
+  "calendarDetailsWhen": "When",
+  "calendarDetailsSection": "Class",
+  "calendarDetailsTeacher": "Teacher",
+  "calendarDetailsRoom": "Room",
+  "calendarDetailsPlace": "Place",
+  "calendarDetailsClass": "Class",
+  "calendarDetailsSubject": "Subject",
+  "calendarDetailsSections": "For",
+  "calendarDetailsWorkspace": "Workspace",
+  "calendarOpenHomework": "Open the homework",
+  "calendarOpenRoutine": "See it in the Routine",
+  "calendarOtherWorkspace": "This is in {workspace}. Switch to that workspace to open it.",
+  "@calendarOtherWorkspace": {
+    "placeholders": {
+      "workspace": {
+        "type": "String"
+      }
+    }
+  },
   "appNoConnection": "No internet connection. Check it and try again.",
   "appUpdateRequiredTitle": "Please update Instructor",
   "appUpdateRequiredBody": "This version of the app is no longer supported. Install the new version to continue.",

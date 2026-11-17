@@ -11,11 +11,18 @@ abstract final class AppRoutes {
   static const notifications = '/notifications';
   static const account = '/account';
   static const features = '/features';
+  static const today = '/today';
+  static const myAttendance = '/my-attendance';
+  static const leave = '/leave';
+  static const routine = '/routine';
+  static const homework = '/homework';
+  static const calendar = '/calendar';
+  static const organization = '/organization';
 
   /// Pages the app has really built (not "use the website for now"). A
   /// notification's link opens in the app only for these; each stage adds
   /// its pages here.
-  static const built = {home, notifications, account, features};
+  static const built = {home, today, notifications, account, features};
 
   static bool isAppPage(String link) {
     final uri = Uri.tryParse(link);

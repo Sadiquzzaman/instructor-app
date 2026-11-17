@@ -57,9 +57,9 @@ Small PRs into `develop`, one at a time, each merged when CI is green and it has
 | # | PR | What |
 | --- | --- | --- |
 | 1 | **feat: files** | Upload (presign, PUT, complete) with progress and cancel; choose photos (camera or gallery) and documents; open or download a file. Packages: `image_picker`, `file_picker` (§3). Used by PRs 5, 7 and 13 |
-| 2 | **feat: today** | Today: classes with their check-in window and own status, and what is due (exams, homework, events from the personal calendar); online check-in. Today's classes kept in the read-only cache (owner's decision 5) |
-| 3 | **feat: in-person check-in** | Location permission with the reason in Bangla and English; one accurate fix (100 m or better) sent with the check-in; clear messages for "too far", "not accurate enough", "location off", "not open yet" and "already checked in". Package: `geolocator` (§3) |
-| 4 | **feat: my attendance** | The month calendar (present, late, absent, leave, holiday) and the totals, month by month |
+| 2 | **feat: today** | Today (home): today's classes, events, exams and homework from the personal calendar, "Check-in is open" with a link to My attendance, due this week, coming up. As on the web, check-in itself is on My attendance (changed while building, 18 Nov) |
+| 3 | **feat: my attendance** | Today's classes with their check-in window and own record, online check-in, the month calendar (present, late, absent, leave, holiday) and the totals. Today's classes kept in the read-only cache (owner's decision 5) |
+| 4 | **feat: in-person check-in** | Location permission with the reason in Bangla and English; one accurate fix (100 m or better) sent with the check-in; clear messages for "too far", "not accurate enough", "location off", "not open yet" and "already checked in". Package: `geolocator` (§3) |
 | 5 | **feat: leave** | My requests with their status; ask for leave (dates, reason, optional photo or PDF); withdraw a pending one |
 | 6 | **feat: timetable** | The week by day, today first; kept in the read-only cache |
 | 7 | **feat: homework** | List (due, handed in, marked), detail with the teacher's files, hand in text, photos and files before the due date (and late if allowed), see the score and comment |

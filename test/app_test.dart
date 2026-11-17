@@ -2,9 +2,8 @@ import 'dart:ui' show Size;
 
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:instructor_app/core/config/app_config.dart';
 import 'package:instructor_app/features/auth/screens/login_screen.dart';
-import 'package:instructor_app/features/shell/screens/home_screen.dart';
+import 'package:instructor_app/features/today/screens/today_screen.dart';
 
 import 'helpers/fake_api.dart';
 import 'helpers/pump_app.dart';
@@ -14,16 +13,22 @@ void main() {
     await pumpInstructorApp(tester);
 
     expect(find.byType(LoginScreen), findsOneWidget);
-    expect(find.byType(HomeScreen), findsNothing);
+    expect(find.byType(TodayScreen), findsNothing);
   });
 
   testWidgets('with a stored session it goes straight home', (tester) async {
     await pumpInstructorApp(tester, session: testSession());
 
-    expect(find.byType(HomeScreen), findsOneWidget);
+    expect(find.byType(TodayScreen), findsOneWidget);
     expect(find.byType(LoginScreen), findsNothing);
-    expect(find.text(AppConfig.appName), findsOneWidget);
-    expect(find.text('Test Student'), findsOneWidget);
+    // Home is Today (Stage 1), with its title.
+    expect(
+      find.descendant(
+        of: find.byType(TodayScreen),
+        matching: find.text('Today'),
+      ),
+      findsOneWidget,
+    );
     expect(find.text('Demo School'), findsOneWidget);
   });
 

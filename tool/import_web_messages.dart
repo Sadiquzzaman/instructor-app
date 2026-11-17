@@ -34,6 +34,8 @@ const webNamespaces = [
   'features',
   'notifications',
   'account',
+  'today',
+  'calendar',
 ];
 
 const locales = ['en', 'bn'];

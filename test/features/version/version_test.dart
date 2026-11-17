@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart' show AppLifecycleState;
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:instructor_app/features/shell/screens/home_screen.dart';
+import 'package:instructor_app/features/today/screens/today_screen.dart';
 import 'package:instructor_app/features/version/data/version_check.dart';
 import 'package:instructor_app/features/version/screens/version_gate.dart';
 
@@ -46,7 +46,7 @@ void main() {
     final r = api.to('GET /app/version').single;
     expect(r.query, {'platform': 'ANDROID', 'current': '0.1.0'});
     expect(r.headers.containsKey('Authorization'), isFalse);
-    expect(find.byType(HomeScreen), findsOneWidget);
+    expect(find.byType(TodayScreen), findsOneWidget);
   });
 
   testWidgets('REQUIRED: the app is replaced by the update screen', (
@@ -66,7 +66,7 @@ void main() {
     await pumpInstructorApp(tester, api: api, openedLinks: opened);
 
     expect(find.byType(UpdateRequiredScreen), findsOneWidget);
-    expect(find.byType(HomeScreen), findsNothing);
+    expect(find.byType(TodayScreen), findsNothing);
     expect(find.text('Please update Instructor'), findsOneWidget);
 
     await tester.tap(find.text('Update'));
@@ -103,7 +103,7 @@ void main() {
       find.text('A new version of Instructor is available.'),
       findsOneWidget,
     );
-    expect(find.byType(HomeScreen), findsOneWidget);
+    expect(find.byType(TodayScreen), findsOneWidget);
 
     await tester.tap(find.text('Later'));
     await tester.pumpAndSettle();
@@ -117,7 +117,7 @@ void main() {
     final api = FakeApi()
       ..on('GET /app/version', (_) => apiError(502, message: 'Bad Gateway'));
     await pumpInstructorApp(tester, api: api, session: testSession());
-    expect(find.byType(HomeScreen), findsOneWidget);
+    expect(find.byType(TodayScreen), findsOneWidget);
     expect(find.byType(UpdateRequiredScreen), findsNothing);
   });
 
