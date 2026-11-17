@@ -6,6 +6,7 @@
     "updateNoLink": "নতুন সংস্করণ আপনার প্রতিষ্ঠান বা অ্যাপ স্টোর থেকে নিন।",
     "updateAvailable": "Instructor-এর নতুন সংস্করণ এসেছে।",
     "updateNow": "আপডেট করুন",
-    "updateLater": "পরে"
+    "updateLater": "পরে",
+    "loginInvalid": "ইমেইল, ফোন নম্বর বা পাসওয়ার্ড সঠিক নয়।"
   }
 }

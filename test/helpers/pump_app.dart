@@ -63,6 +63,8 @@ Future<ProviderContainer> pumpInstructorApp(
     ],
   );
   addTearDown(container.dispose);
+  // As main(): the stored session before the first frame.
+  await container.read(sessionHolderProvider).restore();
   await tester.pumpWidget(
     UncontrolledProviderScope(
       container: container,
