@@ -299,7 +299,7 @@ class _ClassTests extends ConsumerWidget {
             ),
           ),
           data: (tests) =>
-              TestList(tests: tests, onStart: (_) => startTestLater(context)),
+              TestList(tests: tests, onStart: (t) => startTest(context, t)),
         );
   }
 }

@@ -40,7 +40,8 @@
     "locationServiceOff": "Your phone's location is off. Turn it on, then try again.",
     "locationOpenSettings": "Open settings",
     "attendanceRefresh": "Refresh",
-    "resultQuestion": "Question {number, number}",
+    "resultNotPublished": "Your result shows here once your teacher publishes it.",
+    "resultQuestion":"Question {number, number}",
     "resultYourAnswer": "Your answer",
     "resultCorrectAnswer": "Correct answer",
     "resultCorrect": "Correct",
@@ -48,7 +49,14 @@
     "resultNoAnswer": "No answer",
     "resultMarks": "{obtained, number} / {points, number} marks",
     "resultSummary": "{correct, number} correct, {wrong, number} wrong, {unanswered, number} not answered",
-    "testsStartSoon": "Taking tests in the app comes next. Please use the website for now.",
+    "testUseComputer": "Use a computer for this test",
+    "testUseComputerDetail": "This test is watched with the camera and microphone, or is an IELTS test. Please take it on a computer.",
+    "testRuleLeaveApp": "Leaving the app (switching apps or going home) is recorded for your teacher.",
+    "testRuleNoPaste": "Copy and paste are turned off in answers.",
+    "testRuleNoScreenshots": "Screenshots are blocked during the test.",
+    "testLeftApp": "You left the app during the test. This is recorded for your teacher.",
+    "testWarnLimit": "You have {count, number} flags. At {limit, number} the test ends.",
+    "testChooseMatch": "Choose a match",
     "savedCopy":"No internet connection. This was saved on your phone at {time}; pull down to try again."
   }
 }
