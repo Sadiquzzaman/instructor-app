@@ -6,7 +6,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 ## Current stage
 
-**Before Stage 0:** the Stage 0 plan ([STAGE-0-PLAN.md](STAGE-0-PLAN.md)) waits for the owner's approval; no app code yet.
+**Stage 0:** the plan ([STAGE-0-PLAN.md](STAGE-0-PLAN.md)) is approved; the first PR (Flutter project and CI) is next.
 
 ## Done
 
@@ -18,7 +18,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 ## In progress
 
-- Nothing until the plan is approved.
+- PR 1: the Flutter project, lints, folder skeleton, `ci.yml` and `ios-build.yml`.
 
 ## Open `mobile-api` issues
 
@@ -35,4 +35,4 @@ Live classes are postponed by the owner and left out of every stage.
 
 ## Decisions needed from the owner
 
-See [STAGE-0-PLAN.md](STAGE-0-PLAN.md) §12: packages and actions, iOS 15 minimum, the Android test signing key, integration tests against beta, and this plan as a PR.
+Who creates the Android test signing key (STAGE-0-PLAN.md §12.3); needed before PR 2.

@@ -1,6 +1,8 @@
-# Stage 0 plan — for the owner's approval
+# Stage 0 plan
 
-Stage 0 (HANDOVER §4): project setup, theme, Bangla/English, API client with refresh, sign up / log in / OTP / forgot password, workspace switcher, menu by role and plan, notifications inbox, profile. Written 17 Nov 2026 against tes-taker `develop` `8fb2e7f` and beta. **No app code is written until this plan is approved.**
+**Approved by the owner on 17 Nov 2026** (packages, actions, iOS 15 minimum, CI against a fake API only). Still open: who creates the Android test signing key (§12.3), asked again in PR 2.
+
+Stage 0 (HANDOVER §4): project setup, theme, Bangla/English, API client with refresh, sign up / log in / OTP / forgot password, workspace switcher, menu by role and plan, notifications inbox, profile. Written 17 Nov 2026 against tes-taker `develop` `8fb2e7f` and beta.
 
 ## 1. Setup
 
