@@ -8,7 +8,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 **Stage 0:** all 14 PRs done ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11), plus the #345 error codes; its end-of-stage device check is still to do.
 
-**Stage 1 (students):** plan approved 17 Nov ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)). Done: PRs 1–7 (files, Today, My attendance and check-in, read-only cache, leave, timetable, homework). Next: PR 8, classes.
+**Stage 1 (students):** plan approved 17 Nov ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)). Done: PRs 1–8 (files, Today, My attendance and check-in, read-only cache, leave, timetable, homework, classes). Next: class discussions, then the calendar.
 
 ## Done
 
@@ -67,9 +67,11 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 - Stage 1 PR 7: homework for students (`/homework`, `/homework/:id`): the list with "Handed in (version n)" or when it is due (overdue, within a day, later); the page with subject, type, marks, the instructions (the web's HTML shown as plain paragraphs and lists, see TODO), the teacher's files; hand in a typed answer and/or photos and files (purpose HOMEWORK, fixed by the backend in tes-taker#349), with the web's checks and refusals and "Handed in again" counts; every version with its late tag and files; the score (marks, %, grade, late penalty, feedback, ratings). Paper homework says to hand it to the teacher. Teachers see "use the website" until Stage 2. Checked against a test student's real homework on beta (read only) and a HOMEWORK upload link (deleted).
 
+- Stage 1 PR 8: classes for students (`/classes`, `/classes/details/:id` as on the web): the classes in this workspace with when the student joined; a class's page with its classmates. Its tests join with the tests PR and its discussions with the next PR. Teachers see "use the website" until Stage 2. Notification links to a class open in the app.
+
 ## In progress
 
-- Stage 1 ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)), PR 8 of 15: classes. Stage 0 still needs its end-of-stage check (360 px phone, tablet, iOS).
+- Stage 1 ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)), PR 9 of 15: class discussions. Stage 0 still needs its end-of-stage check (360 px phone, tablet, iOS).
 
 ## Owner's decisions since the plan
 

@@ -2300,6 +2300,254 @@
       }
     }
   },
+  "classesTitle": "[[Classes]]",
+  "classesIntro": "Your [[classes]], their students and tests.",
+  "classesStudentIntro": "[[Classes]] in {workspace}.",
+  "@classesStudentIntro": {
+    "placeholders": {
+      "workspace": {
+        "type": "String"
+      }
+    }
+  },
+  "classesWorkspaceFallback": "this workspace",
+  "classesCreate": "Create [[class]]",
+  "classesSearch": "Search [[classes]]",
+  "classesEmpty": "No [[classes]] yet",
+  "classesEmptyTeacher": "Create a [[class]], then invite students with a link or their phone numbers.",
+  "classesEmptyStudent": "Join a [[class]] with the invite link from your teacher.",
+  "classesNoMatch": "No [[classes]] match your search.",
+  "classesImageAlt": "[[Class]] cover",
+  "classesLastTest": "Last test {date}",
+  "@classesLastTest": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "classesNoTestYet": "No test yet",
+  "classesJoinedOn": "Joined {date}",
+  "@classesJoinedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "classesStudents": "Students",
+  "classesTestsTaken": "Tests taken",
+  "classesAddStudents": "Add students",
+  "classesShare": "Share [[class]]",
+  "classesView": "View [[class]]",
+  "classesBack": "Back to [[classes]]",
+  "classesDetails": "[[Class]] details",
+  "classesNotFound": "[[Class]] not found",
+  "classesNotFoundDetail": "It may have been deleted, or you may not have access to it.",
+  "classesTabsStudents": "Students",
+  "classesTabsTests": "Tests",
+  "classesTabsDiscussions": "Discussions",
+  "classesTabsSections": "[[Sections]]",
+  "classesFormTitle": "Create [[class]]",
+  "classesFormClose": "Close",
+  "classesFormDetailsStep": "[[Class]] details",
+  "classesFormStudentsStep": "Add students",
+  "classesFormName": "[[Class]] name",
+  "classesFormNamePlaceholder": "e.g. Class 9A – Mathematics",
+  "classesFormDescription": "Description",
+  "classesFormDescriptionPlaceholder": "e.g. Mathematics for class 9",
+  "classesFormStudentsLabel": "Student email, phone or Student ID",
+  "classesFormStudentsHint": "Press Enter after each one. You can add students later too.",
+  "classesFormStudentsPlaceholder": "Email, phone or Student ID",
+  "classesFormAdd": "Add",
+  "classesFormUploadCsv": "Upload CSV",
+  "classesFormDownloadTemplate": "Download template",
+  "classesFormInvalidHint": "Items in red are not valid. Click one to edit it.",
+  "classesFormCancel": "Cancel",
+  "classesFormSubmit": "Create [[class]]",
+  "classesFormSubmitting": "Creating…",
+  "classesAddModalTitle": "Add students",
+  "classesAddModalIntro": "Invite students one by one or upload a CSV. They join when they accept.",
+  "classesAddModalConfirm": "Invite students",
+  "classesAddModalConfirming": "Inviting…",
+  "classesShareModalCreated": "[[Class]] created",
+  "classesShareModalTitle": "Share [[class]]",
+  "classesShareModalCreatedDetail": "“{name}” is ready, with {count, plural, one{{count} invitation} other{{count} invitations}} sent.",
+  "@classesShareModalCreatedDetail": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "classesShareModalShareDetail": "Share “{name}” with your students.",
+  "@classesShareModalShareDetail": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "classesShareModalAnyone": "Anyone with the link can ask to join this [[class]].",
+  "classesShareModalLink": "[[Class]] join link",
+  "classesShareModalCopy": "Copy",
+  "classesShareModalDirect": "Share directly",
+  "classesShareModalDone": "Done",
+  "classesShareModalCopiedTitle": "Link copied",
+  "classesShareModalCopiedDetail": "The [[class]] link is on your clipboard.",
+  "classesShareModalMessage": "Join my [[class]]: {link}",
+  "@classesShareModalMessage": {
+    "placeholders": {
+      "link": {
+        "type": "String"
+      }
+    }
+  },
+  "classesShareModalSubject": "Join my [[class]]",
+  "classesToastDuplicateTitle": "Already in the list",
+  "classesToastDuplicate": "This phone or email is already in the list.",
+  "classesToastEmptyCsvTitle": "Empty CSV",
+  "classesToastEmptyCsv": "No phone number or email was found in the file.",
+  "classesToastNoNewTitle": "No new students",
+  "classesToastNoNew": "Everyone in this file is already in the list.",
+  "classesToastCsvAddedTitle": "CSV uploaded",
+  "classesToastCsvAdded": "{count, plural, one{{count} student added to the list.} other{{count} students added to the list.}}",
+  "@classesToastCsvAdded": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "classesToastCsvFailedTitle": "CSV upload failed",
+  "classesToastCsvFailed": "The file could not be read. Try again with a valid CSV file.",
+  "classesToastNameRequiredTitle": "[[Class]] name needed",
+  "classesToastFixTitle": "Fix the highlighted entries",
+  "classesToastFix": "Some phone numbers or emails are not valid.",
+  "classesToastNoStudentsTitle": "No students added",
+  "classesToastNoStudents": "Add at least one email, phone number or Student ID.",
+  "classesToastInvalidEmailTitle": "Invalid email",
+  "classesToastInvalidEmail": "Please enter a valid email address.",
+  "classesToastInvalidInputTitle": "Invalid entry",
+  "classesToastInvalidInput": "Enter a valid email, phone number or Student ID.",
+  "classesToastInvalidPhoneTitle": "Invalid phone number",
+  "classesToastInvalidPhone": "Phone numbers have 11 digits. You can also use the Student ID.",
+  "classesToastNameRequired": "Please enter a [[class]] name.",
+  "classesRosterTitle": "Students",
+  "classesRosterSearch": "Search students",
+  "classesRosterPending": "Waiting for approval ({count})",
+  "@classesRosterPending": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "classesRosterActive": "Students ({count})",
+  "@classesRosterActive": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "classesRosterStudent": "Student",
+  "classesRosterContact": "Email or phone",
+  "classesRosterStatus": "Status",
+  "classesRosterActions": "Actions",
+  "classesRosterJoinedSince": "Joined",
+  "classesRosterApprove": "Approve {name}",
+  "@classesRosterApprove": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "classesRosterReject": "Reject {name}",
+  "@classesRosterReject": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "classesRosterView": "View {name}",
+  "@classesRosterView": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "classesRosterRemove": "Remove {name} from [[class]]",
+  "@classesRosterRemove": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "classesRosterJoined": "Joined",
+  "classesRosterInvited": "Invited",
+  "classesRosterEmpty": "No students yet",
+  "classesRosterEmptyDetail": "Add students or share the [[class]] link.",
+  "classesRosterNoPending": "No one is waiting for approval.",
+  "classesRosterDetailsTitle": "Student details",
+  "classesRosterName": "Name",
+  "classesRosterStudentId": "Student ID",
+  "classesRosterJoinedOn": "Joined on",
+  "classesRosterInvitedStudent": "Invited student",
+  "classesRosterStudentWithId": "Student {id}",
+  "@classesRosterStudentWithId": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "classesRosterRemoveTitle": "Remove {name}?",
+  "@classesRosterRemoveTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "classesRosterRemoveDetail": "They will lose access to this [[class]] and its tests.",
+  "classesRosterRemoveConfirm": "Remove",
+  "classesRosterSection": "[[Section]]",
+  "classesRosterAllSections": "All [[sections]]",
+  "classesTestsTitle": "Tests",
+  "classesTestsAll": "All",
+  "classesTestsOngoing": "Live",
+  "classesTestsPending": "Scheduled",
+  "classesTestsCompleted": "Completed",
+  "classesTestsEmpty": "No tests here",
+  "classesTestsEmptyDetail": "Tests for this [[class]] will appear here.",
+  "classesJoinUnavailable": "Class unavailable",
+  "classesJoinTitle": "Join “{className}” by {teacher}",
+  "@classesJoinTitle": {
+    "placeholders": {
+      "className": {
+        "type": "String"
+      },
+      "teacher": {
+        "type": "String"
+      }
+    }
+  },
+  "classesJoinNoDescription": "No description for this class.",
+  "classesJoinSignUp": "Sign up",
+  "classesJoinLogIn": "Log in",
+  "classesIntroStudent": "The [[classes]] you study in, with their tests.",
   "appNoConnection": "No internet connection. Check it and try again.",
   "appUpdateRequiredTitle": "Please update Instructor",
   "appUpdateRequiredBody": "This version of the app is no longer supported. Install the new version to continue.",
