@@ -23,7 +23,8 @@ void main() {
     expect(find.byType(PlaceholderHome), findsOneWidget);
     expect(find.byType(LoginScreen), findsNothing);
     expect(find.text(AppConfig.appName), findsOneWidget);
-    expect(find.text('Test Student · Demo School'), findsOneWidget);
+    expect(find.text('Test Student'), findsOneWidget);
+    expect(find.text('Demo School'), findsOneWidget);
   });
 
   testWidgets('the login screen fits a 360 px phone in Bangla', (tester) async {

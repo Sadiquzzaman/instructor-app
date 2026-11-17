@@ -1,6 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:instructor_app/core/api/api_exception.dart';
+import 'package:instructor_app/core/api/api_providers.dart';
+
 /// What the workspace calls its two academic levels (FND-03): Class / Section,
 /// Course / Batch, or its own words. Messages name them with tokens, as on the
 /// web (frontend/i18n/levelLabels.ts):
@@ -128,8 +131,9 @@ String _lowerFirst(String w) =>
 
 String _upperFirst(String w) => w[0].toUpperCase() + w.substring(1);
 
-/// The current workspace's labels. Class / Section until the workspace's are
-/// loaded (workspace PR); reset on sign-out and workspace switch.
+/// The current workspace's labels (`GET /workspace/level-labels`, FND-03).
+/// Class / Section while loading, without a workspace, or if the call fails;
+/// reloaded whenever the workspace changes, dropped on sign-out.
 final levelLabelsProvider =
     NotifierProvider<LevelLabelsController, LevelLabels>(
       LevelLabelsController.new,
@@ -137,7 +141,25 @@ final levelLabelsProvider =
 
 class LevelLabelsController extends Notifier<LevelLabels> {
   @override
-  LevelLabels build() => LevelLabels.defaults;
+  LevelLabels build() {
+    final workspace = ref.watch(workspaceKeyProvider);
+    if (workspace != null) Future.microtask(() => _load(workspace));
+    return LevelLabels.defaults;
+  }
+
+  Future<void> _load(String workspace) async {
+    try {
+      final r = await ref
+          .read(apiClientProvider)
+          .get('/workspace/level-labels');
+      // Still the same workspace? (A switch may have happened meanwhile.)
+      if (ref.mounted && ref.read(workspaceKeyProvider) == workspace) {
+        state = LevelLabels.fromJson(r.payload);
+      }
+    } on ApiException {
+      // Keep Class / Section.
+    }
+  }
 
   void set(LevelLabels labels) => state = labels;
 }

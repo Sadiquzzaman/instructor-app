@@ -10,6 +10,7 @@ import 'package:instructor_app/features/auth/screens/signup_choice_screen.dart';
 import 'package:instructor_app/features/auth/screens/signup_form_screen.dart';
 import 'package:instructor_app/features/auth/screens/verify_code_screen.dart';
 import 'package:instructor_app/features/shell/screens/placeholder_home.dart';
+import 'package:instructor_app/features/workspace/screens/workspace_gate.dart';
 
 export 'package:instructor_app/core/routing/app_routes.dart';
 
@@ -68,7 +69,9 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: AppRoutes.home,
-        builder: (context, state) => const PlaceholderHome(),
+        // Several workspaces and none chosen: the picker first.
+        builder: (context, state) =>
+            const WorkspaceGate(child: PlaceholderHome()),
       ),
     ],
   );
