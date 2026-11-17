@@ -1,0 +1,11 @@
+# Keeps the pinned GitHub Actions current (STAGE-0-PLAN.md §3).
+# Package updates stay manual: each new package or major version needs the owner's approval.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    target-branch: develop
+    commit-message:
+      prefix: ci
