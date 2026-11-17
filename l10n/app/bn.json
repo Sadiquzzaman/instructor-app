@@ -40,6 +40,15 @@
     "locationServiceOff": "আপনার ফোনের লোকেশন বন্ধ। চালু করে আবার চেষ্টা করুন।",
     "locationOpenSettings": "সেটিংস খুলুন",
     "attendanceRefresh": "রিফ্রেশ করুন",
-    "savedCopy": "ইন্টারনেট সংযোগ নেই। এটি {time}-এ আপনার ফোনে সংরক্ষণ করা হয়েছিল; আবার চেষ্টা করতে নিচে টানুন।"
+    "resultQuestion": "প্রশ্ন {number, number}",
+    "resultYourAnswer": "আপনার উত্তর",
+    "resultCorrectAnswer": "সঠিক উত্তর",
+    "resultCorrect": "সঠিক",
+    "resultIncorrect": "ভুল",
+    "resultNoAnswer": "উত্তর দেওয়া হয়নি",
+    "resultMarks": "{obtained, number} / {points, number} নম্বর",
+    "resultSummary": "{correct, number}টি সঠিক, {wrong, number}টি ভুল, {unanswered, number}টির উত্তর দেওয়া হয়নি",
+    "testsStartSoon": "অ্যাপে পরীক্ষা দেওয়ার সুবিধা শিগগির আসছে। আপাতত ওয়েবসাইট ব্যবহার করুন।",
+    "savedCopy":"ইন্টারনেট সংযোগ নেই। এটি {time}-এ আপনার ফোনে সংরক্ষণ করা হয়েছিল; আবার চেষ্টা করতে নিচে টানুন।"
   }
 }

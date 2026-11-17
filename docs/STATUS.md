@@ -8,7 +8,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 **Stage 0:** all 14 PRs done ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11), plus the #345 error codes; its end-of-stage device check is still to do.
 
-**Stage 1 (students):** plan approved 17 Nov ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)). Done: PRs 1–10 (files, Today, My attendance and check-in, read-only cache, leave, timetable, homework, classes, class discussions, calendar). Next: tests (list and results), then taking a test.
+**Stage 1 (students):** plan approved 17 Nov ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)). Done: PRs 1–11 (files, Today, My attendance and check-in, read-only cache, leave, timetable, homework, classes, class discussions, calendar, tests and results). Next: taking a test.
 
 ## Done
 
@@ -73,9 +73,11 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 - Stage 1 PR 10: the calendar (`/calendar`, month view): the person's classes, events, exams, homework and holidays from every workspace, filtered by kind and workspace; a Saturday-first month with a dot per kind, today outlined; the chosen day's list (the same tiles and details as Today); "My reminders" read only (changed on the web, owner's decision). Week and day views, adding events and the calendar link stay on the web.
 
+- Stage 1 PR 11: tests and results (`/tests`, `/tests/:id/results`, and a class's Tests tab): the tests set to the student with their type, status, subject, schedule and hand-in progress, filtered by status; a finished test's result with score, percentage, grade, right/wrong/not answered, and the answer sheet (each question, the student's answer, the right one, the marks; passages shown once above their questions). Start says taking tests in the app comes next. Teachers see "use the website" until Stage 2.
+
 ## In progress
 
-- Stage 1 ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)), PR 11 of 15: tests. Stage 0 still needs its end-of-stage check (360 px phone, tablet, iOS).
+- Stage 1 ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)), PR 12 of 15: taking a test. Stage 0 still needs its end-of-stage check (360 px phone, tablet, iOS).
 
 ## Owner's decisions since the plan
 

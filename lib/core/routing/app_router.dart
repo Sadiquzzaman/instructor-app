@@ -21,6 +21,8 @@ import 'package:instructor_app/features/notifications/screens/inbox_screen.dart'
 import 'package:instructor_app/features/plan/screens/more_features_screen.dart';
 import 'package:instructor_app/features/shell/menu/menu_items.g.dart';
 import 'package:instructor_app/features/shell/screens/app_shell.dart';
+import 'package:instructor_app/features/tests/screens/test_result_screen.dart';
+import 'package:instructor_app/features/tests/screens/tests_screen.dart';
 import 'package:instructor_app/features/today/screens/today_screen.dart';
 import 'package:instructor_app/features/shell/screens/not_yet_screen.dart';
 import 'package:instructor_app/features/workspace/screens/workspace_gate.dart';
@@ -138,6 +140,17 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: AppRoutes.calendar,
             builder: (context, state) => const CalendarScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.tests,
+            builder: (context, state) => const TestsScreen(),
+            routes: [
+              GoRoute(
+                path: ':id/results',
+                builder: (context, state) =>
+                    TestResultScreen(id: state.pathParameters['id']!),
+              ),
+            ],
           ),
           GoRoute(
             path: AppRoutes.account,

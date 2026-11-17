@@ -14,6 +14,8 @@ import 'package:instructor_app/core/widgets/app_card.dart';
 import 'package:instructor_app/core/widgets/state_views.dart';
 import 'package:instructor_app/features/classes/data/classes.dart';
 import 'package:instructor_app/features/classes/screens/class_discussions.dart';
+import 'package:instructor_app/features/tests/data/tests.dart';
+import 'package:instructor_app/features/tests/screens/tests_screen.dart';
 
 /// The web's /classes for a student: the classes they study in, in the
 /// current workspace. Each opens its page. Teachers' classes (students,
@@ -255,17 +257,49 @@ class _ClassTabsState extends State<_ClassTabs> {
         SegmentedButton<int>(
           segments: [
             ButtonSegment(value: 0, label: Text(l10n.classesTabsStudents)),
-            ButtonSegment(value: 1, label: Text(l10n.classesTabsDiscussions)),
+            ButtonSegment(value: 1, label: Text(l10n.classesTabsTests)),
+            ButtonSegment(value: 2, label: Text(l10n.classesTabsDiscussions)),
           ],
           selected: {_tab},
           onSelectionChanged: (s) => setState(() => _tab = s.first),
         ),
         const SizedBox(height: AppSpacing.md),
-        if (_tab == 0)
-          widget.students
-        else
-          ClassDiscussions(classId: widget.classId),
+        switch (_tab) {
+          0 => widget.students,
+          1 => _ClassTests(classId: widget.classId),
+          _ => ClassDiscussions(classId: widget.classId),
+        },
       ],
     );
+  }
+}
+
+/// The tests set to the student in this class.
+class _ClassTests extends ConsumerWidget {
+  const _ClassTests({required this.classId});
+
+  final String classId;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
+    return ref
+        .watch(classTestsProvider(classId))
+        .when(
+          loading: () => SizedBox(
+            height: 160,
+            child: LoadingView(semanticsLabel: l10n.classesTabsTests),
+          ),
+          error: (_, _) => SizedBox(
+            height: 260,
+            child: ErrorView(
+              title: l10n.testsResultsFailed,
+              retryLabel: l10n.uiErrorRetry,
+              onRetry: () => ref.invalidate(classTestsProvider(classId)),
+            ),
+          ),
+          data: (tests) =>
+              TestList(tests: tests, onStart: (_) => startTestLater(context)),
+        );
   }
 }

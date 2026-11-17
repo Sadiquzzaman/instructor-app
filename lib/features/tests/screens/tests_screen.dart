@@ -1,0 +1,132 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
+
+import 'package:instructor_app/core/api/api_providers.dart';
+import 'package:instructor_app/core/l10n/l10n.dart';
+import 'package:instructor_app/core/theme/app_colors.dart';
+import 'package:instructor_app/core/theme/app_metrics.dart';
+import 'package:instructor_app/core/widgets/state_views.dart';
+import 'package:instructor_app/features/tests/data/tests.dart';
+import 'package:instructor_app/features/tests/widgets/test_card.dart';
+
+/// Tests with a status filter (the web's ClassTests filters), each as a
+/// [TestCard]. Used by /tests and a class's Tests tab.
+class TestList extends StatefulWidget {
+  const TestList({required this.tests, this.onStart, super.key});
+
+  final List<TestItem> tests;
+  final void Function(TestItem)? onStart;
+
+  @override
+  State<TestList> createState() => _TestListState();
+}
+
+class _TestListState extends State<TestList> {
+  String? _filter;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final shown = _filter == null
+        ? widget.tests
+        : widget.tests.where((t) => t.status == _filter).toList();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Wrap(
+          spacing: AppSpacing.sm,
+          children: [
+            for (final (value, label) in [
+              (null, l10n.testsFilterAll),
+              ('ongoing', l10n.testsFilterOngoing),
+              ('pending', l10n.testsFilterPending),
+              ('completed', l10n.testsFilterCompleted),
+            ])
+              ChoiceChip(
+                label: Text(label),
+                selected: _filter == value,
+                onSelected: (_) => setState(() => _filter = value),
+              ),
+          ],
+        ),
+        const SizedBox(height: AppSpacing.md),
+        if (shown.isEmpty)
+          SizedBox(
+            height: 260,
+            child: EmptyView(
+              icon: Icons.quiz_outlined,
+              title: l10n.testsEmpty,
+              message: l10n.testsEmptyStudent,
+            ),
+          )
+        else
+          for (final t in shown) ...[
+            TestCard(
+              test: t,
+              onStart: widget.onStart == null ? null : () => widget.onStart!(t),
+            ),
+            const SizedBox(height: AppSpacing.sm),
+          ],
+      ],
+    );
+  }
+}
+
+/// "Taking tests in the app comes next" until PR 12.
+void startTestLater(BuildContext context) =>
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(context.l10n.appTestsStartSoon)));
+
+/// The web's /tests for a student.
+class TestsScreen extends ConsumerWidget {
+  const TestsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
+    final text = Theme.of(context).textTheme;
+    final colors = AppColors.of(context);
+    if (ref.watch(sessionProvider)?.role != 'STUDENT') {
+      return EmptyView(
+        icon: Icons.public,
+        title: l10n.testsTitle,
+        message: l10n.appNotYetBody,
+      );
+    }
+    final tests = ref.watch(myTestsProvider);
+    return Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 720),
+        child: tests.when(
+          loading: () => LoadingView(semanticsLabel: l10n.testsTitle),
+          error: (_, _) => ErrorView(
+            title: l10n.testsResultsFailed,
+            retryLabel: l10n.uiErrorRetry,
+            onRetry: () => ref.invalidate(myTestsProvider),
+          ),
+          data: (list) => RefreshIndicator(
+            onRefresh: () async {
+              ref.invalidate(myTestsProvider);
+              await ref
+                  .read(myTestsProvider.future)
+                  .then<void>((_) {}, onError: (Object _) {});
+            },
+            child: ListView(
+              padding: const EdgeInsets.all(AppSpacing.lg),
+              children: [
+                Text(l10n.testsTitle, style: text.headlineSmall),
+                const SizedBox(height: AppSpacing.xs),
+                Text(
+                  l10n.testsIntro,
+                  style: text.bodyMedium?.copyWith(color: colors.inkMuted),
+                ),
+                const SizedBox(height: AppSpacing.md),
+                TestList(tests: list, onStart: (_) => startTestLater(context)),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
