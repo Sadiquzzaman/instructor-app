@@ -16,6 +16,7 @@ abstract final class AppRoutes {
   static const leave = '/leave';
   static const routine = '/routine';
   static const homework = '/homework';
+  static const classes = '/classes';
   static const calendar = '/calendar';
   static const organization = '/organization';
 
@@ -29,20 +30,25 @@ abstract final class AppRoutes {
     leave,
     routine,
     homework,
+    classes,
     notifications,
     account,
     features,
   };
 
-  /// Built pages with an id after them (`/homework/<id>`).
-  static const builtWithId = {homework};
+  /// Built pages with an id at the end, as the web names them.
+  static const builtWithId = {'/homework/', '/classes/details/'};
 
   static bool isAppPage(String link) {
     final uri = Uri.tryParse(link);
     if (uri == null || uri.hasScheme) return false;
     if (built.contains(uri.path)) return true;
-    final segments = uri.pathSegments;
-    return segments.length == 2 && builtWithId.contains('/${segments.first}');
+    return builtWithId.any(
+      (p) =>
+          uri.path.startsWith(p) &&
+          uri.path.length > p.length &&
+          !uri.path.substring(p.length).contains('/'),
+    );
   }
 
   /// Screens for people who are not signed in.
