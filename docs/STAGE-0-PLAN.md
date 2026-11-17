@@ -103,6 +103,7 @@ Each feature folder has `data/` (API calls and models), `state/` (providers) and
 
 - **Riverpod** providers per feature. Everything that belongs to a workspace hangs off one `workspaceScope` provider; switching workspace or signing out invalidates it, so no data from the old workspace survives (multi-tenancy rule).
 - **go_router** with one redirect function, in this order: update required → update screen; no session → login; `context_type: individual` with several actionable workspaces → workspace picker (§2); otherwise the requested page. Routes follow the web's names (`/today`, `/account`, …) so deep links can map later.
+- **Phones and tablets (changed in PR 10):** a drawer on phones and a menu that stays open from 840 px, instead of a bottom bar and a side rail: a role sees up to about 20 pages, which do not fit a bottom bar, and the web's own phone menu is a drawer.
 - **Menu:** a table that mirrors `sidebarList.tsx` (`role`, `memberRoles`, `personalWorkspaceOnly`, `workspaces`, `feature`) and one pure function that filters it; unit-tested per role, workspace type and plan. Items not built yet open the "Use the web for this for now" screen, so the menu is complete from day one.
 - **Branch managers** see only what answers: workspace, profile, notifications, and (IELTS) courses. Any 403 `NOT_FOR_BRANCH_MANAGERS` shows "Not available for branch managers yet".
 - **IELTS before stage 5:** shared features as they are built; IELTS-only items show "Use the web for IELTS for now" (owner's decision 6).

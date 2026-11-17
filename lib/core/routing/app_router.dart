@@ -9,7 +9,10 @@ import 'package:instructor_app/features/auth/screens/login_screen.dart';
 import 'package:instructor_app/features/auth/screens/signup_choice_screen.dart';
 import 'package:instructor_app/features/auth/screens/signup_form_screen.dart';
 import 'package:instructor_app/features/auth/screens/verify_code_screen.dart';
-import 'package:instructor_app/features/shell/screens/placeholder_home.dart';
+import 'package:instructor_app/features/shell/menu/menu_items.g.dart';
+import 'package:instructor_app/features/shell/screens/app_shell.dart';
+import 'package:instructor_app/features/shell/screens/home_screen.dart';
+import 'package:instructor_app/features/shell/screens/not_yet_screen.dart';
 import 'package:instructor_app/features/workspace/screens/workspace_gate.dart';
 
 export 'package:instructor_app/core/routing/app_routes.dart';
@@ -67,14 +70,37 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: AppRoutes.forgotPassword,
         builder: (context, state) => const ForgotPasswordScreen(),
       ),
-      GoRoute(
-        path: AppRoutes.home,
-        // Several workspaces and none chosen: the picker first.
-        builder: (context, state) =>
-            const WorkspaceGate(child: PlaceholderHome()),
+      // Everything signed in: the workspace picker first when needed, then
+      // the shell (menu, switcher) around the page.
+      ShellRoute(
+        builder: (context, state, child) => WorkspaceGate(
+          child: AppShell(currentRoute: state.matchedLocation, child: child),
+        ),
+        routes: [
+          GoRoute(
+            path: AppRoutes.home,
+            builder: (context, state) => const HomeScreen(),
+          ),
+          // Every page of the web's menu: "use the website for now" until its
+          // stage builds it.
+          for (final item in appMenuPages)
+            GoRoute(
+              path: item.route,
+              builder: (context, state) => NotYetScreen(item: item),
+            ),
+        ],
       ),
     ],
   );
   ref.onDispose(router.dispose);
   return router;
 });
+
+/// One page per route of the web's menu, without the web-only Admin pages.
+final appMenuPages = [
+  for (final (index, item) in webMenu.indexed)
+    if (item.category != 'Admin' &&
+        item.route != AppRoutes.home &&
+        webMenu.indexWhere((i) => i.route == item.route) == index)
+      item,
+];

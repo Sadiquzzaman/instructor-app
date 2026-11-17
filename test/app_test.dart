@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:instructor_app/core/config/app_config.dart';
 import 'package:instructor_app/features/auth/screens/login_screen.dart';
-import 'package:instructor_app/features/shell/screens/placeholder_home.dart';
+import 'package:instructor_app/features/shell/screens/home_screen.dart';
 
 import 'helpers/fake_api.dart';
 import 'helpers/pump_app.dart';
@@ -14,13 +14,13 @@ void main() {
     await pumpInstructorApp(tester);
 
     expect(find.byType(LoginScreen), findsOneWidget);
-    expect(find.byType(PlaceholderHome), findsNothing);
+    expect(find.byType(HomeScreen), findsNothing);
   });
 
   testWidgets('with a stored session it goes straight home', (tester) async {
     await pumpInstructorApp(tester, session: testSession());
 
-    expect(find.byType(PlaceholderHome), findsOneWidget);
+    expect(find.byType(HomeScreen), findsOneWidget);
     expect(find.byType(LoginScreen), findsNothing);
     expect(find.text(AppConfig.appName), findsOneWidget);
     expect(find.text('Test Student'), findsOneWidget);

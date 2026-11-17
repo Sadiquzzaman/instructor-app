@@ -49,6 +49,16 @@ dart run tool/import_web_messages.dart                                 # rebuild
 
 `flutter pub get` then generates `AppLocalizations` (`context.l10n.uiErrorRetry`). `test/l10n/messages_test.dart` checks the ARB files are up to date, both languages have the same keys and placeholders, and every Bangla string is in Bangla. Use `ref.levels(context, …)` for messages with `[[Classes]]`-style tokens, `RichMessage` for `<tag>` parts, and `OrgTime` for dates, times and numbers.
 
+## The menu
+
+The side menu is generated from the web (tes-taker `frontend/utils/sidebarList.tsx` for the items and who sees them, `sidebarGroups.ts` for the order):
+
+```sh
+dart run tool/import_menu.dart ../tes-taker/frontend/utils
+```
+
+This copies both files into `tool/` and regenerates `lib/features/shell/menu/menu_items.g.dart`; it fails if a label has no message (import the web's `nav` wording first). `lib/features/shell/menu/menu_filter.dart` applies the web's rules; `test/features/shell/menu_test.dart` checks both.
+
 ## Design tokens
 
 Colours, type sizes, radii, shadows and motion come from the web (tes-taker `frontend/design/tokens.json`). When the web changes them:
