@@ -197,5 +197,7 @@
   "appUpdateAvailable": "Instructor-এর নতুন সংস্করণ এসেছে।",
   "appUpdateNow": "আপডেট করুন",
   "appUpdateLater": "পরে",
-  "appLoginInvalid": "ইমেইল, ফোন নম্বর বা পাসওয়ার্ড সঠিক নয়।"
+  "appLoginInvalid": "ইমেইল, ফোন নম্বর বা পাসওয়ার্ড সঠিক নয়।",
+  "appSignupFailed": "সাইন আপ হয়নি। তথ্যগুলো দেখে আবার চেষ্টা করুন।",
+  "appResetFailed": "পাসওয়ার্ড রিসেট করা যায়নি। তথ্য ও কোড দেখে আবার চেষ্টা করুন।"
 }

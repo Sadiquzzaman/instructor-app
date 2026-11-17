@@ -363,5 +363,7 @@
   "appUpdateAvailable": "A new version of Instructor is available.",
   "appUpdateNow": "Update",
   "appUpdateLater": "Later",
-  "appLoginInvalid": "The email, phone number or password is not right."
+  "appLoginInvalid": "The email, phone number or password is not right.",
+  "appSignupFailed": "Sign up failed. Check your details and try again.",
+  "appResetFailed": "Could not reset the password. Check your details and the code, and try again."
 }

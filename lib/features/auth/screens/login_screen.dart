@@ -1,21 +1,26 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'package:instructor_app/core/api/api_exception.dart';
 import 'package:instructor_app/core/config/app_config.dart';
 import 'package:instructor_app/core/l10n/l10n.dart';
 import 'package:instructor_app/core/l10n/language_switcher.dart';
+import 'package:instructor_app/core/routing/app_routes.dart';
 import 'package:instructor_app/core/theme/app_colors.dart';
 import 'package:instructor_app/core/theme/app_metrics.dart';
 import 'package:instructor_app/core/widgets/app_button.dart';
 import 'package:instructor_app/core/widgets/app_text_field.dart';
 import 'package:instructor_app/features/auth/data/auth_repository.dart';
 import 'package:instructor_app/features/auth/data/login_validation.dart';
+import 'package:instructor_app/features/auth/data/signup_repository.dart';
+import 'package:instructor_app/features/auth/widgets/auth_page.dart';
 
 /// Log in with an email or phone number and a password (the web's /login).
-/// Google sign-in waits for the server (PM-02); forgot password and sign-up
-/// come in the next pull request. On success the router moves on by itself.
+/// Google sign-in waits for the server (PM-02). Links to forgot password and
+/// sign-up; shows the message a finished sign-up or reset left. On success
+/// the router moves on by itself.
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
@@ -52,6 +57,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       _formError = null;
     });
     if (identifierError != null || passwordError != null) return;
+    // The sign-up or reset message has served its purpose.
+    ref.read(loginNoticeProvider.notifier).clear();
 
     setState(() => _loading = true);
     try {
@@ -78,6 +85,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // A success message from a finished sign-up or password reset.
+    final notice = ref.watch(loginNoticeProvider);
     final l10n = context.l10n;
     final colors = AppColors.of(context);
     final text = Theme.of(context).textTheme;
@@ -111,8 +120,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: AppSpacing.xl),
+                    if (notice != null && _formError == null) ...[
+                      NoticeBox(message: notice, success: true),
+                      const SizedBox(height: AppSpacing.lg),
+                    ],
                     if (_formError != null) ...[
-                      _ErrorBox(message: _formError!),
+                      NoticeBox(message: _formError!),
                       const SizedBox(height: AppSpacing.lg),
                     ],
                     AppTextField(
@@ -153,54 +166,30 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       },
                       onSubmitted: (_) => _submit(),
                     ),
-                    const SizedBox(height: AppSpacing.xl),
+                    Align(
+                      alignment: AlignmentDirectional.centerEnd,
+                      child: TextButton(
+                        onPressed: () => context.push(AppRoutes.forgotPassword),
+                        child: Text(l10n.authLoginForgotPassword),
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacing.md),
                     AppButton(
                       label: l10n.authLoginSubmit,
                       onPressed: _submit,
                       loading: _loading,
                       expand: true,
                     ),
+                    const SizedBox(height: AppSpacing.lg),
+                    AuthFooterLink(
+                      text: l10n.authNoAccount,
+                      label: l10n.authSignUp,
+                      onTap: () => context.push(AppRoutes.signUp),
+                    ),
                   ],
                 ),
               ),
             ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _ErrorBox extends StatelessWidget {
-  const _ErrorBox({required this.message});
-
-  final String message;
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = AppColors.of(context);
-    return Semantics(
-      liveRegion: true,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: colors.dangerSoft,
-          borderRadius: AppRadius.inputAll,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(AppSpacing.md),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Icon(Icons.error_outline, color: colors.danger),
-              const SizedBox(width: AppSpacing.sm),
-              Expanded(
-                child: Text(
-                  message,
-                  style: Theme.of(context).textTheme.bodyMedium
-                      ?.copyWith(color: colors.danger),
-                ),
-              ),
-            ],
           ),
         ),
       ),

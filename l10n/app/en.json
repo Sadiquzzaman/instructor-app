@@ -7,6 +7,8 @@
     "updateAvailable": "A new version of Instructor is available.",
     "updateNow": "Update",
     "updateLater": "Later",
-    "loginInvalid": "The email, phone number or password is not right."
+    "loginInvalid": "The email, phone number or password is not right.",
+    "signupFailed": "Sign up failed. Check your details and try again.",
+    "resetFailed": "Could not reset the password. Check your details and the code, and try again."
   }
 }
