@@ -9,6 +9,7 @@ import 'package:instructor_app/features/auth/screens/login_screen.dart';
 import 'package:instructor_app/features/auth/screens/signup_choice_screen.dart';
 import 'package:instructor_app/features/auth/screens/signup_form_screen.dart';
 import 'package:instructor_app/features/auth/screens/verify_code_screen.dart';
+import 'package:instructor_app/features/account/screens/account_screen.dart';
 import 'package:instructor_app/features/notifications/screens/inbox_screen.dart';
 import 'package:instructor_app/features/shell/menu/menu_items.g.dart';
 import 'package:instructor_app/features/shell/screens/app_shell.dart';
@@ -86,6 +87,10 @@ final routerProvider = Provider<GoRouter>((ref) {
             path: AppRoutes.notifications,
             builder: (context, state) => const InboxScreen(),
           ),
+          GoRoute(
+            path: AppRoutes.account,
+            builder: (context, state) => const AccountScreen(),
+          ),
           // Every page of the web's menu: "use the website for now" until its
           // stage builds it.
           for (final item in appMenuPages)
@@ -105,7 +110,7 @@ final routerProvider = Provider<GoRouter>((ref) {
 final appMenuPages = [
   for (final (index, item) in webMenu.indexed)
     if (item.category != 'Admin' &&
-        item.route != AppRoutes.home &&
+        !AppRoutes.built.contains(item.route) &&
         webMenu.indexWhere((i) => i.route == item.route) == index)
       item,
 ];

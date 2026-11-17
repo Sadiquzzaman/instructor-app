@@ -13,6 +13,7 @@
     "notYetBody": "This page is not in the app yet. Please use the website for it for now.",
     "notYetIelts": "IELTS pages are not in the app yet. Please use the website for IELTS for now.",
     "notForBranchManagers": "This is not available to branch managers yet.",
-    "notInWorkspace": "This is not part of this workspace."
+    "notInWorkspace": "This is not part of this workspace.",
+    "changePasswordFailed": "Could not change the password. Check your current password and try again."
   }
 }

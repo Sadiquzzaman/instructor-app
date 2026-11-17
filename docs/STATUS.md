@@ -6,7 +6,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 ## Current stage
 
-**Stage 0:** PRs 1–11 of 14 ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11). Next: PR 12, the account screen (name, language, password, signed-in devices).
+**Stage 0:** PRs 1–12 of 14 ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11). Next: a small PR for the #345 error codes (sign-up, codes, reset and sign-in say what went wrong), then PR 13, "More features".
 
 ## Done
 
@@ -34,9 +34,11 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 - PR 11: notifications. The bell in the top bar with the unread count (`GET /me/notifications/unread-count` at once, every minute while the app is open and when it comes back, as the web; Bangla digits; read aloud as "Notifications, 22 unread"); the inbox (newest first, 20 at a time, more on scroll, pull to refresh, unread marked, times in Dhaka time, "Mark all as read"); opening an item marks it read and opens its page when the app has it. Push waits for PM-04. Checked on beta with a test student's 22 real notifications (none opened).
 
+- PR 12: the account screen (`/account`, from the menu): the profile as on the web (name, role, email, phone, verified, member since; read-only, as the API has no way to change the name); change password (the web's checks and wording; a wrong current password says so; the other devices are signed out by the server and the list reloads); signed-in devices (platform, name, app version, last used in Dhaka time, "This device"; sign out one or all the others, each after a confirmation). The language switch now also saves the choice to the account (`PATCH /user/me/locale`), as the web does, and says so if that fails. Checked on beta as a test student in English and Bangla (no password changed, no device signed out).
+
 ## In progress
 
-- PR 12: the account screen: name, language (saved to the account), change password, signed-in devices (sign out one or the others).
+- The #345 error codes in the app: specific messages for an already-registered phone or email, wrong, expired or locked codes, and "not verified" or "disabled" at sign-in.
 
 ## Owner's decisions since the plan
 
