@@ -2640,6 +2640,221 @@
   "discussionsChatPlaceholder": "Type a message…",
   "discussionsChatSend": "Send",
   "discussionsChatConversations": "Conversations",
+  "testsTitle": "Tests",
+  "testsIntro": "Create tests, share them, and follow them live.",
+  "testsStudentIntro": "Your tests and results.",
+  "testsSearch": "Search by test, subject or [[class]]",
+  "testsFilterAll": "All",
+  "testsFilterOngoing": "Live",
+  "testsFilterPending": "Scheduled",
+  "testsFilterCompleted": "Completed",
+  "testsStatusOngoing": "Live",
+  "testsStatusPending": "Scheduled",
+  "testsStatusCompleted": "Completed",
+  "testsEnabled": "Enabled",
+  "testsDisabled": "Disabled",
+  "testsCategoryAcademic": "Academic",
+  "testsCategoryIelts": "IELTS",
+  "testsEmpty": "No tests yet",
+  "testsEmptyTeacher": "Create your first test in a few minutes.",
+  "testsEmptyStudent": "Tests from your teachers will appear here.",
+  "testsNoMatch": "No tests match.",
+  "testsCardAudience": "Audience",
+  "testsCardSubject": "Subject",
+  "testsCardModules": "Modules",
+  "testsCardParticipants": "Participants",
+  "testsCardSubmitted": "Submitted",
+  "testsCardProgress": "Submissions",
+  "testsCardProgressValue": "{submitted} of {total}",
+  "@testsCardProgressValue": {
+    "placeholders": {
+      "submitted": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "total": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "testsCardNoSchedule": "No schedule",
+  "testsCardShare": "Share test",
+  "testsCardDownload": "Download questions",
+  "testsCardGrade": "Grade",
+  "testsCardStart": "Start test",
+  "testsCardDetails": "View details",
+  "testsCardResults": "View results",
+  "testsDetailsTitle": "Test details",
+  "testsDetailsNotFound": "Test not found",
+  "testsDetailsNotFoundDetail": "It may have been deleted, or you may not have access to it.",
+  "testsDetailsBack": "Back to tests",
+  "testsDetailsEdit": "Edit",
+  "testsDetailsEnable": "Enable",
+  "testsDetailsDisable": "Disable",
+  "testsDetailsLocked": "The test has started or ended, so it can no longer be edited or disabled.",
+  "testsDetailsStatusSaved": "Test status updated.",
+  "testsDetailsDisableTitle": "Disable this test?",
+  "testsDetailsDisableDetail": "Students will not be able to start it until you enable it again.",
+  "testsDetailsSubjects": "Subjects",
+  "testsDetailsAudience": "Audience",
+  "testsDetailsClass": "[[Class]]",
+  "testsDetailsDuration": "Duration",
+  "testsDetailsMinutes": "{minutes, plural, one{{minutes} minute} other{{minutes} minutes}}",
+  "@testsDetailsMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "testsDetailsStarts": "Starts",
+  "testsDetailsEnds": "Ends",
+  "testsDetailsQuestions": "Questions",
+  "testsDetailsTotalMarks": "Total marks",
+  "testsDetailsPassingScore": "Passing score",
+  "testsDetailsNegativeMarking": "Negative marking",
+  "testsDetailsOff": "Off",
+  "testsDetailsQuestionCount": "{count, plural, one{{count} question} other{{count} questions}}",
+  "@testsDetailsQuestionCount": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "testsDetailsSessionClosed": "This test belongs to a closed session, so it cannot be changed or graded. The owner can reopen the session.",
+  "testsDetailsMonitor": "Live monitor",
+  "testsDetailsPrint": "Print paper",
+  "testsDetailsIntegrity": "Integrity report",
+  "testsAudienceAnyone": "Anyone with the link",
+  "testsAudienceSelectedClass": "A [[class]]",
+  "testsAudienceSpecificStudents": "Chosen students",
+  "testsShareTitle": "Share test",
+  "testsShareCreated": "Test created",
+  "testsShareScheduled": "Test scheduled",
+  "testsShareScheduledFor": "Starts {date}.",
+  "@testsShareScheduledFor": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "testsShareCreatedDetail": "“{name}” is ready.",
+  "@testsShareCreatedDetail": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "testsShareShareDetail": "Share “{name}”.",
+  "@testsShareShareDetail": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "testsShareAnyone": "Anyone with the link can take it.",
+  "testsShareClassOnly": "Only students of {className} can take it.",
+  "@testsShareClassOnly": {
+    "placeholders": {
+      "className": {
+        "type": "String"
+      }
+    }
+  },
+  "testsShareExcluded": "{count, plural, one{{count} student is excluded.} other{{count} students are excluded.}}",
+  "@testsShareExcluded": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "testsShareLink": "Test link",
+  "testsShareMessage": "Take this test: {link}",
+  "@testsShareMessage": {
+    "placeholders": {
+      "link": {
+        "type": "String"
+      }
+    }
+  },
+  "testsShareSubject": "Test: {name}",
+  "@testsShareSubject": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "testsResultsTitle": "Your results",
+  "testsResultsFallbackSubject": "Exam result",
+  "testsResultsSubmitted": "Submitted {date}",
+  "@testsResultsSubmitted": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "testsResultsScore": "Score",
+  "testsResultsAnswerSheet": "Answer sheet",
+  "testsResultsFailed": "Your results did not load.",
+  "testsResultsPercentage": "Percentage",
+  "testsResultsGrade": "Grade",
+  "testsJoinUnavailable": "Test unavailable",
+  "testsJoinTitle": "“{testName}” by {teacher}",
+  "@testsJoinTitle": {
+    "placeholders": {
+      "testName": {
+        "type": "String"
+      },
+      "teacher": {
+        "type": "String"
+      }
+    }
+  },
+  "testsJoinDuration": "You will have {minutes, plural, one{{minutes} minute} other{{minutes} minutes}} to finish.",
+  "@testsJoinDuration": {
+    "placeholders": {
+      "minutes": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "testsJoinPrivate": "This test is only for students the teacher chose.",
+  "testsJoinPublic": "Any student can take this test.",
+  "testsJoinContinue": "Continue",
+  "testsPrintTitle": "Print the paper",
+  "testsPrintDescription": "A PDF ready to print, for a paper exam with the same questions.",
+  "testsPrintSet": "Set",
+  "testsPrintSetLabel": "Set {set}",
+  "@testsPrintSetLabel": {
+    "placeholders": {
+      "set": {
+        "type": "String"
+      }
+    }
+  },
+  "testsPrintSetAHint": "Questions and options in your order.",
+  "testsPrintSetShuffledHint": "Questions and options in a different order.",
+  "testsPrintPaper": "Paper size",
+  "testsPrintA4": "A4",
+  "testsPrintLegal": "Legal",
+  "testsPrintAnswerKey": "Answer key too",
+  "testsPrintAnswerKeyHint": "A separate PDF with this set's answers, for you.",
+  "testsPrintDownload": "Download PDF",
+  "testsPrintCancel": "Cancel",
+  "testsPrintNoQuestions": "This test has no questions yet.",
+  "testsPrintFailed": "Couldn't make the PDF. Try again.",
   "appNoConnection": "No internet connection. Check it and try again.",
   "appUpdateRequiredTitle": "Please update Instructor",
   "appUpdateRequiredBody": "This version of the app is no longer supported. Install the new version to continue.",
@@ -2703,6 +2918,51 @@
   "appLocationServiceOff": "Your phone's location is off. Turn it on, then try again.",
   "appLocationOpenSettings": "Open settings",
   "appAttendanceRefresh": "Refresh",
+  "appResultQuestion": "Question {number}",
+  "@appResultQuestion": {
+    "placeholders": {
+      "number": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "appResultYourAnswer": "Your answer",
+  "appResultCorrectAnswer": "Correct answer",
+  "appResultCorrect": "Correct",
+  "appResultIncorrect": "Incorrect",
+  "appResultNoAnswer": "No answer",
+  "appResultMarks": "{obtained} / {points} marks",
+  "@appResultMarks": {
+    "placeholders": {
+      "obtained": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "points": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "appResultSummary": "{correct} correct, {wrong} wrong, {unanswered} not answered",
+  "@appResultSummary": {
+    "placeholders": {
+      "correct": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "wrong": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "unanswered": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "appTestsStartSoon": "Taking tests in the app comes next. Please use the website for now.",
   "appSavedCopy": "No internet connection. This was saved on your phone at {time}; pull down to try again.",
   "@appSavedCopy": {
     "placeholders": {

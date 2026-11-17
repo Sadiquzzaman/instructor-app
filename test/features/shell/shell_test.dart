@@ -60,8 +60,8 @@ void main() {
     expect(_inMenu('Today'), findsOneWidget);
     expect(find.text('Sign out'), findsOneWidget);
 
-    // Today is built (Stage 1); Tests is not yet.
-    await tester.tap(_inMenu('Tests'));
+    // Today is built (Stage 1); Chat is not yet.
+    await tester.tap(_inMenu('Chat'));
     await tester.pumpAndSettle();
     expect(find.byType(NotYetScreen), findsOneWidget);
     expect(

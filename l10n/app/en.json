@@ -40,6 +40,15 @@
     "locationServiceOff": "Your phone's location is off. Turn it on, then try again.",
     "locationOpenSettings": "Open settings",
     "attendanceRefresh": "Refresh",
-    "savedCopy": "No internet connection. This was saved on your phone at {time}; pull down to try again."
+    "resultQuestion": "Question {number, number}",
+    "resultYourAnswer": "Your answer",
+    "resultCorrectAnswer": "Correct answer",
+    "resultCorrect": "Correct",
+    "resultIncorrect": "Incorrect",
+    "resultNoAnswer": "No answer",
+    "resultMarks": "{obtained, number} / {points, number} marks",
+    "resultSummary": "{correct, number} correct, {wrong, number} wrong, {unanswered, number} not answered",
+    "testsStartSoon": "Taking tests in the app comes next. Please use the website for now.",
+    "savedCopy":"No internet connection. This was saved on your phone at {time}; pull down to try again."
   }
 }
