@@ -83,3 +83,12 @@ Widget inLanguage(Widget child, {String language = 'en'}) => MaterialApp(
   theme: AppTheme.light(bangla: language == 'bn'),
   home: Scaffold(body: Center(child: child)),
 );
+
+/// Signs out the way a person does: open the menu (phone drawer), then
+/// "Sign out".
+Future<void> signOutFromMenu(WidgetTester tester) async {
+  await tester.tap(find.byType(DrawerButton));
+  await tester.pumpAndSettle();
+  await tester.tap(find.text('Sign out'));
+  await tester.pumpAndSettle();
+}

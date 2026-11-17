@@ -30,6 +30,8 @@ const webNamespaces = [
   'auth',
   'shell',
   'dashboard',
+  'nav',
+  'features',
 ];
 
 const locales = ['en', 'bn'];

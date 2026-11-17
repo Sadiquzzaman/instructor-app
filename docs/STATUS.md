@@ -6,7 +6,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 ## Current stage
 
-**Stage 0:** PRs 1–9 of 14 ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11). Next: PR 10, the app shell and menu (by role, workspace type and plan).
+**Stage 0:** PRs 1–10 of 14 ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11). Next: PR 11, notifications (inbox and unread badge).
 
 ## Done
 
@@ -30,9 +30,11 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 - PR 9: workspaces. After sign-in with several workspaces and none chosen (`context_type: individual`) the app shows "Your workspaces" (the web's wording; "Pending approval" marked); the home switcher opens the same list; `POST /auth/select-context` gives the new tokens on the same device; everything that belongs to a workspace (level labels so far) reloads or drops by itself when the workspace changes or the person signs out; the organisation's language applies when the person has none. Tested on beta with a Sunrise School teacher who has two schools.
 
+- PR 10: the app shell and menu. The menu is generated from the web's `sidebarList.tsx` and `sidebarGroups.ts` (95 items, same rules and order: section by session, role, member role, personal workspace, Academic/IELTS, plan features from `GET /me/entitlements`; groups, "Setup" heading, a group of one as a link; the web-only Admin section left out). Phones: a drawer; screens 840 px and wider: the menu stays open. Every menu page not built yet says "Please use the website for it for now" (IELTS pages: "… for IELTS"). Locked features show the web's "Not in your plan" wording by role, with no upgrade button; NOT_FOR_BRANCH_MANAGERS and NOT_IN_IELTS have short messages. Checked on beta as a student, an owner and an IELTS owner.
+
 ## In progress
 
-- PR 10: the app shell (bottom bar on phones, side rail on tablets) and the menu by role, workspace type and plan (`GET /me/entitlements`), the locked-feature message, "Use the web for this for now", branch managers.
+- PR 11: notifications: the inbox (paged), mark one or all read, the unread badge polled every minute while the app is open.
 
 ## Owner's decisions since the plan
 

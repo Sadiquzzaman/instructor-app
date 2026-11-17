@@ -3,7 +3,7 @@ import 'package:integration_test/integration_test.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'package:instructor_app/features/auth/screens/login_screen.dart';
-import 'package:instructor_app/features/shell/screens/placeholder_home.dart';
+import 'package:instructor_app/features/shell/screens/home_screen.dart';
 
 import '../test/helpers/fake_api.dart';
 import '../test/helpers/pump_app.dart';
@@ -45,11 +45,11 @@ void main() {
     await tester.enterText(field('login-password'), 'right-one');
     await tester.tap(find.text('Sign in'));
     await tester.pumpAndSettle();
-    expect(find.byType(PlaceholderHome), findsOneWidget);
+    expect(find.byType(HomeScreen), findsOneWidget);
     expect(find.text('Test Student'), findsOneWidget);
     expect(find.text('Demo School'), findsOneWidget);
 
-    await tester.tap(find.text('Sign out'));
+    await signOutFromMenu(tester);
     await tester.pumpAndSettle();
     expect(find.byType(LoginScreen), findsOneWidget);
     expect(api.to('POST /auth/logout'), hasLength(1));

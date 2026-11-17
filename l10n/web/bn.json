@@ -344,5 +344,299 @@
       "opening": "খোলা হচ্ছে…",
       "unavailable": "পাওয়া যাচ্ছে না"
     }
+  },
+  "nav": {
+    "category": {
+      "Platform": "প্ল্যাটফর্ম",
+      "System": "সিস্টেম",
+      "Organization": "প্রতিষ্ঠান",
+      "Admin": "অ্যাডমিন"
+    },
+    "group": {
+      "people": "সদস্য",
+      "academics": "পড়াশোনা",
+      "tests": "পরীক্ষা",
+      "attendance": "উপস্থিতি",
+      "billing": "বিল ও প্ল্যান",
+      "logs": "লগ",
+      "customers": "গ্রাহক",
+      "plans": "প্ল্যান ও পেমেন্ট",
+      "setup": "সেটআপ",
+      "results": "ফলাফল"
+    },
+    "plans": "প্ল্যান",
+    "payments": "পেমেন্ট",
+    "teachers": "শিক্ষক",
+    "users": "ব্যবহারকারী",
+    "teacherRequests": "শিক্ষকের আবেদন",
+    "organizations": "প্রতিষ্ঠান",
+    "subjects": "বিষয়",
+    "dashboard": "ড্যাশবোর্ড",
+    "classes": "[[class]]",
+    "tests": "পরীক্ষা",
+    "grading": "মূল্যায়ন",
+    "billing": "বিল ও প্ল্যান",
+    "overview": "সারসংক্ষেপ",
+    "assistants": "স্টাফ",
+    "students": "শিক্ষার্থী",
+    "assignments": "বিষয় শিক্ষক",
+    "account": "অ্যাকাউন্ট",
+    "help": "সাহায্য",
+    "features": "আরও ফিচার",
+    "featureRequests": "ফিচারের অনুরোধ",
+    "sessions": "সেশন",
+    "auditLog": "অডিট লগ",
+    "activityLog": "কার্যক্রমের লগ",
+    "gradingScale": "গ্রেডিং স্কেল",
+    "messageLog": "মেসেজ লগ",
+    "attendanceSettings": "উপস্থিতির সেটিংস",
+    "holidays": "ছুটির দিন",
+    "branches": "শাখা",
+    "classSetup": "ক্লাস সেটআপ",
+    "myAttendance": "আমার উপস্থিতি",
+    "classAttendance": "ক্লাসের উপস্থিতি",
+    "leave": "ছুটি",
+    "attendanceRegister": "মাসিক হাজিরা খাতা",
+    "attendanceReports": "উপস্থিতি রিপোর্ট",
+    "homework": "হোমওয়ার্ক",
+    "homeworkSettings": "হোমওয়ার্কের সেটিংস",
+    "routine": "রুটিন",
+    "calendar": "ক্যালেন্ডার",
+    "today": "আজ",
+    "marks": "লিখিত পরীক্ষা",
+    "behaviour": "আচরণ",
+    "performanceSettings": "পারফরম্যান্স সেটিংস",
+    "performance": "পারফরম্যান্স",
+    "reportCards": "রিপোর্ট কার্ড",
+    "chat": "চ্যাট",
+    "chatReview": "চ্যাট পর্যালোচনা",
+    "resources": "রিসোর্স",
+    "ieltsStudents": "আইইএলটিএস শিক্ষার্থী",
+    "ieltsProfile": "আমার আইইএলটিএস প্রোফাইল",
+    "ieltsTests": "আইইএলটিএস টেস্ট",
+    "ieltsBandTables": "ব্যান্ড টেবিল",
+    "ieltsMyTests": "আইইএলটিএস টেস্ট",
+    "ieltsMarking": "নম্বর দেওয়া",
+    "ieltsOverview": "আইইএলটিএস সারসংক্ষেপ",
+    "plagiarismSettings": "প্লেজিয়ারিজম সেটিংস",
+    "ieltsCourses": "কোর্স",
+    "ieltsMyCourses": "আমার কোর্স"
+  },
+  "features": {
+    "locked": {
+      "title": "আপনার প্ল্যানে নেই",
+      "limitTitle": "প্ল্যানের সীমা পূর্ণ",
+      "ownerMessage": "এই ফিচার মাত্র এক আপগ্রেড দূরে — আজই চালু করুন!",
+      "memberMessage": "এটি চালু করতে আপনার অ্যাডমিনকে বলুন।",
+      "upgrade": "আপগ্রেড করুন",
+      "close": "বন্ধ করুন",
+      "moreFeatures": "সব ফিচার দেখুন ও অনুরোধ করুন"
+    },
+    "page": {
+      "title": "আরও ফিচার",
+      "intro": "আপনার প্ল্যানে কী আছে, আর কী চালু করা যায়।",
+      "planTitle": "আপনার প্ল্যান: {plan}",
+      "free": "ফ্রি",
+      "upgradeHint": "নিচের বন্ধ ফিচারগুলো চালু করতে আপগ্রেড করুন।",
+      "upgrade": "আপগ্রেড করুন",
+      "included": "আছে",
+      "locked": "বন্ধ",
+      "requested": "অনুরোধ পাঠানো হয়েছে",
+      "request": "এই ফিচারের অনুরোধ করুন",
+      "requestFor": "{name}-এর অনুরোধ করুন",
+      "requestTitle": "{name}-এর অনুরোধ",
+      "requestDetail": "আপনার ওয়ার্কস্পেসে এটি যোগ করার বিষয়ে আমরা যোগাযোগ করব।",
+      "note": "নোট (ঐচ্ছিক)",
+      "noteHint": "কী কাজে লাগবে জানান।",
+      "cancel": "বাতিল",
+      "send": "অনুরোধ পাঠান",
+      "sentTitle": "অনুরোধ পাঠানো হয়েছে",
+      "sent": "{name} নিয়ে আমরা আপনার সাথে যোগাযোগ করব।",
+      "loadFailed": "ফিচারগুলো লোড হয়নি।",
+      "membersTitle": "প্ল্যানের ফিচার দেখেন মালিক বা অ্যাডমিন",
+      "membersDetail": "প্ল্যানে কী আছে তা আপনার প্রতিষ্ঠানের মালিক বা অ্যাডমিন দেখেন এবং আরও চাইতে পারেন। কোনো ফিচার দরকার হলে তাঁদের জানান।"
+    },
+    "groups": {
+      "Question": "প্রশ্ন",
+      "Branding": "ব্র্যান্ডিং",
+      "Analytics": "বিশ্লেষণ",
+      "Notifications": "নোটিফিকেশন",
+      "Proctoring": "প্রক্টরিং",
+      "Attendance": "উপস্থিতি",
+      "Homework": "হোমওয়ার্ক",
+      "Calendar": "ক্যালেন্ডার",
+      "Communication": "যোগাযোগ",
+      "Resources": "রিসোর্স",
+      "IELTS": "আইইএলটিএস",
+      "Integrity": "সততা"
+    },
+    "catalog": {
+      "allow_graded_questions": {
+        "name": "নম্বরযুক্ত প্রশ্ন",
+        "description": "নম্বরসহ প্রশ্ন, যা স্বয়ংক্রিয়ভাবে বা আপনি নিজে যাচাই করেন।"
+      },
+      "allow_ungraded_questions": {
+        "name": "নম্বরবিহীন প্রশ্ন",
+        "description": "অনুশীলন ও জরিপের প্রশ্ন, যাতে কোনো নম্বর নেই।"
+      },
+      "allow_passage_questions": {
+        "name": "অনুচ্ছেদভিত্তিক প্রশ্ন",
+        "description": "একটি অনুচ্ছেদের ওপর কয়েকটি প্রশ্ন।"
+      },
+      "allow_model_tests": {
+        "name": "মডেল টেস্ট",
+        "description": "আসল পরীক্ষার আগে অনুশীলনের জন্য মডেল পরীক্ষা।"
+      },
+      "allow_question_images": {
+        "name": "প্রশ্নে ছবি",
+        "description": "প্রশ্ন ও উত্তরে ছবি যোগ করুন।"
+      },
+      "allow_question_import_export": {
+        "name": "প্রশ্ন ইমপোর্ট ও এক্সপোর্ট",
+        "description": "ফাইল থেকে প্রশ্ন আনুন এবং ফাইলে সংরক্ষণ করুন।"
+      },
+      "enable_report_watermark": {
+        "name": "রিপোর্টে ওয়াটারমার্ক",
+        "description": "প্রিন্ট করা রিপোর্টে আপনার নাম বা লোগো।"
+      },
+      "graphical_analytics": {
+        "name": "গ্রাফিক্যাল বিশ্লেষণ",
+        "description": "ক্লাস ও পরীক্ষার ফলাফলের চার্ট।"
+      },
+      "performance_graphs": {
+        "name": "অগ্রগতির গ্রাফ",
+        "description": "সময়ের সাথে প্রত্যেক শিক্ষার্থীর অগ্রগতি।"
+      },
+      "advanced_analytics": {
+        "name": "উন্নত বিশ্লেষণ",
+        "description": "প্রশ্ন ও বিষয়ভিত্তিক ফলাফলের বিস্তারিত।"
+      },
+      "student_risk_score": {
+        "name": "শিক্ষার্থীর ঝুঁকি স্কোর",
+        "description": "যেসব শিক্ষার্থী পিছিয়ে পড়তে পারে তাদের চিহ্নিত করুন।"
+      },
+      "push_notifications": {
+        "name": "পুশ নোটিফিকেশন",
+        "description": "ফোনে ও ব্রাউজারে সতর্কবার্তা।"
+      },
+      "suspicious_activity_notifications": {
+        "name": "সন্দেহজনক কার্যকলাপের সতর্কতা",
+        "description": "প্রক্টরিং কোনো শিক্ষার্থীকে ফ্ল্যাগ করলে জানুন।"
+      },
+      "proctoring_tab_switch": {
+        "name": "ট্যাব পরিবর্তন শনাক্তকরণ",
+        "description": "শিক্ষার্থী পরীক্ষার ট্যাব ছেড়ে গেলে ধরা পড়ে।"
+      },
+      "proctoring_fullscreen_exit": {
+        "name": "ফুলস্ক্রিন ছাড়া শনাক্তকরণ",
+        "description": "শিক্ষার্থী ফুলস্ক্রিন ছাড়লে ধরা পড়ে।"
+      },
+      "proctoring_page_refresh": {
+        "name": "পেজ রিলোড শনাক্তকরণ",
+        "description": "শিক্ষার্থী পরীক্ষার পেজ রিলোড করলে ধরা পড়ে।"
+      },
+      "proctoring_copy_paste": {
+        "name": "কপি-পেস্ট শনাক্তকরণ",
+        "description": "পরীক্ষার সময় কপি ও পেস্ট করলে ধরা পড়ে।"
+      },
+      "proctoring_idle": {
+        "name": "নিষ্ক্রিয়তা শনাক্তকরণ",
+        "description": "শিক্ষার্থী কিছুক্ষণ কাজ না করলে ধরা পড়ে।"
+      },
+      "proctoring_browser_change": {
+        "name": "ব্রাউজার পরিবর্তন শনাক্তকরণ",
+        "description": "অন্য ব্রাউজারে পরীক্ষা চালালে ধরা পড়ে।"
+      },
+      "proctoring_no_face": {
+        "name": "মুখ না থাকা শনাক্তকরণ",
+        "description": "ক্যামেরায় কোনো মুখ না দেখা গেলে ধরা পড়ে।"
+      },
+      "proctoring_multiple_face": {
+        "name": "একাধিক মুখ শনাক্তকরণ",
+        "description": "ক্যামেরায় একাধিক মুখ দেখা গেলে ধরা পড়ে।"
+      },
+      "proctoring_looking_away": {
+        "name": "অন্যদিকে তাকানো শনাক্তকরণ",
+        "description": "শিক্ষার্থী অন্যদিকে তাকালে ক্যামেরায় ধরা পড়ে।"
+      },
+      "proctoring_devtools": {
+        "name": "ডেভেলপার টুলস শনাক্তকরণ",
+        "description": "ব্রাউজারের ডেভেলপার টুলস খুললে ধরা পড়ে।"
+      },
+      "proctoring_double_display": {
+        "name": "দ্বিতীয় স্ক্রিন শনাক্তকরণ",
+        "description": "দ্বিতীয় ডিসপ্লে যুক্ত থাকলে ধরা পড়ে।"
+      },
+      "proctoring_phone": {
+        "name": "ফোন শনাক্তকরণ",
+        "description": "ক্যামেরায় ফোন দেখা গেলে ধরা পড়ে।"
+      },
+      "proctoring_voice": {
+        "name": "কণ্ঠস্বর শনাক্তকরণ",
+        "description": "মাইক্রোফোনে কথা শোনা গেলে ধরা পড়ে।"
+      },
+      "proctoring_video_monitoring": {
+        "name": "লাইভ ভিডিও নজরদারি",
+        "description": "পরীক্ষার সময় শিক্ষার্থীদের ক্যামেরা দেখুন।"
+      },
+      "proctoring_real_time_alerts": {
+        "name": "তাৎক্ষণিক সতর্কতা",
+        "description": "প্রক্টরিং ফ্ল্যাগ সঙ্গে সঙ্গে দেখুন।"
+      },
+      "proctoring_auto_disqualification": {
+        "name": "স্বয়ংক্রিয় বাতিল",
+        "description": "বারবার ফ্ল্যাগ হলে পরীক্ষা স্বয়ংক্রিয়ভাবে শেষ হয়।"
+      },
+      "attendance": {
+        "name": "উপস্থিতি",
+        "description": "উপস্থিতির সেটিংস, ছুটির দিন, চেক-ইন ও রোল কল।"
+      },
+      "homework": {
+        "name": "হোমওয়ার্ক",
+        "description": "বিষয়-ক্লাসে হোমওয়ার্ক দিন, জমা নিন ও নম্বর দিন।"
+      },
+      "calendar": {
+        "name": "ক্যালেন্ডার",
+        "description": "সময় মিলে যাওয়ার সতর্কতাসহ সাপ্তাহিক ক্লাস রুটিন; এরপর ইভেন্ট ও রিমাইন্ডার।"
+      },
+      "chat": {
+        "name": "চ্যাট",
+        "description": "প্রতিটি বিষয়-ক্লাসের জন্য গ্রুপ চ্যাট ও মন্তব্য, আর শিক্ষক–শিক্ষার্থী ব্যক্তিগত চ্যাট।"
+      },
+      "resources": {
+        "name": "রিসোর্স লাইব্রেরি",
+        "description": "বিষয়-ক্লাসের সাথে শেয়ার করা নোট, স্লাইড, PDF, অডিও ও লিংক।"
+      },
+      "ielts": {
+        "name": "IELTS ওয়ার্কস্পেস",
+        "description": "IELTS সেন্টারের জন্য: শিক্ষার্থীর প্রোফাইল, কম্পিউটার-ভিত্তিক IELTS পরীক্ষা, রাইটিং ও স্পিকিং মূল্যায়ন, ব্যান্ড।"
+      },
+      "integrity": {
+        "name": "প্লেজিয়ারিজম পরীক্ষক",
+        "description": "সহপাঠীদের টাইপ করা হোমওয়ার্ক ও আইইএলটিএস রাইটিং মেলায় (বাংলা ও ইংরেজি), মিলে যাওয়া অংশ পাশাপাশি দেখায় ও শিক্ষক পর্যালোচনা করেন"
+      },
+      "live_classes": {
+        "name": "লাইভ ক্লাস",
+        "description": "অ্যাপের ভেতরে ভিডিও, স্ক্রিন শেয়ার ও রেকর্ডিংসহ অনলাইন ক্লাস, কোর্সের শিক্ষার্থীদের জন্য।"
+      },
+      "live_class_links": {
+        "name": "অনলাইন ক্লাসের লিংক",
+        "description": "কোর্সের রুটিনে জুম বা গুগল মিট লিংক দিয়ে অনলাইন ক্লাস।"
+      }
+    },
+    "limits": {
+      "max_exams_per_month": "প্রতি মাসে পরীক্ষা",
+      "max_total_exams": "মোট পরীক্ষা",
+      "max_students_per_exam": "প্রতি পরীক্ষায় শিক্ষার্থী",
+      "max_question_bank_size": "প্রশ্নব্যাংকে প্রশ্ন",
+      "max_storage_mb": "স্টোরেজ (MB)",
+      "sms_credits_per_month": "প্রতি মাসে SMS",
+      "max_students": "শিক্ষার্থী",
+      "max_branches": "শাখা",
+      "live_hours_per_month": "মাসে লাইভ ক্লাসের ঘণ্টা",
+      "live_max_participants": "এক লাইভ ক্লাসে সর্বোচ্চ জন",
+      "recording_retention_days": "রেকর্ডিং রাখার দিন",
+      "ended_course_visible_days": "শেষ কোর্স দেখা যাবে (দিন)"
+    }
   }
 }

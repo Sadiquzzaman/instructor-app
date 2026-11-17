@@ -9,6 +9,10 @@
     "updateLater": "Later",
     "loginInvalid": "The email, phone number or password is not right.",
     "signupFailed": "Sign up failed. Check your details and try again.",
-    "resetFailed": "Could not reset the password. Check your details and the code, and try again."
+    "resetFailed": "Could not reset the password. Check your details and the code, and try again.",
+    "notYetBody": "This page is not in the app yet. Please use the website for it for now.",
+    "notYetIelts": "IELTS pages are not in the app yet. Please use the website for IELTS for now.",
+    "notForBranchManagers": "This is not available to branch managers yet.",
+    "notInWorkspace": "This is not part of this workspace."
   }
 }

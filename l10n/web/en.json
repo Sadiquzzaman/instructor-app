@@ -344,5 +344,299 @@
       "opening": "Opening…",
       "unavailable": "Unavailable"
     }
+  },
+  "nav": {
+    "category": {
+      "Platform": "Platform",
+      "System": "System",
+      "Organization": "Organization",
+      "Admin": "Admin"
+    },
+    "group": {
+      "people": "People",
+      "academics": "Academics",
+      "tests": "Tests",
+      "attendance": "Attendance",
+      "billing": "Billing & plan",
+      "logs": "Logs",
+      "customers": "Customers",
+      "plans": "Plans & payments",
+      "setup": "Setup",
+      "results": "Results"
+    },
+    "plans": "Plans",
+    "payments": "Payments",
+    "teachers": "Teachers",
+    "users": "Users",
+    "teacherRequests": "Teacher Requests",
+    "organizations": "Organizations",
+    "subjects": "Subjects",
+    "dashboard": "Dashboard",
+    "classes": "[[Classes]]",
+    "tests": "Tests",
+    "grading": "Grading",
+    "billing": "Billing & Plans",
+    "overview": "Overview",
+    "assistants": "Staff",
+    "students": "Students",
+    "assignments": "Subject teachers",
+    "account": "Account",
+    "help": "Help",
+    "features": "More features",
+    "featureRequests": "Feature requests",
+    "sessions": "Sessions",
+    "auditLog": "Audit log",
+    "activityLog": "Activity log",
+    "gradingScale": "Grading scale",
+    "messageLog": "Message log",
+    "attendanceSettings": "Attendance settings",
+    "holidays": "Holidays",
+    "branches": "Branches",
+    "classSetup": "Class setup",
+    "myAttendance": "My attendance",
+    "classAttendance": "Class attendance",
+    "leave": "Leave",
+    "attendanceRegister": "Monthly register",
+    "attendanceReports": "Attendance reports",
+    "homework": "Homework",
+    "homeworkSettings": "Homework settings",
+    "routine": "Routine",
+    "calendar": "Calendar",
+    "today": "Today",
+    "marks": "Paper exams",
+    "behaviour": "Behaviour",
+    "performanceSettings": "Performance settings",
+    "performance": "Performance",
+    "reportCards": "Report cards",
+    "chat": "Chat",
+    "chatReview": "Chat review",
+    "resources": "Resources",
+    "ieltsStudents": "IELTS students",
+    "ieltsProfile": "My IELTS profile",
+    "ieltsTests": "IELTS tests",
+    "ieltsBandTables": "Band tables",
+    "ieltsMyTests": "IELTS tests",
+    "ieltsMarking": "Marking",
+    "ieltsOverview": "IELTS overview",
+    "plagiarismSettings": "Plagiarism settings",
+    "ieltsCourses": "Courses",
+    "ieltsMyCourses": "My courses"
+  },
+  "features": {
+    "locked": {
+      "title": "Not in your plan",
+      "limitTitle": "Plan limit reached",
+      "ownerMessage": "This feature is one upgrade away — unlock it today!",
+      "memberMessage": "Ask your admin to unlock this.",
+      "upgrade": "Upgrade",
+      "close": "Close",
+      "moreFeatures": "See all features and request one"
+    },
+    "page": {
+      "title": "More features",
+      "intro": "What your plan includes, and what you can unlock.",
+      "planTitle": "Your plan: {plan}",
+      "free": "Free",
+      "upgradeHint": "Upgrade to unlock the locked features below.",
+      "upgrade": "Upgrade",
+      "included": "Included",
+      "locked": "Locked",
+      "requested": "Requested",
+      "request": "Request this feature",
+      "requestFor": "Request {name}",
+      "requestTitle": "Request {name}",
+      "requestDetail": "We will contact you about adding it to your workspace.",
+      "note": "Note (optional)",
+      "noteHint": "Tell us what you need it for.",
+      "cancel": "Cancel",
+      "send": "Send request",
+      "sentTitle": "Request sent",
+      "sent": "We will contact you about {name}.",
+      "loadFailed": "The features did not load.",
+      "membersTitle": "Plan features are managed by your owner or admin",
+      "membersDetail": "Your organisation's owner or an admin sees what the plan includes and can ask for more. Ask them if you need a feature."
+    },
+    "groups": {
+      "Question": "Questions",
+      "Branding": "Branding",
+      "Analytics": "Analytics",
+      "Notifications": "Notifications",
+      "Proctoring": "Proctoring",
+      "Attendance": "Attendance",
+      "Homework": "Homework",
+      "Calendar": "Calendar",
+      "Communication": "Communication",
+      "Resources": "Resources",
+      "IELTS": "IELTS",
+      "Integrity": "Integrity"
+    },
+    "catalog": {
+      "allow_graded_questions": {
+        "name": "Graded questions",
+        "description": "Questions with marks, checked automatically or by you."
+      },
+      "allow_ungraded_questions": {
+        "name": "Ungraded questions",
+        "description": "Practice and survey questions that carry no marks."
+      },
+      "allow_passage_questions": {
+        "name": "Passage questions",
+        "description": "Several questions on one reading passage."
+      },
+      "allow_model_tests": {
+        "name": "Model tests",
+        "description": "Mock exams students sit before the real one."
+      },
+      "allow_question_images": {
+        "name": "Question images",
+        "description": "Add pictures to questions and answers."
+      },
+      "allow_question_import_export": {
+        "name": "Import and export questions",
+        "description": "Bring questions in from a file, and save them to one."
+      },
+      "enable_report_watermark": {
+        "name": "Report watermark",
+        "description": "Your name or logo on printed reports."
+      },
+      "graphical_analytics": {
+        "name": "Graphical analytics",
+        "description": "Charts of class and test results."
+      },
+      "performance_graphs": {
+        "name": "Performance graphs",
+        "description": "Each student's progress over time."
+      },
+      "advanced_analytics": {
+        "name": "Advanced analytics",
+        "description": "Results broken down by question and topic."
+      },
+      "student_risk_score": {
+        "name": "Student risk score",
+        "description": "Spot students who may fall behind."
+      },
+      "push_notifications": {
+        "name": "Push notifications",
+        "description": "Alerts on phones and in the browser."
+      },
+      "suspicious_activity_notifications": {
+        "name": "Suspicious activity alerts",
+        "description": "Be told when proctoring flags a student."
+      },
+      "proctoring_tab_switch": {
+        "name": "Tab switch detection",
+        "description": "Notice when a student leaves the test tab."
+      },
+      "proctoring_fullscreen_exit": {
+        "name": "Full-screen exit detection",
+        "description": "Notice when a student leaves full screen."
+      },
+      "proctoring_page_refresh": {
+        "name": "Page reload detection",
+        "description": "Notice when a student reloads the test."
+      },
+      "proctoring_copy_paste": {
+        "name": "Copy and paste detection",
+        "description": "Notice copying and pasting during a test."
+      },
+      "proctoring_idle": {
+        "name": "Idle detection",
+        "description": "Notice when a student stops working for a while."
+      },
+      "proctoring_browser_change": {
+        "name": "Browser change detection",
+        "description": "Notice when a test continues in another browser."
+      },
+      "proctoring_no_face": {
+        "name": "No-face detection",
+        "description": "Camera check: notice when no face is in view."
+      },
+      "proctoring_multiple_face": {
+        "name": "Several-faces detection",
+        "description": "Camera check: notice more than one face."
+      },
+      "proctoring_looking_away": {
+        "name": "Looking-away detection",
+        "description": "Camera check: notice a student looking away."
+      },
+      "proctoring_devtools": {
+        "name": "Developer tools detection",
+        "description": "Notice when the browser's developer tools are opened."
+      },
+      "proctoring_double_display": {
+        "name": "Second screen detection",
+        "description": "Notice a second display."
+      },
+      "proctoring_phone": {
+        "name": "Phone detection",
+        "description": "Camera check: notice a phone in view."
+      },
+      "proctoring_voice": {
+        "name": "Voice detection",
+        "description": "Microphone check: notice talking."
+      },
+      "proctoring_video_monitoring": {
+        "name": "Live video monitoring",
+        "description": "Watch students' cameras during the test."
+      },
+      "proctoring_real_time_alerts": {
+        "name": "Real-time alerts",
+        "description": "See proctoring flags as they happen."
+      },
+      "proctoring_auto_disqualification": {
+        "name": "Automatic disqualification",
+        "description": "End a test automatically after repeated flags."
+      },
+      "attendance": {
+        "name": "Attendance",
+        "description": "Attendance settings, holidays, check-in and roll call."
+      },
+      "homework": {
+        "name": "Homework",
+        "description": "Assign homework to subject classes, collect submissions and score them."
+      },
+      "calendar": {
+        "name": "Calendar",
+        "description": "Weekly class routine with clash warnings; events and reminders next."
+      },
+      "chat": {
+        "name": "Chat",
+        "description": "Group chat for each subject class with comment threads, and private teacher–student chat."
+      },
+      "resources": {
+        "name": "Resource library",
+        "description": "Notes, slides, PDFs, audio and links shared with subject classes."
+      },
+      "ielts": {
+        "name": "IELTS workspace",
+        "description": "IELTS centres: student profiles, IELTS tests in the computer-delivered format, Writing and Speaking marking, bands."
+      },
+      "integrity": {
+        "name": "Plagiarism checker",
+        "description": "Compares classmates’ typed homework and IELTS Writing (Bangla and English), with matching passages side by side and teacher review"
+      },
+      "live_classes": {
+        "name": "Live classes",
+        "description": "Online classes inside the app with video, screen sharing and recordings for the course's students."
+      },
+      "live_class_links": {
+        "name": "Online class links",
+        "description": "Online classes by a Zoom or Google Meet link in the course timetable."
+      }
+    },
+    "limits": {
+      "max_exams_per_month": "Tests per month",
+      "max_total_exams": "Tests in total",
+      "max_students_per_exam": "Students per test",
+      "max_question_bank_size": "Questions in the question bank",
+      "max_storage_mb": "Storage (MB)",
+      "sms_credits_per_month": "SMS per month",
+      "max_students": "Students",
+      "max_branches": "Branches",
+      "live_hours_per_month": "Live-class hours per month",
+      "live_max_participants": "People in one live class",
+      "recording_retention_days": "Recording retention (days)",
+      "ended_course_visible_days": "Ended courses visible (days)"
+    }
   }
 }

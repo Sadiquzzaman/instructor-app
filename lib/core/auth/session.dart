@@ -20,6 +20,7 @@ class Session {
     this.memberRole,
     this.organizationDefaultLocale,
     this.teacherId,
+    this.personalTeacherEnabled = false,
   });
 
   final String accessToken;
@@ -51,6 +52,10 @@ class Session {
   final String? memberRole;
   final String? organizationDefaultLocale;
   final String? teacherId;
+
+  /// The teacher teaches in their own workspace too (the web's
+  /// `personal_teacher` cookie; "personal workspace only" menu items).
+  final bool personalTeacherEnabled;
 
   bool get isOrganization =>
       sessionMode == 'organization' && organizationId != null;
@@ -88,6 +93,7 @@ class Session {
           ? o['default_locale'] as String?
           : null,
       teacherId: p['teacher_id'] as String?,
+      personalTeacherEnabled: p['personal_teacher_enabled'] == true,
     );
   }
 
@@ -107,6 +113,7 @@ class Session {
     'member_role': memberRole,
     'organization_default_locale': organizationDefaultLocale,
     'teacher_id': teacherId,
+    'personal_teacher_enabled': personalTeacherEnabled,
   };
 
   factory Session.fromJson(Map<String, dynamic> j) => Session(
@@ -124,6 +131,7 @@ class Session {
     memberRole: j['member_role'] as String?,
     organizationDefaultLocale: j['organization_default_locale'] as String?,
     teacherId: j['teacher_id'] as String?,
+    personalTeacherEnabled: j['personal_teacher_enabled'] == true,
   );
 
   /// Never prints the tokens.
