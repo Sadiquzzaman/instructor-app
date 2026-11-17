@@ -39,6 +39,7 @@ const webNamespaces = [
   'myAttendance',
   'leave',
   'routine',
+  'homework',
 ];
 
 const locales = ['en', 'bn'];

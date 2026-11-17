@@ -25,8 +25,7 @@ enum FilePurpose {
   exam('EXAM', _images),
   discussion('DISCUSSION', [..._images, ..._documents]),
   leave('LEAVE', [..._images, 'application/pdf']),
-  // The server refuses HOMEWORK today (tes-taker#349); the types follow the
-  // web's hand-in until the server says otherwise.
+  // Accepted since 18 Nov (tes-taker#349): images and documents.
   homework('HOMEWORK', [..._images, ..._documents]);
 
   const FilePurpose(this.apiValue, this.mimes);

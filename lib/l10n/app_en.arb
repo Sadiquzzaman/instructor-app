@@ -1846,6 +1846,460 @@
       }
     }
   },
+  "homeworkTitle": "Homework",
+  "homeworkStudentIntro": "Homework set for you, soonest due first.",
+  "homeworkStaffIntro": "Homework for your subject classes: write it, publish it now or later, and see who it is for.",
+  "homeworkNew": "New homework",
+  "homeworkShow": "Show",
+  "homeworkLoadFailed": "Homework could not be loaded.",
+  "homeworkNotFound": "This homework is not available.",
+  "homeworkBack": "All homework",
+  "homeworkStudentEmpty": "No homework right now",
+  "homeworkStudentEmptyHint": "New homework from your teachers shows here, and you are told in the bell.",
+  "homeworkStaffEmpty": "No homework yet",
+  "homeworkStaffEmptyHint": "Write one with New homework.",
+  "homeworkSavedTitle": "Saved",
+  "homeworkNotSavedTitle": "Not saved",
+  "homeworkSavedDraft": "Saved as a draft. Students see it once you publish it.",
+  "homeworkSaved": "Your changes are saved.",
+  "homeworkPublished": "Published. Its students were told in the bell.",
+  "homeworkScheduled": "Scheduled. It is published at the time you chose.",
+  "homeworkWithdrawn": "Withdrawn. Students no longer see it.",
+  "homeworkColumnsTitle": "Homework",
+  "homeworkColumnsSubject": "Subject",
+  "homeworkColumnsClasses": "Classes",
+  "homeworkColumnsDue": "Due",
+  "homeworkColumnsStudents": "Students",
+  "homeworkColumnsStatus": "Status",
+  "homeworkFiltersACTIVE": "Current",
+  "homeworkFiltersDRAFT": "Drafts",
+  "homeworkFiltersSCHEDULED": "Scheduled",
+  "homeworkFiltersPUBLISHED": "Published",
+  "homeworkFiltersCANCELLED": "Withdrawn",
+  "homeworkStatusesDRAFT": "Draft",
+  "homeworkStatusesSCHEDULED": "Scheduled",
+  "homeworkStatusesPUBLISHED": "Published",
+  "homeworkStatusesCANCELLED": "Withdrawn",
+  "homeworkDueNone": "No due date",
+  "homeworkDueOverdue": "Was due {when}",
+  "@homeworkDueOverdue": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "homeworkDueSoon": "Due {when}",
+  "@homeworkDueSoon": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "homeworkDueLater": "Due {when}",
+  "@homeworkDueLater": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "homeworkDetailSubject": "Subject",
+  "homeworkDetailType": "Hand in",
+  "homeworkDetailMarks": "Marks",
+  "homeworkDetailNotScored": "Not scored",
+  "homeworkDetailClasses": "Classes",
+  "homeworkDetailStudents": "Students",
+  "homeworkDetailInstructions": "Instructions",
+  "homeworkDetailNoInstructions": "No instructions.",
+  "homeworkDetailAttachments": "Files",
+  "homeworkDetailFile": "File",
+  "homeworkDetailEdit": "Edit",
+  "homeworkDetailSchedule": "Schedule",
+  "homeworkDetailPublishNow": "Publish now",
+  "homeworkDetailScheduledFor": "Publishes {when}",
+  "@homeworkDetailScheduledFor": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "homeworkDetailScheduleTitle": "Publish later",
+  "homeworkDetailScheduleHint": "Students get it and are told at this time.",
+  "homeworkDetailScheduleDate": "Date",
+  "homeworkDetailScheduleTime": "Time",
+  "homeworkDetailWithdraw": "Withdraw",
+  "homeworkDetailWithdrawTitle": "Withdraw this homework?",
+  "homeworkDetailWithdrawDetail": "Students will no longer see it. It is kept, with everything about it, for staff.",
+  "homeworkDetailPlagiarism": "Plagiarism check",
+  "homeworkEditorNewTitle": "New homework",
+  "homeworkEditorEditTitle": "Edit homework",
+  "homeworkEditorIntro": "Saved as a draft until you publish it.",
+  "homeworkEditorPublishedHint": "Students already have it: its classes and how it is handed in stay; the rest can change.",
+  "homeworkEditorTitle": "Title",
+  "homeworkEditorClasses": "Classes",
+  "homeworkEditorClassesHint": "One subject; tick each section that gets it.",
+  "homeworkEditorNoClasses": "There are no subject classes you can set homework for.",
+  "homeworkEditorSomeStudents": "Only some students",
+  "homeworkEditorSomeStudentsHint": "Leave this off to give it to everyone in the classes.",
+  "homeworkEditorInstructions": "Instructions",
+  "homeworkEditorInstructionsPlaceholder": "What should students do?",
+  "homeworkEditorType": "How students hand it in",
+  "homeworkEditorTypesFILE": "Photos or files",
+  "homeworkEditorTypesTEXT": "Typed answer",
+  "homeworkEditorTypesPAPER": "On paper",
+  "homeworkEditorTypeHintsFILE": "They upload photos or files.",
+  "homeworkEditorTypeHintsTEXT": "They type their answer.",
+  "homeworkEditorTypeHintsPAPER": "Done on paper; you enter scores later.",
+  "homeworkEditorMarks": "Total marks",
+  "homeworkEditorMarksHint": "Leave empty if it is not scored.",
+  "homeworkEditorDueDate": "Due date",
+  "homeworkEditorDueHint": "Leave empty for no due date.",
+  "homeworkEditorDueTime": "Due time",
+  "homeworkEditorAttachments": "Files for students",
+  "homeworkEditorAttachmentsAccept": "Images, PDF, Word or text",
+  "homeworkEditorCancel": "Cancel",
+  "homeworkEditorSaveDraft": "Save draft",
+  "homeworkEditorPublish": "Publish",
+  "homeworkEditorSave": "Save",
+  "homeworkErrorsTITLEREQUIRED": "Give the homework a title.",
+  "homeworkErrorsCLASSREQUIRED": "Choose at least one class.",
+  "homeworkErrorsUPLOADFAILED": "This file could not be uploaded.",
+  "homeworkErrorsHOMEWORKTARGETSINVALID": "Choose classes you can set homework for.",
+  "homeworkErrorsHOMEWORKTARGETSMIXED": "Choose classes of one subject.",
+  "homeworkErrorsHOMEWORKSTUDENTNOTINCLASS": "A chosen student is not in these classes.",
+  "homeworkErrorsHOMEWORKSESSIONCLOSED": "This session is closed; its homework can no longer change.",
+  "homeworkErrorsHOMEWORKFILEINVALID": "Upload the files again.",
+  "homeworkErrorsHOMEWORKDUEINVALID": "The due time must be in the future.",
+  "homeworkErrorsHOMEWORKWRONGSTATUS": "This is not possible for this homework now.",
+  "homeworkErrorsHOMEWORKPAPERNOSUBMISSION": "This homework is done on paper; hand it to your teacher.",
+  "homeworkErrorsHOMEWORKLATENOTALLOWED": "The due time has passed and late work is not accepted.",
+  "homeworkErrorsHOMEWORKNOMORESUBMISSIONS": "You have handed this in as many times as allowed.",
+  "homeworkErrorsHOMEWORKALREADYSCORED": "Your teacher has scored this; it cannot be handed in again.",
+  "homeworkErrorsHOMEWORKSUBMISSIONEMPTY": "Add your work before handing it in.",
+  "homeworkErrorsHOMEWORKTOOMANYFILES": "At most {max} files in one hand-in.",
+  "@homeworkErrorsHOMEWORKTOOMANYFILES": {
+    "placeholders": {
+      "max": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "homeworkErrorsHOMEWORKSCOREINVALID": "A score can be at most {max}.",
+  "@homeworkErrorsHOMEWORKSCOREINVALID": {
+    "placeholders": {
+      "max": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "homeworkErrorsHOMEWORKSTUDENTNOTSET": "This homework is not set to one of these students.",
+  "homeworkErrorsHOMEWORKNOTLATEST": "Only the latest hand-in can be returned.",
+  "homeworkHandedIn": "Handed in (version {version})",
+  "@homeworkHandedIn": {
+    "placeholders": {
+      "version": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "homeworkMyWorkTitle": "Your work",
+  "homeworkMyWorkPaper": "This homework is done on paper. Hand it to your teacher.",
+  "homeworkMyWorkLateWarning": "The due time has passed. If you hand it in now, it is marked late.",
+  "homeworkMyWorkAnswer": "Your answer",
+  "homeworkMyWorkFiles": "Photos or files",
+  "homeworkMyWorkFilesOptional": "Photos or files (optional)",
+  "homeworkMyWorkFilesAccept": "Images, PDF, Word or text, at most {count} files",
+  "@homeworkMyWorkFilesAccept": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "homeworkMyWorkCombine": "Put my photos into one PDF",
+  "homeworkMyWorkCombineHint": "Your teacher gets one file with a page per photo.",
+  "homeworkMyWorkSubmit": "Hand in",
+  "homeworkMyWorkSubmitAgain": "Hand in again",
+  "homeworkMyWorkLeft": "{count, plural, =0{This is your last hand-in.} one{You can hand in {count} more time after this.} other{You can hand in {count} more times after this.}}",
+  "@homeworkMyWorkLeft": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "homeworkMyWorkHandedIn": "What you handed in",
+  "homeworkMyWorkVersion": "Version {version}",
+  "@homeworkMyWorkVersion": {
+    "placeholders": {
+      "version": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "homeworkMyWorkLate": "Late by {minutes} min",
+  "@homeworkMyWorkLate": {
+    "placeholders": {
+      "minutes": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "homeworkMyWorkFile": "File",
+  "homeworkMyWorkStatusesSUBMITTED": "Handed in",
+  "homeworkMyWorkStatusesRETURNED": "Returned for redo",
+  "homeworkMyWorkStatusesSCORED": "Scored",
+  "homeworkMyWorkScore": "Your score",
+  "homeworkMyWorkNotHandedIn": "Not handed in",
+  "homeworkMyWorkPenalty": "Scored {raw}; {penalty} taken off for handing in late.",
+  "@homeworkMyWorkPenalty": {
+    "placeholders": {
+      "raw": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "penalty": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "homeworkMyWorkRating": "{rating}: {value}/5",
+  "@homeworkMyWorkRating": {
+    "placeholders": {
+      "rating": {
+        "type": "String"
+      },
+      "value": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "homeworkMyWorkLeftFirst": "{count, plural, =0{You can hand in once.} one{After handing in, you can still change it {count} time.} other{After handing in, you can still change it {count} times.}}",
+  "@homeworkMyWorkLeftFirst": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "homeworkSubmissionsTitle": "Review",
+  "homeworkSubmissionsSummary": "{handedIn} of {total} handed in",
+  "@homeworkSubmissionsSummary": {
+    "placeholders": {
+      "handedIn": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "total": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "homeworkSubmissionsStudent": "Student",
+  "homeworkSubmissionsState": "State",
+  "homeworkSubmissionsWhen": "Handed in at",
+  "homeworkSubmissionsVersions": "Versions",
+  "homeworkSubmissionsActions": "Actions",
+  "homeworkSubmissionsHandedIn": "Handed in",
+  "homeworkSubmissionsMissing": "Not handed in",
+  "homeworkSubmissionsOpen": "Open",
+  "homeworkSubmissionsOpenFor": "Open {name}'s work",
+  "@homeworkSubmissionsOpenFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "homeworkSubmissionsEmpty": "No students yet",
+  "homeworkSubmissionsLoadFailed": "The review could not be loaded.",
+  "homeworkSubmissionsScore": "Score",
+  "homeworkSubmissionsScoreFor": "Score for {name}",
+  "@homeworkSubmissionsScoreFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "homeworkSubmissionsRemark": "Remark",
+  "homeworkSubmissionsRemarkFor": "Remark for {name}",
+  "@homeworkSubmissionsRemarkFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "homeworkSubmissionsFeedback": "Feedback",
+  "homeworkSubmissionsRatingFor": "{rating} for {name}",
+  "@homeworkSubmissionsRatingFor": {
+    "placeholders": {
+      "rating": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "homeworkSubmissionsRatingsNeatness": "Neatness",
+  "homeworkSubmissionsRatingsEffort": "Effort",
+  "homeworkSubmissionsRatingsOnTime": "On time",
+  "homeworkSubmissionsCountsStudents": "Students",
+  "homeworkSubmissionsCountsHandedIn": "Handed in",
+  "homeworkSubmissionsCountsLate": "Late",
+  "homeworkSubmissionsCountsMissing": "Missing",
+  "homeworkSubmissionsCountsScored": "Scored",
+  "homeworkSubmissionsRemind": "Remind missing",
+  "homeworkSubmissionsRemindTitle": "Remind students who have not handed in?",
+  "homeworkSubmissionsRemindDetail": "{count, plural, one{{count} student gets} other{{count} students get}} a notice in the app.",
+  "@homeworkSubmissionsRemindDetail": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "homeworkSubmissionsSmsGuardians": "Also send an SMS to their guardians",
+  "homeworkSubmissionsSmsGuardiansHint": "Uses your SMS credits. Guardians get at most one reminder a day per homework.",
+  "homeworkSubmissionsRemindSend": "Send reminder",
+  "homeworkSubmissionsReminded": "Reminded {students} students; {sms} SMS queued.",
+  "@homeworkSubmissionsReminded": {
+    "placeholders": {
+      "students": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "sms": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "homeworkSubmissionsPublish": "Publish scores",
+  "homeworkSubmissionsPublishTitle": "Publish the scores?",
+  "homeworkSubmissionsPublishDetail": "{scored} of {total} students are scored. Students see their score and feedback, and are told. Scores you change later are shown to them straight away.",
+  "@homeworkSubmissionsPublishDetail": {
+    "placeholders": {
+      "scored": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "total": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "homeworkSubmissionsPublishedDetail": "Students can see their scores.",
+  "homeworkSubmissionsPublishedOn": "Scores published {when}. Changes are shown to students straight away.",
+  "@homeworkSubmissionsPublishedOn": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "homeworkSubmissionsNotPublished": "Scores are not published yet; students do not see them.",
+  "homeworkSubmissionsSaveScore": "Save score",
+  "homeworkSubmissionsSaveAll": "Save all",
+  "homeworkSubmissionsUnsaved": "{count, plural, one{{count} change not saved} other{{count} changes not saved}}",
+  "@homeworkSubmissionsUnsaved": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "homeworkSubmissionsSaved": "Saved",
+  "homeworkSubmissionsSavedDetail": "{count, plural, one{{count} score saved.} other{{count} scores saved.}}",
+  "@homeworkSubmissionsSavedDetail": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "homeworkSubmissionsNotSaved": "Not saved",
+  "homeworkSubmissionsScoreInvalid": "Enter a number from 0 to {max}, with at most two decimals.",
+  "@homeworkSubmissionsScoreInvalid": {
+    "placeholders": {
+      "max": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "homeworkSubmissionsLateHint": "This was handed in late; the late penalty in homework settings is taken off.",
+  "homeworkSubmissionsPenaltyTaken": "{penalty} marks were taken off for handing in late.",
+  "@homeworkSubmissionsPenaltyTaken": {
+    "placeholders": {
+      "penalty": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "homeworkSubmissionsReturn": "Return for redo",
+  "homeworkSubmissionsReturnTitle": "Return this work for redo?",
+  "homeworkSubmissionsReturnDetail": "The student is told and can hand it in once more.",
+  "homeworkSubmissionsReturnNote": "Note for the student (optional)",
+  "homeworkSubmissionsReturned": "Returned; the student was told.",
+  "homeworkSubmissionsNotHandedIn": "Not handed in",
+  "homeworkSubmissionsPaperHint": "Type each student's score from their paper. Tick “Not handed in” for students who did not hand it in.",
+  "homeworkSubmissionsCancel": "Cancel",
+  "homeworkSettingsTitle": "Homework settings",
+  "homeworkSettingsIntro": "How late work, hand-ins and files work for every homework here.",
+  "homeworkSettingsReadOnly": "Owners and admins change these settings.",
+  "homeworkSettingsLateAllowed": "Accept late work",
+  "homeworkSettingsLateAllowedHint": "After the due time, hand-ins are accepted and marked late. Off: they are refused.",
+  "homeworkSettingsPenalty": "Late penalty",
+  "homeworkSettingsPenaltiesNONE": "None",
+  "homeworkSettingsPenaltiesPERDAY": "Percent off per day late",
+  "homeworkSettingsPenaltiesFIXED": "Fixed percent off",
+  "homeworkSettingsPercent": "Percent",
+  "homeworkSettingsPercentInvalid": "Between 1 and 100.",
+  "homeworkSettingsResubmissions": "Changes after handing in",
+  "homeworkSettingsResubmissionsHint": "After handing in, a student can send a new version this many times, until the teacher marks it. Work returned for redo gets one more.",
+  "homeworkSettingsNoResubmission": "None: one hand-in only",
+  "homeworkSettingsMaxFiles": "Files in one hand-in",
+  "homeworkSettingsSave": "Save settings",
+  "homeworkSettingsUndo": "Undo changes",
+  "homeworkSettingsSavedTitle": "Saved",
+  "homeworkSettingsSaved": "Homework settings saved.",
+  "homeworkSettingsLoadFailed": "Homework settings could not be loaded.",
+  "homeworkSettingsMaxFilesHint": "The most files (photos, PDF, Word) a student can attach each time they hand in.",
+  "homeworkSettingsSummary": "{changes, plural, =0{Students hand in once.} one{Students hand in, then can change it {changes} more time.} other{Students hand in, then can change it {changes} more times.}} {files, plural, one{Each hand-in can have {files} file.} other{Each hand-in can have up to {files} files.}}",
+  "@homeworkSettingsSummary": {
+    "placeholders": {
+      "changes": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "files": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "appNoConnection": "No internet connection. Check it and try again.",
   "appUpdateRequiredTitle": "Please update Instructor",
   "appUpdateRequiredBody": "This version of the app is no longer supported. Install the new version to continue.",
