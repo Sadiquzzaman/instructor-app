@@ -28,14 +28,21 @@ abstract final class AppRoutes {
     myAttendance,
     leave,
     routine,
+    homework,
     notifications,
     account,
     features,
   };
 
+  /// Built pages with an id after them (`/homework/<id>`).
+  static const builtWithId = {homework};
+
   static bool isAppPage(String link) {
     final uri = Uri.tryParse(link);
-    return uri != null && !uri.hasScheme && built.contains(uri.path);
+    if (uri == null || uri.hasScheme) return false;
+    if (built.contains(uri.path)) return true;
+    final segments = uri.pathSegments;
+    return segments.length == 2 && builtWithId.contains('/${segments.first}');
   }
 
   /// Screens for people who are not signed in.
