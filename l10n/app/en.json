@@ -14,6 +14,16 @@
     "notYetIelts": "IELTS pages are not in the app yet. Please use the website for IELTS for now.",
     "notForBranchManagers": "This is not available to branch managers yet.",
     "notInWorkspace": "This is not part of this workspace.",
-    "changePasswordFailed": "Could not change the password. Check your current password and try again."
+    "changePasswordFailed": "Could not change the password. Check your current password and try again.",
+    "phoneTaken": "This phone number already has an account. Log in, or reset the password if you forgot it.",
+    "emailTaken": "This email already has an account. Log in, or use another email.",
+    "codeNotSent": "We could not send the code. You can get up to 3 codes an hour, so please try again later.",
+    "accountNotFound": "No account was found with this phone number or email.",
+    "alreadyVerified": "This phone number is already verified. You can log in.",
+    "codeWrong": "That code is not right. Check it and try again.",
+    "codeExpired": "This code has expired. Ask for a new one.",
+    "codeLocked": "Too many wrong codes. Please wait up to 15 minutes, then try again.",
+    "loginNotVerified": "This phone number is not verified yet. Sign up again with the same number to get a new code.",
+    "loginDisabled": "Your account has been disabled. Please contact support."
   }
 }

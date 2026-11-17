@@ -955,5 +955,15 @@
   "appNotYetIelts": "IELTS pages are not in the app yet. Please use the website for IELTS for now.",
   "appNotForBranchManagers": "This is not available to branch managers yet.",
   "appNotInWorkspace": "This is not part of this workspace.",
-  "appChangePasswordFailed": "Could not change the password. Check your current password and try again."
+  "appChangePasswordFailed": "Could not change the password. Check your current password and try again.",
+  "appPhoneTaken": "This phone number already has an account. Log in, or reset the password if you forgot it.",
+  "appEmailTaken": "This email already has an account. Log in, or use another email.",
+  "appCodeNotSent": "We could not send the code. You can get up to 3 codes an hour, so please try again later.",
+  "appAccountNotFound": "No account was found with this phone number or email.",
+  "appAlreadyVerified": "This phone number is already verified. You can log in.",
+  "appCodeWrong": "That code is not right. Check it and try again.",
+  "appCodeExpired": "This code has expired. Ask for a new one.",
+  "appCodeLocked": "Too many wrong codes. Please wait up to 15 minutes, then try again.",
+  "appLoginNotVerified": "This phone number is not verified yet. Sign up again with the same number to get a new code.",
+  "appLoginDisabled": "Your account has been disabled. Please contact support."
 }

@@ -10,6 +10,7 @@ import 'package:instructor_app/core/theme/app_colors.dart';
 import 'package:instructor_app/core/theme/app_metrics.dart';
 import 'package:instructor_app/core/widgets/app_button.dart';
 import 'package:instructor_app/core/widgets/app_text_field.dart';
+import 'package:instructor_app/features/auth/data/auth_error_text.dart';
 import 'package:instructor_app/features/auth/data/signup_repository.dart';
 import 'package:instructor_app/features/auth/data/signup_validation.dart';
 import 'package:instructor_app/features/auth/widgets/auth_page.dart';
@@ -99,13 +100,26 @@ class _SignUpFormScreenState extends ConsumerState<SignUpFormScreen> {
     } on ApiException catch (e) {
       if (!mounted) return;
       final l10n = context.l10n;
-      setState(
-        () => _formError = e.isTransient && e.kind != ApiErrorKind.server
-            ? l10n.appNoConnection
-            : _isOrganization
-            ? l10n.authSignupOrganizationFailed
-            : l10n.appSignupFailed,
-      );
+      final coded = authErrorText(e, l10n);
+      // A phone or email that already has an account: under that field.
+      final field = switch (e.code) {
+        'PHONE_ALREADY_REGISTERED' => 'phone',
+        'EMAIL_ALREADY_REGISTERED' => 'email',
+        _ => null,
+      };
+      setState(() {
+        if (field != null && coded != null) {
+          _errors = {..._errors, field: coded};
+          return;
+        }
+        _formError =
+            coded ??
+            (e.isTransient && e.kind != ApiErrorKind.server
+                ? l10n.appNoConnection
+                : _isOrganization
+                ? l10n.authSignupOrganizationFailed
+                : l10n.appSignupFailed);
+      });
     } finally {
       if (mounted) setState(() => _loading = false);
     }

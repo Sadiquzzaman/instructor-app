@@ -12,6 +12,7 @@ import 'package:instructor_app/core/theme/app_colors.dart';
 import 'package:instructor_app/core/theme/app_metrics.dart';
 import 'package:instructor_app/core/widgets/app_button.dart';
 import 'package:instructor_app/core/widgets/app_text_field.dart';
+import 'package:instructor_app/features/auth/data/auth_error_text.dart';
 import 'package:instructor_app/features/auth/data/auth_repository.dart';
 import 'package:instructor_app/features/auth/data/login_validation.dart';
 import 'package:instructor_app/features/auth/data/signup_repository.dart';
@@ -76,8 +77,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   }
 
   static String _messageFor(ApiException e, AppLocalizations l10n) =>
+      authErrorText(e, l10n) ??
       switch (e.kind) {
-        // No code on sign-in errors: 401 is a wrong identifier or password.
+        // A 401 without a code: a wrong identifier or password.
         ApiErrorKind.unauthorized => l10n.appLoginInvalid,
         ApiErrorKind.network || ApiErrorKind.timeout => l10n.appNoConnection,
         _ => l10n.authLoginFailedDescription,

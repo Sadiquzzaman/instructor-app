@@ -10,6 +10,7 @@ import 'package:instructor_app/core/theme/app_colors.dart';
 import 'package:instructor_app/core/theme/app_metrics.dart';
 import 'package:instructor_app/core/widgets/app_button.dart';
 import 'package:instructor_app/core/widgets/app_text_field.dart';
+import 'package:instructor_app/features/auth/data/auth_error_text.dart';
 import 'package:instructor_app/features/auth/data/login_validation.dart';
 import 'package:instructor_app/features/auth/data/signup_repository.dart';
 import 'package:instructor_app/features/auth/data/signup_validation.dart';
@@ -51,9 +52,10 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
   SignUpRepository get _repo => ref.read(signUpRepositoryProvider);
 
   String _failure(ApiException e) =>
-      e.kind == ApiErrorKind.network || e.kind == ApiErrorKind.timeout
-      ? context.l10n.appNoConnection
-      : context.l10n.appResetFailed;
+      authErrorText(e, context.l10n) ??
+      (e.kind == ApiErrorKind.network || e.kind == ApiErrorKind.timeout
+          ? context.l10n.appNoConnection
+          : context.l10n.appResetFailed);
 
   Future<void> _run(Future<void> Function() action) async {
     if (_loading) return;
