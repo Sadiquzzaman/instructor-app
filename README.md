@@ -29,6 +29,16 @@ flutter test
 
 CI runs the same on every pull request, plus an iOS build without signing.
 
+## Design tokens
+
+Colours, type sizes, radii, shadows and motion come from the web (tes-taker `frontend/design/tokens.json`). When the web changes them:
+
+```sh
+dart run tool/import_tokens.dart ../tes-taker/frontend/design/tokens.json
+```
+
+This copies the file to `tool/tokens.json` and regenerates `lib/core/theme/tokens.g.dart`; `test/core/theme/tokens_test.dart` fails until both agree. Screens never write a colour or font size: they use `AppColors.of(context)`, the theme's text styles, `AppSpacing`, `AppRadius`, `AppShadows` and `AppMotion`.
+
 ## Test builds
 
 Every merge into `develop` publishes an Android APK as a pre-release under [Releases](https://github.com/Sadiquzzaman/instructor-app/releases). It talks to beta and is signed with a test key, so each new build installs over the last one (allow "install unknown apps" the first time). The key is only in the repository's Actions secrets; locally, `flutter build apk --release` signs with the debug key unless `ANDROID_KEYSTORE_PATH`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS` and `ANDROID_KEY_PASSWORD` are set.
