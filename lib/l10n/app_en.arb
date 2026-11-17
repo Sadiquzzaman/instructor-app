@@ -3095,6 +3095,679 @@
   "examSubmitWaitingDetail": "Your answers are saved on this device. We'll submit them as soon as the connection is back.",
   "examSubmitOfflineTitle": "Couldn't reach the server",
   "examSubmitOfflineDetail": "Try submitting again. Answers already saved to the server are submitted automatically when time is up.",
+  "marksTitle": "Paper exams",
+  "marksIntro": "Exams taken on paper: enter each student's marks, then publish them. They count toward performance.",
+  "marksMyTitle": "Paper exam results",
+  "marksMyIntro": "Your marks in exams taken on paper, once your teacher publishes them.",
+  "marksMyEmpty": "No results yet",
+  "marksMyEmptyHint": "Your marks show here once your teacher publishes them.",
+  "marksLoadFailed": "Paper exams could not be loaded.",
+  "marksAdd": "Add paper exam",
+  "marksEmpty": "No paper exams yet",
+  "marksEmptyHint": "Add one for a subject, then enter the marks.",
+  "marksCreated": "Paper exam added",
+  "marksCreatedHint": "Open {name} to enter the marks.",
+  "@marksCreatedHint": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "marksAbsent": "Absent",
+  "marksColumnsName": "Exam",
+  "marksColumnsSubject": "Subject",
+  "marksColumnsSection": "[[Section]]",
+  "marksColumnsDate": "Date",
+  "marksColumnsTotal": "Total",
+  "marksColumnsEntered": "Marks entered",
+  "marksColumnsStatus": "Status",
+  "marksEntered": "{entered} of {students}",
+  "@marksEntered": {
+    "placeholders": {
+      "entered": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "students": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "marksPublished": "Published",
+  "marksNotPublished": "Not published",
+  "marksAddTitle": "Add a paper exam",
+  "marksEditTitle": "Change this paper exam",
+  "marksFormIntro": "For one subject in one [[section]]. Split it into parts (e.g. MCQ and Written) to enter marks per part.",
+  "marksCancel": "Cancel",
+  "marksSave": "Save",
+  "marksSubjectClass": "Subject and [[section]]",
+  "marksChooseSubjectClass": "Choose a subject",
+  "marksNoSubjectClasses": "You teach no subject in an open session yet.",
+  "marksName": "Exam name",
+  "marksNamePlaceholder": "e.g. Half-yearly exam",
+  "marksDate": "Date",
+  "marksTotal": "Total marks",
+  "marksTerm": "Term (optional)",
+  "marksNoTerm": "No term",
+  "marksWithParts": "Split into parts",
+  "marksWithPartsHint": "Parts must add up to the total marks.",
+  "marksParts": "Parts",
+  "marksPartName": "Part {number}",
+  "@marksPartName": {
+    "placeholders": {
+      "number": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "marksPartMarks": "Marks of part {number}",
+  "@marksPartMarks": {
+    "placeholders": {
+      "number": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "marksRemovePart": "Remove part {number}",
+  "@marksRemovePart": {
+    "placeholders": {
+      "number": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "marksAddPart": "Add a part",
+  "marksPartsSum": "Parts add up to {sum} of {total}.",
+  "@marksPartsSum": {
+    "placeholders": {
+      "sum": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "total": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "marksPartMcq": "MCQ",
+  "marksPartWritten": "Written",
+  "marksMarksColumn": "Marks",
+  "marksSaved": "Marks saved",
+  "marksErrorFor": "{name}: {error}",
+  "@marksErrorFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "marksImported": "{count, plural, one{Marks of {count} student imported} other{Marks of {count} students imported}}",
+  "@marksImported": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "marksPublishedToast": "Marks published",
+  "marksRemoved": "Paper exam removed",
+  "marksOutOf": "out of {total}",
+  "@marksOutOf": {
+    "placeholders": {
+      "total": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "marksDownloadSheet": "Download marks sheet",
+  "marksImportSheet": "Import marks sheet",
+  "marksEdit": "Change exam",
+  "marksPublish": "Publish marks",
+  "marksPartsOf": "Parts: {parts}",
+  "@marksPartsOf": {
+    "placeholders": {
+      "parts": {
+        "type": "String"
+      }
+    }
+  },
+  "marksReadOnly": "You can see these marks but not change them.",
+  "marksGridCaption": "Marks for {name}",
+  "@marksGridCaption": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "marksRoll": "Roll",
+  "marksStudent": "Student",
+  "marksResult": "Result",
+  "marksMarksFor": "{part} for {name}",
+  "@marksMarksFor": {
+    "placeholders": {
+      "part": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "marksAbsentFor": "{name} was absent",
+  "@marksAbsentFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "marksRemove": "Remove exam",
+  "marksUnsaved": "{count, plural, =0{All saved} one{{count} change not saved} other{{count} changes not saved}}",
+  "@marksUnsaved": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "marksSaveMarks": "Save marks",
+  "marksExamSaved": "Paper exam saved",
+  "marksPublishTitle": "Publish these marks?",
+  "marksPublishDetail": "{count, plural, =0{Students will see their marks.} one{Students will see their marks. {count} student has no marks yet.} other{Students will see their marks. {count} students have no marks yet.}}",
+  "@marksPublishDetail": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "marksRemoveTitle": "Remove this paper exam?",
+  "marksRemoveDetail": "It leaves every list and its marks stop counting. It is kept in the records.",
+  "marksSheetSTUDENTUNKNOWN": "Line {line}: no student with that roll number or name.",
+  "@marksSheetSTUDENTUNKNOWN": {
+    "placeholders": {
+      "line": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "marksSheetNUMBERINVALID": "Line {line}: marks must be numbers.",
+  "@marksSheetNUMBERINVALID": {
+    "placeholders": {
+      "line": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "marksSheetCOLUMNSMISSING": "The sheet needs the roll_no or name column and a column for the marks (download the sheet to start).",
+  "marksSheetEMPTY": "The sheet has no marks.",
+  "marksErrorsOFFLINEEXAMPARTSINVALID": "Parts need different names and must add up to the total marks.",
+  "marksErrorsOFFLINEEXAMTERMINVALID": "Choose a term of the same session.",
+  "marksErrorsOFFLINEEXAMTOTALBELOWMARKS": "Some marks already entered are above the new total.",
+  "marksErrorsOFFLINEEXAMSESSIONCLOSED": "The session is closed, so its exams can't be changed.",
+  "marksErrorsOFFLINEEXAMNOTALLOWED": "Only the subject's teachers, the owner, admins and staff can do this.",
+  "marksErrorsOFFLINEEXAMMARKSINVALID": "Marks must be between 0 and the total (or the part's marks), and every part needs marks.",
+  "marksErrorsOFFLINEEXAMSTUDENTNOTINCLASS": "This student doesn't take the subject.",
+  "marksErrorsOFFLINEEXAMNOTFOUND": "This paper exam is no longer available.",
+  "marksErrorsCLASSREQUIRED": "Choose the subject and [[section]].",
+  "marksErrorsNAMEREQUIRED": "Give the exam a name.",
+  "marksErrorsTOTALREQUIRED": "Enter the total marks.",
+  "performanceTitle": "Performance",
+  "performanceIntro": "How each [[section]] is doing: scores, grades, the trend across exams and who needs help.",
+  "performanceLoadFailed": "Couldn't load the scores.",
+  "performanceSession": "Session",
+  "performanceSection": "[[Section]]",
+  "performanceTerm": "Term",
+  "performanceWholeSession": "Whole session",
+  "performanceNoSections": "No [[sections]] to show",
+  "performanceNoSectionsHint": "You see the [[sections]] you teach or look after.",
+  "performanceSubject": "Subject",
+  "performanceAllSubjects": "All subjects",
+  "performanceWeightsLine": "Score = exams {exams}% · homework {homework}% · attendance {attendance}% · behaviour {behaviour}%",
+  "@performanceWeightsLine": {
+    "placeholders": {
+      "exams": {
+        "type": "String"
+      },
+      "homework": {
+        "type": "String"
+      },
+      "attendance": {
+        "type": "String"
+      },
+      "behaviour": {
+        "type": "String"
+      }
+    }
+  },
+  "performanceAverage": "Average",
+  "performanceHighest": "Highest",
+  "performanceLowest": "Lowest",
+  "performanceHomeworkRate": "Homework handed in",
+  "performanceAttendanceRate": "Attendance",
+  "performanceGradesTitle": "Grades",
+  "performanceNoScores": "No scores yet",
+  "performanceGradesChart": "Students per grade: {grades}",
+  "@performanceGradesChart": {
+    "placeholders": {
+      "grades": {
+        "type": "String"
+      }
+    }
+  },
+  "performanceStudentsCount": "{count, plural, one{{count} student} other{{count} students}}",
+  "@performanceStudentsCount": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "performanceTrendTitle": "Class average per exam",
+  "performanceNoExams": "No exams yet",
+  "performanceTrendChart": "Class average per exam: {exams}",
+  "@performanceTrendChart": {
+    "placeholders": {
+      "exams": {
+        "type": "String"
+      }
+    }
+  },
+  "performanceAtRiskTitle": "At risk",
+  "performanceAtRiskLimits": "Score below {score}%, attendance below {attendance}%, or {missing} or more missing homework.",
+  "@performanceAtRiskLimits": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      },
+      "attendance": {
+        "type": "String"
+      },
+      "missing": {
+        "type": "String"
+      }
+    }
+  },
+  "performanceNoneAtRisk": "Nobody is at risk.",
+  "performanceRiskSCORE": "Score {score}",
+  "@performanceRiskSCORE": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "performanceRiskATTENDANCE": "Attendance {attendance}",
+  "@performanceRiskATTENDANCE": {
+    "placeholders": {
+      "attendance": {
+        "type": "String"
+      }
+    }
+  },
+  "performanceRiskMISSINGHOMEWORK": "{missing} missing homework",
+  "@performanceRiskMISSINGHOMEWORK": {
+    "placeholders": {
+      "missing": {
+        "type": "String"
+      }
+    }
+  },
+  "performanceTableCaption": "Scores in {section}",
+  "@performanceTableCaption": {
+    "placeholders": {
+      "section": {
+        "type": "String"
+      }
+    }
+  },
+  "performanceNoStudents": "No students in this [[section]].",
+  "performanceColumnsPosition": "Position",
+  "performanceColumnsStudent": "Student",
+  "performanceColumnsScore": "Score",
+  "performanceColumnsGrade": "Grade",
+  "performanceColumnsSubject": "Subject",
+  "performanceColumnsExam": "Exam",
+  "performanceColumnsDate": "Date",
+  "performanceColumnsKind": "Kind",
+  "performanceColumnsMarks": "Marks",
+  "performanceColumnsHomework": "Homework",
+  "performanceColumnsDue": "Due",
+  "performanceColumnsStudents": "Students",
+  "performanceColumnsSections": "[[Sections]]",
+  "performanceColumnsOpen": "Open",
+  "performanceColumnsName": "Name",
+  "performanceColumnsTitle": "Title",
+  "performancePartsExams": "Exams",
+  "performancePartsHomework": "Homework",
+  "performancePartsAttendance": "Attendance",
+  "performancePartsBehaviour": "Behaviour",
+  "performanceKindsONLINE": "Online",
+  "performanceKindsPAPER": "On paper",
+  "performanceAbsent": "Absent",
+  "performanceMissing": "Missing",
+  "performanceLate": "Late",
+  "performanceMyTitle": "My performance",
+  "performanceRoll": "Roll {roll}",
+  "@performanceRoll": {
+    "placeholders": {
+      "roll": {
+        "type": "String"
+      }
+    }
+  },
+  "performanceSessionHistory": "Session",
+  "performancePublishedOnly": "You see the results your teachers have published.",
+  "performanceOverall": "Overall",
+  "performanceGpa": "GPA",
+  "performancePosition": "Position",
+  "performancePositionOf": "{position} of {size}",
+  "@performancePositionOf": {
+    "placeholders": {
+      "position": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "size": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "performanceOnTime": "Homework on time",
+  "performanceSubjectsCaption": "Scores by subject",
+  "performanceNoSubjects": "No subjects yet.",
+  "performanceStrengthsTitle": "Strengths and weaknesses",
+  "performanceStrengthsHint": "Subjects with at least 3 marked exams or homework.",
+  "performanceNotEnough": "Not enough marked work yet.",
+  "performanceStrongest": "Strongest",
+  "performanceWeakest": "Weakest",
+  "performanceTermTrendTitle": "Score per term",
+  "performanceTrendOne": "{term}: {score}",
+  "@performanceTrendOne": {
+    "placeholders": {
+      "term": {
+        "type": "String"
+      },
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "performanceTrendNone": "No term scores yet.",
+  "performanceTermTrendChart": "Score per term: {terms}",
+  "@performanceTermTrendChart": {
+    "placeholders": {
+      "terms": {
+        "type": "String"
+      }
+    }
+  },
+  "performanceExamsTitle": "Exams",
+  "performanceHomeworkTitle": "Homework",
+  "performanceNoHomework": "No marked homework yet.",
+  "performanceWholeSchool": "Whole school",
+  "performanceOneSection": "One [[section]]",
+  "performanceBySection": "By [[section]]",
+  "performanceBySubject": "By subject",
+  "performanceOpen": "Open",
+  "performanceOpenSection": "Open {section}",
+  "@performanceOpenSection": {
+    "placeholders": {
+      "section": {
+        "type": "String"
+      }
+    }
+  },
+  "reportCardsTitle": "Report cards",
+  "reportCardsIntro": "Write each student's remarks, make the cards and print them. A card keeps the scores it was made with; make it again after a change.",
+  "reportCardsLoadFailed": "Couldn't load the report cards.",
+  "reportCardsNoSections": "No [[sections]] to show",
+  "reportCardsNoSectionsHint": "You see the [[sections]] you teach or look after.",
+  "reportCardsSection": "[[Section]]",
+  "reportCardsTerm": "Term",
+  "reportCardsWholeSession": "Whole session",
+  "reportCardsLanguage": "Card language",
+  "reportCardsLanguagesBn": "Bangla",
+  "reportCardsLanguagesEn": "English",
+  "reportCardsNoStudents": "No students in this [[section]].",
+  "reportCardsMadeCount": "{made} of {total} cards made",
+  "@reportCardsMadeCount": {
+    "placeholders": {
+      "made": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "total": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "reportCardsPrintAll": "Print all (one PDF)",
+  "reportCardsMake": "Make cards",
+  "reportCardsMakeHint": "Making cards again changes only the cards whose scores, remarks or language changed; each change is a new version.",
+  "reportCardsMadeToast": "{count, plural, =0{Nothing changed; the cards are up to date} one{{count} card made} other{{count} cards made}}",
+  "@reportCardsMadeToast": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "reportCardsVersion": "Version {version}, {date}.",
+  "@reportCardsVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "reportCardsOpenFor": "Open the card of {name}",
+  "@reportCardsOpenFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "reportCardsNotMade": "No card yet",
+  "reportCardsTeacherRemarkFor": "Teacher's remark for {name}",
+  "@reportCardsTeacherRemarkFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "reportCardsPrincipalRemarkFor": "Principal's remark for {name}",
+  "@reportCardsPrincipalRemarkFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "reportCardsPrincipalSaid": "Principal: {remark}",
+  "@reportCardsPrincipalSaid": {
+    "placeholders": {
+      "remark": {
+        "type": "String"
+      }
+    }
+  },
+  "reportCardsPrincipalLater": "The principal's remark is written by an owner or admin.",
+  "reportCardsMyTitle": "My report cards",
+  "reportCardsMyIntro": "Your report cards, as your school made them.",
+  "reportCardsMyEmpty": "No report cards yet",
+  "reportCardsMyEmptyHint": "Your report card appears here when your school makes it.",
+  "reportCardsMadeOn": "Made on {date}",
+  "@reportCardsMadeOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "reportCardsOpen": "Open",
+  "reportCardsShare": "Send to guardians",
+  "reportCardsShareTitle": "Send these report cards to guardians?",
+  "reportCardsShareDetail": "Each guardian with a phone number gets an SMS with a short summary and a link to the card ({count} cards). The link needs no login and works for 30 days; sending again replaces it. SMS uses your SMS credits.",
+  "@reportCardsShareDetail": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "reportCardsSharedToast": "{count, plural, =0{No cards to send} one{{count} card sent} other{{count} cards sent}}",
+  "@reportCardsSharedToast": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "reportCardsSharedSms": "{count, plural, =0{No guardian has a phone number.} one{{count} SMS on its way to a guardian.} other{{count} SMS on their way to guardians.}}",
+  "@reportCardsSharedSms": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "reportCardsSharedUntil": "Link works until {date}.",
+  "@reportCardsSharedUntil": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "reportCardTitle": "Report card",
+  "reportCardCardOf": "Report card of {name}",
+  "@reportCardCardOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "reportCardWholeSession": "Whole session",
+  "reportCardStudent": "Student",
+  "reportCardRoll": "Roll",
+  "reportCardClass": "[[Class]]",
+  "reportCardPosition": "Position",
+  "reportCardPositionOf": "{position} of {size}",
+  "@reportCardPositionOf": {
+    "placeholders": {
+      "position": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "size": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "reportCardSubjects": "Subjects",
+  "reportCardSubject": "Subject",
+  "reportCardExams": "Exams",
+  "reportCardHomework": "Homework",
+  "reportCardScore": "Score",
+  "reportCardGrade": "Grade",
+  "reportCardGpa": "GPA",
+  "reportCardOverall": "Overall",
+  "reportCardAttendance": "Attendance",
+  "reportCardAttendanceDays": "Present {present} · absent {absent} · leave {leave}",
+  "@reportCardAttendanceDays": {
+    "placeholders": {
+      "present": {
+        "type": "String"
+      },
+      "absent": {
+        "type": "String"
+      },
+      "leave": {
+        "type": "String"
+      }
+    }
+  },
+  "reportCardBehaviour": "Behaviour",
+  "reportCardOnTime": "Homework on time",
+  "reportCardWeights": "Score made of",
+  "reportCardWeightsValue": "exams {exams}%, homework {homework}%, attendance {attendance}%, behaviour {behaviour}%",
+  "@reportCardWeightsValue": {
+    "placeholders": {
+      "exams": {
+        "type": "String"
+      },
+      "homework": {
+        "type": "String"
+      },
+      "attendance": {
+        "type": "String"
+      },
+      "behaviour": {
+        "type": "String"
+      }
+    }
+  },
+  "reportCardStrengths": "Strongest subjects",
+  "reportCardWeaknesses": "Needs more work in",
+  "reportCardTeacherRemark": "Class teacher's remark",
+  "reportCardPrincipalRemark": "Principal's remark",
+  "reportCardTeacherSignature": "Class teacher's signature",
+  "reportCardPrincipalSignature": "Principal's signature",
+  "reportCardFooter": "Made on {date} · version {version}",
+  "@reportCardFooter": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "reportCardCount": "{count, plural, one{{count} card} other{{count} cards}}",
+  "@reportCardCount": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "reportCardPrint": "Print / Save as PDF",
+  "reportCardLoadFailed": "Couldn't load the report cards.",
+  "reportCardNone": "No report cards made yet",
+  "reportCardNoneHint": "Make the cards on the Report cards page first.",
   "appNoConnection": "No internet connection. Check it and try again.",
   "appUpdateRequiredTitle": "Please update Instructor",
   "appUpdateRequiredBody": "This version of the app is no longer supported. Install the new version to continue.",
