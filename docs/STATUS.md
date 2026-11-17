@@ -2,13 +2,13 @@
 
 Updated in every pull request, so the owner and the backend session can see where the app is.
 
-**Last updated:** 17 Nov 2026
+**Last updated:** 18 Nov 2026
 
 ## Current stage
 
 **Stage 0:** all 14 PRs done ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11), plus the #345 error codes; its end-of-stage device check is still to do.
 
-**Stage 1 (students):** plan approved 17 Nov ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)). Done: PRs 1–15 (files, Today, My attendance and check-in, read-only cache, leave, timetable, homework, classes, class discussions, calendar, tests and results, taking a test, results, resources, chat). Next: PR 16, integration tests and the end-of-stage check.
+**Stage 1 (students):** plan approved 17 Nov ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)). Done: all 16 PRs (files, Today, My attendance and check-in, read-only cache, leave, timetable, homework, classes, class discussions, calendar, tests and results, taking a test, results, resources, chat, student-flow tests). Still to do: the end-of-stage check on a 360 px phone, a tablet and iOS, done by hand (see "In progress").
 
 ## Done
 
@@ -83,10 +83,11 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 - Stage 1 PR 14: chat for students (`/chat`): class chats (one per subject class, unread counts, last message, muted) and private chats with their teachers ("Message a teacher" from the contacts); a chat page with posts (author, teacher tag, pinned, reply-to quote, files), older posts on request, send (files in class chats, purpose DISCUSSION), reply, comments on posts, delete your own, report another's (asked why), mute; read on opening; "only teachers post", read-only and closed chats say so. Live through Socket.IO `/chat` (a new or deleted message shows at once; the lists refresh). Checked against a test student's real chats on beta (read only).
 
+- Stage 1 PR 16: the student flows end to end through the app's own screens, against the fake API (`test/flows/student_flows.dart`): sign in → Today → "Check in" → My attendance → check in; homework list → a homework → typed answer and a photo (presign, upload, complete) → hand in → version 1 shown; Tests → Start → rules → answer → autosave → submit. They run in CI with `flutter test` and on a device with `flutter test integration_test -d <device>`.
+
 ## In progress
 
-- Stage 1 ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)), PR 14 of 15: chat. Stage 0 still needs its end-of-stage check (360 px phone, tablet, iOS).
-
+- The end-of-stage checks for Stage 0 and Stage 1, by hand: a 360 px phone, a tablet and iOS (Jubaer's Mac), including taking a test through the app's own screens on a phone. Not done yet: the emulator holds the owner's own signed-in session, which I did not sign out, and the integration tests were not run on a device for the same reason.
 ## Owner's decisions since the plan
 
 - 17 Nov: the Stage 1 plan approved as written: `image_picker`, `file_picker`, `geolocator` and `socket_io_client`; location, camera and photo permissions; Light proctoring in the app (leaving the app reported like a tab switch, screenshots blocked on Android, no copy and paste in answers); reminders read-only; one test exam on beta for demo.student1; class discussions in Stage 1.
