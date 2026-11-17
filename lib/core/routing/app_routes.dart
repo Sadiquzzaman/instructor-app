@@ -22,7 +22,14 @@ abstract final class AppRoutes {
   /// Pages the app has really built (not "use the website for now"). A
   /// notification's link opens in the app only for these; each stage adds
   /// its pages here.
-  static const built = {home, today, notifications, account, features};
+  static const built = {
+    home,
+    today,
+    myAttendance,
+    notifications,
+    account,
+    features,
+  };
 
   static bool isAppPage(String link) {
     final uri = Uri.tryParse(link);

@@ -1266,6 +1266,171 @@
       }
     }
   },
+  "myAttendanceTitle": "My attendance",
+  "myAttendanceIntro": "Check in to your classes here, and see your attendance for the month. The time always comes from the server.",
+  "myAttendanceTodayTitle": "Today, {date}",
+  "@myAttendanceTodayTitle": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "myAttendanceTodayTitleShort": "Today",
+  "myAttendanceLoadFailed": "Couldn't load your attendance.",
+  "myAttendanceNoClassesToday": "No classes today",
+  "myAttendanceNoClassesTodayHint": "Your classes appear here on the days they meet.",
+  "myAttendanceYouTeach": "You teach",
+  "myAttendanceCheckIn": "Check in",
+  "myAttendanceCheckInTo": "Check in to {section}",
+  "@myAttendanceCheckInTo": {
+    "placeholders": {
+      "section": {
+        "type": "String"
+      }
+    }
+  },
+  "myAttendanceLocating": "Finding your location…",
+  "myAttendanceCheckingIn": "Checking in…",
+  "myAttendanceCheckedIn": "You're checked in. On time!",
+  "myAttendanceCheckedInLate": "You're checked in, {minutes} min late.",
+  "@myAttendanceCheckedInLate": {
+    "placeholders": {
+      "minutes": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "myAttendanceOpensAt": "Check-in opens at {time}",
+  "@myAttendanceOpensAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "myAttendanceOpenUntil": "Check-in open until {time}",
+  "@myAttendanceOpenUntil": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "myAttendanceLateBy": "Late by {minutes} min",
+  "@myAttendanceLateBy": {
+    "placeholders": {
+      "minutes": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "myAttendanceMonthTitle": "This month",
+  "myAttendancePreviousMonth": "Previous month",
+  "myAttendanceNextMonth": "Next month",
+  "myAttendanceAttendancePct": "Attendance rate",
+  "myAttendanceCalendarLabel": "Attendance in {month}",
+  "@myAttendanceCalendarLabel": {
+    "placeholders": {
+      "month": {
+        "type": "String"
+      }
+    }
+  },
+  "myAttendanceLegend": "What the marks mean",
+  "myAttendanceMarkLabel": "{section}, {time}: {status}",
+  "@myAttendanceMarkLabel": {
+    "placeholders": {
+      "section": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      },
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "myAttendanceClassTypeINPERSON": "In person",
+  "myAttendanceClassTypeONLINE": "Online",
+  "myAttendanceClosedWEEKLYOFF": "Weekly off day: no classes.",
+  "myAttendanceClosedHOLIDAY": "Holiday: no classes. {name}",
+  "@myAttendanceClosedHOLIDAY": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "myAttendanceBlockedPAPERREGISTER": "Attendance for this class is kept on paper.",
+  "myAttendanceBlockedNOPIN": "The check-in location of this class isn't set yet. Ask your admin.",
+  "myAttendanceBlockedCANCELLED": "This class is cancelled today.",
+  "myAttendanceFlagEDGEACCURACY": "Saved, but your location was unclear near the edge; your teacher may check it.",
+  "myAttendanceFlagIMPOSSIBLEJUMP": "Saved, but it was far from your last check-in; your teacher may check it.",
+  "myAttendanceStatusUPCOMING": "Upcoming",
+  "myAttendanceStatusOPEN": "Check-in open",
+  "myAttendanceStatusPRESENT": "Present",
+  "myAttendanceStatusLATE": "Late",
+  "myAttendanceStatusABSENT": "Absent",
+  "myAttendanceStatusLEAVE": "On leave",
+  "myAttendanceStatusCLOSEDDAY": "Holiday or off day",
+  "myAttendanceStatusNOTRECORDED": "Not recorded yet",
+  "myAttendanceStatusCANCELLED": "Class cancelled",
+  "myAttendanceLetterUPCOMING": "U",
+  "myAttendanceLetterOPEN": "O",
+  "myAttendanceLetterPRESENT": "P",
+  "myAttendanceLetterLATE": "L",
+  "myAttendanceLetterABSENT": "A",
+  "myAttendanceLetterLEAVE": "LV",
+  "myAttendanceLetterCLOSEDDAY": "H",
+  "myAttendanceLetterNOTRECORDED": "N",
+  "myAttendanceLetterCANCELLED": "C",
+  "myAttendanceLocationDenied": "Allow location for this site in your browser, then try again.",
+  "myAttendanceLocationUnavailable": "Couldn't find your location. Move near a window and try again.",
+  "myAttendanceErrorsATTENDANCECHECKINNOTOPEN": "Check-in opens at {time}.",
+  "@myAttendanceErrorsATTENDANCECHECKINNOTOPEN": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "myAttendanceErrorsATTENDANCECHECKINCLOSED": "Check-in for this class has closed.",
+  "myAttendanceErrorsATTENDANCECHECKINALREADY": "You have already checked in to this class.",
+  "myAttendanceErrorsATTENDANCECHECKINNOPIN": "The check-in location of this class isn't set yet. Ask your admin.",
+  "myAttendanceErrorsATTENDANCECHECKINLOCATIONREQUIRED": "Allow location for this site in your browser, then try again.",
+  "myAttendanceErrorsATTENDANCECHECKINACCURACYPOOR": "Your location isn't accurate enough ({accuracy} m). Move near a window and try again.",
+  "@myAttendanceErrorsATTENDANCECHECKINACCURACYPOOR": {
+    "placeholders": {
+      "accuracy": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "myAttendanceErrorsATTENDANCECHECKINTOOFAR": "You are {distance} m away. Check in within {radius} m of your class.",
+  "@myAttendanceErrorsATTENDANCECHECKINTOOFAR": {
+    "placeholders": {
+      "distance": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "radius": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "myAttendanceErrorsATTENDANCECHECKINCLOSEDDAY": "There are no classes today.",
+  "myAttendanceErrorsATTENDANCECHECKINPAPERREGISTER": "Attendance for this class is kept on paper.",
+  "myAttendanceErrorsATTENDANCECHECKINNOCLASSTODAY": "This class doesn't meet today.",
+  "myAttendanceErrorsATTENDANCECHECKINNOTYOURCLASS": "You can check in only to your own classes.",
+  "myAttendanceErrorsATTENDANCECHECKINCANCELLED": "This class is cancelled today.",
+  "myAttendanceOnLeaveToday": "You're on approved leave today. Your classes count as Leave unless you check in.",
+  "myAttendanceLeaveLink": "Leave",
   "appNoConnection": "No internet connection. Check it and try again.",
   "appUpdateRequiredTitle": "Please update Instructor",
   "appUpdateRequiredBody": "This version of the app is no longer supported. Install the new version to continue.",
@@ -1323,5 +1488,10 @@
     }
   },
   "appAttachStorageAlmostFull": "Your organisation's storage is almost full.",
-  "appFileOpenFailed": "The file could not be opened."
+  "appFileOpenFailed": "The file could not be opened.",
+  "appLocationDenied": "Allow location for Instructor, then try again. Check-in needs it once, to confirm you are at your class.",
+  "appLocationDeniedForever": "Location is turned off for Instructor. Allow it in your phone's settings, then try again.",
+  "appLocationServiceOff": "Your phone's location is off. Turn it on, then try again.",
+  "appLocationOpenSettings": "Open settings",
+  "appAttendanceRefresh": "Refresh"
 }

@@ -34,6 +34,11 @@
     "attachTypeNotAllowed": "{name} can't be added: this type of file isn't allowed here.",
     "attachTooMany": "You can add up to {count, number} files.",
     "attachStorageAlmostFull": "Your organisation's storage is almost full.",
-    "fileOpenFailed": "The file could not be opened."
+    "fileOpenFailed": "The file could not be opened.",
+    "locationDenied": "Allow location for Instructor, then try again. Check-in needs it once, to confirm you are at your class.",
+    "locationDeniedForever": "Location is turned off for Instructor. Allow it in your phone's settings, then try again.",
+    "locationServiceOff": "Your phone's location is off. Turn it on, then try again.",
+    "locationOpenSettings": "Open settings",
+    "attendanceRefresh": "Refresh"
   }
 }

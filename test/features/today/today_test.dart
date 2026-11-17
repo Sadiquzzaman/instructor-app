@@ -4,7 +4,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:instructor_app/core/auth/session.dart';
 import 'package:instructor_app/core/time/org_time.dart';
 import 'package:instructor_app/features/calendar/data/calendar_feed.dart';
-import 'package:instructor_app/features/shell/screens/not_yet_screen.dart';
+import 'package:instructor_app/features/attendance/screens/my_attendance_screen.dart';
 import 'package:instructor_app/features/today/screens/today_screen.dart';
 import 'package:instructor_app/l10n/generated/app_localizations_bn.dart';
 import 'package:instructor_app/l10n/generated/app_localizations_en.dart';
@@ -177,7 +177,7 @@ void main() {
     await pumpInstructorApp(tester, api: _api(), session: testSession());
     await tester.tap(find.text(_en.todayCheckIn));
     await tester.pumpAndSettle();
-    expect(find.byType(NotYetScreen), findsOneWidget);
+    expect(find.byType(MyAttendanceScreen), findsOneWidget);
   });
 
   testWidgets('an item opens its details; another workspace says so', (

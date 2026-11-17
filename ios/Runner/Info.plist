@@ -68,6 +68,8 @@
 	</array>
 	<key>NSCameraUsageDescription</key>
 	<string>Instructor uses the camera when you take a photo to hand in homework, attach to a leave request or send in chat.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Instructor checks your location once when you check in to an in-person class, to confirm you are at your school. It is not tracked in the background.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Instructor opens your photos when you choose one to hand in homework, attach to a leave request or send in chat.</string>
 </dict>

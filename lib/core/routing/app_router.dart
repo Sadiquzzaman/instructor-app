@@ -10,6 +10,7 @@ import 'package:instructor_app/features/auth/screens/signup_choice_screen.dart';
 import 'package:instructor_app/features/auth/screens/signup_form_screen.dart';
 import 'package:instructor_app/features/auth/screens/verify_code_screen.dart';
 import 'package:instructor_app/features/account/screens/account_screen.dart';
+import 'package:instructor_app/features/attendance/screens/my_attendance_screen.dart';
 import 'package:instructor_app/features/notifications/screens/inbox_screen.dart';
 import 'package:instructor_app/features/plan/screens/more_features_screen.dart';
 import 'package:instructor_app/features/shell/menu/menu_items.g.dart';
@@ -92,6 +93,10 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: AppRoutes.notifications,
             builder: (context, state) => const InboxScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.myAttendance,
+            builder: (context, state) => const MyAttendanceScreen(),
           ),
           GoRoute(
             path: AppRoutes.account,
