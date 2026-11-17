@@ -19,6 +19,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 - PR 1: the Flutter project (`academy.instructor.app`, "Instructor", Android 7.0 / API 24, iOS 15.0), lints, a placeholder home, tests, and CI (`ci.yml`: format, analyze, test; `ios-build.yml`: iOS build without signing; Dependabot for actions).
 - PR 2: every merge into `develop` publishes a test APK as a GitHub pre-release ([Releases](https://github.com/Sadiquzzaman/instructor-app/releases)), signed with the test key so it installs over earlier test builds. First one: `v0.1.0-dev.3`.
 - PR 3: the theme from the web's design tokens (`tool/tokens.json` → `lib/core/theme/tokens.g.dart`), `AppColors` by role, the type scale with Bangla line height 1.7, the bundled fonts (Instrument Sans, Hind Siliguri; OFL), and shared widgets (button, text field, card, status pill, loading/empty/error states). Tests check the tokens against the web's file, WCAG AA contrast and that no screen hard-codes a colour or font size.
+- CI fix: the Android build keeps the NDK (~700 MB) and Gradle's downloads in the Actions cache and stops after 15 minutes (a slow NDK download hung a build for 24 minutes on 17 Nov).
 
 ## In progress
 

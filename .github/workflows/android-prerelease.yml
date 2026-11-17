@@ -32,7 +32,8 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # A normal build takes 2–4 minutes; fail fast instead of hanging on a stuck download.
+    timeout-minutes: 15
     permissions:
       contents: write # to create the pre-release on pushes to develop
     steps:
@@ -50,6 +51,48 @@ jobs:
           cache: true
 
       - run: flutter pub get
+
+      # The NDK (~700 MB) is not on GitHub's runners in the version Flutter
+      # needs, and Google's download can be very slow (24 minutes and a broken
+      # zip on 17 Nov). Keep it, and Gradle's downloads, in the Actions cache.
+      - name: NDK version Flutter uses
+        id: ndk
+        run: |
+          version=$(sed -n 's/.*val ndkVersion: String = "\([0-9.]*\)".*/\1/p' \
+            "$FLUTTER_ROOT/packages/flutter_tools/gradle/src/main/kotlin/FlutterExtension.kt")
+          if [ -z "$version" ]; then echo "::error::Could not read Flutter's NDK version."; exit 1; fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "path=$ANDROID_HOME/ndk/$version" >> "$GITHUB_OUTPUT"
+
+      - name: Restore the NDK
+        id: ndk-cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ${{ steps.ndk.outputs.path }}
+          key: ndk-${{ runner.os }}-${{ steps.ndk.outputs.version }}
+
+      - name: Install the NDK (first time only)
+        if: steps.ndk-cache.outputs.cache-hit != 'true'
+        timeout-minutes: 10
+        run: |
+          sdkmanager="$(ls -d "$ANDROID_HOME"/cmdline-tools/*/bin | sort -V | tail -1)/sdkmanager"
+          for attempt in 1 2 3; do
+            if timeout 180 "$sdkmanager" --install "ndk;${{ steps.ndk.outputs.version }}" > /dev/null; then
+              echo "NDK installed (attempt $attempt)."; exit 0
+            fi
+            echo "::warning::NDK download attempt $attempt failed or took over 3 minutes; retrying."
+            rm -rf "${{ steps.ndk.outputs.path }}"
+          done
+          echo "::error::Could not download the NDK after 3 attempts."; exit 1
+
+      - name: Restore Gradle's downloads
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ runner.os }}-${{ hashFiles('android/**/*.gradle.kts', 'android/gradle/wrapper/gradle-wrapper.properties', 'pubspec.lock') }}
+          restore-keys: gradle-${{ runner.os }}-
 
       - name: Write the test signing key
         env:
