@@ -1,0 +1,175 @@
+{
+  "@@locale": "en",
+  "commonLoading": "Loading...",
+  "languageSwitchTo": "বাংলা",
+  "languageSwitchToLabel": "Switch language to Bangla",
+  "languageSaveFailed": "Your language was changed on this device, but could not be saved to your account.",
+  "uiClose": "Close",
+  "uiCancel": "Cancel",
+  "uiConfirm": "Confirm",
+  "uiLoading": "Loading…",
+  "uiRequired": "required",
+  "uiOptional": "Optional",
+  "uiSelectPlaceholder": "Select…",
+  "uiNoResults": "No results",
+  "uiSearch": "Search",
+  "uiClearFilters": "Clear filters",
+  "uiRemoveTag": "Remove {label}",
+  "@uiRemoveTag": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "uiFileDropPrompt": "Drag files here or <browse>choose files</browse>",
+  "uiFileDropLimits": "{types} up to {size} MB",
+  "@uiFileDropLimits": {
+    "placeholders": {
+      "types": {
+        "type": "String"
+      },
+      "size": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "uiFileDropTooLarge": "{name} is larger than {size} MB",
+  "@uiFileDropTooLarge": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "size": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "uiFileDropRemove": "Remove {name}",
+  "@uiFileDropRemove": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "uiTableSelectAll": "Select all rows",
+  "uiTableSelectRow": "Select row",
+  "uiTableSortBy": "Sort by {column}",
+  "@uiTableSortBy": {
+    "placeholders": {
+      "column": {
+        "type": "String"
+      }
+    }
+  },
+  "uiTableEmpty": "Nothing here yet",
+  "uiPaginationLabel": "Pagination",
+  "uiPaginationPrevious": "Previous page",
+  "uiPaginationNext": "Next page",
+  "uiPaginationPage": "Page {page}",
+  "@uiPaginationPage": {
+    "placeholders": {
+      "page": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "uiBreadcrumb": "Breadcrumb",
+  "uiStepperLabel": "Progress",
+  "uiStepperStep": "Step {current} of {total}",
+  "@uiStepperStep": {
+    "placeholders": {
+      "current": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "total": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "uiStepperDone": "Done",
+  "uiErrorTitle": "Something went wrong",
+  "uiErrorRetry": "Try again",
+  "uiShellOpenMenu": "Open menu",
+  "uiShellCloseMenu": "Close menu",
+  "uiShellNotifications": "Notifications",
+  "uiShellNavigation": "Main navigation",
+  "uiPasswordShow": "Show password",
+  "uiPasswordHide": "Hide password",
+  "validationIdentifierRequired": "Please enter your email or phone number",
+  "validationPhoneLength": "Phone number must be 11 digits",
+  "validationPhoneInvalidBd": "Invalid Bangladeshi phone number",
+  "validationEmailInvalidShort": "Invalid email address",
+  "validationIdentifierInvalid": "Enter a valid email or phone number",
+  "validationOrganizationNumberRequired": "Please enter organization number",
+  "validationOrganizationNumberShort": "Organization number must be at least 6 digits",
+  "validationPhoneRequired": "Please enter a phone number",
+  "validationPhoneInvalid": "Please enter a valid 11-digit phone number",
+  "validationFullNameRequired": "Please enter your full name",
+  "validationEmailRequired": "Please enter your email address",
+  "validationEmailInvalid": "It looks like the email you entered is invalid!",
+  "validationOrganizationNameRequired": "Please enter your organization or school name",
+  "validationTermsRequired": "You must agree to the Terms of Service and Privacy Policy",
+  "validationPasswordRequired": "{field, select, newPassword{Please enter a new password} other{Please enter a password}}",
+  "@validationPasswordRequired": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "validationPasswordShort": "{field, select, newPassword{New password} other{Password}} must be at least 8 characters.",
+  "@validationPasswordShort": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "validationPasswordUppercase": "{field, select, newPassword{New password} other{Password}} must include at least one uppercase letter.",
+  "@validationPasswordUppercase": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "validationPasswordLowercase": "{field, select, newPassword{New password} other{Password}} must include at least one lowercase letter.",
+  "@validationPasswordLowercase": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "validationPasswordNumber": "{field, select, newPassword{New password} other{Password}} must include at least one number.",
+  "@validationPasswordNumber": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "validationPasswordSpecial": "{field, select, newPassword{New password} other{Password}} must include at least one special character.",
+  "@validationPasswordSpecial": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "validationConfirmPasswordRequired": "Please confirm your password",
+  "validationPasswordMismatch": "Password and Confirm password do not match",
+  "validationCurrentPasswordRequired": "Please enter your current password",
+  "validationNewPasswordSame": "New password must be different from the current password",
+  "validationConfirmNewPasswordRequired": "Please confirm your new password",
+  "validationNewPasswordMismatch": "New password and Confirm password do not match",
+  "validationOtpIncomplete": "Please enter the complete OTP code",
+  "appNoConnection": "No internet connection. Check it and try again."
+}

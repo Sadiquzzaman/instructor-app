@@ -29,6 +29,20 @@ flutter test
 
 CI runs the same on every pull request, plus an iOS build without signing.
 
+## Text in Bangla and English
+
+Every user-facing string comes from `lib/l10n/app_en.arb` and `app_bn.arb`, which are **generated** (never edit them):
+
+- `l10n/web/{en,bn}.json`: the web's wording (tes-taker `frontend/messages`), for the namespaces listed in `tool/import_web_messages.dart`;
+- `l10n/app/{en,bn}.json`: strings only the app has, under `app`.
+
+```sh
+dart run tool/import_web_messages.dart ../tes-taker/frontend/messages   # refresh the web's wording, rebuild the ARB files
+dart run tool/import_web_messages.dart                                 # rebuild after editing l10n/app/
+```
+
+`flutter pub get` then generates `AppLocalizations` (`context.l10n.uiErrorRetry`). `test/l10n/messages_test.dart` checks the ARB files are up to date, both languages have the same keys and placeholders, and every Bangla string is in Bangla. Use `ref.levels(context, …)` for messages with `[[Classes]]`-style tokens, `RichMessage` for `<tag>` parts, and `OrgTime` for dates, times and numbers.
+
 ## Design tokens
 
 Colours, type sizes, radii, shadows and motion come from the web (tes-taker `frontend/design/tokens.json`). When the web changes them:
