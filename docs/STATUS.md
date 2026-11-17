@@ -8,7 +8,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 **Stage 0:** all 14 PRs done ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11), plus the #345 error codes; its end-of-stage device check is still to do.
 
-**Stage 1 (students):** plan approved 17 Nov ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)). Done: PRs 1–12 (files, Today, My attendance and check-in, read-only cache, leave, timetable, homework, classes, class discussions, calendar, tests and results, taking a test). Next: results (marks, performance, report cards).
+**Stage 1 (students):** plan approved 17 Nov ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)). Done: PRs 1–13 (files, Today, My attendance and check-in, read-only cache, leave, timetable, homework, classes, class discussions, calendar, tests and results, taking a test, results). Next: chat.
 
 ## Done
 
@@ -77,9 +77,11 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 - Stage 1 PR 12: taking a test (`/tests/:id/take`, full screen): eligibility (the web's messages for not started, ended, already submitted, disqualified, not assigned, full); Strict and IELTS tests say to use a computer; the rules (what is watched, the warning and the limit); then the questions (single and multiple choice, matching, written answers, passages once above their questions) with a timer, answers kept on the phone and sent a few seconds after each change, submit after a confirmation (open questions counted), automatic when time is up, retried while offline. Live connection (`socket_io_client` 3.1.6, pinned): joins the test, a heartbeat every 15 s, the teacher's warning, "ended by your teacher". Light proctoring: leaving the app is flagged (live and on the attempt), paste is off, screenshots are blocked on Android; auto-disqualification counts flags as the web. Checked end to end on beta with the approved test exam ("Mobile app check (Stage 1)", made by demo.teacher1 for Class 6, Off proctoring): demo.student1 was eligible, started, autosaved, submitted (3/5, the essay waits for marking) using the app's exact requests; the result is not published yet (tes-taker#351 asks for an error code).
 
+- Stage 1 PR 13: results for students (Academic): paper-exam marks (`/marks`: marks, %, grade, absent), my performance (`/performance`, `GET /scores/students/:me`: overall score, grade, GPA, position, the four parts, homework on time, subjects with score and grade, exams), report cards (`/report-cards` and a card: school, term, overall, subjects, position when shown, attendance days, remarks). Charts and printing stay on the web. Teachers see "use the website" until Stage 2. demo.student1 has none on beta yet (checked: empty lists and a performance answer in the expected shape).
+
 ## In progress
 
-- Stage 1 ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)), PR 13 of 15: results. Stage 0 still needs its end-of-stage check (360 px phone, tablet, iOS).
+- Stage 1 ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)), PR 14 of 15: chat. Stage 0 still needs its end-of-stage check (360 px phone, tablet, iOS).
 
 ## Owner's decisions since the plan
 

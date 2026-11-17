@@ -16,6 +16,7 @@ import 'package:instructor_app/features/classes/screens/classes_screen.dart';
 import 'package:instructor_app/features/homework/screens/homework_detail_screen.dart';
 import 'package:instructor_app/features/homework/screens/homework_list_screen.dart';
 import 'package:instructor_app/features/leave/screens/leave_screen.dart';
+import 'package:instructor_app/features/results/screens/results_screens.dart';
 import 'package:instructor_app/features/routine/screens/routine_screen.dart';
 import 'package:instructor_app/features/notifications/screens/inbox_screen.dart';
 import 'package:instructor_app/features/plan/screens/more_features_screen.dart';
@@ -156,6 +157,25 @@ final routerProvider = Provider<GoRouter>((ref) {
                 path: ':id/results',
                 builder: (context, state) =>
                     TestResultScreen(id: state.pathParameters['id']!),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: AppRoutes.marks,
+            builder: (context, state) => const MarksScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.performance,
+            builder: (context, state) => const PerformanceScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.reportCards,
+            builder: (context, state) => const ReportCardsScreen(),
+            routes: [
+              GoRoute(
+                path: ':id',
+                builder: (context, state) =>
+                    ReportCardScreen(id: state.pathParameters['id']!),
               ),
             ],
           ),
