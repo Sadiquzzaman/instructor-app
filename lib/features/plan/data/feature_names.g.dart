@@ -10,38 +10,30 @@ String? featureName(AppLocalizations l10n, String key) => switch (key) {
   'allow_passage_questions' => l10n.featuresCatalogAllowPassageQuestionsName,
   'allow_model_tests' => l10n.featuresCatalogAllowModelTestsName,
   'allow_question_images' => l10n.featuresCatalogAllowQuestionImagesName,
-  'allow_question_import_export' =>
-    l10n.featuresCatalogAllowQuestionImportExportName,
+  'allow_question_import_export' => l10n.featuresCatalogAllowQuestionImportExportName,
   'enable_report_watermark' => l10n.featuresCatalogEnableReportWatermarkName,
   'graphical_analytics' => l10n.featuresCatalogGraphicalAnalyticsName,
   'performance_graphs' => l10n.featuresCatalogPerformanceGraphsName,
   'advanced_analytics' => l10n.featuresCatalogAdvancedAnalyticsName,
   'student_risk_score' => l10n.featuresCatalogStudentRiskScoreName,
   'push_notifications' => l10n.featuresCatalogPushNotificationsName,
-  'suspicious_activity_notifications' =>
-    l10n.featuresCatalogSuspiciousActivityNotificationsName,
+  'suspicious_activity_notifications' => l10n.featuresCatalogSuspiciousActivityNotificationsName,
   'proctoring_tab_switch' => l10n.featuresCatalogProctoringTabSwitchName,
-  'proctoring_fullscreen_exit' =>
-    l10n.featuresCatalogProctoringFullscreenExitName,
+  'proctoring_fullscreen_exit' => l10n.featuresCatalogProctoringFullscreenExitName,
   'proctoring_page_refresh' => l10n.featuresCatalogProctoringPageRefreshName,
   'proctoring_copy_paste' => l10n.featuresCatalogProctoringCopyPasteName,
   'proctoring_idle' => l10n.featuresCatalogProctoringIdleName,
-  'proctoring_browser_change' =>
-    l10n.featuresCatalogProctoringBrowserChangeName,
+  'proctoring_browser_change' => l10n.featuresCatalogProctoringBrowserChangeName,
   'proctoring_no_face' => l10n.featuresCatalogProctoringNoFaceName,
   'proctoring_multiple_face' => l10n.featuresCatalogProctoringMultipleFaceName,
   'proctoring_looking_away' => l10n.featuresCatalogProctoringLookingAwayName,
   'proctoring_devtools' => l10n.featuresCatalogProctoringDevtoolsName,
-  'proctoring_double_display' =>
-    l10n.featuresCatalogProctoringDoubleDisplayName,
+  'proctoring_double_display' => l10n.featuresCatalogProctoringDoubleDisplayName,
   'proctoring_phone' => l10n.featuresCatalogProctoringPhoneName,
   'proctoring_voice' => l10n.featuresCatalogProctoringVoiceName,
-  'proctoring_video_monitoring' =>
-    l10n.featuresCatalogProctoringVideoMonitoringName,
-  'proctoring_real_time_alerts' =>
-    l10n.featuresCatalogProctoringRealTimeAlertsName,
-  'proctoring_auto_disqualification' =>
-    l10n.featuresCatalogProctoringAutoDisqualificationName,
+  'proctoring_video_monitoring' => l10n.featuresCatalogProctoringVideoMonitoringName,
+  'proctoring_real_time_alerts' => l10n.featuresCatalogProctoringRealTimeAlertsName,
+  'proctoring_auto_disqualification' => l10n.featuresCatalogProctoringAutoDisqualificationName,
   'attendance' => l10n.featuresCatalogAttendanceName,
   'homework' => l10n.featuresCatalogHomeworkName,
   'calendar' => l10n.featuresCatalogCalendarName,
@@ -56,50 +48,35 @@ String? featureName(AppLocalizations l10n, String key) => switch (key) {
 
 /// A plan feature's one-line description, or null.
 String? featureDescription(AppLocalizations l10n, String key) => switch (key) {
-  'allow_graded_questions' =>
-    l10n.featuresCatalogAllowGradedQuestionsDescription,
-  'allow_ungraded_questions' =>
-    l10n.featuresCatalogAllowUngradedQuestionsDescription,
-  'allow_passage_questions' =>
-    l10n.featuresCatalogAllowPassageQuestionsDescription,
+  'allow_graded_questions' => l10n.featuresCatalogAllowGradedQuestionsDescription,
+  'allow_ungraded_questions' => l10n.featuresCatalogAllowUngradedQuestionsDescription,
+  'allow_passage_questions' => l10n.featuresCatalogAllowPassageQuestionsDescription,
   'allow_model_tests' => l10n.featuresCatalogAllowModelTestsDescription,
   'allow_question_images' => l10n.featuresCatalogAllowQuestionImagesDescription,
-  'allow_question_import_export' =>
-    l10n.featuresCatalogAllowQuestionImportExportDescription,
-  'enable_report_watermark' =>
-    l10n.featuresCatalogEnableReportWatermarkDescription,
+  'allow_question_import_export' => l10n.featuresCatalogAllowQuestionImportExportDescription,
+  'enable_report_watermark' => l10n.featuresCatalogEnableReportWatermarkDescription,
   'graphical_analytics' => l10n.featuresCatalogGraphicalAnalyticsDescription,
   'performance_graphs' => l10n.featuresCatalogPerformanceGraphsDescription,
   'advanced_analytics' => l10n.featuresCatalogAdvancedAnalyticsDescription,
   'student_risk_score' => l10n.featuresCatalogStudentRiskScoreDescription,
   'push_notifications' => l10n.featuresCatalogPushNotificationsDescription,
-  'suspicious_activity_notifications' =>
-    l10n.featuresCatalogSuspiciousActivityNotificationsDescription,
+  'suspicious_activity_notifications' => l10n.featuresCatalogSuspiciousActivityNotificationsDescription,
   'proctoring_tab_switch' => l10n.featuresCatalogProctoringTabSwitchDescription,
-  'proctoring_fullscreen_exit' =>
-    l10n.featuresCatalogProctoringFullscreenExitDescription,
-  'proctoring_page_refresh' =>
-    l10n.featuresCatalogProctoringPageRefreshDescription,
+  'proctoring_fullscreen_exit' => l10n.featuresCatalogProctoringFullscreenExitDescription,
+  'proctoring_page_refresh' => l10n.featuresCatalogProctoringPageRefreshDescription,
   'proctoring_copy_paste' => l10n.featuresCatalogProctoringCopyPasteDescription,
   'proctoring_idle' => l10n.featuresCatalogProctoringIdleDescription,
-  'proctoring_browser_change' =>
-    l10n.featuresCatalogProctoringBrowserChangeDescription,
+  'proctoring_browser_change' => l10n.featuresCatalogProctoringBrowserChangeDescription,
   'proctoring_no_face' => l10n.featuresCatalogProctoringNoFaceDescription,
-  'proctoring_multiple_face' =>
-    l10n.featuresCatalogProctoringMultipleFaceDescription,
-  'proctoring_looking_away' =>
-    l10n.featuresCatalogProctoringLookingAwayDescription,
+  'proctoring_multiple_face' => l10n.featuresCatalogProctoringMultipleFaceDescription,
+  'proctoring_looking_away' => l10n.featuresCatalogProctoringLookingAwayDescription,
   'proctoring_devtools' => l10n.featuresCatalogProctoringDevtoolsDescription,
-  'proctoring_double_display' =>
-    l10n.featuresCatalogProctoringDoubleDisplayDescription,
+  'proctoring_double_display' => l10n.featuresCatalogProctoringDoubleDisplayDescription,
   'proctoring_phone' => l10n.featuresCatalogProctoringPhoneDescription,
   'proctoring_voice' => l10n.featuresCatalogProctoringVoiceDescription,
-  'proctoring_video_monitoring' =>
-    l10n.featuresCatalogProctoringVideoMonitoringDescription,
-  'proctoring_real_time_alerts' =>
-    l10n.featuresCatalogProctoringRealTimeAlertsDescription,
-  'proctoring_auto_disqualification' =>
-    l10n.featuresCatalogProctoringAutoDisqualificationDescription,
+  'proctoring_video_monitoring' => l10n.featuresCatalogProctoringVideoMonitoringDescription,
+  'proctoring_real_time_alerts' => l10n.featuresCatalogProctoringRealTimeAlertsDescription,
+  'proctoring_auto_disqualification' => l10n.featuresCatalogProctoringAutoDisqualificationDescription,
   'attendance' => l10n.featuresCatalogAttendanceDescription,
   'homework' => l10n.featuresCatalogHomeworkDescription,
   'calendar' => l10n.featuresCatalogCalendarDescription,
@@ -113,19 +90,18 @@ String? featureDescription(AppLocalizations l10n, String key) => switch (key) {
 };
 
 /// A feature group's name, or null.
-String? featureGroupName(AppLocalizations l10n, String group) =>
-    switch (group) {
-      'Question' => l10n.featuresGroupsQuestion,
-      'Branding' => l10n.featuresGroupsBranding,
-      'Analytics' => l10n.featuresGroupsAnalytics,
-      'Notifications' => l10n.featuresGroupsNotifications,
-      'Proctoring' => l10n.featuresGroupsProctoring,
-      'Attendance' => l10n.featuresGroupsAttendance,
-      'Homework' => l10n.featuresGroupsHomework,
-      'Calendar' => l10n.featuresGroupsCalendar,
-      'Communication' => l10n.featuresGroupsCommunication,
-      'Resources' => l10n.featuresGroupsResources,
-      'IELTS' => l10n.featuresGroupsIELTS,
-      'Integrity' => l10n.featuresGroupsIntegrity,
-      _ => null,
-    };
+String? featureGroupName(AppLocalizations l10n, String group) => switch (group) {
+  'Question' => l10n.featuresGroupsQuestion,
+  'Branding' => l10n.featuresGroupsBranding,
+  'Analytics' => l10n.featuresGroupsAnalytics,
+  'Notifications' => l10n.featuresGroupsNotifications,
+  'Proctoring' => l10n.featuresGroupsProctoring,
+  'Attendance' => l10n.featuresGroupsAttendance,
+  'Homework' => l10n.featuresGroupsHomework,
+  'Calendar' => l10n.featuresGroupsCalendar,
+  'Communication' => l10n.featuresGroupsCommunication,
+  'Resources' => l10n.featuresGroupsResources,
+  'IELTS' => l10n.featuresGroupsIELTS,
+  'Integrity' => l10n.featuresGroupsIntegrity,
+  _ => null,
+};

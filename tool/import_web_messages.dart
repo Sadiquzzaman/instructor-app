@@ -48,6 +48,8 @@ const webNamespaces = [
   'performance',
   'reportCards',
   'reportCard',
+  'resources',
+  'chat',
 ];
 
 const locales = ['en', 'bn'];

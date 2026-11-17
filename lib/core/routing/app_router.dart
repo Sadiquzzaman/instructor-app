@@ -16,6 +16,7 @@ import 'package:instructor_app/features/classes/screens/classes_screen.dart';
 import 'package:instructor_app/features/homework/screens/homework_detail_screen.dart';
 import 'package:instructor_app/features/homework/screens/homework_list_screen.dart';
 import 'package:instructor_app/features/leave/screens/leave_screen.dart';
+import 'package:instructor_app/features/resources/resources_screen.dart';
 import 'package:instructor_app/features/results/screens/results_screens.dart';
 import 'package:instructor_app/features/routine/screens/routine_screen.dart';
 import 'package:instructor_app/features/notifications/screens/inbox_screen.dart';
@@ -178,6 +179,10 @@ final routerProvider = Provider<GoRouter>((ref) {
                     ReportCardScreen(id: state.pathParameters['id']!),
               ),
             ],
+          ),
+          GoRoute(
+            path: AppRoutes.resources,
+            builder: (context, state) => const ResourcesScreen(),
           ),
           GoRoute(
             path: AppRoutes.account,
