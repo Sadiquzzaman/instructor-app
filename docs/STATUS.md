@@ -8,7 +8,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 **Stage 0:** all 14 PRs done ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11), plus the #345 error codes; its end-of-stage device check is still to do.
 
-**Stage 1 (students):** plan approved 17 Nov ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)). Done: PRs 1–13 and 15 (files, Today, My attendance and check-in, read-only cache, leave, timetable, homework, classes, class discussions, calendar, tests and results, taking a test, results, resources). Next: chat (PR 14), then the integration tests.
+**Stage 1 (students):** plan approved 17 Nov ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)). Done: PRs 1–15 (files, Today, My attendance and check-in, read-only cache, leave, timetable, homework, classes, class discussions, calendar, tests and results, taking a test, results, resources, chat). Next: PR 16, integration tests and the end-of-stage check.
 
 ## Done
 
@@ -80,6 +80,8 @@ Updated in every pull request, so the owner and the backend session can see wher
 - Stage 1 PR 13: results for students (Academic): paper-exam marks (`/marks`: marks, %, grade, absent), my performance (`/performance`, `GET /scores/students/:me`: overall score, grade, GPA, position, the four parts, homework on time, subjects with score and grade, exams), report cards (`/report-cards` and a card: school, term, overall, subjects, position when shown, attendance days, remarks). Charts and printing stay on the web. Teachers see "use the website" until Stage 2. demo.student1 has none on beta yet (checked: empty lists and a performance answer in the expected shape).
 
 - Stage 1 PR 15 (built before chat): resources for students (`/resources`): files and links shared with their classes, with search (after typing stops), subject and type filters, the "New" tag and the view-only note; Open records the opening (`POST /resources/:id/open`, as the web) and then opens the file or link. "Not in your plan" (403) says so.
+
+- Stage 1 PR 14: chat for students (`/chat`): class chats (one per subject class, unread counts, last message, muted) and private chats with their teachers ("Message a teacher" from the contacts); a chat page with posts (author, teacher tag, pinned, reply-to quote, files), older posts on request, send (files in class chats, purpose DISCUSSION), reply, comments on posts, delete your own, report another's (asked why), mute; read on opening; "only teachers post", read-only and closed chats say so. Live through Socket.IO `/chat` (a new or deleted message shows at once; the lists refresh). Checked against a test student's real chats on beta (read only).
 
 ## In progress
 

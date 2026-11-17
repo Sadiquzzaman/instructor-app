@@ -22,6 +22,7 @@ abstract final class AppRoutes {
   static const performance = '/performance';
   static const reportCards = '/report-cards';
   static const resources = '/resources';
+  static const chat = '/chat';
   static const calendar = '/calendar';
   static const organization = '/organization';
 
@@ -42,6 +43,7 @@ abstract final class AppRoutes {
     performance,
     reportCards,
     resources,
+    chat,
     notifications,
     account,
     features,
