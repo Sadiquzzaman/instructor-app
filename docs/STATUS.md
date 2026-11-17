@@ -8,7 +8,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 **Stage 0:** all 14 PRs done ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11), plus the #345 error codes; its end-of-stage device check is still to do.
 
-**Stage 1 (students):** plan approved 17 Nov ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)). Done: PRs 1–9 (files, Today, My attendance and check-in, read-only cache, leave, timetable, homework, classes, class discussions). Next: the calendar.
+**Stage 1 (students):** plan approved 17 Nov ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)). Done: PRs 1–10 (files, Today, My attendance and check-in, read-only cache, leave, timetable, homework, classes, class discussions, calendar). Next: tests (list and results), then taking a test.
 
 ## Done
 
@@ -71,9 +71,11 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 - Stage 1 PR 9: class discussions (the class page's Discussions tab), per subject as on the web: the class discussion (posts with their type, files and replies; a type filter; a new post with up to 5 photos or files, purpose DISCUSSION; replies; delete your own post) and private messages with the subject's teachers (start a conversation, read and send with files). Both are read again every 20 seconds, as the web. Editing a post stays on the web (TODO).
 
+- Stage 1 PR 10: the calendar (`/calendar`, month view): the person's classes, events, exams, homework and holidays from every workspace, filtered by kind and workspace; a Saturday-first month with a dot per kind, today outlined; the chosen day's list (the same tiles and details as Today); "My reminders" read only (changed on the web, owner's decision). Week and day views, adding events and the calendar link stay on the web.
+
 ## In progress
 
-- Stage 1 ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)), PR 10 of 15: the calendar. Stage 0 still needs its end-of-stage check (360 px phone, tablet, iOS).
+- Stage 1 ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)), PR 11 of 15: tests. Stage 0 still needs its end-of-stage check (360 px phone, tablet, iOS).
 
 ## Owner's decisions since the plan
 

@@ -31,6 +31,7 @@ abstract final class AppRoutes {
     routine,
     homework,
     classes,
+    calendar,
     notifications,
     account,
     features,

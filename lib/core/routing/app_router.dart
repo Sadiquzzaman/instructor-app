@@ -11,6 +11,7 @@ import 'package:instructor_app/features/auth/screens/signup_form_screen.dart';
 import 'package:instructor_app/features/auth/screens/verify_code_screen.dart';
 import 'package:instructor_app/features/account/screens/account_screen.dart';
 import 'package:instructor_app/features/attendance/screens/my_attendance_screen.dart';
+import 'package:instructor_app/features/calendar/screens/calendar_screen.dart';
 import 'package:instructor_app/features/classes/screens/classes_screen.dart';
 import 'package:instructor_app/features/homework/screens/homework_detail_screen.dart';
 import 'package:instructor_app/features/homework/screens/homework_list_screen.dart';
@@ -133,6 +134,10 @@ final routerProvider = Provider<GoRouter>((ref) {
                     ClassDetailScreen(id: state.pathParameters['id']!),
               ),
             ],
+          ),
+          GoRoute(
+            path: AppRoutes.calendar,
+            builder: (context, state) => const CalendarScreen(),
           ),
           GoRoute(
             path: AppRoutes.account,
