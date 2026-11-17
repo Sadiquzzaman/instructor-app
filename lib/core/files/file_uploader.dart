@@ -45,6 +45,7 @@ class UploadedFile {
     required this.name,
     required this.mime,
     required this.size,
+    this.url,
     this.storageWarning = false,
   });
 
@@ -52,6 +53,10 @@ class UploadedFile {
   final String name;
   final String mime;
   final int size;
+
+  /// Where the server says it can be seen (an API path); discussion posts and
+  /// chat messages send it back with the file.
+  final String? url;
 
   /// The workspace has used 90% or more of its storage.
   final bool storageWarning;
@@ -113,6 +118,7 @@ class FileUploader {
       name: (done['name'] as String?) ?? file.name,
       mime: (done['mime'] as String?) ?? file.mime,
       size: (done['size_bytes'] as num?)?.toInt() ?? file.size,
+      url: done['url'] as String?,
       storageWarning: storage is Map && storage['warning'] == true,
     );
   }
