@@ -1,0 +1,510 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
+
+import 'package:instructor_app/core/api/api_error_text.dart';
+import 'package:instructor_app/core/api/api_exception.dart';
+import 'package:instructor_app/core/l10n/l10n.dart';
+import 'package:instructor_app/core/theme/app_colors.dart';
+import 'package:instructor_app/core/theme/app_metrics.dart';
+import 'package:instructor_app/core/time/org_time.dart';
+import 'package:instructor_app/core/widgets/app_button.dart';
+import 'package:instructor_app/core/widgets/app_card.dart';
+import 'package:instructor_app/core/widgets/app_text_field.dart';
+import 'package:instructor_app/core/widgets/state_views.dart';
+import 'package:instructor_app/core/widgets/status_pill.dart';
+import 'package:instructor_app/features/account/data/account_repository.dart';
+import 'package:instructor_app/features/account/data/change_password_validation.dart';
+
+/// The web's /account: the profile (read only, as on the web), change
+/// password, and the signed-in devices. The language switch is in the top
+/// bar and saves to the account.
+class AccountScreen extends ConsumerWidget {
+  const AccountScreen({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 720),
+        child: ListView(
+          padding: const EdgeInsets.all(AppSpacing.lg),
+          children: const [
+            _ProfileCard(),
+            SizedBox(height: AppSpacing.lg),
+            _ChangePasswordCard(),
+            SizedBox(height: AppSpacing.lg),
+            _DevicesCard(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _Section extends StatelessWidget {
+  const _Section({required this.title, required this.child, this.intro});
+
+  final String title;
+  final String? intro;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final text = Theme.of(context).textTheme;
+    return AppCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(title, style: text.titleLarge),
+          if (intro != null) ...[
+            const SizedBox(height: AppSpacing.xs),
+            Text(
+              intro!,
+              style: text.bodyMedium?.copyWith(
+                color: AppColors.of(context).inkMuted,
+              ),
+            ),
+          ],
+          const SizedBox(height: AppSpacing.lg),
+          child,
+        ],
+      ),
+    );
+  }
+}
+
+class _ProfileCard extends ConsumerWidget {
+  const _ProfileCard();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
+    final language = Localizations.localeOf(context).languageCode;
+    return _Section(
+      title: l10n.accountTitle,
+      child: ref
+          .watch(profileProvider)
+          .when(
+            loading: () => const Padding(
+              padding: EdgeInsets.all(AppSpacing.lg),
+              child: Center(child: CircularProgressIndicator()),
+            ),
+            error: (e, _) => ErrorView(
+              title: l10n.accountLoadFailed,
+              retryLabel: l10n.uiErrorRetry,
+              onRetry: () => ref.invalidate(profileProvider),
+            ),
+            data: (p) {
+              final created = p.createdAt;
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // What the API holds about the person: not translated.
+                  _Row(l10n.accountFullName, Text(p.fullName)),
+                  _Row(l10n.accountRole, Text(_role(l10n, p.role))),
+                  _Row(
+                    l10n.accountEmail,
+                    Text(p.email ?? l10n.accountNotProvided),
+                  ),
+                  _Row(
+                    l10n.accountPhone,
+                    Text(p.phone ?? l10n.accountNotProvided),
+                  ),
+                  _Row(
+                    l10n.accountStatus,
+                    Align(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: StatusPill(
+                        label: p.verified
+                            ? l10n.accountVerified
+                            : l10n.accountUnverified,
+                        tone: p.verified
+                            ? StatusTone.success
+                            : StatusTone.warning,
+                      ),
+                    ),
+                  ),
+                  _Row(
+                    l10n.accountMemberSince,
+                    Text(
+                      created == null ? '—' : OrgTime.date(created, language),
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+    );
+  }
+
+  static String _role(AppLocalizations l10n, String role) => switch (role) {
+    'STUDENT' => l10n.accountRolesSTUDENT,
+    'TEACHER' => l10n.accountRolesTEACHER,
+    _ => role,
+  };
+}
+
+class _Row extends StatelessWidget {
+  const _Row(this.label, this.value);
+
+  final String label;
+  final Widget value;
+
+  @override
+  Widget build(BuildContext context) {
+    final text = Theme.of(context).textTheme;
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 120,
+            child: Text(
+              label,
+              style: text.bodyMedium?.copyWith(
+                color: AppColors.of(context).inkMuted,
+              ),
+            ),
+          ),
+          const SizedBox(width: AppSpacing.md),
+          Expanded(
+            child: DefaultTextStyle.merge(style: text.bodyLarge, child: value),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ChangePasswordCard extends ConsumerStatefulWidget {
+  const _ChangePasswordCard();
+
+  @override
+  ConsumerState<_ChangePasswordCard> createState() =>
+      _ChangePasswordCardState();
+}
+
+class _ChangePasswordCardState extends ConsumerState<_ChangePasswordCard> {
+  final _current = TextEditingController();
+  final _next = TextEditingController();
+  final _confirm = TextEditingController();
+  Map<String, String> _errors = const {};
+  String? _formError;
+  bool _loading = false;
+
+  @override
+  void dispose() {
+    for (final c in [_current, _next, _confirm]) {
+      c.dispose();
+    }
+    super.dispose();
+  }
+
+  Future<void> _submit() async {
+    if (_loading) return;
+    final l10n = context.l10n;
+    final errors = validateChangePassword(
+      current: _current.text,
+      next: _next.text,
+      confirm: _confirm.text,
+      l10n: l10n,
+    );
+    setState(() {
+      _errors = errors;
+      _formError = null;
+    });
+    if (errors.isNotEmpty) return;
+    setState(() => _loading = true);
+    try {
+      await ref
+          .read(accountRepositoryProvider)
+          .changePassword(
+            current: _current.text,
+            next: _next.text,
+            confirm: _confirm.text,
+          );
+      if (!mounted) return;
+      for (final c in [_current, _next, _confirm]) {
+        c.clear();
+      }
+      // The other devices were signed out: show the list as it is now.
+      ref.invalidate(devicesProvider);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.authChangePasswordDoneDescription)),
+      );
+    } on ApiException catch (e) {
+      if (!mounted) return;
+      setState(
+        () => _formError =
+            e.kind == ApiErrorKind.network || e.kind == ApiErrorKind.timeout
+            ? l10n.appNoConnection
+            : l10n.appChangePasswordFailed,
+      );
+    } finally {
+      if (mounted) setState(() => _loading = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    AppTextField field(
+      String key,
+      String label,
+      String hint,
+      TextEditingController c, {
+      List<String> autofill = const [AutofillHints.newPassword],
+    }) => AppTextField(
+      key: Key('password-$key'),
+      label: label,
+      hint: hint,
+      controller: c,
+      errorText: _errors[key],
+      obscure: true,
+      showLabel: l10n.authShowPassword,
+      hideLabel: l10n.authHidePassword,
+      autofillHints: autofill,
+    );
+    return _Section(
+      title: l10n.accountChangePasswordTitle,
+      intro: l10n.accountChangePasswordIntro,
+      child: AutofillGroup(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            if (_formError != null) ...[
+              Text(
+                _formError!,
+                style: TextStyle(color: AppColors.of(context).danger),
+              ),
+              const SizedBox(height: AppSpacing.md),
+            ],
+            field(
+              'current',
+              l10n.accountChangePasswordCurrent,
+              l10n.accountChangePasswordCurrentPlaceholder,
+              _current,
+              autofill: const [AutofillHints.password],
+            ),
+            const SizedBox(height: AppSpacing.sm),
+            field(
+              'new',
+              l10n.accountChangePasswordNew,
+              l10n.accountChangePasswordNewPlaceholder,
+              _next,
+            ),
+            const SizedBox(height: AppSpacing.sm),
+            field(
+              'confirm',
+              l10n.accountChangePasswordConfirm,
+              l10n.accountChangePasswordConfirmPlaceholder,
+              _confirm,
+            ),
+            const SizedBox(height: AppSpacing.lg),
+            Align(
+              alignment: AlignmentDirectional.centerStart,
+              child: AppButton(
+                label: l10n.accountChangePasswordSubmit,
+                onPressed: _submit,
+                loading: _loading,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _DevicesCard extends ConsumerWidget {
+  const _DevicesCard();
+
+  static String _platform(AppLocalizations l10n, String p) => switch (p) {
+    'ANDROID' => l10n.accountDevicesPlatformANDROID,
+    'IOS' => l10n.accountDevicesPlatformIOS,
+    _ => l10n.accountDevicesPlatformWEB,
+  };
+
+  Future<bool> _confirm(BuildContext context, String title) async =>
+      await showDialog<bool>(
+        context: context,
+        builder: (dialog) {
+          final l10n = dialog.l10n;
+          return AlertDialog(
+            title: Text(title),
+            content: Text(l10n.accountDevicesConfirmDetail),
+            actions: [
+              // Starts on Cancel (design system: ConfirmDialog).
+              TextButton(
+                autofocus: true,
+                onPressed: () => Navigator.of(dialog).pop(false),
+                child: Text(l10n.uiCancel),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(dialog).pop(true),
+                child: Text(l10n.accountDevicesSignOut),
+              ),
+            ],
+          );
+        },
+      ) ??
+      false;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
+    final colors = AppColors.of(context);
+    final text = Theme.of(context).textTheme;
+    final language = Localizations.localeOf(context).languageCode;
+
+    Future<void> act(Future<String> Function() action) async {
+      final messenger = ScaffoldMessenger.of(context);
+      try {
+        final done = await action();
+        messenger.showSnackBar(SnackBar(content: Text(done)));
+      } on Object catch (e) {
+        messenger.showSnackBar(SnackBar(content: Text(apiErrorText(l10n, e))));
+      } finally {
+        ref.invalidate(devicesProvider);
+      }
+    }
+
+    return _Section(
+      title: l10n.accountDevicesTitle,
+      intro: l10n.accountDevicesIntro,
+      child: ref
+          .watch(devicesProvider)
+          .when(
+            loading: () => const Padding(
+              padding: EdgeInsets.all(AppSpacing.lg),
+              child: Center(child: CircularProgressIndicator()),
+            ),
+            error: (e, _) => ErrorView(
+              title: l10n.accountDevicesLoadFailed,
+              retryLabel: l10n.uiErrorRetry,
+              onRetry: () => ref.invalidate(devicesProvider),
+            ),
+            data: (devices) {
+              final others = devices.where((d) => !d.current).toList();
+              final repo = ref.read(accountRepositoryProvider);
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  for (final d in [
+                    ...devices.where((d) => d.current),
+                    ...others,
+                  ])
+                    Padding(
+                      key: Key('device-${d.id}'),
+                      padding: const EdgeInsets.symmetric(
+                        vertical: AppSpacing.sm,
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            d.platform == 'WEB'
+                                ? Icons.laptop
+                                : Icons.smartphone,
+                            color: colors.inkMuted,
+                          ),
+                          const SizedBox(width: AppSpacing.md),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Wrap(
+                                  spacing: AppSpacing.sm,
+                                  crossAxisAlignment: WrapCrossAlignment.center,
+                                  children: [
+                                    Text(
+                                      d.name ?? _platform(l10n, d.platform),
+                                      style: text.titleSmall,
+                                    ),
+                                    if (d.current)
+                                      StatusPill(
+                                        label: l10n.accountDevicesThisDevice,
+                                        tone: StatusTone.success,
+                                      ),
+                                  ],
+                                ),
+                                Text(
+                                  [
+                                    _platform(l10n, d.platform),
+                                    if (d.appVersion != null)
+                                      l10n.accountDevicesAppVersion(
+                                        d.appVersion!,
+                                      ),
+                                  ].join(' · '),
+                                  style: text.bodySmall?.copyWith(
+                                    color: colors.inkMuted,
+                                  ),
+                                ),
+                                if (d.lastUsedAt != null)
+                                  Text(
+                                    l10n.accountDevicesLastUsed(
+                                      OrgTime.dateTime(d.lastUsedAt!, language),
+                                    ),
+                                    style: text.bodySmall?.copyWith(
+                                      color: colors.inkMuted,
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
+                          if (!d.current)
+                            TextButton(
+                              onPressed: () async {
+                                final name =
+                                    d.name ?? _platform(l10n, d.platform);
+                                if (!await _confirm(
+                                  context,
+                                  l10n.accountDevicesOneConfirmTitle(name),
+                                )) {
+                                  return;
+                                }
+                                await act(() async {
+                                  await repo.signOutDevice(d.id);
+                                  return l10n.accountDevicesOneDone;
+                                });
+                              },
+                              child: Text(l10n.accountDevicesSignOut),
+                            ),
+                        ],
+                      ),
+                    ),
+                  const SizedBox(height: AppSpacing.md),
+                  if (others.isEmpty)
+                    Text(
+                      l10n.accountDevicesOnlyThisOne,
+                      style: text.bodyMedium?.copyWith(color: colors.inkMuted),
+                    )
+                  else
+                    Align(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: AppButton(
+                        label: l10n.accountDevicesSignOutOthers,
+                        variant: AppButtonVariant.secondary,
+                        onPressed: () async {
+                          if (!await _confirm(
+                            context,
+                            l10n.accountDevicesOthersConfirmTitle(
+                              others.length,
+                            ),
+                          )) {
+                            return;
+                          }
+                          await act(() async {
+                            final n = await repo.signOutOthers();
+                            return l10n.accountDevicesOthersDone(n);
+                          });
+                        },
+                      ),
+                    ),
+                ],
+              );
+            },
+          ),
+    );
+  }
+}
