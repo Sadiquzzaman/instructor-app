@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'package:instructor_app/core/api/api_exception.dart';
+import 'package:instructor_app/core/api/api_providers.dart';
 import 'package:instructor_app/core/l10n/l10n.dart';
 import 'package:instructor_app/core/l10n/level_text.dart';
 import 'package:instructor_app/core/theme/app_colors.dart';
@@ -11,6 +12,7 @@ import 'package:instructor_app/core/time/org_time.dart';
 import 'package:instructor_app/core/widgets/app_card.dart';
 import 'package:instructor_app/core/widgets/state_views.dart';
 import 'package:instructor_app/core/widgets/status_pill.dart';
+import 'package:instructor_app/features/attendance/screens/teacher_report.dart';
 import 'package:instructor_app/features/attendance/data/attendance_reports.dart';
 import 'package:instructor_app/features/attendance/data/my_attendance.dart';
 import 'package:instructor_app/features/attendance/widgets/attendance_mark.dart';
@@ -59,8 +61,8 @@ Widget _failure(
 String _dayColour(String status) => status == 'WAITING' ? 'UPCOMING' : status;
 
 /// Attendance reports (the web's `/attendance-reports`): the daily summary
-/// per section and the monthly register. Printing, the CSV file and the
-/// teachers' report (owners, Stage 3) stay on the web.
+/// per section, the monthly register and, for owners and admins, the
+/// teachers' report. Printing and the CSV file stay on the web.
 class AttendanceReportsScreen extends ConsumerStatefulWidget {
   const AttendanceReportsScreen({super.key});
 
@@ -71,13 +73,16 @@ class AttendanceReportsScreen extends ConsumerStatefulWidget {
 
 class _AttendanceReportsScreenState
     extends ConsumerState<AttendanceReportsScreen> {
-  bool _monthly = false;
+  /// 0 daily, 1 monthly, 2 teachers.
+  int _tab = 0;
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final text = Theme.of(context).textTheme;
     final sections = ref.watch(reportSectionsProvider);
+    final role = ref.watch(sessionProvider)?.memberRole;
+    final managers = role == 'OWNER' || role == 'ADMIN';
     return Center(
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 960),
@@ -121,22 +126,26 @@ class _AttendanceReportsScreenState
                       Wrap(
                         spacing: AppSpacing.sm,
                         children: [
-                          ChoiceChip(
-                            key: const Key('tab-daily'),
-                            label: Text(l10n.reportsTabsDaily),
-                            selected: !_monthly,
-                            onSelected: (_) => setState(() => _monthly = false),
-                          ),
-                          ChoiceChip(
-                            key: const Key('tab-monthly'),
-                            label: Text(l10n.reportsTabsMonthly),
-                            selected: _monthly,
-                            onSelected: (_) => setState(() => _monthly = true),
-                          ),
+                          for (final (i, key, label) in [
+                            (0, 'tab-daily', l10n.reportsTabsDaily),
+                            (1, 'tab-monthly', l10n.reportsTabsMonthly),
+                            if (managers)
+                              (2, 'tab-teachers', l10n.reportsTabsTeachers),
+                          ])
+                            ChoiceChip(
+                              key: Key(key),
+                              label: Text(label),
+                              selected: _tab == i,
+                              onSelected: (_) => setState(() => _tab = i),
+                            ),
                         ],
                       ),
                       const SizedBox(height: AppSpacing.md),
-                      if (_monthly) _Monthly(list) else _Daily(list),
+                      switch (_tab) {
+                        1 => _Monthly(list),
+                        2 when managers => const TeacherReportView(),
+                        _ => _Daily(list),
+                      },
                     ],
             ),
           ],
