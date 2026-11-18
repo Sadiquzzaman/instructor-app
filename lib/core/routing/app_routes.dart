@@ -44,6 +44,8 @@ abstract final class AppRoutes {
   static const attendanceSetup = '/attendance-setup';
   static const homeworkSettings = '/homework-settings';
   static const plagiarismSettings = '/plagiarism-settings';
+  static const performanceSettings = '/performance-settings';
+  static const gradingScale = '/grading-scale';
 
   /// Pages the app has really built (not "use the website for now"). A
   /// notification's link opens in the app only for these; each stage adds
@@ -79,6 +81,8 @@ abstract final class AppRoutes {
     attendanceSetup,
     homeworkSettings,
     plagiarismSettings,
+    performanceSettings,
+    gradingScale,
     performance,
     reportCards,
     resources,

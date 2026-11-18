@@ -34,6 +34,7 @@ import 'package:instructor_app/features/organization/screens/class_setup_screen.
 import 'package:instructor_app/features/organization/screens/holidays_screen.dart';
 import 'package:instructor_app/features/organization/screens/organization_overview_screen.dart';
 import 'package:instructor_app/features/organization/screens/people_screen.dart';
+import 'package:instructor_app/features/organization/screens/perf_grading_screens.dart';
 import 'package:instructor_app/features/organization/screens/sessions_screen.dart';
 import 'package:instructor_app/features/organization/screens/settings_forms_screens.dart';
 import 'package:instructor_app/features/organization/screens/subjects_classes_screens.dart';
@@ -320,6 +321,14 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: AppRoutes.plagiarismSettings,
             builder: (context, state) => const PlagiarismSettingsScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.performanceSettings,
+            builder: (context, state) => const PerformanceSettingsScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.gradingScale,
+            builder: (context, state) => const GradingScaleScreen(),
           ),
           GoRoute(
             path: AppRoutes.marks,
