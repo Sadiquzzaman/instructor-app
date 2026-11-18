@@ -67,6 +67,7 @@ abstract final class AppRoutes {
     '/classes/details/',
     '/grading/details/',
     '/marks/',
+    '/performance/students/',
   };
 
   static bool isAppPage(String link) {

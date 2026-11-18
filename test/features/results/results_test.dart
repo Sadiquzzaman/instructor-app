@@ -7,6 +7,8 @@ import 'package:instructor_app/features/results/screens/results_screens.dart';
 import 'package:instructor_app/l10n/generated/app_localizations_bn.dart';
 import 'package:instructor_app/l10n/generated/app_localizations_en.dart';
 
+import 'package:instructor_app/features/results/screens/section_performance_screen.dart';
+
 import '../../helpers/fake_api.dart';
 import '../../helpers/pump_app.dart';
 
@@ -199,13 +201,16 @@ void main() {
     expect(find.text('Works hard.'), findsOneWidget);
   });
 
-  testWidgets('teachers are sent to the website for now', (tester) async {
+  testWidgets('teachers get their sections (section_performance_test)', (
+    tester,
+  ) async {
     await _open(
       tester,
       AppRoutes.performance,
       session: Session.fromPayload({...sessionPayload(), 'role': 'TEACHER'}),
     );
-    expect(find.text(_en.appNotYetBody), findsOneWidget);
+    expect(find.byType(SectionPerformanceScreen), findsOneWidget);
+    expect(find.text(_en.appNotYetBody), findsNothing);
   });
 
   testWidgets('in Bangla', (tester) async {

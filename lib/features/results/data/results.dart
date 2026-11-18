@@ -116,8 +116,11 @@ class MyPerformance {
     this.classSize = 0,
     this.onTime,
     this.publishedOnly = true,
+    this.name,
   });
 
+  /// The student's name (shown when a teacher opens it).
+  final String? name;
   final ScoreLine overall;
   final List<ScoreLine> subjects;
   final List<ExamLine> exams;
@@ -130,6 +133,9 @@ class MyPerformance {
     final j = json is Map ? json : const <String, Object?>{};
     final hw = j['homework'];
     return MyPerformance(
+      name: j['student'] is Map
+          ? (j['student'] as Map)['full_name'] as String?
+          : null,
       overall: ScoreLine.fromJson(j['overall']),
       subjects: [
         if (j['subjects'] is List)
@@ -282,6 +288,14 @@ final myPerformanceProvider = FutureProvider.autoDispose<MyPerformance>((
   final r = await ref.read(apiClientProvider).get('/scores/students/$me');
   return MyPerformance.fromJson(r.payload);
 }, retry: (retryCount, error) => null);
+
+/// A student's results for their teacher (`GET /scores/students/:id`).
+final studentPerformanceProvider = FutureProvider.autoDispose
+    .family<MyPerformance, String>((ref, id) async {
+      ref.watch(workspaceKeyProvider);
+      final r = await ref.read(apiClientProvider).get('/scores/students/$id');
+      return MyPerformance.fromJson(r.payload);
+    }, retry: (retryCount, error) => null);
 
 final myReportCardsProvider = FutureProvider.autoDispose<List<ReportCardItem>>((
   ref,
