@@ -7,6 +7,7 @@ import 'package:instructor_app/core/api/api_error_text.dart';
 import 'package:instructor_app/core/api/api_exception.dart';
 import 'package:instructor_app/core/api/api_providers.dart';
 import 'package:instructor_app/core/l10n/l10n.dart';
+import 'package:instructor_app/core/l10n/level_text.dart';
 import 'package:instructor_app/core/routing/app_routes.dart';
 import 'package:instructor_app/core/theme/app_colors.dart';
 import 'package:instructor_app/core/theme/app_metrics.dart';
@@ -527,7 +528,7 @@ class _ClassSessionScreenState extends ConsumerState<ClassSessionScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
               child: Text(
-                l10n.classAttendanceNoStudents,
+                ref.levels(context, l10n.classAttendanceNoStudents),
                 style: text.bodySmall?.copyWith(color: colors.inkMuted),
               ),
             )

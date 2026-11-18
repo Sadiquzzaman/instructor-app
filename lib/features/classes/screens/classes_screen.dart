@@ -44,7 +44,9 @@ class ClassesScreen extends ConsumerWidget {
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 720),
         child: classes.when(
-          loading: () => LoadingView(semanticsLabel: l10n.classesTitle),
+          loading: () => LoadingView(
+            semanticsLabel: ref.levels(context, l10n.classesTitle),
+          ),
           error: (_, _) => ErrorView(
             title: ref.levels(context, l10n.classesNotFound),
             retryLabel: l10n.uiErrorRetry,
@@ -155,7 +157,9 @@ class ClassDetailScreen extends ConsumerWidget {
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 720),
         child: detail.when(
-          loading: () => LoadingView(semanticsLabel: l10n.classesTitle),
+          loading: () => LoadingView(
+            semanticsLabel: ref.levels(context, l10n.classesTitle),
+          ),
           error: (e, _) =>
               e is ApiException && (e.statusCode == 404 || e.statusCode == 403)
               ? notFound()
