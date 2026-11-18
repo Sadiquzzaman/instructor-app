@@ -27,6 +27,7 @@ import 'package:instructor_app/features/shell/menu/menu_items.g.dart';
 import 'package:instructor_app/features/shell/screens/app_shell.dart';
 import 'package:instructor_app/features/tests/screens/take_test_screen.dart';
 import 'package:instructor_app/features/tests/screens/test_result_screen.dart';
+import 'package:instructor_app/features/tests/screens/integrity_screen.dart';
 import 'package:instructor_app/features/tests/screens/monitor_screen.dart';
 import 'package:instructor_app/features/tests/screens/teacher_tests_screens.dart';
 import 'package:instructor_app/features/tests/screens/tests_screen.dart';
@@ -226,6 +227,11 @@ final routerProvider = Provider<GoRouter>((ref) {
                 path: ':id/monitor',
                 builder: (context, state) =>
                     MonitorScreen(examId: state.pathParameters['id']!),
+              ),
+              GoRoute(
+                path: ':id/integrity',
+                builder: (context, state) =>
+                    IntegrityScreen(examId: state.pathParameters['id']!),
               ),
               GoRoute(
                 path: ':id/results',

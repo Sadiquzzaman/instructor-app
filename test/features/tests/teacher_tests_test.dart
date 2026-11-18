@@ -145,6 +145,8 @@ void main() {
     expect(find.text(_en.testsEnabled), findsOneWidget);
     // They made it (created_by is them): the live monitor is theirs.
     expect(find.byKey(const Key('test-monitor')), findsOneWidget);
+    // Nothing to report before it starts.
+    expect(find.byKey(const Key('test-integrity')), findsNothing);
     expect(find.text(_en.testsDetailsMinutes(40)), findsOneWidget);
     expect(find.text(_en.testsAudienceSelectedClass), findsOneWidget);
     expect(find.text('25%'), findsOneWidget);
