@@ -15,6 +15,7 @@ import 'package:instructor_app/core/widgets/app_button.dart';
 import 'package:instructor_app/core/widgets/app_card.dart';
 import 'package:instructor_app/core/widgets/state_views.dart';
 import 'package:instructor_app/core/widgets/status_pill.dart';
+import 'package:instructor_app/features/resources/staff_resources_screen.dart';
 
 /// A resource shared with the student's classes (`GET /resources/mine`).
 @immutable
@@ -147,12 +148,9 @@ class _ResourcesScreenState extends ConsumerState<ResourcesScreen> {
     final l10n = context.l10n;
     final text = Theme.of(context).textTheme;
     final colors = AppColors.of(context);
+    // Staff keep a library and share it (the web's StaffLibrary).
     if (ref.watch(sessionProvider)?.role != 'STUDENT') {
-      return EmptyView(
-        icon: Icons.public,
-        title: l10n.resourcesTitle,
-        message: l10n.appNotYetBody,
-      );
+      return const StaffResourcesScreen();
     }
     final items = ref.watch(myResourcesProvider(_query));
     for (final r in items.value ?? const <Resource>[]) {

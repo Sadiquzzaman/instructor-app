@@ -8,3 +8,4 @@ Each item: what, and why it waits.
 - Rich text: homework instructions (and later resource notes, discussions) come from the web editor as HTML; the app shows them as plain paragraphs and lists (`core/text/html_text.dart`). Bold, links and tables need an HTML renderer package (owner's approval).
 - Homework photos: the web combines several photos into one PDF before handing in; the app uploads each photo (up to the homework's file limit). Combining needs a PDF package (owner's approval).
 - Class discussions: editing a post or deleting a comment (the web has both) is not in the app yet; a teacher-side view (start a conversation with a student) comes with Stage 2.
+- Chat: teachers deleting other people's comments inside a post's thread is on the web only; it waits for a second pass on chat after Stage 2.

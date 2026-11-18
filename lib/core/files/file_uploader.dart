@@ -17,6 +17,18 @@ const _documents = [
   'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
   'text/plain',
 ];
+const _slides = [
+  'application/vnd.ms-powerpoint',
+  'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+];
+const _audio = [
+  'audio/mpeg',
+  'audio/mp4',
+  'audio/x-m4a',
+  'audio/ogg',
+  'audio/wav',
+  'audio/webm',
+];
 
 /// What a file is for (`purpose` in `POST /files/presign`), with the types
 /// the server takes for it (backend `UPLOAD_RULES`).
@@ -26,7 +38,10 @@ enum FilePurpose {
   discussion('DISCUSSION', [..._images, ..._documents]),
   leave('LEAVE', [..._images, 'application/pdf']),
   // Accepted since 18 Nov (tes-taker#349): images and documents.
-  homework('HOMEWORK', [..._images, ..._documents]);
+  homework('HOMEWORK', [..._images, ..._documents]),
+
+  /// The resource library: documents, slides, images and audio.
+  resource('RESOURCE', [..._images, ..._documents, ..._slides, ..._audio]);
 
   const FilePurpose(this.apiValue, this.mimes);
 
