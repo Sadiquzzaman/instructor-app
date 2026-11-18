@@ -80,6 +80,21 @@ void main() {
       expect(m.placeholders, {'name': PlaceholderType.text});
     });
 
+    test('a Dart reserved word as a placeholder gets "Value" added', () {
+      final m = convertMessage(
+        '{new, plural, one {# new mark} other {# new marks}}, was {old}, now {new}',
+      );
+      expect(
+        m.text,
+        '{newValue, plural, one{{newValue} new mark} other{{newValue} new marks}}'
+        ', was {old}, now {newValue}',
+      );
+      expect(m.placeholders, {
+        'newValue': PlaceholderType.number,
+        'old': PlaceholderType.text,
+      });
+    });
+
     test('{x, number} becomes a number placeholder', () {
       final m = convertMessage('Step {current, number} of {total, number}');
       expect(m.text, 'Step {current} of {total}');

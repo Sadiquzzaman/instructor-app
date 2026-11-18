@@ -1825,6 +1825,366 @@
   "classAttendanceChangeUndo": "Undo change",
   "classAttendanceChangeEditChange": "Edit change",
   "classAttendanceChangeOpen": "Change time or teacher",
+  "reportsTitle": "Attendance reports",
+  "reportsIntro": "The day's summary per [[section]], the monthly register to print, save as PDF or open in Excel, and, for owners and admins, teachers' attendance.",
+  "reportsTabsDaily": "Daily summary",
+  "reportsTabsMonthly": "Monthly register",
+  "reportsTabsTeachers": "Teachers",
+  "reportsLoadFailed": "The report could not be loaded.",
+  "reportsNoSections": "No [[sections]] to show",
+  "reportsNoSectionsHint": "[[Sections]] with a schedule in Class setup appear here: all of them for owners and admins, the ones you teach for teachers.",
+  "reportsSection": "[[Section]]",
+  "reportsAllSections": "All [[sections]]",
+  "reportsDate": "Date",
+  "reportsFrom": "From",
+  "reportsTo": "To",
+  "reportsToday": "Today",
+  "reportsThisMonth": "This month",
+  "reportsPreviousMonth": "Previous month",
+  "reportsNextMonth": "Next month",
+  "reportsPrint": "Print / Save as PDF",
+  "reportsExportCsv": "Export CSV (Excel)",
+  "reportsLegend": "Letters",
+  "reportsLegendMissed": "A small number: classes missed that day",
+  "reportsCancelled": "cancelled",
+  "reportsDayPRESENT": "Present",
+  "reportsDayLATE": "Late",
+  "reportsDayABSENT": "Absent",
+  "reportsDayLEAVE": "On leave",
+  "reportsDayWAITING": "Not in yet",
+  "reportsDayMissed": "{status}, missed {missed, plural, one{{missed} class} other{{missed} classes}}",
+  "@reportsDayMissed": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      },
+      "missed": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "reportsMissedShort": "missed {missed}",
+  "@reportsMissedShort": {
+    "placeholders": {
+      "missed": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "reportsGroupABSENT": "Missed every class of this [[section]]",
+  "reportsGroupMISSEDSOME": "Missed some classes",
+  "reportsGroupLATE": "Late",
+  "reportsGroupLEAVE": "On leave",
+  "reportsGroupWAITING": "Not in yet",
+  "reportsGroupPRESENT": "Present",
+  "reportsClosedWEEKLYOFF": "Weekly off day: no classes.",
+  "reportsClosedHOLIDAY": "Holiday: no classes.",
+  "reportsNoClassesDay": "No classes on this day",
+  "reportsNoClassesDayHint": "Classes come from the weekly schedules in Class setup.",
+  "reportsClassesLine": "{count, plural, one{{count} class} other{{count} classes}}: {times}",
+  "@reportsClassesLine": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "times": {
+        "type": "String"
+      }
+    }
+  },
+  "reportsStudentsCount": "{count, plural, one{{count} student} other{{count} students}}",
+  "@reportsStudentsCount": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "reportsDailyTitle": "Daily attendance summary",
+  "reportsMonthTitle": "Monthly attendance register",
+  "reportsMonthHint": "{days, plural, one{{days} class day} other{{days} class days}}, {classes, plural, one{{classes} class} other{{classes} classes}}, {students, plural, one{{students} student} other{{students} students}} · attendance {pct}. Absent on a day means every class of this [[section]] that day was missed.",
+  "@reportsMonthHint": {
+    "placeholders": {
+      "days": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "classes": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "students": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "pct": {
+        "type": "String"
+      }
+    }
+  },
+  "reportsMonthCaption": "Students by class day",
+  "reportsNoClasses": "No classes this month",
+  "reportsNoClassesHint": "This [[section]] has no class days this month (holidays, off days and cancelled classes are left out).",
+  "reportsNoStudents": "No students in this [[section]].",
+  "reportsColumnsRoll": "Roll",
+  "reportsColumnsName": "Name",
+  "reportsColumnsPresent": "Present",
+  "reportsColumnsLate": "Late",
+  "reportsColumnsAbsent": "Absent",
+  "reportsColumnsLeave": "Leave",
+  "reportsColumnsPct": "Attendance %",
+  "reportsColumnsTeacher": "Teacher",
+  "reportsColumnsLateMinutes": "Minutes late",
+  "reportsColumnsDate": "Date",
+  "reportsColumnsTime": "Time",
+  "reportsColumnsStatus": "Status",
+  "reportsShortPresent": "P",
+  "reportsShortLate": "L",
+  "reportsShortAbsent": "A",
+  "reportsShortLeave": "LV",
+  "reportsTeachersTitle": "Teachers' attendance",
+  "reportsTeachersHint": "Classes with a saved mark; Absent is saved when check-in closes. Up to 31 days.",
+  "reportsTeachersCaption": "Teachers",
+  "reportsNoTeachers": "No teacher attendance in this period",
+  "reportsNoTeachersHint": "Teachers check in to the classes that name them; paper-register classes have no teacher marks.",
+  "reportsNotOnTime": "Classes not on time",
+  "reportsAllOnTime": "Every class was on time.",
+  "reportsMinutesLate": "{minutes} min late",
+  "@reportsMinutesLate": {
+    "placeholders": {
+      "minutes": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "reportsErrorsATTENDANCEREPORTDATEINVALID": "Choose a real date.",
+  "reportsErrorsATTENDANCEREPORTRANGEINVALID": "The end date is before the start date.",
+  "reportsErrorsATTENDANCEREPORTRANGETOOLONG": "Choose at most 31 days.",
+  "reportsErrorsATTENDANCEREPORTSECTIONNOTFOUND": "This [[section]] is not one you can see.",
+  "reportsErrorsATTENDANCEREGISTERSECTIONNOTFOUND": "This [[section]] is not one you can see.",
+  "reportsErrorsATTENDANCEREGISTERSESSIONCLOSED": "This academic session is closed.",
+  "registerTitle": "Monthly register",
+  "registerIntro": "Each [[section]]'s month as a CSV file: roll number, name and one column per class day. [[Sections]] that keep attendance on paper fill in the template and import it here.",
+  "registerSection": "[[Section]]",
+  "registerModeSELFCHECKIN": "Self check-in",
+  "registerModePAPERREGISTER": "Paper register",
+  "registerPreviousMonth": "Previous month",
+  "registerNextMonth": "Next month",
+  "registerLoadFailed": "The register could not be loaded.",
+  "registerNoSections": "No [[sections]] to show",
+  "registerNoSectionsHint": "[[Sections]] with a schedule in Class setup appear here: all of them for owners and admins, the ones you teach for teachers.",
+  "registerNoClasses": "No classes this month",
+  "registerNoClassesHint": "This [[section]] has no class days this month (holidays, off days and cancelled classes are left out).",
+  "registerNoStudents": "No students in this [[section]].",
+  "registerPaperHint": "Paper register · {classes, plural, one{{classes} class day} other{{classes} class days}}, {students, plural, one{{students} student} other{{students} students}}. Download the template, fill in P, L, A or LV, and import it. Importing the same file again changes nothing.",
+  "@registerPaperHint": {
+    "placeholders": {
+      "classes": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "students": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "registerSelfHint": "Self check-in · {classes, plural, one{{classes} class day} other{{classes} class days}}, {students, plural, one{{students} student} other{{students} students}}. Students check themselves in; you can download the register. To import a paper register, set the [[section]] to Paper register in Class setup.",
+  "@registerSelfHint": {
+    "placeholders": {
+      "classes": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "students": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "registerTemplate": "Download template",
+  "registerExport": "Export CSV",
+  "registerImport": "Import CSV",
+  "registerTableCaption": "Students this month",
+  "registerImported": "Register imported: {newValue, plural, one{{newValue} new mark} other{{newValue} new marks}}, {changed, plural, one{{changed} changed} other{{changed} changed}}.",
+  "@registerImported": {
+    "placeholders": {
+      "newValue": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "changed": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "registerColumnsRoll": "Roll",
+  "registerColumnsName": "Name",
+  "registerColumnsPRESENT": "Present",
+  "registerColumnsLATE": "Late",
+  "registerColumnsABSENT": "Absent",
+  "registerColumnsLEAVE": "Leave",
+  "registerColumnsMissing": "No mark yet",
+  "registerStatusPRESENT": "Present",
+  "registerStatusLATE": "Late",
+  "registerStatusABSENT": "Absent",
+  "registerStatusLEAVE": "Leave",
+  "registerImporterTitle": "Import the register: {section}, {month}",
+  "@registerImporterTitle": {
+    "placeholders": {
+      "section": {
+        "type": "String"
+      },
+      "month": {
+        "type": "String"
+      }
+    }
+  },
+  "registerImporterIntro": "Choose the filled-in CSV. Every column, line and mark is checked first; nothing is saved until everything is right.",
+  "registerImporterColumnsHint": "Columns: roll_no, name, then one column per class day (as in the template). Marks: P, L, A or LV (or উ, দে, অ, ছু). An empty cell changes nothing.",
+  "registerImporterFile": "CSV file",
+  "registerImporterFileTypes": "CSV files",
+  "registerImporterNoRows": "The file has no lines after the header.",
+  "registerImporterTooManyRows": "A file can have at most {max} lines.",
+  "@registerImporterTooManyRows": {
+    "placeholders": {
+      "max": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "registerImporterTooManyColumns": "A file can have at most {max} columns.",
+  "@registerImporterTooManyColumns": {
+    "placeholders": {
+      "max": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "registerImporterMissingColumns": "The file needs a roll_no or a name column. Start from the template.",
+  "registerImporterPreviewProblems": "Some lines or columns have problems. Fix the file and choose it again; nothing is imported until everything is right.",
+  "registerImporterPreviewReady": "Everything is right. Importing saves the marks below.",
+  "registerImporterNothingToChange": "Everything is right, and the register already has these marks: nothing to import.",
+  "registerImporterSummaryNew": "{count, plural, one{{count} new mark} other{{count} new marks}}",
+  "@registerImporterSummaryNew": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "registerImporterSummaryChanged": "{count, plural, one{{count} changed mark (kept in the correction trail)} other{{count} changed marks (kept in the correction trail)}}",
+  "@registerImporterSummaryChanged": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "registerImporterSummaryUnchanged": "{count, plural, one{{count} already saved} other{{count} already saved}}",
+  "@registerImporterSummaryUnchanged": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "registerImporterSummaryKept": "{count, plural, one{{count} kept as it is} other{{count} kept as they are}}",
+  "@registerImporterSummaryKept": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "registerImporterOverwrite": "{count, plural, one{Also replace {count} self check-in the file disagrees with} other{Also replace {count} self check-ins the file disagrees with}}",
+  "@registerImporterOverwrite": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "registerImporterOverwriteHint": "Left unticked, the students' own check-ins stay and only the other marks are imported.",
+  "registerImporterColumnProblems": "Columns",
+  "registerImporterEmptyIgnored": "(empty, ignored)",
+  "registerImporterClosedHOLIDAY": "This day is a holiday.",
+  "registerImporterClosedWEEKLYOFF": "This day is a weekly off day.",
+  "registerImporterCancel": "Cancel",
+  "registerImporterImportCount": "{count, plural, =0{Nothing to import} one{Import {count} mark} other{Import {count} marks}}",
+  "@registerImporterImportCount": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "registerImporterTableCaption": "Lines of the file",
+  "registerImporterOk": "OK",
+  "registerImporterHasErrors": "Problem",
+  "registerImporterIgnored": "Ignored",
+  "registerImporterColumnsRow": "Line",
+  "registerImporterColumnsStudent": "Student",
+  "registerImporterColumnsChanges": "Marks to save",
+  "registerImporterColumnsStatus": "Check",
+  "registerImporterIssuesCOLUMNUNKNOWN": "This header is not a date. Use the template's headers.",
+  "registerImporterIssuesCOLUMNNOTINMONTH": "This date is not in the register's month.",
+  "registerImporterIssuesNOTCLASSDAY": "There is no class this day.",
+  "registerImporterIssuesCLOSEDDAY": "This day is a holiday or off day.",
+  "registerImporterIssuesCANCELLED": "This class was cancelled.",
+  "registerImporterIssuesNOTSTARTED": "This class has not started yet.",
+  "registerImporterIssuesTIMENEEDED": "There are two classes this day; add the start time (e.g. 2026-11-07 16:00).",
+  "registerImporterIssuesNOTCLASSTIME": "No class starts at this time this day.",
+  "registerImporterIssuesDUPLICATECOLUMN": "Another column is for the same class.",
+  "registerImporterIssuesSTUDENTMISSING": "Enter the roll number or the name.",
+  "registerImporterIssuesSTUDENTNOTFOUND": "No student of this [[section]] has this roll number or name.",
+  "registerImporterIssuesSTUDENTAMBIGUOUS": "Two students match; use the roll number.",
+  "registerImporterIssuesSTUDENTDUPLICATE": "This student is on another line too.",
+  "registerImporterIssuesSTATUSINVALID": "“{value}” is not a mark. Use P, L, A or LV.",
+  "@registerImporterIssuesSTATUSINVALID": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "registerImporterIssuesNOTJOINED": "The student joined after this class.",
+  "registerImporterIssuesTOOOLD": "Teachers change saved marks of the last 7 days only; ask an admin.",
+  "registerImporterNotesNAMEDIFFERS": "The name is written differently from the student list (matched by roll number).",
+  "registerImporterNotesSELFCHECKIN": "The student checked in themselves as {old}; the file says {newValue}.",
+  "@registerImporterNotesSELFCHECKIN": {
+    "placeholders": {
+      "old": {
+        "type": "String"
+      },
+      "newValue": {
+        "type": "String"
+      }
+    }
+  },
+  "registerImporterNotesLEAVEKEPT": "On approved leave: Leave is kept.",
+  "registerImporterNotesONLEAVE": "On approved leave: saved as Leave.",
+  "registerErrorsATTENDANCEREGISTERSECTIONNOTFOUND": "This [[section]] was not found.",
+  "registerErrorsATTENDANCEREGISTERMONTHINVALID": "Choose a month.",
+  "registerErrorsATTENDANCEREGISTERSELFCHECKIN": "This [[section]] uses self check-in. Set it to Paper register in Class setup first.",
+  "registerErrorsATTENDANCEREGISTERSESSIONCLOSED": "This academic session is closed.",
+  "registerErrorsATTENDANCEREGISTERCOLUMNSMISSING": "The file needs a roll_no or a name column.",
+  "registerErrorsATTENDANCEREGISTERINVALID": "Some lines have problems; fix the file and check it again.",
+  "registerErrorsATTENDANCEREGISTERCHANGED": "The register changed while it was imported; choose the file again.",
   "leaveTitle": "Leave",
   "leaveIntro": "Apply for leave with dates and a reason. Approved days show as Leave (blue) and never count as absent.",
   "leaveApply": "Apply for leave",

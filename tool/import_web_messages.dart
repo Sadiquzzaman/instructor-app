@@ -38,6 +38,8 @@ const webNamespaces = [
   'calendar',
   'myAttendance',
   'classAttendance',
+  'reports',
+  'register',
   'leave',
   'routine',
   'homework',
@@ -234,6 +236,49 @@ ConvertedMessage convertMessage(String message, {String key = ''}) {
   return ConvertedMessage(text, parser.placeholders);
 }
 
+/// Dart's reserved words, which gen-l10n cannot use as parameter names.
+const _dartReserved = {
+  'assert',
+  'break',
+  'case',
+  'catch',
+  'class',
+  'const',
+  'continue',
+  'default',
+  'do',
+  'else',
+  'enum',
+  'extends',
+  'false',
+  'final',
+  'finally',
+  'for',
+  'if',
+  'in',
+  'is',
+  'new',
+  'null',
+  'rethrow',
+  'return',
+  'super',
+  'switch',
+  'this',
+  'throw',
+  'true',
+  'try',
+  'var',
+  'void',
+  'while',
+  'with',
+};
+
+/// A placeholder name gen-l10n can use: a reserved word (the web's `{new}`)
+/// gets "Value" added. Screens pass placeholders by position, so only the
+/// generated parameter's name changes.
+String safePlaceholderName(String name) =>
+    _dartReserved.contains(name) ? '${name}Value' : name;
+
 class _IcuParser {
   _IcuParser(this.src, this.key);
   final String src;
@@ -267,7 +312,7 @@ class _IcuParser {
 
   String _parseArgument() {
     pos++; // {
-    final name = _word();
+    final name = safePlaceholderName(_word());
     _spaces();
     if (_peek('}')) {
       pos++;
