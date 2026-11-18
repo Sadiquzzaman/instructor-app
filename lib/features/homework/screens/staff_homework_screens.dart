@@ -536,6 +536,14 @@ class _StaffHomeworkDetailScreenState
             spacing: AppSpacing.sm,
             runSpacing: AppSpacing.sm,
             children: [
+              if (h.status == 'PUBLISHED')
+                OutlinedButton.icon(
+                  key: const Key('homework-plagiarism'),
+                  onPressed: () =>
+                      context.push('${AppRoutes.homework}/${h.id}/similarity'),
+                  icon: const Icon(Icons.manage_search),
+                  label: Text(l10n.homeworkDetailPlagiarism),
+                ),
               OutlinedButton(
                 key: const Key('homework-edit'),
                 onPressed: _busy

@@ -2185,6 +2185,144 @@
   "registerErrorsATTENDANCEREGISTERCOLUMNSMISSING": "The file needs a roll_no or a name column.",
   "registerErrorsATTENDANCEREGISTERINVALID": "Some lines have problems; fix the file and check it again.",
   "registerErrorsATTENDANCEREGISTERCHANGED": "The register changed while it was imported; choose the file again.",
+  "plagiarismTitle": "Plagiarism check: {name}",
+  "@plagiarismTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "plagiarismTitlePlain": "Plagiarism check: IELTS Writing",
+  "plagiarismCrumb": "Plagiarism check",
+  "plagiarismMatchCrumb": "Side by side",
+  "plagiarismBackToHomework": "Back to the homework",
+  "plagiarismBackToTests": "Back to IELTS tests",
+  "plagiarismStaffOnly": "Only teachers and admins see these results. A decision never changes a score by itself.",
+  "plagiarismRunNow": "Run check now",
+  "plagiarismRan": "Check finished",
+  "plagiarismNotAvailable": "Plagiarism checks are not in your plan.",
+  "plagiarismLoadFailed": "The results could not be loaded.",
+  "plagiarismLastRun": "Last checked {when} ({count, plural, one{{count} text} other{{count} texts}} compared)",
+  "@plagiarismLastRun": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      },
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "plagiarismNotRunYet": "Not checked yet. It runs by itself after the due date, or now with Run check now.",
+  "plagiarismThresholds": "High from {high}%, Medium from {medium}%, texts under {words} words not checked",
+  "@plagiarismThresholds": {
+    "placeholders": {
+      "high": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "medium": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "words": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "plagiarismStudent": "Student",
+  "plagiarismTask": "Task",
+  "plagiarismTaskN": "Task {no}",
+  "@plagiarismTaskN": {
+    "placeholders": {
+      "no": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "plagiarismWords": "Words",
+  "plagiarismSimilarity": "Similarity",
+  "plagiarismMostSimilar": "Most similar to",
+  "plagiarismCompareWith": "Compare {a} with {b}",
+  "@plagiarismCompareWith": {
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      }
+    }
+  },
+  "plagiarismLevelsHIGH": "High",
+  "plagiarismLevelsMEDIUM": "Medium",
+  "plagiarismLevelsLOW": "Low",
+  "plagiarismNotCheckedTOOSHORT": "Not checked: too short",
+  "plagiarismNotCheckedNOTEXT": "Not checked: no text",
+  "plagiarismNotCheckedHANDWRITTENIMAGE": "Not checked: handwritten image",
+  "plagiarismNotCheckedFILENOTREAD": "Not checked: file (Word and PDF are not read yet)",
+  "plagiarismSubmissionsCaption": "Submissions and their similarity",
+  "plagiarismNoSubmissions": "No submissions yet",
+  "plagiarismPairsTitle": "Similar pairs",
+  "plagiarismPairsDescription": "Pairs at Medium or High, and any already reviewed.",
+  "plagiarismPair": "Pair",
+  "plagiarismReview": "Review",
+  "plagiarismNotReviewed": "Not reviewed",
+  "plagiarismNoPairs": "No similar pairs",
+  "plagiarismDecisionsOK": "Reviewed — OK",
+  "plagiarismDecisionsCOPIED": "Copied",
+  "plagiarismMatchTitle": "{a} and {b}",
+  "@plagiarismMatchTitle": {
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      }
+    }
+  },
+  "plagiarismSharePercent": "{percent}% of this text is in shared passages",
+  "@plagiarismSharePercent": {
+    "placeholders": {
+      "percent": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "plagiarismTextOf": "Text of {name}",
+  "@plagiarismTextOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "plagiarismDecision": "Decision",
+  "plagiarismNote": "Note",
+  "plagiarismNoScoreChange": "The decision is recorded; change the score yourself if needed.",
+  "plagiarismSaveReview": "Save review",
+  "plagiarismReviewSaved": "Review saved",
+  "plagiarismReviewedAt": "Reviewed {when}",
+  "@plagiarismReviewedAt": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "plagiarismSettingsTitle": "Plagiarism settings",
+  "plagiarismSettingsDescription": "When a similarity counts as High or Medium, and the fewest words a text needs to be checked.",
+  "plagiarismHighFrom": "High from (%)",
+  "plagiarismMediumFrom": "Medium from (%)",
+  "plagiarismMinWords": "Fewest words checked",
+  "plagiarismSave": "Save",
+  "plagiarismSettingsSaved": "Settings saved",
   "leaveTitle": "Leave",
   "leaveIntro": "Apply for leave with dates and a reason. Approved days show as Leave (blue) and never count as absent.",
   "leaveApply": "Apply for leave",
