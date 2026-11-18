@@ -406,6 +406,20 @@ class _TeacherTestScreenState extends ConsumerState<TeacherTestScreen> {
                 ),
               ),
             ),
+          if (canMonitor && t.status != 'pending')
+            Padding(
+              padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+              child: Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: OutlinedButton.icon(
+                  key: const Key('test-integrity'),
+                  onPressed: () =>
+                      context.push('${AppRoutes.tests}/${t.id}/integrity'),
+                  icon: const Icon(Icons.verified_user_outlined),
+                  label: Text(l10n.testsDetailsIntegrity),
+                ),
+              ),
+            ),
           if (canModify)
             Align(
               alignment: AlignmentDirectional.centerStart,
