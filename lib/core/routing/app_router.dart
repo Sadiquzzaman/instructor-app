@@ -30,6 +30,7 @@ import 'package:instructor_app/features/tests/screens/test_result_screen.dart';
 import 'package:instructor_app/features/organization/screens/assignments_screen.dart';
 import 'package:instructor_app/features/organization/screens/attendance_settings_screen.dart';
 import 'package:instructor_app/features/organization/screens/branches_screen.dart';
+import 'package:instructor_app/features/organization/screens/class_setup_screen.dart';
 import 'package:instructor_app/features/organization/screens/holidays_screen.dart';
 import 'package:instructor_app/features/organization/screens/organization_overview_screen.dart';
 import 'package:instructor_app/features/organization/screens/people_screen.dart';
@@ -306,6 +307,10 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: AppRoutes.attendanceBranches,
             builder: (context, state) => const BranchesScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.attendanceSetup,
+            builder: (context, state) => const ClassSetupScreen(),
           ),
           GoRoute(
             path: AppRoutes.marks,

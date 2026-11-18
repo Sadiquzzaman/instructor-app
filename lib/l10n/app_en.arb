@@ -6703,6 +6703,297 @@
     }
   },
   "branchesRemovedBranch": "Removed branch",
+  "classSetupTitle": "Class setup",
+  "classSetupIntro": "How each [[section]]'s attendance is taken: in person or online, check-in or a paper register, and when Late begins. The timetable is made in the Routine.",
+  "classSetupLoadFailed": "Couldn't load the class setup.",
+  "classSetupSectionsIn": "[[Sections]] in {session}",
+  "@classSetupSectionsIn": {
+    "placeholders": {
+      "session": {
+        "type": "String"
+      }
+    }
+  },
+  "classSetupSession": "Session",
+  "classSetupClass": "[[Class]]",
+  "classSetupAllClasses": "All [[classes]]",
+  "classSetupShiftLabel": "Shift",
+  "classSetupAllShifts": "All shifts",
+  "classSetupShiftMORNING": "Morning",
+  "classSetupShiftDAY": "Day",
+  "classSetupShiftEVENING": "Evening",
+  "classSetupSection": "[[Section]]",
+  "classSetupSchedule": "Weekly schedule",
+  "classSetupBranch": "Branch",
+  "classSetupClassType": "Type",
+  "classSetupMode": "Attendance",
+  "classSetupGrace": "Late after",
+  "classSetupActions": "Actions",
+  "classSetupNoSchedule": "No schedule yet",
+  "classSetupWithoutSchedule": "{count, plural, one{{count} [[section]] has no schedule yet; no check-in opens for it.} other{{count} [[sections]] have no schedule yet; no check-in opens for them.}}",
+  "@classSetupWithoutSchedule": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "classSetupDayShort1": "Mon",
+  "classSetupDayShort2": "Tue",
+  "classSetupDayShort3": "Wed",
+  "classSetupDayShort4": "Thu",
+  "classSetupDayShort5": "Fri",
+  "classSetupDayShort6": "Sat",
+  "classSetupDayShort7": "Sun",
+  "classSetupClassTypesINPERSON": "In person",
+  "classSetupClassTypesONLINE": "Online",
+  "classSetupModesSELFCHECKIN": "Self check-in",
+  "classSetupModesPAPERREGISTER": "Paper register",
+  "classSetupGraceDefault": "Default ({minutes} min)",
+  "@classSetupGraceDefault": {
+    "placeholders": {
+      "minutes": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "classSetupGraceMinutes": "{minutes} min",
+  "@classSetupGraceMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "classSetupNoPin": "Its branch has no pin yet",
+  "classSetupBranchFor": "Branch of {section}",
+  "@classSetupBranchFor": {
+    "placeholders": {
+      "section": {
+        "type": "String"
+      }
+    }
+  },
+  "classSetupClassTypeFor": "Class type of {section}",
+  "@classSetupClassTypeFor": {
+    "placeholders": {
+      "section": {
+        "type": "String"
+      }
+    }
+  },
+  "classSetupModeFor": "Attendance mode of {section}",
+  "@classSetupModeFor": {
+    "placeholders": {
+      "section": {
+        "type": "String"
+      }
+    }
+  },
+  "classSetupGraceFor": "Late after, {section}",
+  "@classSetupGraceFor": {
+    "placeholders": {
+      "section": {
+        "type": "String"
+      }
+    }
+  },
+  "classSetupApply": "Apply settings to…",
+  "classSetupApplyFor": "Apply the settings of {section} to other [[sections]]",
+  "@classSetupApplyFor": {
+    "placeholders": {
+      "section": {
+        "type": "String"
+      }
+    }
+  },
+  "classSetupSaved": "{section} saved",
+  "@classSetupSaved": {
+    "placeholders": {
+      "section": {
+        "type": "String"
+      }
+    }
+  },
+  "classSetupApplied": "{count, plural, one{Schedule applied to {count} [[section]]} other{Schedule applied to {count} [[sections]]}}",
+  "@classSetupApplied": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "classSetupEmpty": "No [[sections]] in this session",
+  "classSetupEmptyHint": "Add [[classes]] and [[sections]] first; then set when they meet.",
+  "classSetupGoToClasses": "Go to [[classes]]",
+  "classSetupStart": "Starts",
+  "classSetupCancel": "Cancel",
+  "classSetupErrorsSCHEDULETIMEINVALID": "The end must be after the start.",
+  "classSetupErrorsSCHEDULEOVERLAP": "This overlaps another time on the same day.",
+  "classSetupErrorsSCHEDULETEACHERCLASH": "This teacher already has a class at this time ({section}).",
+  "@classSetupErrorsSCHEDULETEACHERCLASH": {
+    "placeholders": {
+      "section": {
+        "type": "String"
+      }
+    }
+  },
+  "classSetupErrorsSCHEDULETOOMANY": "A [[section]] can have at most 70 times a week.",
+  "classSetupErrorsATTENDANCESETUPTEACHERINVALID": "Choose a teacher of this organisation.",
+  "classSetupApplyTo": "Apply to",
+  "classSetupApplyToClass": "Every other [[section]] of {classValue}",
+  "@classSetupApplyToClass": {
+    "placeholders": {
+      "classValue": {
+        "type": "String"
+      }
+    }
+  },
+  "classSetupApplyToShift": "Every other [[section]] of the {shift} shift",
+  "@classSetupApplyToShift": {
+    "placeholders": {
+      "shift": {
+        "type": "String"
+      }
+    }
+  },
+  "classSetupApplyNone": "There are no other [[sections]] to change.",
+  "classSetupImportTitle": "Import schedules from CSV",
+  "classSetupImportIntro": "One line per [[section]] and time. Each [[section]] in the file gets exactly the times listed for it; other [[sections]] are not changed.",
+  "classSetupImportColumnsHint": "Columns: class, section, days (e.g. Sat;Mon), start, end. Optional: class_type, mode, grace, branch.",
+  "classSetupImportTemplate": "Download template",
+  "classSetupImportFile": "CSV file",
+  "classSetupImportFileTypes": "CSV files",
+  "classSetupImportMissingColumns": "The file needs these columns: {columns}.",
+  "@classSetupImportMissingColumns": {
+    "placeholders": {
+      "columns": {
+        "type": "String"
+      }
+    }
+  },
+  "classSetupImportNoRows": "The file has no rows.",
+  "classSetupImportTooManyRows": "A file can have at most {max} rows.",
+  "@classSetupImportTooManyRows": {
+    "placeholders": {
+      "max": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "classSetupImportPreviewProblems": "{count, plural, one{{count} row has a problem. Fix the file and choose it again; nothing is imported until every row is right.} other{{count} rows have problems. Fix the file and choose it again; nothing is imported until every row is right.}}",
+  "@classSetupImportPreviewProblems": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "classSetupImportPreviewReady": "{sections, plural, one{Every row is right. {sections} [[section]] in {session} will get the times below.} other{Every row is right. {sections} [[sections]] in {session} will get the times below.}}",
+  "@classSetupImportPreviewReady": {
+    "placeholders": {
+      "session": {
+        "type": "String"
+      },
+      "sections": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "classSetupImportSectionPlan": "{before} → {after} times",
+  "@classSetupImportSectionPlan": {
+    "placeholders": {
+      "before": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "after": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "classSetupImportSettingsChanged": "settings change",
+  "classSetupImportOk": "OK",
+  "classSetupImportHasErrors": "Problem",
+  "classSetupImportCancel": "Cancel",
+  "classSetupImportImportCount": "{count, plural, one{Import {count} [[section]]} other{Import {count} [[sections]]}}",
+  "@classSetupImportImportCount": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "classSetupImportFixFirst": "Fix the file to import",
+  "classSetupImportColumnsRow": "Line",
+  "classSetupImportColumnsSection": "[[Section]]",
+  "classSetupImportColumnsTime": "Days and time",
+  "classSetupImportColumnsStatus": "Check",
+  "classSetupImportIssuesCLASSMISSING": "Enter the [[class]].",
+  "classSetupImportIssuesCLASSNOTFOUND": "No [[class]] with this name in the session.",
+  "classSetupImportIssuesSECTIONMISSING": "Enter the [[section]].",
+  "classSetupImportIssuesSECTIONNOTFOUND": "This [[class]] has no [[section]] with this name.",
+  "classSetupImportIssuesNAMEAMBIGUOUS": "Two [[classes]] have this name; rename one first.",
+  "classSetupImportIssuesNOTYOURSECTION": "You can set up only the [[sections]] you teach.",
+  "classSetupImportIssuesDAYSINVALID": "Days not understood. Write them like Sat;Mon.",
+  "classSetupImportIssuesSTARTINVALID": "Start time not understood. Write it like 16:00 or 4:00 PM.",
+  "classSetupImportIssuesENDINVALID": "End time not understood. Write it like 17:30 or 5:30 PM.",
+  "classSetupImportIssuesENDBEFORESTART": "The end must be after the start.",
+  "classSetupImportIssuesOVERLAP": "Overlaps another line of this [[section]] on the same day.",
+  "classSetupImportIssuesTOOMANY": "A [[section]] can have at most 70 times a week.",
+  "classSetupImportIssuesCLASSTYPEINVALID": "class_type must be In person or Online.",
+  "classSetupImportIssuesMODEINVALID": "mode must be Self check-in or Paper register.",
+  "classSetupImportIssuesGRACEINVALID": "grace must be 0 to 60 minutes, or default.",
+  "classSetupImportIssuesBRANCHNOTFOUND": "No branch with this name.",
+  "classSetupImportIssuesBRANCHNOTALLOWED": "You can't move classes between branches. Ask the organisation's owner or admin.",
+  "classSetupImportIssuesSETTINGSCONFLICT": "Another line of this [[section]] has different settings.",
+  "classSetupAddInRoutine": "Add periods in the Routine",
+  "classSetupEditInRoutine": "Edit in the Routine",
+  "classSetupViewInRoutine": "See in the Routine",
+  "classSetupEditInRoutineFor": "Edit the routine of {section}",
+  "@classSetupEditInRoutineFor": {
+    "placeholders": {
+      "section": {
+        "type": "String"
+      }
+    }
+  },
+  "classSetupApplySettingsTitle": "Apply these settings to other [[sections]]",
+  "classSetupApplySettingsIntro": "In person or online, the attendance method and “Late after” of {section} go to the [[sections]] below. Branches and periods stay as they are.",
+  "@classSetupApplySettingsIntro": {
+    "placeholders": {
+      "section": {
+        "type": "String"
+      }
+    }
+  },
+  "classSetupApplySettingsConfirm": "{count, plural, one{Apply to {count} [[section]]} other{Apply to {count} [[sections]]}}",
+  "@classSetupApplySettingsConfirm": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "classSetupApplySettingsWill": "{count, plural, one{This [[section]] gets the settings:} other{These {count} [[sections]] get the settings:}}",
+  "@classSetupApplySettingsWill": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "appNoConnection": "No internet connection. Check it and try again.",
   "appUpdateRequiredTitle": "Please update Instructor",
   "appUpdateRequiredBody": "This version of the app is no longer supported. Install the new version to continue.",

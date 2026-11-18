@@ -63,6 +63,7 @@ const webNamespaces = [
   'attendanceSettings',
   'holidays',
   'branches',
+  'classSetup',
 ];
 
 const locales = ['en', 'bn'];
