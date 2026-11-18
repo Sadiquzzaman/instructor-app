@@ -6426,6 +6426,283 @@
   "academicsImportIssuesGUARDIANSAMEPHONE": "same phone as guardian 1",
   "academicsImportIssuesSAVEFAILED": "Could not be saved; try this row again",
   "academicsImportIssuesGUARDIANSKEPT": "Already has guardians; the ones on record are kept",
+  "attendanceSettingsTitle": "Attendance settings",
+  "attendanceSettingsIntro": "Set up attendance once and it runs on its own. Students check in for each class; changes apply from now on and attendance already saved is kept.",
+  "attendanceSettingsLoadFailed": "Couldn't load the attendance settings.",
+  "attendanceSettingsReadOnly": "Only the owner and admins can change these settings.",
+  "attendanceSettingsOffDays": "Weekly off days",
+  "attendanceSettingsOffDaysHint": "No attendance and no absence SMS on these days. A day you make a school day counts from tomorrow. Add other holidays on the Holidays page.",
+  "attendanceSettingsWeekday1": "Monday",
+  "attendanceSettingsWeekday2": "Tuesday",
+  "attendanceSettingsWeekday3": "Wednesday",
+  "attendanceSettingsWeekday4": "Thursday",
+  "attendanceSettingsWeekday5": "Friday",
+  "attendanceSettingsWeekday6": "Saturday",
+  "attendanceSettingsWeekday7": "Sunday",
+  "attendanceSettingsAlertsTitle": "Alerts",
+  "attendanceSettingsAlertsIntro": "SMS to guardians use your SMS credits.",
+  "attendanceSettingsGuardianSms": "Send guardians an SMS when a student is",
+  "attendanceSettingsSmsLate": "Late",
+  "attendanceSettingsSmsAbsent": "Absent",
+  "attendanceSettingsSmsLeave": "On leave",
+  "attendanceSettingsSmsHintLate": "Sent when the student checks in late.",
+  "attendanceSettingsSmsHintAbsent": "Sent at the end of the day.",
+  "attendanceSettingsSmsHintLeave": "Sent when leave is applied for.",
+  "attendanceSettingsRepeatDays": "Alert the class teacher after",
+  "attendanceSettingsRepeatDaysHint": "School days absent in a row (2 to 30).",
+  "attendanceSettingsDaysUnit": "days",
+  "attendanceSettingsRepeatDaysError": "Enter a whole number from 2 to 30.",
+  "attendanceSettingsSave": "Save settings",
+  "attendanceSettingsUndo": "Undo changes",
+  "attendanceSettingsSaved": "Attendance settings saved",
+  "attendanceSettingsLocationTitle": "Check-in location",
+  "attendanceSettingsLocationIntro": "Students and teachers in in-person classes can check in only inside this radius. Online classes can check in from anywhere, so they need no pin.",
+  "attendanceSettingsMoreBranches": "Classes at more than one place?",
+  "attendanceSettingsAddBranches": "Add branches",
+  "attendanceSettingsBranchesSummary": "{count, plural, one{{count} branch, each with its own pin} other{{count} branches, each with its own pin}}",
+  "@attendanceSettingsBranchesSummary": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "attendanceSettingsManageBranches": "Manage branches",
+  "attendanceSettingsDaysTitle": "Class days and lateness",
+  "attendanceSettingsDaysIntro": "Class times come from each [[section]]'s schedule.",
+  "attendanceSettingsGrace": "Late after",
+  "attendanceSettingsGraceHint": "Minutes after a class starts before a check-in counts as Late (0 to 60). A [[section]] can set its own.",
+  "attendanceSettingsMinutesUnit": "minutes",
+  "attendanceSettingsGraceError": "Enter a whole number from 0 to 60.",
+  "attendanceSettingsNoWorkingDay": "Leave at least one school day in the week.",
+  "holidaysTitle": "Holidays",
+  "holidaysIntro": "Mark holidays and closures. Attendance and absence SMS are skipped on these days and on the weekly off days.",
+  "holidaysAdd": "Add holiday",
+  "holidaysYear": "Year",
+  "holidaysOffDays": "Weekly off days: {days}.",
+  "@holidaysOffDays": {
+    "placeholders": {
+      "days": {
+        "type": "String"
+      }
+    }
+  },
+  "holidaysNoOffDays": "No weekly off days.",
+  "holidaysChangeOffDays": "Change",
+  "holidaysListTitle": "Holidays in {year}",
+  "@holidaysListTitle": {
+    "placeholders": {
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "holidaysSummary": "{count, plural, one{{count} holiday} other{{count} holidays}}, {days, plural, one{{days} day} other{{days} days}} in all",
+  "@holidaysSummary": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "days": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "holidaysLoadFailed": "Couldn't load the holidays.",
+  "holidaysEmpty": "No holidays in {year} yet",
+  "@holidaysEmpty": {
+    "placeholders": {
+      "year": {
+        "type": "String"
+      }
+    }
+  },
+  "holidaysEmptyHint": "Add public holidays, exam breaks and other closures.",
+  "holidaysDates": "Dates",
+  "holidaysDays": "Days",
+  "holidaysNote": "Note",
+  "holidaysStatus": "Status",
+  "holidaysActions": "Actions",
+  "holidaysWhenPast": "Past",
+  "holidaysWhenNow": "Ongoing",
+  "holidaysWhenUpcoming": "Upcoming",
+  "holidaysEdit": "Edit",
+  "holidaysRemove": "Remove",
+  "holidaysEditNamed": "Edit holiday on {dates}",
+  "@holidaysEditNamed": {
+    "placeholders": {
+      "dates": {
+        "type": "String"
+      }
+    }
+  },
+  "holidaysRemoveNamed": "Remove holiday on {dates}",
+  "@holidaysRemoveNamed": {
+    "placeholders": {
+      "dates": {
+        "type": "String"
+      }
+    }
+  },
+  "holidaysLocked": "Can't be changed",
+  "holidaysRange": "{from} – {to}",
+  "@holidaysRange": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "holidaysAddTitle": "Add holiday",
+  "holidaysEditTitle": "Edit holiday",
+  "holidaysFormHint": "Today or later only. Past days can't be changed because attendance may already be recorded.",
+  "holidaysFrom": "First day",
+  "holidaysTo": "Last day",
+  "holidaysToHint": "Leave empty for a single day.",
+  "holidaysNoteLabel": "Note (optional)",
+  "holidaysNoteHint": "For example: Victory Day, winter break.",
+  "holidaysCancel": "Cancel",
+  "holidaysSaveChanges": "Save changes",
+  "holidaysAdded": "Holiday added",
+  "holidaysUpdated": "Holiday updated",
+  "holidaysRemoved": "Holiday removed",
+  "holidaysRemoveTitle": "Remove this holiday?",
+  "holidaysRemoveDescription": "{dates} will be a normal school day again. The record stays in the activity log.",
+  "@holidaysRemoveDescription": {
+    "placeholders": {
+      "dates": {
+        "type": "String"
+      }
+    }
+  },
+  "holidaysErrorsHOLIDAYINVALIDDATE": "Choose the first day.",
+  "holidaysErrorsHOLIDAYRANGEINVALID": "The last day can't be before the first day.",
+  "holidaysErrorsHOLIDAYRANGETOOLONG": "A holiday can be at most 120 days long.",
+  "holidaysErrorsHOLIDAYPASTLOCKED": "Past days can't be changed. Choose today or a later date.",
+  "branchesTitle": "Branches",
+  "branchesIntro": "Places where your classes meet. Each branch has a pin and a radius; in-person check-in works only inside it.",
+  "branchesAdd": "Add branch",
+  "branchesLoadFailed": "Couldn't load the branches.",
+  "branchesMainBranch": "Main branch",
+  "branchesMain": "Main",
+  "branchesOnlyMain": "You have one location. Add a branch if your classes also meet somewhere else.",
+  "branchesName": "Name",
+  "branchesAddress": "Address",
+  "branchesAddressHint": "Optional, to help people find it.",
+  "branchesPin": "Check-in",
+  "branchesNoPin": "No pin yet",
+  "branchesRadiusShort": "Within {radius} m",
+  "@branchesRadiusShort": {
+    "placeholders": {
+      "radius": {
+        "type": "String"
+      }
+    }
+  },
+  "branchesSections": "[[Sections]]",
+  "branchesActions": "Actions",
+  "branchesEdit": "Edit",
+  "branchesRemove": "Remove",
+  "branchesEditNamed": "Edit {name}",
+  "@branchesEditNamed": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "branchesRemoveNamed": "Remove {name}",
+  "@branchesRemoveNamed": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "branchesAddTitle": "Add a branch",
+  "branchesEditTitle": "Edit {name}",
+  "@branchesEditTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "branchesFormHint": "Stand at the branch and use this device's location, or paste a Google Maps link.",
+  "branchesMainNameHint": "Leave empty to call it Main branch.",
+  "branchesCancel": "Cancel",
+  "branchesSaveChanges": "Save changes",
+  "branchesAdded": "Branch added",
+  "branchesUpdated": "Branch saved",
+  "branchesRemoved": "Branch removed",
+  "branchesRemoveTitle": "Remove this branch?",
+  "branchesRemoveDescription": "{name} will no longer be offered for [[sections]]. Its record and past attendance are kept.",
+  "@branchesRemoveDescription": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "branchesErrorsATTENDANCEBRANCHNAMEREQUIRED": "Enter a name for the branch.",
+  "branchesErrorsATTENDANCEBRANCHNAMETAKEN": "Another branch already has this name.",
+  "branchesErrorsATTENDANCEBRANCHPININCOMPLETE": "A pin needs both latitude and longitude.",
+  "branchesErrorsATTENDANCEBRANCHDEFAULTKEPT": "The main branch can't be removed.",
+  "branchesErrorsATTENDANCEBRANCHINUSE": "[[Sections]] of this session still meet here. Move them to another branch first.",
+  "branchesErrorsATTENDANCEBRANCHESNOTFORSOLO": "Your workspace has one location. Set its pin in the attendance settings.",
+  "branchesLocationLink": "Google Maps link",
+  "branchesLocationLinkHint": "Open the place in Google Maps, copy the link from the address bar and paste it here.",
+  "branchesLocationLinkFailed": "No location found in this link. Short share links don't work; open the link first and copy the full address.",
+  "branchesLocationUseMine": "Use my current location",
+  "branchesLocationUseMineHint": "Works best when you are at the branch.",
+  "branchesLocationLocated": "Location found (accurate to about {accuracy} m).",
+  "@branchesLocationLocated": {
+    "placeholders": {
+      "accuracy": {
+        "type": "String"
+      }
+    }
+  },
+  "branchesLocationLocateFailed": "Couldn't get this device's location. Allow location access, or paste a link.",
+  "branchesLocationLat": "Latitude",
+  "branchesLocationLng": "Longitude",
+  "branchesLocationCheck": "Check the pin on Google Maps",
+  "branchesLocationClear": "Remove pin",
+  "branchesLocationNoPin": "No pin yet. In-person check-in needs one.",
+  "branchesLocationRadius": "Check-in radius",
+  "branchesLocationRadiusHint": "From {min} to {max} metres.",
+  "@branchesLocationRadiusHint": {
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "branchesLocationMetres": "metres",
+  "branchesLocationErrorsPinIncomplete": "Enter both latitude and longitude.",
+  "branchesLocationErrorsLatInvalid": "Latitude is a number from -90 to 90.",
+  "branchesLocationErrorsLngInvalid": "Longitude is a number from -180 to 180.",
+  "branchesLocationErrorsRadiusInvalid": "Enter a whole number from {min} to {max}.",
+  "@branchesLocationErrorsRadiusInvalid": {
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "branchesRemovedBranch": "Removed branch",
   "appNoConnection": "No internet connection. Check it and try again.",
   "appUpdateRequiredTitle": "Please update Instructor",
   "appUpdateRequiredBody": "This version of the app is no longer supported. Install the new version to continue.",

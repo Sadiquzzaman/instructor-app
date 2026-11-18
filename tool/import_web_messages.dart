@@ -60,6 +60,9 @@ const webNamespaces = [
   'chat',
   'organization',
   'academics',
+  'attendanceSettings',
+  'holidays',
+  'branches',
 ];
 
 const locales = ['en', 'bn'];
