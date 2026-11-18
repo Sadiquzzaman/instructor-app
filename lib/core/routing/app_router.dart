@@ -35,6 +35,7 @@ import 'package:instructor_app/features/organization/screens/holidays_screen.dar
 import 'package:instructor_app/features/organization/screens/organization_overview_screen.dart';
 import 'package:instructor_app/features/organization/screens/people_screen.dart';
 import 'package:instructor_app/features/organization/screens/sessions_screen.dart';
+import 'package:instructor_app/features/organization/screens/settings_forms_screens.dart';
 import 'package:instructor_app/features/organization/screens/subjects_classes_screens.dart';
 import 'package:instructor_app/features/results/screens/behaviour_screen.dart';
 import 'package:instructor_app/features/results/screens/paper_exam_screens.dart';
@@ -311,6 +312,14 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: AppRoutes.attendanceSetup,
             builder: (context, state) => const ClassSetupScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.homeworkSettings,
+            builder: (context, state) => const HomeworkSettingsScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.plagiarismSettings,
+            builder: (context, state) => const PlagiarismSettingsScreen(),
           ),
           GoRoute(
             path: AppRoutes.marks,
