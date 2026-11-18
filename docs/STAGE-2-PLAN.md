@@ -1,6 +1,6 @@
 # Stage 2 plan: teachers
 
-**Waiting for the owner's approval.** Nothing in this plan is built until the owner answers §7.
+**Approved by the owner as written on 18 Nov 2026**, with each §7 suggestion (the answers are under §7).
 
 Stage 2 ([HANDOVER.md](HANDOVER.md) §4) gives teachers the app they use every day. They can:
 - see their day and check in (the student screens already do this for teachers too);
@@ -96,7 +96,18 @@ Push (PM-04) would help teachers most: a leave request, a hand-in, a test to mar
 
 About 15 PRs. Homework (PRs 6–7), the live monitor (PR 10) and the marks grids (PR 12) are the largest; leave approvals and the dashboard are small.
 
-## 7. Decisions needed from the owner
+## 7. Decisions (approved 18 Nov 2026)
+
+The owner approved the plan as written, so each question below takes its suggestion:
+1. Homework instructions: a plain text box, sent as simple paragraphs and lists.
+2. Teacher home: the dashboard, with Today one tap away.
+3. Paper register: a grid in the app; no CSV file (so no CSV package).
+4. Live monitor: on phones and tablets, wider on tablets.
+5. Beta data: yes, only the changes listed in question 5, as demo.teacher1 and demo.student1.
+6. Classes: in the app, as PR 5 says (create a class in personal workspaces, add, approve and remove students).
+
+The questions as asked:
+
 
 1. **Homework instructions.** The web writes them with a rich-text editor (HTML). I suggest a plain text box in the app, sent as simple paragraphs and lists, which the web shows correctly; changing a homework set on the web keeps its formatting only if it is changed on the web. A rich editor would need a package (later, if wanted). OK?
 2. **Teacher home.** Show the dashboard as a teacher's home, as on the web, with Today one tap away? Or keep Today as home for everyone?
