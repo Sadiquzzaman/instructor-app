@@ -336,6 +336,47 @@ class ClassAttendanceRepository {
         ),
       );
 
+  /// Changes the class for the day: other times (HH:MM, the organisation's
+  /// time zone) and/or a substitute (null: the routine's teacher). The
+  /// routine's own times and no substitute undo the change.
+  Future<ClassSessionDetail> change(
+    String slotId,
+    String date, {
+    required String start,
+    required String end,
+    String? substituteId,
+    String note = '',
+  }) async => _detail(
+    await _api.post(
+      '/attendance/sessions/$slotId/$date/change',
+      data: {
+        'start_time': start,
+        'end_time': end,
+        'substitute_teacher_id': substituteId,
+        if (note.isNotEmpty) 'note': note,
+      },
+    ),
+  );
+
+  /// Teachers of the organisation who can take a class.
+  Future<List<Who>> assignableTeachers(String organizationId) async {
+    final p = (await _api.get(
+      '/organizations/$organizationId/assignable-teachers',
+    )).payload;
+    return [
+      if (p is List)
+        for (final m in p)
+          if (m is Map && m['user'] is Map)
+            if (_who(m['user']) case final w?)
+              (
+                id: w.id,
+                name: w.name.isNotEmpty
+                    ? w.name
+                    : ((m['user'] as Map)['email'] as String?) ?? '',
+              ),
+    ];
+  }
+
   ClassSessionDetail _detail(ApiResponse r) {
     final d = ClassSessionDetail.fromJson(r.payload);
     if (d == null) throw const FormatException('class session');
@@ -361,4 +402,13 @@ final classSessionProvider = FutureProvider.autoDispose
       return ref
           .read(classAttendanceRepositoryProvider)
           .detail(k.slotId, k.date);
+    }, retry: (retryCount, error) => null);
+
+/// Teachers who can take a class, in the organisation with this id.
+final assignableTeachersProvider = FutureProvider.autoDispose
+    .family<List<Who>, String>((ref, organizationId) {
+      ref.watch(workspaceKeyProvider);
+      return ref
+          .read(classAttendanceRepositoryProvider)
+          .assignableTeachers(organizationId);
     }, retry: (retryCount, error) => null);

@@ -25,6 +25,7 @@ Map<String, Object?> _session({
   bool canCorrect = true,
   bool canCancel = true,
   bool canRestore = false,
+  bool canChange = false,
   Map<String, Object?>? cancelled,
   Map<String, Object?>? change,
   Map<String, Object?>? counts,
@@ -59,7 +60,7 @@ Map<String, Object?> _session({
   'can_correct': canCorrect,
   'can_cancel': canCancel,
   'can_restore': canRestore,
-  'can_change': false,
+  'can_change': canChange,
 };
 
 Map<String, Object?> _row(
@@ -135,6 +136,17 @@ FakeApi _api({
   ..on('GET /workspace/level-labels', (_) => ok(<String, Object>{}))
   ..on('GET /dashboard/teacher', (_) => ok(<String, Object>{}))
   ..on(
+    'GET /organizations/org-1/assignable-teachers',
+    (_) => ok([
+      {
+        'user': {'id': 't1', 'full_name': 'Rina Akter'},
+      },
+      {
+        'user': {'id': 't2', 'full_name': 'Jamal Uddin'},
+      },
+    ]),
+  )
+  ..on(
     'GET /attendance/sessions',
     (r) => ok({
       'date': r.query['date'] ?? _date,
@@ -179,6 +191,7 @@ Future<void> _openClass(WidgetTester tester, FakeApi api) async {
 Finder _scrollable() => find.byType(Scrollable).first;
 
 void main() {
+  group('one day changes', changeTests);
   testWidgets('the day: each class with its counts and state', (tester) async {
     final api = _api();
     await _openList(tester, api);
@@ -396,7 +409,7 @@ void main() {
         ),
       ),
     );
-    expect(find.byKey(const Key('change-banner')), findsOneWidget);
+    expect(find.byKey(const Key('change-section')), findsOneWidget);
     expect(
       find.text(_en.classAttendanceChangeSubstituteIs('Jamal Uddin')),
       findsOneWidget,
@@ -447,5 +460,136 @@ void main() {
       scrollable: _scrollable(),
     );
     expect(tester.takeException(), isNull);
+  });
+}
+
+void changeTests() {
+  Map<String, Object?> changeable({Map<String, Object?>? change}) => _detail(
+    session: _session(canCorrect: false, canChange: true, change: change),
+  );
+
+  testWidgets('change a class for the day: a substitute and a note', (
+    tester,
+  ) async {
+    final api = _api(detail: (_) => ok(changeable()))
+      ..on(
+        'POST /attendance/sessions/$_slot/$_date/change',
+        (_) => ok(
+          changeable(
+            change: {
+              'routine_start_time': '10:00',
+              'routine_end_time': '10:45',
+              'substitute': {'id': 't2', 'full_name': 'Jamal Uddin'},
+              'at': '2026-11-18T02:00:00.000Z',
+              'by': {'id': 't1', 'full_name': 'Rina Akter'},
+              'note': 'Rina is at a workshop',
+            },
+          ),
+        ),
+      );
+    await _openClass(tester, api);
+    await tester.tap(find.byKey(const Key('change-open')));
+    await tester.pumpAndSettle();
+    // The routine's teacher is the default; the others can take it.
+    expect(
+      find.text(_en.classAttendanceChangeRoutineTeacher('Rina Akter')),
+      findsOneWidget,
+    );
+    await tester.tap(find.byKey(const Key('change-substitute')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Jamal Uddin').last);
+    await tester.pumpAndSettle();
+    await tester.enterText(
+      find.byKey(const Key('change-note')),
+      ' Rina is at a workshop ',
+    );
+    await tester.ensureVisible(find.byKey(const Key('change-save')));
+    await tester.tap(find.byKey(const Key('change-save')));
+    await tester.pumpAndSettle();
+    // The times stay the class's own (10:00 in Dhaka).
+    expect(
+      api.to('POST /attendance/sessions/$_slot/$_date/change').single.body,
+      {
+        'start_time': '10:00',
+        'end_time': '10:45',
+        'substitute_teacher_id': 't2',
+        'note': 'Rina is at a workshop',
+      },
+    );
+    expect(
+      find.text(_en.classAttendanceChangeSubstituteIs('Jamal Uddin')),
+      findsOneWidget,
+    );
+    expect(
+      find.text(_en.classAttendanceChangedToast('Mathematics · Class 6 A')),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('undo a change: the routine times, no substitute', (
+    tester,
+  ) async {
+    final api =
+        _api(
+          detail: (_) => ok(
+            changeable(
+              change: {
+                'routine_start_time': '09:00',
+                'routine_end_time': '09:45',
+                'substitute': null,
+                'at': null,
+                'by': null,
+                'note': null,
+              },
+            ),
+          ),
+        )..on(
+          'POST /attendance/sessions/$_slot/$_date/change',
+          (_) => ok(changeable()),
+        );
+    await _openClass(tester, api);
+    await tester.tap(find.byKey(const Key('change-undo')));
+    await tester.pumpAndSettle();
+    expect(
+      api.to('POST /attendance/sessions/$_slot/$_date/change').single.body,
+      {
+        'start_time': '09:00',
+        'end_time': '09:45',
+        'substitute_teacher_id': null,
+      },
+    );
+    expect(find.byKey(const Key('change-undo')), findsNothing);
+  });
+
+  testWidgets('a change refused: the overlap in the web\'s words', (
+    tester,
+  ) async {
+    await _openClass(
+      tester,
+      _api(detail: (_) => ok(changeable()))..on(
+        'POST /attendance/sessions/$_slot/$_date/change',
+        (_) => (
+          409,
+          {
+            'statusCode': 409,
+            'error': true,
+            'message': 'Overlap',
+            'code': 'ATTENDANCE_CHANGE_OVERLAP',
+            'details': {'start_time': '10:30', 'end_time': '11:15'},
+          },
+        ),
+      ),
+    );
+    await tester.tap(find.byKey(const Key('change-open')));
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.byKey(const Key('change-save')));
+    await tester.tap(find.byKey(const Key('change-save')));
+    await tester.pumpAndSettle();
+    expect(
+      find.text(
+        _en.classAttendanceErrorsATTENDANCECHANGEOVERLAP('10:30', '11:15'),
+      ),
+      findsOneWidget,
+    );
   });
 }
