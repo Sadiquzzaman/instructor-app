@@ -235,7 +235,7 @@ class _StaffResourcesScreenState extends ConsumerState<StaffResourcesScreen> {
   Future<void> _edit(LibraryResource? r) async {
     final l10n = context.l10n;
     final messenger = ScaffoldMessenger.of(context);
-    final saved = await Navigator.of(context).push<bool>(
+    final saved = await Navigator.of(context, rootNavigator: true).push<bool>(
       MaterialPageRoute(
         fullscreenDialog: true,
         builder: (_) => ResourceFormScreen(resource: r),
