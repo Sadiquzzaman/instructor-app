@@ -7650,6 +7650,146 @@
   "messageLogEventsCalendarEventCancelled": "Event cancelled",
   "messageLogEventsCalendarReminder": "Reminder",
   "messageLogEventsReportCardShared": "Report card to guardians",
+  "billingTitle": "Billing and plans",
+  "billingIntro": "Your workspace's plan and usage, and the plans you can upgrade to.",
+  "billingCurrentPlan": "Current plan: <b>{plan}</b>",
+  "@billingCurrentPlan": {
+    "placeholders": {
+      "plan": {
+        "type": "String"
+      }
+    }
+  },
+  "billingFree": "Free",
+  "billingRefresh": "Refresh usage",
+  "billingExamsThisMonth": "Tests this month",
+  "billingTotalExams": "Tests in total",
+  "billingUsageOf": "{used} of {limit}",
+  "@billingUsageOf": {
+    "placeholders": {
+      "used": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "limit": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "billingCycle": "Billing period",
+  "billingCyclesMONTHLY": "Monthly",
+  "billingCyclesHALFYEARLY": "Every 6 months",
+  "billingCyclesYEARLY": "Yearly",
+  "billingPerMONTHLY": "per month",
+  "billingPerHALFYEARLY": "per 6 months",
+  "billingPerYEARLY": "per year",
+  "billingCurrent": "Current plan",
+  "billingDowngrade": "Lower plan",
+  "billingDowngradeHint": "Contact support to move to a lower plan.",
+  "billingUpgrade": "Upgrade",
+  "billingNoPlans": "No paid plans are available for this billing period.",
+  "billingLoadFailed": "Your plan did not load.",
+  "billingMemberHint": "Only the workspace owner or an admin can change the plan. Ask your admin to unlock more features.",
+  "billingSeeFeatures": "See all features",
+  "storageTitle": "Storage",
+  "storageIntro": "Files your workspace keeps count toward your plan. Space frees up when files are deleted.",
+  "storageUsed": "{usedSize} of {limitSize} used",
+  "@storageUsed": {
+    "placeholders": {
+      "usedSize": {
+        "type": "String"
+      },
+      "limitSize": {
+        "type": "String"
+      }
+    }
+  },
+  "storageUsedNoLimit": "{usedSize} used — your plan has no storage limit",
+  "@storageUsedNoLimit": {
+    "placeholders": {
+      "usedSize": {
+        "type": "String"
+      }
+    }
+  },
+  "storagePercentUsed": "{percent}% used",
+  "@storagePercentUsed": {
+    "placeholders": {
+      "percent": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "storageWarning": "Almost full. At 100% uploads stop.",
+  "storageFull": "Storage is full. Delete files or upgrade your plan to upload more.",
+  "storageLoadFailed": "Could not load storage use.",
+  "storageByTypeHomework": "Homework",
+  "storageByTypeResources": "Resources",
+  "storageByTypeVideo": "Video",
+  "storageByTypeOther": "Tests and discussions",
+  "smsCreditsTitle": "SMS credits",
+  "smsCreditsIntro": "Your plan includes SMS each month. Buy more when you need them.",
+  "smsCreditsOpenLog": "Message log",
+  "smsCreditsLoadFailed": "SMS credits did not load.",
+  "smsCreditsTotalLeft": "{count, plural, one{{count} SMS left} other{{count} SMS left}}",
+  "@smsCreditsTotalLeft": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "smsCreditsLow": "Running low",
+  "smsCreditsAllowance": "From your plan this month",
+  "smsCreditsAllowanceLeft": "{left} of {granted} left",
+  "@smsCreditsAllowanceLeft": {
+    "placeholders": {
+      "left": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "granted": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "smsCreditsNoAllowance": "Your plan has no monthly SMS",
+  "smsCreditsAllowanceHint": "Resets at the start of each month. Unused SMS do not carry over.",
+  "smsCreditsTopUp": "Top-up credits",
+  "smsCreditsCredits": "{count, plural, one{{count} SMS} other{{count} SMS}}",
+  "@smsCreditsCredits": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "smsCreditsTopUpHint": "Bought credits carry over until used.",
+  "smsCreditsBuyHeading": "Buy more SMS",
+  "smsCreditsPrice": "৳{price}",
+  "@smsCreditsPrice": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "smsCreditsBuy": "Buy",
+  "smsCreditsBuyPack": "Buy {count} SMS",
+  "@smsCreditsBuyPack": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "smsCreditsNoCreditHint": "Each SMS part uses one credit (160 English or 70 Bangla characters). With no credits left, SMS stop; in-app messages and emails still go out.",
   "appNoConnection": "No internet connection. Check it and try again.",
   "appUpdateRequiredTitle": "Please update Instructor",
   "appUpdateRequiredBody": "This version of the app is no longer supported. Install the new version to continue.",

@@ -33,6 +33,7 @@ import 'package:instructor_app/features/organization/screens/branches_screen.dar
 import 'package:instructor_app/features/organization/screens/chat_review_screen.dart';
 import 'package:instructor_app/features/organization/screens/class_setup_screen.dart';
 import 'package:instructor_app/features/organization/screens/logs_screens.dart';
+import 'package:instructor_app/features/plan/screens/plan_usage_screen.dart';
 import 'package:instructor_app/features/organization/screens/holidays_screen.dart';
 import 'package:instructor_app/features/organization/screens/organization_overview_screen.dart';
 import 'package:instructor_app/features/organization/screens/people_screen.dart';
@@ -343,6 +344,10 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: AppRoutes.messageLog,
             builder: (context, state) => const MessageLogScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.billing,
+            builder: (context, state) => const PlanUsageScreen(),
           ),
           GoRoute(
             path: AppRoutes.marks,

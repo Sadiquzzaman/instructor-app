@@ -69,6 +69,9 @@ const webNamespaces = [
   'chatReview',
   'audit',
   'messageLog',
+  'billing',
+  'storage',
+  'smsCredits',
 ];
 
 const locales = ['en', 'bn'];
