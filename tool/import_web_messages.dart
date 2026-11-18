@@ -58,6 +58,8 @@ const webNamespaces = [
   'reportCard',
   'resources',
   'chat',
+  'organization',
+  'academics',
 ];
 
 const locales = ['en', 'bn'];

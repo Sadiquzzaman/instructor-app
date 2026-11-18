@@ -5343,6 +5343,1089 @@
   "chatReportReason": "Why are you reporting it?",
   "chatReportSend": "Report",
   "chatReported": "Thanks — the school will review it.",
+  "organizationRolesOWNER": "Owner",
+  "organizationRolesADMIN": "Admin",
+  "organizationRolesASSISTANT": "Staff",
+  "organizationRolesTEACHER": "Teacher",
+  "organizationRolesSTUDENT": "Student",
+  "organizationRolesBRANCHMANAGER": "Branch manager",
+  "organizationStatusesPending": "Waiting for approval",
+  "organizationStatusesApproved": "Approved",
+  "organizationStatusesRejected": "Rejected",
+  "organizationStatusesInactive": "Inactive",
+  "organizationGateNoWorkspaceTitle": "Open an organisation first",
+  "organizationGateNoWorkspace": "Choose an organisation from the workspace switcher, or log in with your organisation account.",
+  "organizationGateChooseWorkspace": "Choose workspace",
+  "organizationGatePendingTitle": "Your organisation is waiting for approval",
+  "organizationGatePending": "Organisation features stay locked until a super admin approves it.",
+  "organizationGateViewStatus": "View status",
+  "organizationGateNoAccessTitle": "You don't have access",
+  "organizationGateNoAccess": "This page is not available for your role in this organisation.",
+  "organizationGateGoToClasses": "Go to [[classes]]",
+  "organizationOverviewTitle": "Organisation",
+  "organizationOverviewTeachers": "Teachers",
+  "organizationOverviewStudents": "Students",
+  "organizationOverviewClasses": "[[Classes]]",
+  "organizationOverviewExams": "Tests",
+  "organizationOverviewDetails": "Details",
+  "organizationOverviewNumber": "Organisation number",
+  "organizationOverviewStatus": "Status",
+  "organizationOverviewYourRole": "Your role",
+  "organizationOverviewLoadFailed": "The organisation did not load.",
+  "organizationPendingTitle": "Your organisation is waiting for approval",
+  "organizationPendingDetailNamed": "“{name}” is waiting for a super admin to approve it. You can log in, but teaching, members and [[classes]] stay locked until then.",
+  "@organizationPendingDetailNamed": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "organizationPendingDetail": "Your organisation is waiting for a super admin to approve it. You can log in, but teaching, members and [[classes]] stay locked until then.",
+  "organizationPendingId": "Organisation ID",
+  "organizationClassesTitle": "[[Classes]]",
+  "organizationClassesCreate": "Create [[class]]",
+  "organizationClassesClass": "[[Class]]",
+  "organizationClassesSubjects": "Subjects",
+  "organizationClassesStudents": "Students",
+  "organizationClassesView": "View",
+  "organizationClassesEmpty": "This organisation has no [[classes]] yet.",
+  "organizationMembersTeachers": "Teachers",
+  "organizationMembersAssistants": "Staff",
+  "organizationMembersStudents": "Students",
+  "organizationMembersAddTEACHER": "Add teacher",
+  "organizationMembersAddASSISTANT": "Add staff member",
+  "organizationMembersAddSTUDENT": "Add student",
+  "organizationMembersIdColumnTEACHER": "Teacher ID",
+  "organizationMembersIdColumnASSISTANT": "Teacher ID",
+  "organizationMembersIdColumnSTUDENT": "Student ID",
+  "organizationMembersLookupLabelTEACHER": "Teacher ID, phone or email",
+  "organizationMembersLookupLabelASSISTANT": "Teacher ID, phone or email",
+  "organizationMembersLookupLabelSTUDENT": "Student ID, phone or email",
+  "organizationMembersSearch": "Search by name, ID, email or phone",
+  "organizationMembersName": "Name",
+  "organizationMembersEmail": "Email",
+  "organizationMembersPhone": "Phone",
+  "organizationMembersRole": "Role",
+  "organizationMembersJoined": "Joined",
+  "organizationMembersActions": "Actions",
+  "organizationMembersRemove": "Remove",
+  "organizationMembersRemoveTitle": "Remove {name} from the organisation?",
+  "@organizationMembersRemoveTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "organizationMembersRemoveDetail": "They lose access now. Their past tests and results are kept.",
+  "organizationMembersRemovedTitle": "Member removed",
+  "organizationMembersRemovedDetail": "Access was removed. Past records were kept.",
+  "organizationMembersEmpty": "No members found.",
+  "organizationMembersUnnamed": "Unnamed user",
+  "organizationMembersAddIntro": "Search by one field. People who already have an account are added; anyone else gets an SMS or email invitation. No duplicate accounts are created.",
+  "organizationMembersFind": "Search",
+  "organizationMembersMissingQuery": "Enter an ID, phone or email to search.",
+  "organizationMembersNotFoundTitle": "No account found",
+  "organizationMembersSendInvite": "Send invitation",
+  "organizationMembersTeacherId": "Teacher ID: {id}",
+  "@organizationMembersTeacherId": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "organizationMembersStudentId": "Student ID: {id}",
+  "@organizationMembersStudentId": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "organizationMembersAlreadyMember": "This person is already an active member.",
+  "organizationMembersNotVerified": "This account is not verified yet.",
+  "organizationMembersRestore": "Restore membership",
+  "organizationMembersAddToOrg": "Add to organisation",
+  "organizationMembersInvitedTitle": "Invitation sent",
+  "organizationMembersInvitedDetail": "They will join this organisation after they sign up or log in.",
+  "organizationMembersAddedTitle": "Member added",
+  "organizationMembersAddedDetail": "The membership was created or restored. No duplicate account was created.",
+  "organizationMembersPhoneListTitle": "Add several phone numbers",
+  "organizationMembersPhoneListHintTEACHER": "One Bangladeshi mobile number per line. Each valid number is added as a teacher. Numbers without an account are reported, not invited.",
+  "organizationMembersPhoneListHintASSISTANT": "One Bangladeshi mobile number per line. Each valid number is added as staff. Numbers without an account are reported, not invited.",
+  "organizationMembersPhoneListHintSTUDENT": "One Bangladeshi mobile number per line. Each valid number is added as a student. Numbers without an account are reported, not invited.",
+  "organizationMembersPhoneListLabel": "Phone numbers",
+  "organizationMembersAddPhones": "Add these numbers",
+  "organizationMembersNoPhonesTitle": "No phone numbers",
+  "organizationMembersNoPhones": "Paste one phone number per line, then add them together.",
+  "organizationMembersPhonesDoneTitle": "Phone numbers processed",
+  "organizationMembersPhonesDone": "Check the result for each number below.",
+  "organizationMembersCsvTitle": "Import from CSV",
+  "organizationMembersCsvHint": "One column of IDs, phone numbers or emails. You'll see the result for each row after the import.",
+  "organizationMembersUploadCsv": "Upload CSV",
+  "organizationMembersDownloadTemplate": "Download sample CSV",
+  "organizationMembersEmptyFileTitle": "Empty file",
+  "organizationMembersEmptyFile": "No phone numbers, emails or IDs were found in the CSV.",
+  "organizationMembersImportDoneTitle": "Import finished",
+  "organizationMembersImportDone": "Check the result for each row below.",
+  "organizationMembersSummary": "{imported} added · {already} already members · {notFound} not found · {invalid} invalid · {invited} invited · {duplicate} duplicates",
+  "@organizationMembersSummary": {
+    "placeholders": {
+      "imported": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "already": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "notFound": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "invalid": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "invited": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "duplicate": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "organizationMembersResultValue": "Value",
+  "organizationMembersResultStatus": "Result",
+  "organizationMembersResultMessage": "Details",
+  "organizationMembersImportStatusImported": "Added",
+  "organizationMembersImportStatusReactivated": "Added again",
+  "organizationMembersImportStatusAlreadyMember": "Already a member",
+  "organizationMembersImportStatusUserNotFound": "No account",
+  "organizationMembersImportStatusInvalid": "Invalid number",
+  "organizationMembersImportStatusInvitationSent": "Invitation sent",
+  "organizationMembersImportStatusDuplicate": "Duplicate in this list",
+  "organizationMembersSectionLabel": "[[Section]] (optional)",
+  "organizationMembersSectionHint": "Puts the student straight into this [[section]] of the current session.",
+  "organizationMembersSectionLater": "Choose later",
+  "organizationMembersAddToSection": "Add to {section}",
+  "@organizationMembersAddToSection": {
+    "placeholders": {
+      "section": {
+        "type": "String"
+      }
+    }
+  },
+  "organizationMembersAddedToSection": "Added to {section}",
+  "@organizationMembersAddedToSection": {
+    "placeholders": {
+      "section": {
+        "type": "String"
+      }
+    }
+  },
+  "organizationMembersInvitedToSection": "They join {section} after they sign up or log in.",
+  "@organizationMembersInvitedToSection": {
+    "placeholders": {
+      "section": {
+        "type": "String"
+      }
+    }
+  },
+  "organizationMembersPendingInSection": "They join once their account is verified.",
+  "organizationMembersChangeRoleAction": "Change role",
+  "organizationMembersChangeRoleTitle": "Change the role of {name}",
+  "@organizationMembersChangeRoleTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "organizationMembersChangeRoleIntro": "A branch manager runs one branch and sees only that branch.",
+  "organizationMembersChangeRoleRole": "Role",
+  "organizationMembersChangeRoleBranch": "Branch",
+  "organizationMembersChangeRoleChooseBranch": "Choose a branch",
+  "organizationMembersChangeRoleMainBranch": "Main branch",
+  "organizationMembersChangeRoleBranchManagerHint": "Branch managers see only what is open to them; more branch tools are coming.",
+  "organizationMembersChangeRoleCancel": "Cancel",
+  "organizationMembersChangeRoleSave": "Save",
+  "organizationMembersChangeRoleDoneTitle": "Role changed",
+  "organizationMembersChangeRoleDone": "The role is now {role}.",
+  "@organizationMembersChangeRoleDone": {
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "organizationSubjectsTitle": "Subjects",
+  "organizationSubjectsCreate": "Create subject",
+  "organizationSubjectsCreateIntro": "Add a subject name and code. Codes must be unique in this organisation.",
+  "organizationSubjectsName": "Subject name",
+  "organizationSubjectsNamePlaceholder": "e.g. Physics",
+  "organizationSubjectsCode": "Subject code",
+  "organizationSubjectsCodePlaceholder": "e.g. PHY-09",
+  "organizationSubjectsClasses": "[[Classes]]",
+  "organizationSubjectsActions": "Actions",
+  "organizationSubjectsEdit": "Edit",
+  "organizationSubjectsEditTitle": "Edit subject",
+  "organizationSubjectsSave": "Save",
+  "organizationSubjectsDelete": "Delete",
+  "organizationSubjectsDeleteTitle": "Delete {name}?",
+  "@organizationSubjectsDeleteTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "organizationSubjectsDeleteDetail": "It is removed from the subject list. [[Classes]] that use it may lose it too.",
+  "organizationSubjectsEmpty": "No subjects yet. Create one, for example Physics / PHY-09.",
+  "organizationSubjectsRequiredTitle": "Name and code needed",
+  "organizationSubjectsRequired": "Enter a subject name and a code, for example Physics and PHY-09.",
+  "organizationSubjectsCreatedTitle": "Subject created",
+  "organizationSubjectsCreated": "It can now be added to [[classes]].",
+  "organizationSubjectsUpdatedTitle": "Subject updated",
+  "organizationSubjectsUpdated": "The name and code were saved.",
+  "organizationSubjectsDeletedTitle": "Subject deleted",
+  "organizationSubjectsDeleted": "It was removed from the subject list.",
+  "organizationAssignmentsTitle": "Subject teachers",
+  "organizationAssignmentsIntro": "Add subjects to a [[class]], then choose who teaches each one in each [[section]].",
+  "organizationAssignmentsStep1": "1. Add a subject to a [[class]]",
+  "organizationAssignmentsStep2": "2. Choose the teacher",
+  "organizationAssignmentsStep3": "3. Current assignments",
+  "organizationAssignmentsClass": "[[Class]]",
+  "organizationAssignmentsSubject": "Subject",
+  "organizationAssignmentsTeacher": "Teacher",
+  "organizationAssignmentsSelectClass": "Select a [[class]]",
+  "organizationAssignmentsClassFirst": "Select a [[class]] first",
+  "organizationAssignmentsAllAttached": "Every subject is already in this [[class]]",
+  "organizationAssignmentsSelectSubject": "Select a subject",
+  "organizationAssignmentsAddSubjectFirst": "Add a subject in step 1 first",
+  "organizationAssignmentsSubjectFirst": "Select a subject first",
+  "organizationAssignmentsSelectTeacher": "Select a teacher",
+  "organizationAssignmentsAddSubject": "Add subject",
+  "organizationAssignmentsSubjectsIn": "Subjects in {name}",
+  "@organizationAssignmentsSubjectsIn": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "organizationAssignmentsNoSubjects": "No subjects in this [[class]] yet.",
+  "organizationAssignmentsRemove": "Remove",
+  "organizationAssignmentsRemoveSubjectTitle": "Remove {subject} from {className}?",
+  "@organizationAssignmentsRemoveSubjectTitle": {
+    "placeholders": {
+      "subject": {
+        "type": "String"
+      },
+      "className": {
+        "type": "String"
+      }
+    }
+  },
+  "organizationAssignmentsRemoveSubjectDetail": "Its teacher assignments in this [[class]] are removed too.",
+  "organizationAssignmentsUnassignTitle": "Remove {teacher} from {subject}?",
+  "@organizationAssignmentsUnassignTitle": {
+    "placeholders": {
+      "teacher": {
+        "type": "String"
+      },
+      "subject": {
+        "type": "String"
+      }
+    }
+  },
+  "organizationAssignmentsUnassignDetail": "They will no longer teach this subject in {className}.",
+  "@organizationAssignmentsUnassignDetail": {
+    "placeholders": {
+      "className": {
+        "type": "String"
+      }
+    }
+  },
+  "organizationAssignmentsAssign": "Assign teacher",
+  "organizationAssignmentsReplace": "Replace teacher",
+  "organizationAssignmentsCancelEdit": "Cancel change",
+  "organizationAssignmentsEdit": "Change",
+  "organizationAssignmentsUnassigned": "No teacher yet",
+  "organizationAssignmentsAllClasses": "All [[classes]]",
+  "organizationAssignmentsAllSubjects": "All subjects",
+  "organizationAssignmentsAllTeachers": "All teachers",
+  "organizationAssignmentsFilterClass": "Filter by [[class]]",
+  "organizationAssignmentsFilterSubject": "Filter by subject",
+  "organizationAssignmentsFilterTeacher": "Filter by teacher",
+  "organizationAssignmentsEmpty": "No [[class]] subjects yet. Start with step 1.",
+  "organizationAssignmentsNeedClassSubjectTitle": "Choose a [[class]] and a subject",
+  "organizationAssignmentsNeedClassSubject": "Select a [[class]] and a subject to add.",
+  "organizationAssignmentsNeedAllTitle": "Fill in every field",
+  "organizationAssignmentsNeedAll": "Select a [[class]], a subject and a teacher.",
+  "organizationAssignmentsSubjectAddedTitle": "Subject added",
+  "organizationAssignmentsSubjectAdded": "Now choose a teacher for it.",
+  "organizationAssignmentsAssignedTitle": "Teacher assigned",
+  "organizationAssignmentsReplacedTitle": "Teacher replaced",
+  "organizationAssignmentsAssigned": "The teacher can now create tests for this [[class]] and subject.",
+  "organizationAssignmentsUnassignedTitle": "Assignment removed",
+  "organizationAssignmentsUnassignedDetail": "The teacher no longer teaches this [[class]] subject.",
+  "organizationAssignmentsSubjectRemovedTitle": "Subject removed",
+  "organizationAssignmentsSubjectRemoved": "The subject and its teacher assignments were removed from the [[class]].",
+  "organizationAssignmentsSection": "[[Section]]",
+  "organizationAssignmentsSelectSection": "Select a [[section]]",
+  "organizationAssignmentsSectionFirst": "Select a [[section]] first",
+  "organizationAssignmentsNoSections": "This [[class]] has no [[sections]] in this session",
+  "organizationAssignmentsAllSections": "All [[sections]] of the [[class]]",
+  "organizationAssignmentsSession": "Session",
+  "organizationAssignmentsSessionClosed": "This session is closed, so its teachers cannot be changed.",
+  "organizationAssignmentsActions": "Actions",
+  "organizationAssignmentsAssignTeacherFor": "Teacher for {subject} in {section}",
+  "@organizationAssignmentsAssignTeacherFor": {
+    "placeholders": {
+      "subject": {
+        "type": "String"
+      },
+      "section": {
+        "type": "String"
+      }
+    }
+  },
+  "organizationAssignmentsChooseTeacher": "Choose a teacher",
+  "academicsSessionsTitle": "Sessions",
+  "academicsSessionsIntro": "School years or terms. Several can run at once; new [[classes]] and tests go into the default session.",
+  "academicsSessionsAdd": "Add session",
+  "academicsSessionsEdit": "Edit session",
+  "academicsSessionsEmpty": "No sessions yet",
+  "academicsSessionsName": "Name",
+  "academicsSessionsNamePlaceholder": "e.g. 2027",
+  "academicsSessionsStart": "Starts",
+  "academicsSessionsEnd": "Ends",
+  "academicsSessionsDates": "Dates",
+  "academicsSessionsStatus": "Status",
+  "academicsSessionsStatusActive": "Active",
+  "academicsSessionsStatusClosed": "Closed",
+  "academicsSessionsDefault": "Default",
+  "academicsSessionsActions": "Actions",
+  "academicsSessionsMakeDefaultOnCreate": "Make it the default session",
+  "academicsSessionsMakeDefaultFor": "Make {name} the default session",
+  "@academicsSessionsMakeDefaultFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsSessionsCloseFor": "Close {name}",
+  "@academicsSessionsCloseFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsSessionsCloseTitle": "Close {name}?",
+  "@academicsSessionsCloseTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsSessionsCloseDetail": "Its attendance, marks and homework become read-only. Only the owner can reopen it.",
+  "academicsSessionsCloseConfirm": "Close session",
+  "academicsSessionsReopenFor": "Reopen {name}",
+  "@academicsSessionsReopenFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsSessionsTermsFor": "Terms of {name}",
+  "@academicsSessionsTermsFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsSessionsEditFor": "Edit {name}",
+  "@academicsSessionsEditFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsSessionsSave": "Save",
+  "academicsSessionsCancel": "Cancel",
+  "academicsSessionsSaved": "Session saved",
+  "academicsSessionsClosed": "Session closed",
+  "academicsSessionsReopened": "Session reopened",
+  "academicsSessionsDefaultChanged": "Default session changed",
+  "academicsSessionsNoAccess": "Only owners and admins can manage sessions.",
+  "academicsSessionsDatesInvalid": "The end date must be on or after the start date.",
+  "academicsTermsEmpty": "No terms in this session yet",
+  "academicsTermsAdd": "Add term",
+  "academicsTermsName": "Term name",
+  "academicsTermsNamePlaceholder": "e.g. Half-yearly",
+  "academicsTermsStart": "Starts",
+  "academicsTermsEnd": "Ends",
+  "academicsTermsOrder": "Order",
+  "academicsTermsEditFor": "Edit {name}",
+  "@academicsTermsEditFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsTermsDeleteFor": "Delete {name}",
+  "@academicsTermsDeleteFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsTermsDeleteTitle": "Delete {name}?",
+  "@academicsTermsDeleteTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsTermsDeleteDetail": "The term is removed from this session.",
+  "academicsTermsDeleteConfirm": "Delete",
+  "academicsTermsSave": "Save term",
+  "academicsTermsCancelEdit": "Cancel",
+  "academicsTermsSaved": "Term saved",
+  "academicsTermsDeleted": "Term deleted",
+  "academicsTermsClosedNote": "This session is closed; reopen it to change its terms.",
+  "academicsSettingsTitle": "Settings",
+  "academicsSettingsClassTeacher": "[[Sections]] have a class teacher",
+  "academicsSettingsClassTeacherHint": "A class teacher looks after a whole [[section]]. Turning this off keeps the class teachers you already chose.",
+  "academicsSettingsSaved": "Settings saved",
+  "academicsSettingsLanguage": "Language for members",
+  "academicsSettingsLanguageHint": "Members who have not chosen a language see the app in this one.",
+  "academicsSettingsLanguagesBn": "Bangla",
+  "academicsSettingsLanguagesEn": "English",
+  "academicsSettingsSmsLanguage": "Guardian SMS language",
+  "academicsSettingsSmsLanguageHint": "Students can have their own. One SMS holds 160 English or 70 Bangla characters, so Bangla SMS use more credits.",
+  "academicsSettingsBranches": "Branches",
+  "academicsSettingsBranchesHint": "Several campuses, each with its own check-in location and a branch manager. To switch this off, remove every branch except the main one.",
+  "academicsSettingsGuardians": "Guardians",
+  "academicsSettingsGuardiansHint": "Keep guardians' names and phone numbers for each student. Off by default for IELTS, where most students are adults.",
+  "academicsSectionsTitle": "[[Sections]]",
+  "academicsSectionsSession": "Session",
+  "academicsSectionsAdd": "Add [[section]]",
+  "academicsSectionsEdit": "Edit [[section]]",
+  "academicsSectionsEditFor": "Edit [[section]] {name}",
+  "@academicsSectionsEditFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsSectionsDeleteFor": "Delete [[section]] {name}",
+  "@academicsSectionsDeleteFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsSectionsOpen": "Open [[section]] {name}",
+  "@academicsSectionsOpen": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsSectionsEmpty": "No [[sections]] in this session",
+  "academicsSectionsName": "[[Section]] name",
+  "academicsSectionsNamePlaceholder": "e.g. A or Morning batch",
+  "academicsSectionsShift": "Shift",
+  "academicsSectionsShiftsMORNING": "Morning",
+  "academicsSectionsShiftsDAY": "Day",
+  "academicsSectionsShiftsEVENING": "Evening",
+  "academicsSectionsNoShift": "No shift",
+  "academicsSectionsRoom": "Room",
+  "academicsSectionsClassTeacher": "Class teacher",
+  "academicsSectionsNoClassTeacher": "No class teacher",
+  "academicsSectionsStudentCount": "{count, plural, one{{count} student} other{{count} students}}",
+  "@academicsSectionsStudentCount": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "academicsSectionsDeleteTitle": "Delete [[section]] {name}?",
+  "@academicsSectionsDeleteTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsSectionsDeleteDetail": "Only an empty [[section]] can be deleted, and a [[class]] keeps at least one [[section]].",
+  "academicsSectionsDeleteConfirm": "Delete",
+  "academicsSectionsSaved": "[[Section]] saved",
+  "academicsSectionsDeleted": "[[Section]] deleted",
+  "academicsSectionsClosedSession": "This session is closed, so its [[sections]] cannot be changed.",
+  "academicsSectionsSectionTitle": "[[Section]] {name}",
+  "@academicsSectionsSectionTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsSectionsTabsStudents": "Students",
+  "academicsSectionsTabsSubjects": "Subjects",
+  "academicsEnrolmentsEmpty": "No students in this [[section]] yet",
+  "academicsEnrolmentsStudent": "Student",
+  "academicsEnrolmentsRoll": "Roll",
+  "academicsEnrolmentsStatus": "Status",
+  "academicsEnrolmentsActions": "Actions",
+  "academicsEnrolmentsStatusesINVITED": "Invited",
+  "academicsEnrolmentsStatusesPENDING": "Waiting for approval",
+  "academicsEnrolmentsStatusesACTIVE": "Active",
+  "academicsEnrolmentsStatusesLEFT": "Left",
+  "academicsEnrolmentsStatusesPROMOTED": "Promoted",
+  "academicsEnrolmentsAdd": "Add student",
+  "academicsEnrolmentsContact": "Phone or email",
+  "academicsEnrolmentsContactHint": "A registered student is added straight away; anyone else gets an invitation that their sign-up claims.",
+  "academicsEnrolmentsRollNo": "Roll number",
+  "academicsEnrolmentsAdded": "Student added",
+  "academicsEnrolmentsInvited": "Invitation saved. Share the [[class]] link so they can join.",
+  "academicsEnrolmentsPendingAdded": "Added. They appear once their account is verified.",
+  "academicsEnrolmentsEditFor": "Change the [[section]] or roll number of {name}",
+  "@academicsEnrolmentsEditFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsEnrolmentsEditTitle": "Edit {name}",
+  "@academicsEnrolmentsEditTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsEnrolmentsSection": "[[Section]]",
+  "academicsEnrolmentsSaved": "Student updated",
+  "academicsEnrolmentsLeaveFor": "Mark {name} as left",
+  "@academicsEnrolmentsLeaveFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsEnrolmentsLeaveTitle": "Mark {name} as left?",
+  "@academicsEnrolmentsLeaveTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsEnrolmentsLeaveDetail": "They leave this [[class]]. Their record is kept, and they can be added again.",
+  "academicsEnrolmentsLeaveConfirm": "Mark as left",
+  "academicsEnrolmentsLeft": "Student marked as left",
+  "academicsEnrolmentsInvitedContact": "Invited: {contact}",
+  "@academicsEnrolmentsInvitedContact": {
+    "placeholders": {
+      "contact": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsEnrolmentsShowLeft": "Show students who left",
+  "academicsEnrolmentsSave": "Save",
+  "academicsEnrolmentsPromote": "Promote students",
+  "academicsEnrolmentsInvitedNamed": "{name} (invited: {contact})",
+  "@academicsEnrolmentsInvitedNamed": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "contact": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsSubjectsEmpty": "No subjects in this [[section]]",
+  "academicsSubjectsSubject": "Subject",
+  "academicsSubjectsTeachers": "Teachers",
+  "academicsSubjectsNoTeacher": "No teacher yet",
+  "academicsSubjectsTakenBy": "Who takes it",
+  "academicsSubjectsWhole": "Whole [[section]]",
+  "academicsSubjectsSelected": "{count, plural, one{{count} selected student} other{{count} selected students}}",
+  "@academicsSubjectsSelected": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "academicsSubjectsAdd": "Add subject",
+  "academicsSubjectsAllAdded": "Every subject of this [[class]] is already taught here.",
+  "academicsSubjectsAdded": "Subject added",
+  "academicsSubjectsRemoveFor": "Stop teaching {name} in this [[section]]",
+  "@academicsSubjectsRemoveFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsSubjectsRemoveTitle": "Stop teaching {name} in this [[section]]?",
+  "@academicsSubjectsRemoveTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsSubjectsRemoveDetail": "The subject class and its teachers are removed from this [[section]].",
+  "academicsSubjectsRemoveConfirm": "Remove",
+  "academicsSubjectsRemoved": "Subject removed",
+  "academicsSubjectsEditFor": "Edit {name}",
+  "@academicsSubjectsEditFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsSubjectsEditTitle": "{name}: teachers and students",
+  "@academicsSubjectsEditTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsSubjectsTeachersLabel": "Teachers",
+  "academicsSubjectsTeachersHint": "All teachers of a subject class are equal.",
+  "academicsSubjectsAddTeacher": "Add a teacher",
+  "academicsSubjectsRemoveTeacher": "Remove {name}",
+  "@academicsSubjectsRemoveTeacher": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsSubjectsSelectedOnly": "Only selected students take it (religion, electives)",
+  "academicsSubjectsPickStudents": "Students who take it",
+  "academicsSubjectsNoActiveStudents": "This [[section]] has no active students yet.",
+  "academicsSubjectsSave": "Save",
+  "academicsSubjectsSaved": "Subject class saved",
+  "academicsPromotionTitle": "Promote students of [[section]] {name}",
+  "@academicsPromotionTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsPromotionIntro": "Move students to a [[section]] of another session. This year's records stay with this [[section]].",
+  "academicsPromotionSession": "Session",
+  "academicsPromotionClass": "[[Class]]",
+  "academicsPromotionSection": "[[Section]]",
+  "academicsPromotionNoSection": "This [[class]] has no [[section]] in that session yet. Add one on the [[class]] page.",
+  "academicsPromotionNoSession": "No other open session",
+  "academicsPromotionNoSessionDetail": "Add next year's session first, then promote students into it.",
+  "academicsPromotionStudents": "Students",
+  "academicsPromotionStudentsHint": "Untick students who are held back or leaving; they stay in this [[section]].",
+  "academicsPromotionStudentWithRoll": "{name} (roll {roll})",
+  "@academicsPromotionStudentWithRoll": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "roll": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsPromotionSummary": "{count, plural, one{{count} student moves} other{{count} students move}} to {className} · {section} ({session}). {held, plural, =0{Nobody stays behind.} one{{held} student stays here.} other{{held} students stay here.}}",
+  "@academicsPromotionSummary": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "className": {
+        "type": "String"
+      },
+      "section": {
+        "type": "String"
+      },
+      "session": {
+        "type": "String"
+      },
+      "held": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "academicsPromotionPromote": "{count, plural, =0{Promote} one{Promote {count} student} other{Promote {count} students}}",
+  "@academicsPromotionPromote": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "academicsPromotionCancel": "Cancel",
+  "academicsPromotionDone": "Done",
+  "academicsPromotionMoved": "{count, plural, =0{No students were moved.} one{{count} student was promoted.} other{{count} students were promoted.}}",
+  "@academicsPromotionMoved": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "academicsPromotionSkipped": "{count, plural, one{{count} student was already in that [[class]] and was not moved:} other{{count} students were already in that [[class]] and were not moved:}}",
+  "@academicsPromotionSkipped": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "academicsSetupTitle": "Academic setup",
+  "academicsSetupIntro": "Five short steps: names and language, the session, [[classes]] and subjects, [[sections]], and a final check. Everything is saved as you go.",
+  "academicsSetupStepsBasics": "Names and language",
+  "academicsSetupStepsSession": "Session",
+  "academicsSetupStepsClasses": "[[Classes]] and subjects",
+  "academicsSetupStepsSections": "[[Sections]]",
+  "academicsSetupStepsSummary": "Check and finish",
+  "academicsSetupBack": "Back",
+  "academicsSetupNext": "Next",
+  "academicsSetupFinish": "Finish setup",
+  "academicsSetupFinished": "Setup finished",
+  "academicsSetupBasicsNamesTitle": "Names for classes and sections",
+  "academicsSetupBasicsOwnerOnly": "Only the owner can rename [[classes]] and [[sections]]. They are called “[[Class]]” and “[[Section]]” now.",
+  "academicsSetupSessionTitle": "Session",
+  "academicsSetupSessionIntro": "The school year or term you are setting up. New [[classes]] get their [[sections]] in the default session.",
+  "academicsSetupSessionAdd": "Add session",
+  "academicsSetupSessionDefault": "Default",
+  "academicsSetupSessionEdit": "Edit",
+  "academicsSetupSessionEditFor": "Edit session {name}",
+  "@academicsSetupSessionEditFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsSetupClassesTitle": "[[Classes]] and subjects",
+  "academicsSetupClassesIntro": "Add each [[class]] and the subjects taught in it. Every new [[class]] starts with [[section]] A.",
+  "academicsSetupClassesClassName": "[[Class]] name",
+  "academicsSetupClassesClassNamePlaceholder": "e.g. Class 6, HSC Physics",
+  "academicsSetupClassesAddClass": "Add [[class]]",
+  "academicsSetupClassesClassAdded": "[[Class]] added",
+  "academicsSetupClassesEmpty": "No [[classes]] yet",
+  "academicsSetupClassesEmptyDetail": "Add your first [[class]] above.",
+  "academicsSetupClassesNoSubjects": "No subjects yet.",
+  "academicsSetupClassesSubject": "Subject",
+  "academicsSetupClassesChooseSubject": "Choose a subject",
+  "academicsSetupClassesSubjectFor": "Subject to add to {name}",
+  "@academicsSetupClassesSubjectFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsSetupClassesAddSubject": "Add subject",
+  "academicsSetupClassesSubjectAdded": "Subject added",
+  "academicsSetupClassesNewSubject": "New subject",
+  "academicsSetupClassesNewSubjectIntro": "A subject that is not in the list yet. It can then be added to any [[class]].",
+  "academicsSetupClassesSubjectName": "Subject name",
+  "academicsSetupClassesSubjectCode": "Code",
+  "academicsSetupClassesCreateSubject": "Create subject",
+  "academicsSetupClassesSubjectCreated": "Subject created",
+  "academicsSetupClassesNewSubjectOption": "+ New subject…",
+  "academicsSetupClassesCreateAndAdd": "Create and add",
+  "academicsSetupSectionsIntro": "Each [[class]] needs at least one [[section]]. Set the shift, room and class teacher, or add more [[sections]].",
+  "academicsSetupSectionsNoClasses": "No [[classes]] yet",
+  "academicsSetupSectionsNoClassesDetail": "Go back one step and add your [[classes]].",
+  "academicsSetupSummaryTitle": "Check and finish",
+  "academicsSetupSummarySession": "Session {name}",
+  "@academicsSetupSummarySession": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsSetupSummaryClass": "[[Class]]",
+  "academicsSetupSummarySubjects": "Subjects",
+  "academicsSetupSummarySections": "[[Sections]]",
+  "academicsSetupSummaryStatus": "Status",
+  "academicsSetupSummaryReady": "Ready",
+  "academicsSetupSummaryNoSubjects": "No subjects",
+  "academicsSetupSummaryNeedsSection": "Needs a [[section]]",
+  "academicsSetupSummaryNeedsClass": "Add at least one [[class]] before finishing.",
+  "academicsSetupSummaryNeedsSectionDetail": "Add a [[section]] to: {names}.",
+  "@academicsSetupSummaryNeedsSectionDetail": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsSetupSummaryNoSubjectsDetail": "No subjects yet in: {names}. You can finish now and add them later.",
+  "@academicsSetupSummaryNoSubjectsDetail": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsSetupSummaryStudents": "Students",
+  "academicsSetupSummaryNeedsTeacher": "Needs teachers",
+  "academicsSetupSummaryNoStudents": "No students",
+  "academicsSetupSummaryNeedsTeacherDetail": "Subjects without a teacher (you can finish now and assign them later):",
+  "academicsSetupSummaryAssignTeachers": "Assign subject teachers",
+  "academicsSetupSummaryNoStudentsDetail": "No students yet in: {names}.",
+  "@academicsSetupSummaryNoStudentsDetail": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsSetupSummaryAddStudents": "Add students",
+  "academicsSetupSummaryPinMissing": "Students and teachers can't check in on site until the school's location is set.",
+  "academicsSetupSummarySetPin": "Set the school's location",
+  "academicsSetupBannerTitle": "Finish setting up",
+  "academicsSetupBannerDetail": "Name your [[classes]] and [[sections]], set the session, and add [[classes]], subjects and [[sections]] in five short steps.",
+  "academicsSetupBannerStart": "Start setup",
+  "academicsSetupBannerContinue": "Continue setup",
+  "academicsSetupBannerReopen": "Open academic setup",
+  "academicsGuardiansOpen": "Guardians",
+  "academicsGuardiansOpenFor": "Guardians of {name}",
+  "@academicsGuardiansOpenFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsGuardiansTitle": "Guardians of {name}",
+  "@academicsGuardiansTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsGuardiansIntro": "Up to 2 guardians. Alerts and reports go to them by SMS.",
+  "academicsGuardiansEmpty": "No guardians yet",
+  "academicsGuardiansGuardianN": "Guardian {n}",
+  "@academicsGuardiansGuardianN": {
+    "placeholders": {
+      "n": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "academicsGuardiansName": "Name",
+  "academicsGuardiansRelation": "Relation",
+  "academicsGuardiansPhone": "Mobile number",
+  "academicsGuardiansPhoneHint": "01XXXXXXXXX",
+  "academicsGuardiansRelationsFATHER": "Father",
+  "academicsGuardiansRelationsMOTHER": "Mother",
+  "academicsGuardiansRelationsOTHER": "Other",
+  "academicsGuardiansPrimary": "Primary guardian",
+  "academicsGuardiansAdd": "Add a guardian",
+  "academicsGuardiansRemove": "Remove",
+  "academicsGuardiansRemoveFor": "Remove guardian {n}",
+  "@academicsGuardiansRemoveFor": {
+    "placeholders": {
+      "n": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "academicsGuardiansSmsLanguage": "SMS language for this student",
+  "academicsGuardiansSmsDefault": "Organisation default ({language})",
+  "@academicsGuardiansSmsDefault": {
+    "placeholders": {
+      "language": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsGuardiansSmsHint": "One SMS holds 160 English or 70 Bangla characters, so Bangla SMS use more credits.",
+  "academicsGuardiansSave": "Save",
+  "academicsGuardiansSaved": "Guardians saved",
+  "academicsGuardiansCancel": "Cancel",
+  "academicsGuardiansInvalidPhone": "Enter a Bangladeshi mobile number, 01XXXXXXXXX",
+  "academicsGuardiansSamePhone": "Two guardians cannot have the same number",
+  "academicsGuardiansNameRequired": "Enter the guardian's name",
+  "academicsImportOpen": "Import from CSV",
+  "academicsImportTitle": "Import students from CSV",
+  "academicsImportIntro": "Every row is checked before anything is saved. Rows with problems are skipped.",
+  "academicsImportColumnsHint": "Columns: name, phone or email, [[section]], roll number, and up to 2 guardians (name, relation, phone).",
+  "academicsImportTemplate": "Download template",
+  "academicsImportFile": "CSV file",
+  "academicsImportFileTypes": "CSV files",
+  "academicsImportMissingColumns": "The first line must name the columns, with name and phone or email. Start from the template.",
+  "academicsImportNoRows": "This file has no students under the header.",
+  "academicsImportTooManyRows": "Import at most {max} students at a time.",
+  "@academicsImportTooManyRows": {
+    "placeholders": {
+      "max": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "academicsImportPreviewSummary": "{session}: {valid, plural, one{{valid} student} other{{valid} students}} ready, {invalid, plural, =0{no problems} one{{invalid} row with problems} other{{invalid} rows with problems}}.",
+  "@academicsImportPreviewSummary": {
+    "placeholders": {
+      "session": {
+        "type": "String"
+      },
+      "valid": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "invalid": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "academicsImportResultSummary": "{imported, plural, one{{imported} student} other{{imported} students}} imported, {skipped, plural, =0{none skipped} other{{skipped} skipped}}. {sent, plural, =0{No invitations sent.} one{{sent} invitation sent.} other{{sent} invitations sent.}}",
+  "@academicsImportResultSummary": {
+    "placeholders": {
+      "imported": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "skipped": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "sent": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "academicsImportOverLimit": "Your plan allows {max} students. You have {current}, and this file adds {adding}. Upgrade the plan or import fewer students.",
+  "@academicsImportOverLimit": {
+    "placeholders": {
+      "max": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "current": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "adding": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "academicsImportSendInvitations": "Send invitations to students without an account",
+  "academicsImportSendInvitationsHint": "By email when the row has one; otherwise by SMS, which uses your SMS credits.",
+  "academicsImportImportCount": "{count, plural, =0{Import} one{Import {count} student} other{Import {count} students}}",
+  "@academicsImportImportCount": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "academicsImportCancel": "Cancel",
+  "academicsImportDone": "Done",
+  "academicsImportHasErrors": "Not imported",
+  "academicsImportGuardianIssue": "Guardian {n}: {issue}",
+  "@academicsImportGuardianIssue": {
+    "placeholders": {
+      "n": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "issue": {
+        "type": "String"
+      }
+    }
+  },
+  "academicsImportGuardianCount": "{count, plural, one{{count} guardian} other{{count} guardians}}",
+  "@academicsImportGuardianCount": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "academicsImportColumnsRow": "Row",
+  "academicsImportColumnsName": "Name",
+  "academicsImportColumnsContact": "Phone or email",
+  "academicsImportColumnsSection": "[[Section]] · Roll",
+  "academicsImportColumnsStatus": "Result",
+  "academicsImportPlansENROL": "Will be added",
+  "academicsImportPlansPENDING": "Will wait for verification",
+  "academicsImportPlansINVITE": "Will be invited",
+  "academicsImportOutcomesENROLLED": "Added",
+  "academicsImportOutcomesPENDING": "Waiting for verification",
+  "academicsImportOutcomesINVITED": "Invited",
+  "academicsImportOutcomesSKIPPED": "Skipped",
+  "academicsImportIssuesNAMEREQUIRED": "Name is missing",
+  "academicsImportIssuesNAMETOOLONG": "Name is longer than 150 characters",
+  "academicsImportIssuesCONTACTREQUIRED": "Give a phone number or email",
+  "academicsImportIssuesINVALIDPHONE": "Phone is not a Bangladeshi mobile number (01XXXXXXXXX)",
+  "academicsImportIssuesINVALIDEMAIL": "Email is not valid",
+  "academicsImportIssuesSECTIONREQUIRED": "[[Section]] is missing",
+  "academicsImportIssuesSECTIONNOTFOUND": "No [[section]] with this name in this [[class]]",
+  "academicsImportIssuesROLLTOOLONG": "Roll number is longer than 20 characters",
+  "academicsImportIssuesROLLTAKEN": "This roll number is already used in the [[section]]",
+  "academicsImportIssuesDUPLICATEINFILE": "This student is already in an earlier row",
+  "academicsImportIssuesALREADYINCLASS": "Already in this [[class]] this session",
+  "academicsImportIssuesALREADYINVITED": "Already invited to this [[class]]",
+  "academicsImportIssuesSTAFFACCOUNT": "This phone or email belongs to a staff account",
+  "academicsImportIssuesGUARDIANINCOMPLETE": "name and phone are needed",
+  "academicsImportIssuesGUARDIANRELATION": "relation must be Father, Mother or Other",
+  "academicsImportIssuesGUARDIANPHONE": "phone is not a Bangladeshi mobile number",
+  "academicsImportIssuesGUARDIANSAMEPHONE": "same phone as guardian 1",
+  "academicsImportIssuesSAVEFAILED": "Could not be saved; try this row again",
+  "academicsImportIssuesGUARDIANSKEPT": "Already has guardians; the ones on record are kept",
   "appNoConnection": "No internet connection. Check it and try again.",
   "appUpdateRequiredTitle": "Please update Instructor",
   "appUpdateRequiredBody": "This version of the app is no longer supported. Install the new version to continue.",
@@ -5479,5 +6562,6 @@
       }
     }
   },
-  "appHomeworkPlainText": "Instructions written on the website with bold, links or tables keep their words here, but saving from the app keeps plain text only."
+  "appHomeworkPlainText": "Instructions written on the website with bold, links or tables keep their words here, but saving from the app keeps plain text only.",
+  "appOpenOnWebsite": "Open on the website"
 }
