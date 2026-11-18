@@ -4051,5 +4051,415 @@
     "who": "Who",
     "accessLogCaption": "Who opened which chat",
     "noAccess": "Nobody has opened a chat yet"
+  },
+  "audit": {
+    "title": "Audit log",
+    "platformIntro": "Who changed what, in which organisation, and when. Open a row for the details.",
+    "organizationTitle": "Activity log",
+    "organizationIntro": "Who changed what in this workspace, and when: members, plan and results. Open a row for the details.",
+    "when": "When",
+    "who": "Who",
+    "organization": "Organisation",
+    "action": "What",
+    "summary": "Change",
+    "record": "Record",
+    "reason": "Reason",
+    "reasonValue": "Reason: {reason}",
+    "ip": "IP address",
+    "platform": "Platform",
+    "system": "System",
+    "unknownUser": "Deleted user",
+    "area": "Area",
+    "allAreas": "All areas",
+    "from": "From",
+    "to": "To",
+    "organizationFilter": "Organisation: {name}",
+    "onlyThisOrganization": "Show only this organisation",
+    "empty": "Nothing has been recorded yet.",
+    "emptyFiltered": "Nothing matches these filters.",
+    "changes": "What changed",
+    "noChanges": "No details were recorded for this action.",
+    "beforeAfter": "{before} → {after}",
+    "more": "+{count, number} more",
+    "yes": "Yes",
+    "no": "No",
+    "byOn": "{who}, {when}",
+    "noRecentChanges": "No changes yet.",
+    "loadFailed": "The changes did not load.",
+    "areas": {
+      "member": "Members",
+      "subscription": "Plan and switches",
+      "plan": "Plans",
+      "payment": "Payments",
+      "feature_request": "Feature requests",
+      "exam": "Tests",
+      "grade": "Marks",
+      "grading_scale": "Grading scale",
+      "organization": "Organisations",
+      "teacher_request": "Teacher requests",
+      "user": "Users",
+      "teacher": "Teachers",
+      "message_template": "Message templates",
+      "sms_credits": "SMS credits",
+      "guardian": "Guardians",
+      "student": "Students",
+      "attendance_settings": "Attendance settings",
+      "holiday": "Holidays",
+      "branch": "Branches",
+      "section_attendance": "[[Section]] setup",
+      "schedule": "Schedules",
+      "attendance": "Attendance",
+      "homework": "Homework",
+      "routine": "Routine",
+      "event": "Events",
+      "reminders": "Reminders",
+      "offline_exam": "Paper exams",
+      "behaviour": "Behaviour",
+      "score": "Score weights",
+      "performance": "Performance settings",
+      "report_card": "Report cards"
+    },
+    "actions": {
+      "plan": {
+        "create": "Plan created",
+        "update": "Plan edited",
+        "delete": "Plan deleted",
+        "reorder": "Plans reordered",
+        "activate": "Plan turned on",
+        "deactivate": "Plan turned off"
+      },
+      "subscription": {
+        "plan_assign": "Plan assigned",
+        "cancel": "Plan cancelled",
+        "override_set": "Feature or limit changed",
+        "override_remove": "Feature or limit back to plan"
+      },
+      "payment": {
+        "confirm": "Payment confirmed"
+      },
+      "feature_request": {
+        "handled": "Feature request handled"
+      },
+      "organization": {
+        "approve": "Organisation approved",
+        "reject": "Organisation rejected"
+      },
+      "teacher_request": {
+        "approve": "Teacher request approved",
+        "reject": "Teacher request rejected"
+      },
+      "user": {
+        "role_change": "Account role changed",
+        "sign_out_devices": "Signed out of devices"
+      },
+      "teacher": {
+        "status_change": "Teacher enabled or disabled"
+      },
+      "member": {
+        "add": "Member added",
+        "role_change": "Member role changed",
+        "remove": "Member removed"
+      },
+      "exam": {
+        "results_publish": "Results published"
+      },
+      "grade": {
+        "update": "Marks changed after publishing"
+      },
+      "grading_scale": {
+        "update": "Grading scale changed",
+        "reset": "Grading scale reset to default"
+      },
+      "message_template": {
+        "update": "Message template edited"
+      },
+      "sms_credits": {
+        "top_up": "SMS credits added"
+      },
+      "guardian": {
+        "create": "Guardian added",
+        "update": "Guardian changed",
+        "delete": "Guardian removed"
+      },
+      "student": {
+        "import": "Students imported from CSV"
+      },
+      "file": {
+        "upload": "File uploaded",
+        "delete": "File deleted"
+      },
+      "attendance_settings": {
+        "update": "Attendance settings changed"
+      },
+      "holiday": {
+        "create": "Holiday added",
+        "update": "Holiday changed",
+        "remove": "Holiday removed"
+      },
+      "branch": {
+        "create": "Branch added",
+        "update": "Branch changed",
+        "remove": "Branch removed"
+      },
+      "section_attendance": {
+        "update": "[[Section]] setup changed"
+      },
+      "schedule": {
+        "update": "Schedule changed"
+      },
+      "attendance": {
+        "correct": "Attendance corrected",
+        "cancel": "Class cancelled",
+        "restore": "Class restored",
+        "auto_absent": "Absent saved when check-in closed",
+        "import": "Paper register imported",
+        "change": "Class changed for a day"
+      },
+      "homework": {
+        "create": "Homework written",
+        "update": "Homework changed",
+        "publish": "Homework published",
+        "cancel": "Homework withdrawn",
+        "score": "Homework scored",
+        "return": "Homework returned for redo",
+        "publish_scores": "Homework scores published",
+        "remind": "Homework reminder sent"
+      },
+      "homework_settings": {
+        "update": "Homework settings changed"
+      },
+      "routine": {
+        "add": "Routine class added",
+        "change": "Routine class changed",
+        "remove": "Routine class removed",
+        "copy": "Routine week copied"
+      },
+      "event": {
+        "create": "Event added",
+        "update": "Event changed",
+        "cancel": "Event cancelled"
+      },
+      "reminders": {
+        "defaults_update": "Default reminders changed"
+      },
+      "offline_exam": {
+        "create": "Paper exam added",
+        "update": "Paper exam changed",
+        "remove": "Paper exam removed",
+        "publish": "Paper exam marks published",
+        "marks": "Paper exam marks entered"
+      },
+      "behaviour": {
+        "criteria": "Behaviour criteria changed",
+        "rate": "Behaviour rated"
+      },
+      "score": {
+        "weights": "Score weights changed"
+      },
+      "performance": {
+        "settings": "Performance settings changed"
+      },
+      "report_card": {
+        "generate": "Report card made",
+        "share": "Report card sent to guardians"
+      },
+      "ielts": {
+        "course_create": "IELTS course created",
+        "course_update": "IELTS course changed",
+        "course_remove": "IELTS course removed"
+      }
+    },
+    "fields": {
+      "role": "Role",
+      "status": "Status",
+      "active": "Active",
+      "user_name": "Member",
+      "user_id": "User",
+      "via": "Added by",
+      "reactivated": "Rejoined",
+      "plan_id": "Plan",
+      "plan_slug": "Plan",
+      "plan_name": "Plan name",
+      "billing_cycle": "Billing cycle",
+      "end_date": "Ends",
+      "key": "Feature or limit",
+      "value": "Value",
+      "expires_at": "Until",
+      "name": "Name",
+      "slug": "Short name",
+      "price_monthly": "Monthly price",
+      "price_half_yearly": "Half-yearly price",
+      "price_yearly": "Yearly price",
+      "visibility": "Visibility",
+      "is_custom": "Custom",
+      "sort_order": "Order",
+      "is_plan_active": "Turned on",
+      "features": "Features",
+      "limits": "Limits",
+      "plan_ids": "Order",
+      "amount": "Amount",
+      "transaction_id": "Transaction",
+      "subscription_id": "Subscription",
+      "feature_key": "Feature",
+      "test_name": "Test",
+      "published_at": "Published",
+      "submissions": "Submissions",
+      "total_score": "Total marks",
+      "marks": "Marks",
+      "exam_id": "Test",
+      "student_id": "Student",
+      "organization": "Organisation",
+      "organization_member": "Member",
+      "account_subscription": "Plan",
+      "feature_override": "Feature or limit",
+      "subscription_plan": "Plan",
+      "teacher_role_request": "Teacher request",
+      "student_exam_submission": "Answer sheet",
+      "exam": "Test",
+      "bands": "Bands",
+      "grading_scale": "Grading scale",
+      "event_type": "Message",
+      "channel": "Channel",
+      "locale": "Language",
+      "subject": "Subject",
+      "body": "Text",
+      "message_template": "Message template",
+      "credits": "Credits",
+      "top_up_left": "Top-up credits left",
+      "relation": "Relation",
+      "phone": "Mobile number",
+      "is_primary": "Primary",
+      "sms_locale": "SMS language",
+      "guardian": "Guardian",
+      "class_name": "Class",
+      "session_name": "Session",
+      "rows": "Rows",
+      "imported": "Imported",
+      "skipped": "Skipped",
+      "enrolled": "Added",
+      "pending": "Waiting",
+      "invited": "Invited",
+      "guardians": "Guardians",
+      "invitations_sent": "Invitations sent",
+      "class": "Class",
+      "attendance_method": "Daily presence",
+      "selfie_required": "Selfie required",
+      "class_attendance_mode": "Class attendance",
+      "weekly_off_days": "Weekly off days",
+      "student_entry_time": "Students' entry time",
+      "teacher_entry_time": "Teachers' entry time",
+      "guardian_sms": "Guardian SMS",
+      "repeat_absence_days": "Repeated-absence alert (days)",
+      "date_from": "First day",
+      "date_to": "Last day",
+      "org_settings": "Settings",
+      "holiday": "Holiday",
+      "late_grace_minutes": "Late after (minutes)",
+      "address": "Address",
+      "geo_lat": "Latitude",
+      "geo_lng": "Longitude",
+      "checkin_radius_m": "Check-in radius (m)",
+      "branch": "Branch",
+      "branch_id": "Branch",
+      "class_type": "Class type",
+      "mode": "Attendance mode",
+      "grace_minutes": "Late after (minutes)",
+      "slots": "Schedule",
+      "source": "How",
+      "from_section_id": "Copied from",
+      "section": "[[Section]]",
+      "late_minutes": "Minutes late",
+      "exams_pct": "Exams %",
+      "homework_pct": "Homework %",
+      "attendance_pct": "Attendance %",
+      "behaviour_pct": "Behaviour %",
+      "show_rank": "Show position to students",
+      "at_risk": "At-risk limits",
+      "part_marks": "Marks per part",
+      "is_absent": "Absent",
+      "ratings": "Ratings",
+      "criteria": "Criteria",
+      "remark": "Remark"
+    }
+  },
+  "messageLog": {
+    "title": "Message log",
+    "intro": "Every SMS and email sent from this workspace: who it was for, when, and whether it went out.",
+    "when": "When",
+    "to": "To",
+    "type": "Type",
+    "channel": "Channel",
+    "status": "Status",
+    "message": "Message",
+    "credits": "Credits",
+    "from": "From",
+    "toDay": "To",
+    "allTypes": "All types",
+    "allChannels": "All channels",
+    "allStatuses": "All statuses",
+    "unknown": "Unknown",
+    "hidden": "Code hidden",
+    "onlyRecipient": "Show only messages to {name}",
+    "recipientFilter": "To: {name}",
+    "empty": "No messages yet.",
+    "emptyFiltered": "No messages match these filters.",
+    "channels": {
+      "SMS": "SMS",
+      "EMAIL": "Email",
+      "IN_APP": "In-app"
+    },
+    "statuses": {
+      "PENDING": "Waiting",
+      "SENDING": "Sending",
+      "SENT": "Sent",
+      "DELIVERED": "Delivered",
+      "FAILED": "Failed",
+      "NO_CREDIT": "Not sent — no credit"
+    },
+    "areas": {
+      "exam": "Tests",
+      "class": "Class invitations",
+      "organization": "Organisation invitations",
+      "sms": "SMS credits",
+      "attendance": "Attendance"
+    },
+    "events": {
+      "exam": {
+        "scheduled": "Test scheduled"
+      },
+      "class": {
+        "invitation": "Class invitation"
+      },
+      "organization": {
+        "invitation": "Organisation invitation"
+      },
+      "sms": {
+        "low_credit": "SMS credits running low"
+      },
+      "auth": {
+        "otp": "Sign-up code",
+        "password_reset": "Password reset code"
+      },
+      "feature_request": {
+        "created": "Feature request"
+      },
+      "attendance": {
+        "late": "Late (guardian SMS)",
+        "absent": "Absent (guardian SMS)",
+        "class_cancelled": "Class cancelled",
+        "class_restored": "Class restored",
+        "repeat_absence": "Repeated absence",
+        "class_changed": "Class changed for a day"
+      },
+      "calendar": {
+        "event_added": "Event added",
+        "event_changed": "Event changed",
+        "event_cancelled": "Event cancelled",
+        "reminder": "Reminder"
+      },
+      "report_card": {
+        "shared": "Report card to guardians"
+      }
+    }
   }
 }

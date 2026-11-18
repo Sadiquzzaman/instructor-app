@@ -47,6 +47,8 @@ abstract final class AppRoutes {
   static const performanceSettings = '/performance-settings';
   static const gradingScale = '/grading-scale';
   static const chatAdmin = '/chat-admin';
+  static const activityLog = '/activity-log';
+  static const messageLog = '/message-log';
 
   /// Pages the app has really built (not "use the website for now"). A
   /// notification's link opens in the app only for these; each stage adds
@@ -85,6 +87,8 @@ abstract final class AppRoutes {
     performanceSettings,
     gradingScale,
     chatAdmin,
+    activityLog,
+    messageLog,
     performance,
     reportCards,
     resources,
