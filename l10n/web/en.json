@@ -4461,5 +4461,70 @@
         "shared": "Report card to guardians"
       }
     }
+  },
+  "billing": {
+    "title": "Billing and plans",
+    "intro": "Your workspace's plan and usage, and the plans you can upgrade to.",
+    "currentPlan": "Current plan: <b>{plan}</b>",
+    "free": "Free",
+    "refresh": "Refresh usage",
+    "examsThisMonth": "Tests this month",
+    "totalExams": "Tests in total",
+    "usageOf": "{used, number} of {limit, number}",
+    "cycle": "Billing period",
+    "cycles": {
+      "MONTHLY": "Monthly",
+      "HALF_YEARLY": "Every 6 months",
+      "YEARLY": "Yearly"
+    },
+    "per": {
+      "MONTHLY": "per month",
+      "HALF_YEARLY": "per 6 months",
+      "YEARLY": "per year"
+    },
+    "current": "Current plan",
+    "downgrade": "Lower plan",
+    "downgradeHint": "Contact support to move to a lower plan.",
+    "upgrade": "Upgrade",
+    "noPlans": "No paid plans are available for this billing period.",
+    "loadFailed": "Your plan did not load.",
+    "memberHint": "Only the workspace owner or an admin can change the plan. Ask your admin to unlock more features.",
+    "seeFeatures": "See all features"
+  },
+  "storage": {
+    "title": "Storage",
+    "intro": "Files your workspace keeps count toward your plan. Space frees up when files are deleted.",
+    "used": "{usedSize} of {limitSize} used",
+    "usedNoLimit": "{usedSize} used — your plan has no storage limit",
+    "percentUsed": "{percent, number}% used",
+    "warning": "Almost full. At 100% uploads stop.",
+    "full": "Storage is full. Delete files or upgrade your plan to upload more.",
+    "loadFailed": "Could not load storage use.",
+    "byType": {
+      "homework": "Homework",
+      "resources": "Resources",
+      "video": "Video",
+      "other": "Tests and discussions"
+    }
+  },
+  "smsCredits": {
+    "title": "SMS credits",
+    "intro": "Your plan includes SMS each month. Buy more when you need them.",
+    "openLog": "Message log",
+    "loadFailed": "SMS credits did not load.",
+    "totalLeft": "{count, plural, one {# SMS left} other {# SMS left}}",
+    "low": "Running low",
+    "allowance": "From your plan this month",
+    "allowanceLeft": "{left, number} of {granted, number} left",
+    "noAllowance": "Your plan has no monthly SMS",
+    "allowanceHint": "Resets at the start of each month. Unused SMS do not carry over.",
+    "topUp": "Top-up credits",
+    "credits": "{count, plural, one {# SMS} other {# SMS}}",
+    "topUpHint": "Bought credits carry over until used.",
+    "buyHeading": "Buy more SMS",
+    "price": "৳{price}",
+    "buy": "Buy",
+    "buyPack": "Buy {count, number} SMS",
+    "noCreditHint": "Each SMS part uses one credit (160 English or 70 Bangla characters). With no credits left, SMS stop; in-app messages and emails still go out."
   }
 }

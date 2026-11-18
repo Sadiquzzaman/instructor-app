@@ -49,6 +49,7 @@ abstract final class AppRoutes {
   static const chatAdmin = '/chat-admin';
   static const activityLog = '/activity-log';
   static const messageLog = '/message-log';
+  static const billing = '/billing';
 
   /// Pages the app has really built (not "use the website for now"). A
   /// notification's link opens in the app only for these; each stage adds
@@ -89,6 +90,7 @@ abstract final class AppRoutes {
     chatAdmin,
     activityLog,
     messageLog,
+    billing,
     performance,
     reportCards,
     resources,
