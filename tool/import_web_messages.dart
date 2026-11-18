@@ -37,6 +37,7 @@ const webNamespaces = [
   'today',
   'calendar',
   'myAttendance',
+  'classAttendance',
   'leave',
   'routine',
   'homework',

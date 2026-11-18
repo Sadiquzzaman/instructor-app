@@ -20,6 +20,7 @@ import 'package:instructor_app/core/widgets/app_card.dart';
 import 'package:instructor_app/core/widgets/state_views.dart';
 import 'package:instructor_app/core/widgets/status_pill.dart';
 import 'package:instructor_app/features/attendance/data/my_attendance.dart';
+import 'package:instructor_app/features/attendance/widgets/attendance_mark.dart';
 import 'package:instructor_app/features/shell/widgets/api_error_handling.dart';
 
 /// Today's classes are read again this often, so check-in opens and closes
@@ -60,18 +61,6 @@ class _MyAttendanceScreenState extends ConsumerState<MyAttendanceScreen> {
     _timer?.cancel();
     super.dispose();
   }
-
-  String _statusName(AppLocalizations l10n, String status) => switch (status) {
-    'UPCOMING' => l10n.myAttendanceStatusUPCOMING,
-    'OPEN' => l10n.myAttendanceStatusOPEN,
-    'PRESENT' => l10n.myAttendanceStatusPRESENT,
-    'LATE' => l10n.myAttendanceStatusLATE,
-    'ABSENT' => l10n.myAttendanceStatusABSENT,
-    'LEAVE' => l10n.myAttendanceStatusLEAVE,
-    'CLOSED_DAY' => l10n.myAttendanceStatusCLOSEDDAY,
-    'CANCELLED' => l10n.myAttendanceStatusCANCELLED,
-    _ => l10n.myAttendanceStatusNOTRECORDED,
-  };
 
   String? _knownError(AppLocalizations l10n, ApiException e, String language) {
     final d = e.details is Map ? e.details! as Map : const <String, Object?>{};
@@ -322,7 +311,7 @@ class _MyAttendanceScreenState extends ConsumerState<MyAttendanceScreen> {
       'OPEN' when item.endsAt != null => l10n.myAttendanceOpenUntil(
         OrgTime.time(item.endsAt!, language),
       ),
-      _ => _statusName(l10n, status),
+      _ => attendanceStatusName(l10n, status),
     };
     final problem = _problems[item.slotId];
     final busy = _busySlot == item.slotId;
@@ -394,11 +383,11 @@ class _MyAttendanceScreenState extends ConsumerState<MyAttendanceScreen> {
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
             Semantics(
-              label: _statusName(l10n, status),
+              label: attendanceStatusName(l10n, status),
               excludeSemantics: true,
               child: StatusPill(
-                label: '${_letter(l10n, status)} $statusText',
-                tone: _tone(status),
+                label: '${attendanceLetter(l10n, status)} $statusText',
+                tone: attendanceTone(status),
               ),
             ),
             if (item.canCheckIn && !offline)
@@ -510,8 +499,8 @@ class _MyAttendanceScreenState extends ConsumerState<MyAttendanceScreen> {
             const SizedBox(height: AppSpacing.lg),
             _MonthGrid(
               calendar: value,
-              letter: (s) => _letter(l10n, s),
-              statusName: (s) => _statusName(l10n, s),
+              letter: (s) => attendanceLetter(l10n, s),
+              statusName: (s) => attendanceStatusName(l10n, s),
             ),
             const SizedBox(height: AppSpacing.md),
             Semantics(
@@ -532,9 +521,15 @@ class _MyAttendanceScreenState extends ConsumerState<MyAttendanceScreen> {
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        _Mark(status: s, letter: _letter(l10n, s)),
+                        AttendanceMark(
+                          status: s,
+                          letter: attendanceLetter(l10n, s),
+                        ),
                         const SizedBox(width: AppSpacing.xs),
-                        Text(_statusName(l10n, s), style: text.bodySmall),
+                        Text(
+                          attendanceStatusName(l10n, s),
+                          style: text.bodySmall,
+                        ),
                       ],
                     ),
                 ],
@@ -546,27 +541,6 @@ class _MyAttendanceScreenState extends ConsumerState<MyAttendanceScreen> {
     );
   }
 }
-
-String _letter(AppLocalizations l10n, String status) => switch (status) {
-  'UPCOMING' => l10n.myAttendanceLetterUPCOMING,
-  'OPEN' => l10n.myAttendanceLetterOPEN,
-  'PRESENT' => l10n.myAttendanceLetterPRESENT,
-  'LATE' => l10n.myAttendanceLetterLATE,
-  'ABSENT' => l10n.myAttendanceLetterABSENT,
-  'LEAVE' => l10n.myAttendanceLetterLEAVE,
-  'CLOSED_DAY' => l10n.myAttendanceLetterCLOSEDDAY,
-  'CANCELLED' => l10n.myAttendanceLetterCANCELLED,
-  _ => l10n.myAttendanceLetterNOTRECORDED,
-};
-
-StatusTone _tone(String status) => switch (status) {
-  'OPEN' => StatusTone.primary,
-  'PRESENT' => StatusTone.success,
-  'LATE' => StatusTone.warning,
-  'ABSENT' => StatusTone.danger,
-  'LEAVE' => StatusTone.info,
-  _ => StatusTone.neutral,
-};
 
 class _Stat extends StatelessWidget {
   const _Stat(this.label, this.value);
@@ -591,44 +565,6 @@ class _Stat extends StatelessWidget {
           Text(label, style: text.bodySmall?.copyWith(color: colors.inkMuted)),
           Text(value, style: text.titleLarge),
         ],
-      ),
-    );
-  }
-}
-
-/// A status mark: its colour and letter (the web's `StatusMark`).
-class _Mark extends StatelessWidget {
-  const _Mark({required this.status, required this.letter, this.size = 22});
-
-  final String status;
-  final String letter;
-  final double size;
-
-  @override
-  Widget build(BuildContext context) {
-    final c = AppColors.of(context);
-    final (fill, ink, border) = switch (status) {
-      'OPEN' => (c.primarySoft, c.primary, c.primary),
-      'PRESENT' => (c.success, c.inkInverse, null),
-      'LATE' => (c.warning, c.inkInverse, null),
-      'ABSENT' => (c.danger, c.inkInverse, null),
-      'LEAVE' => (c.info, c.inkInverse, null),
-      'NOT_RECORDED' => (c.surface, c.inkMuted, c.border),
-      _ => (c.canvas, c.inkMuted, c.border),
-    };
-    return Container(
-      width: size,
-      height: size,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: fill,
-        shape: BoxShape.circle,
-        border: border == null ? null : Border.all(color: border),
-      ),
-      child: Text(
-        letter,
-        style: Theme.of(context).textTheme.labelSmall
-            ?.copyWith(color: ink, fontWeight: FontWeight.w700, height: 1),
       ),
     );
   }
@@ -714,7 +650,7 @@ class _MonthGrid extends StatelessWidget {
                   runSpacing: 1,
                   children: [
                     for (final m in day.marks)
-                      _Mark(
+                      AttendanceMark(
                         status: m.status,
                         letter: letter(m.status),
                         size: 16,
