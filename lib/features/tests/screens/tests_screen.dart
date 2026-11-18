@@ -10,15 +10,28 @@ import 'package:instructor_app/core/theme/app_colors.dart';
 import 'package:instructor_app/core/theme/app_metrics.dart';
 import 'package:instructor_app/core/widgets/state_views.dart';
 import 'package:instructor_app/features/tests/data/tests.dart';
+import 'package:instructor_app/features/tests/screens/teacher_tests_screens.dart';
 import 'package:instructor_app/features/tests/widgets/test_card.dart';
 
 /// Tests with a status filter (the web's ClassTests filters), each as a
 /// [TestCard]. Used by /tests and a class's Tests tab.
 class TestList extends StatefulWidget {
-  const TestList({required this.tests, this.onStart, super.key});
+  const TestList({
+    required this.tests,
+    this.onStart,
+    this.onOpen,
+    this.emptyMessage,
+    super.key,
+  });
 
   final List<TestItem> tests;
   final void Function(TestItem)? onStart;
+
+  /// Opens a test's page (teachers).
+  final void Function(TestItem)? onOpen;
+
+  /// Under "No tests yet"; the students' wording by default.
+  final String? emptyMessage;
 
   @override
   State<TestList> createState() => _TestListState();
@@ -59,7 +72,7 @@ class _TestListState extends State<TestList> {
             child: EmptyView(
               icon: Icons.quiz_outlined,
               title: l10n.testsEmpty,
-              message: l10n.testsEmptyStudent,
+              message: widget.emptyMessage ?? l10n.testsEmptyStudent,
             ),
           )
         else
@@ -67,6 +80,7 @@ class _TestListState extends State<TestList> {
             TestCard(
               test: t,
               onStart: widget.onStart == null ? null : () => widget.onStart!(t),
+              onOpen: widget.onOpen == null ? null : () => widget.onOpen!(t),
             ),
             const SizedBox(height: AppSpacing.sm),
           ],
@@ -88,12 +102,9 @@ class TestsScreen extends ConsumerWidget {
     final l10n = context.l10n;
     final text = Theme.of(context).textTheme;
     final colors = AppColors.of(context);
+    // Teachers follow their own tests (the web's TestList for a teacher).
     if (ref.watch(sessionProvider)?.role != 'STUDENT') {
-      return EmptyView(
-        icon: Icons.public,
-        title: l10n.testsTitle,
-        message: l10n.appNotYetBody,
-      );
+      return const TeacherTestsScreen();
     }
     final tests = ref.watch(myTestsProvider);
     return Center(

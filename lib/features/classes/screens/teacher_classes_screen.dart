@@ -17,6 +17,7 @@ import 'package:instructor_app/core/widgets/state_views.dart';
 import 'package:instructor_app/core/widgets/status_pill.dart';
 import 'package:instructor_app/features/classes/data/teacher_classes.dart';
 import 'package:instructor_app/features/classes/screens/class_discussions.dart';
+import 'package:instructor_app/features/tests/screens/teacher_tests_screens.dart';
 import 'package:instructor_app/features/shell/widgets/api_error_handling.dart';
 
 /// A member's name as the web shows it: their name, else their contact,
@@ -581,8 +582,8 @@ class _TeacherClassScreenState extends ConsumerState<TeacherClassScreen> {
   final _search = TextEditingController();
   String? _section;
 
-  /// Students (false) or Discussions (true).
-  bool _discussions = false;
+  /// Students (0), Tests (1) or Discussions (2).
+  int _tab = 0;
   bool _busy = false;
 
   @override
@@ -851,23 +852,20 @@ class _TeacherClassScreenState extends ConsumerState<TeacherClassScreen> {
             ],
           ),
           const SizedBox(height: AppSpacing.lg),
-          SegmentedButton<bool>(
+          SegmentedButton<int>(
             key: const Key('class-tabs'),
             segments: [
-              ButtonSegment(
-                value: false,
-                label: Text(l10n.classesTabsStudents),
-              ),
-              ButtonSegment(
-                value: true,
-                label: Text(l10n.classesTabsDiscussions),
-              ),
+              ButtonSegment(value: 0, label: Text(l10n.classesTabsStudents)),
+              ButtonSegment(value: 1, label: Text(l10n.classesTabsTests)),
+              ButtonSegment(value: 2, label: Text(l10n.classesTabsDiscussions)),
             ],
-            selected: {_discussions},
-            onSelectionChanged: (s) => setState(() => _discussions = s.first),
+            selected: {_tab},
+            onSelectionChanged: (s) => setState(() => _tab = s.first),
           ),
           const SizedBox(height: AppSpacing.lg),
-          if (_discussions)
+          if (_tab == 1)
+            TeacherClassTests(classId: c.id)
+          else if (_tab == 2)
             ClassDiscussions(
               classId: c.id,
               students: [

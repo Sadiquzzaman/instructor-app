@@ -27,6 +27,7 @@ import 'package:instructor_app/features/shell/menu/menu_items.g.dart';
 import 'package:instructor_app/features/shell/screens/app_shell.dart';
 import 'package:instructor_app/features/tests/screens/take_test_screen.dart';
 import 'package:instructor_app/features/tests/screens/test_result_screen.dart';
+import 'package:instructor_app/features/tests/screens/teacher_tests_screens.dart';
 import 'package:instructor_app/features/tests/screens/tests_screen.dart';
 import 'package:instructor_app/features/today/screens/today_screen.dart';
 import 'package:instructor_app/features/dashboard/screens/teacher_dashboard_screen.dart';
@@ -213,6 +214,13 @@ final routerProvider = Provider<GoRouter>((ref) {
             path: AppRoutes.tests,
             builder: (context, state) => const TestsScreen(),
             routes: [
+              // A teacher's test (students open a test to take it, or its
+              // result).
+              GoRoute(
+                path: ':id',
+                builder: (context, state) =>
+                    TeacherTestScreen(id: state.pathParameters['id']!),
+              ),
               GoRoute(
                 path: ':id/results',
                 builder: (context, state) =>

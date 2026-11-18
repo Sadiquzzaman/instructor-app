@@ -27,9 +27,12 @@ StatusTone testStatusTone(String s) => switch (s) {
 /// status, subject, schedule and how many have handed in; Results once it
 /// is over. Starting a test comes with the next PR.
 class TestCard extends StatelessWidget {
-  const TestCard({required this.test, this.onStart, super.key});
+  const TestCard({required this.test, this.onStart, this.onOpen, super.key});
 
   final TestItem test;
+
+  /// Opens the test's page (teachers); null: the card is not tappable.
+  final VoidCallback? onOpen;
 
   /// Opens the test; null hides Start.
   final VoidCallback? onStart;
@@ -44,6 +47,7 @@ class TestCard extends StatelessWidget {
     final progress = t.participants > 0 ? t.submitted / t.participants : 0.0;
     return AppCard(
       key: Key('test-${t.id}'),
+      onTap: onOpen,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
