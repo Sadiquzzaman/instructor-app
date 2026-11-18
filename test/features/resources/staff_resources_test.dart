@@ -6,6 +6,7 @@ import 'package:instructor_app/core/files/file_picking.dart';
 import 'package:instructor_app/core/files/local_file.dart';
 import 'package:instructor_app/core/routing/app_router.dart';
 import 'package:instructor_app/features/resources/staff_resources_screen.dart';
+import 'package:instructor_app/features/shell/screens/app_shell.dart';
 import 'package:instructor_app/l10n/generated/app_localizations_bn.dart';
 import 'package:instructor_app/l10n/generated/app_localizations_en.dart';
 
@@ -191,6 +192,14 @@ void main() {
     await tester.tap(find.byKey(const Key('resource-add')));
     await tester.pumpAndSettle();
     expect(find.text(_en.resourcesAddTitle), findsOneWidget);
+    // Over the whole app, not inside the menu frame.
+    expect(
+      find.ancestor(
+        of: find.byType(ResourceFormScreen),
+        matching: find.byType(AppShell),
+      ),
+      findsNothing,
+    );
     await tester.tap(find.byKey(const Key('kind-link')));
     await tester.pumpAndSettle();
     await _enter(tester, 'resource-url', 'https://www.khanacademy.org/x');
