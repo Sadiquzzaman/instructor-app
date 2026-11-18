@@ -52,6 +52,7 @@ abstract final class AppRoutes {
     grading,
     marks,
     behaviour,
+    organization,
     performance,
     reportCards,
     resources,
