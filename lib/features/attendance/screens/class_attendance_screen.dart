@@ -340,8 +340,8 @@ class _SessionCard extends StatelessWidget {
 /// One class on a date (the web's drawer): everyone's status with check-in
 /// time, minutes late, distance and flag, and the corrections so far; a
 /// correction takes the new status and a reason. The class can be cancelled
-/// for the day with a note, and restored. A one-day change (other times, a
-/// substitute) shows here; making one stays on the web for now.
+/// for the day with a note, and restored, or given other times or a
+/// substitute teacher for the day.
 class ClassSessionScreen extends ConsumerStatefulWidget {
   const ClassSessionScreen({
     required this.slotId,
@@ -496,9 +496,21 @@ class _ClassSessionScreenState extends ConsumerState<ClassSessionScreen> {
             ].join(' · '),
             style: text.bodyMedium?.copyWith(color: colors.inkMuted),
           ),
-          if (s.change != null) ...[
+          if (s.cancelled == null && (s.change != null || s.canChange)) ...[
             const SizedBox(height: AppSpacing.md),
-            _ChangeBanner(s),
+            _ChangeSection(
+              s,
+              onChanged: (d) {
+                setState(() => _latest = d);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      context.l10n.classAttendanceChangedToast(d.session.label),
+                    ),
+                  ),
+                );
+              },
+            ),
           ],
           const SizedBox(height: AppSpacing.md),
           _cancellation(s),
@@ -667,11 +679,157 @@ class _ClassSessionScreenState extends ConsumerState<ClassSessionScreen> {
   }
 }
 
-/// The day's change: routine and new times, the substitute, who and when.
-class _ChangeBanner extends StatelessWidget {
-  const _ChangeBanner(this.s);
+/// A refusal of a day's change, in the web's words; null for anything else.
+String? _changeErrorText(AppLocalizations l10n, Object e) {
+  if (e is! ApiException) return null;
+  final d = e.details is Map ? e.details! as Map : const <String, Object?>{};
+  return switch (e.code) {
+    'ATTENDANCE_CHANGE_STARTED' =>
+      l10n.classAttendanceErrorsATTENDANCECHANGESTARTED,
+    'ATTENDANCE_CHANGE_TIME_INVALID' =>
+      l10n.classAttendanceErrorsATTENDANCECHANGETIMEINVALID,
+    'ATTENDANCE_CHANGE_OVERLAP' =>
+      l10n.classAttendanceErrorsATTENDANCECHANGEOVERLAP(
+        (d['start_time'] as String?) ?? '',
+        (d['end_time'] as String?) ?? '',
+      ),
+    'ATTENDANCE_CHANGE_TEACHER_INVALID' =>
+      l10n.classAttendanceErrorsATTENDANCECHANGETEACHERINVALID,
+    'ATTENDANCE_CHANGE_NONE' => l10n.classAttendanceErrorsATTENDANCECHANGENONE,
+    _ => classAttendanceErrorText(l10n, e),
+  };
+}
+
+/// "HH:MM" of an instant in the organisation's time zone.
+String _hhmm(DateTime instant) =>
+    DateFormat('HH:mm').format(OrgTime.wallClock(instant));
+
+/// A one-day change of the class (the web's `ClassChangeSection`): a change
+/// already made (routine and new times, the substitute, who and when, the
+/// note) with Undo; before check-in opens, other times that day and/or a
+/// substitute teacher, with a note for students. The routine stays as it is.
+class _ChangeSection extends ConsumerStatefulWidget {
+  const _ChangeSection(this.s, {required this.onChanged});
 
   final ClassSession s;
+  final void Function(ClassSessionDetail) onChanged;
+
+  @override
+  ConsumerState<_ChangeSection> createState() => _ChangeSectionState();
+}
+
+class _ChangeSectionState extends ConsumerState<_ChangeSection> {
+  bool _open = false;
+  bool _busy = false;
+  String? _problem;
+  String _start = '';
+  String _end = '';
+
+  /// The substitute's id; null keeps the routine's teacher.
+  String? _substitute;
+  final _note = TextEditingController();
+
+  @override
+  void dispose() {
+    _note.dispose();
+    super.dispose();
+  }
+
+  ClassSession get s => widget.s;
+
+  void _startForm() {
+    setState(() {
+      _start = s.startsAt != null ? _hhmm(s.startsAt!) : s.startTime;
+      _end = s.endsAt != null ? _hhmm(s.endsAt!) : s.endTime;
+      _substitute = s.change?.substitute?.id;
+      _note.text = s.change?.note ?? '';
+      _problem = null;
+      _open = true;
+    });
+  }
+
+  Future<void> _pickTime({required bool start}) async {
+    final current = start ? _start : _end;
+    final parts = current.split(':');
+    final picked = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay(
+        hour: int.tryParse(parts.first) ?? 9,
+        minute: parts.length > 1 ? int.tryParse(parts[1]) ?? 0 : 0,
+      ),
+    );
+    if (picked == null || !mounted) return;
+    final v =
+        '${picked.hour.toString().padLeft(2, '0')}:'
+        '${picked.minute.toString().padLeft(2, '0')}';
+    setState(() => start ? _start = v : _end = v);
+  }
+
+  Future<void> _send({
+    required String start,
+    required String end,
+    String? substitute,
+    String note = '',
+  }) async {
+    final l10n = context.l10n;
+    setState(() {
+      _busy = true;
+      _problem = null;
+    });
+    try {
+      final d = await ref
+          .read(classAttendanceRepositoryProvider)
+          .change(
+            s.slotId,
+            s.date,
+            start: start,
+            end: end,
+            substituteId: substitute,
+            note: note,
+          );
+      if (!mounted) return;
+      setState(() => _open = false);
+      widget.onChanged(d);
+    } catch (e) {
+      if (!mounted) return;
+      final known = _changeErrorText(l10n, e);
+      if (known != null) {
+        setState(() => _problem = known);
+      } else if (!await handleCommonApiError(
+            context,
+            e,
+            session: ref.read(sessionProvider),
+          ) &&
+          mounted) {
+        setState(() => _problem = apiErrorText(l10n, e));
+      }
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  void _save() {
+    // "HH:MM" strings compare in time order.
+    if (_start.isEmpty || _end.isEmpty || _end.compareTo(_start) <= 0) {
+      setState(
+        () => _problem =
+            context.l10n.classAttendanceErrorsATTENDANCECHANGETIMEINVALID,
+      );
+      return;
+    }
+    _send(
+      start: _start,
+      end: _end,
+      substitute: _substitute,
+      note: _note.text.trim(),
+    );
+  }
+
+  void _undo() {
+    final c = s.change;
+    if (c == null) return;
+    _send(start: c.routineStart, end: c.routineEnd);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -679,37 +837,177 @@ class _ChangeBanner extends StatelessWidget {
     final language = Localizations.localeOf(context).languageCode;
     final text = Theme.of(context).textTheme;
     final colors = AppColors.of(context);
-    final c = s.change!;
+    final c = s.change;
     String t(String v) => OrgTime.timeOfDay(v, language);
+    // Who teaches when nobody substitutes.
+    final routineTeacher = c == null
+        ? s.teacher
+        : (c.substitute == null ? s.teacher : null);
+    final orgId = ref.watch(sessionProvider)?.isOrganization == true
+        ? ref.watch(sessionProvider)?.organizationId
+        : null;
+    final teachers = _open && orgId != null
+        ? ref.watch(assignableTeachersProvider(orgId)).value ?? const <Who>[]
+        : const <Who>[];
+    final choices = [
+      for (final w in teachers)
+        if (w.id != routineTeacher?.id) w,
+    ];
+    // A substitute chosen earlier stays a choice even if the list is late.
+    if (_substitute != null && choices.every((w) => w.id != _substitute)) {
+      final known = c?.substitute;
+      if (known != null && known.id == _substitute) choices.add(known);
+    }
     return AppCard(
-      key: const Key('change-banner'),
+      key: const Key('change-section'),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(l10n.classAttendanceChangeChangedTitle, style: text.titleSmall),
-          Text(
-            '${l10n.classAttendanceChangeRoutineTimes(t(c.routineStart), t(c.routineEnd))}'
-            ' · ${l10n.classAttendanceChangeDayTimes(t(s.startTime), t(s.endTime))}',
-            style: text.bodySmall,
-          ),
-          if (c.substitute != null)
+          if (c != null) ...[
             Text(
-              l10n.classAttendanceChangeSubstituteIs(c.substitute!.name),
+              l10n.classAttendanceChangeChangedTitle,
+              style: text.titleSmall,
+            ),
+            Text(
+              '${l10n.classAttendanceChangeRoutineTimes(t(c.routineStart), t(c.routineEnd))}'
+              ' → ${l10n.classAttendanceChangeDayTimes(t(s.startTime), t(s.endTime))}',
               style: text.bodySmall,
             ),
-          if (c.at != null)
-            Text(
-              l10n.classAttendanceChangeChangedBy(
-                c.by?.name ?? l10n.classAttendanceChangeSomeone,
-                OrgTime.dateTime(c.at!, language),
+            if (c.substitute != null)
+              Text(
+                l10n.classAttendanceChangeSubstituteIs(c.substitute!.name),
+                style: text.bodySmall,
               ),
+            if (c.at != null)
+              Text(
+                l10n.classAttendanceChangeChangedBy(
+                  c.by?.name ?? l10n.classAttendanceChangeSomeone,
+                  OrgTime.dateTime(c.at!, language),
+                ),
+                style: text.bodySmall?.copyWith(color: colors.inkMuted),
+              ),
+            if (c.note != null && c.note!.isNotEmpty)
+              Text(
+                l10n.classAttendanceChangeNoteIs(c.note!),
+                style: text.bodySmall,
+              ),
+          ] else
+            Text(l10n.classAttendanceChangeTitle, style: text.titleSmall),
+          if (_open) ...[
+            const SizedBox(height: AppSpacing.sm),
+            Text(
+              l10n.classAttendanceChangeIntro,
               style: text.bodySmall?.copyWith(color: colors.inkMuted),
             ),
-          if (c.note != null && c.note!.isNotEmpty)
-            Text(
-              l10n.classAttendanceChangeNoteIs(c.note!),
-              style: text.bodySmall,
+            const SizedBox(height: AppSpacing.sm),
+            Wrap(
+              spacing: AppSpacing.sm,
+              runSpacing: AppSpacing.sm,
+              children: [
+                OutlinedButton.icon(
+                  key: const Key('change-start'),
+                  onPressed: _busy ? null : () => _pickTime(start: true),
+                  icon: const Icon(Icons.schedule),
+                  label: Text(
+                    '${l10n.classAttendanceChangeStart}: ${t(_start)}',
+                  ),
+                ),
+                OutlinedButton.icon(
+                  key: const Key('change-end'),
+                  onPressed: _busy ? null : () => _pickTime(start: false),
+                  icon: const Icon(Icons.schedule),
+                  label: Text('${l10n.classAttendanceChangeEnd}: ${t(_end)}'),
+                ),
+              ],
             ),
+            if (orgId != null) ...[
+              const SizedBox(height: AppSpacing.sm),
+              DropdownButtonFormField<String?>(
+                key: const Key('change-substitute'),
+                initialValue: _substitute,
+                isExpanded: true,
+                decoration: InputDecoration(
+                  labelText: l10n.classAttendanceChangeSubstitute,
+                ),
+                items: [
+                  DropdownMenuItem<String?>(
+                    child: Text(
+                      routineTeacher != null
+                          ? l10n.classAttendanceChangeRoutineTeacher(
+                              routineTeacher.name,
+                            )
+                          : l10n.classAttendanceChangeNoSubstitute,
+                    ),
+                  ),
+                  for (final w in choices)
+                    DropdownMenuItem<String?>(value: w.id, child: Text(w.name)),
+                ],
+                onChanged: _busy
+                    ? null
+                    : (v) => setState(() => _substitute = v),
+              ),
+            ],
+            const SizedBox(height: AppSpacing.sm),
+            TextField(
+              key: const Key('change-note'),
+              controller: _note,
+              maxLength: 300,
+              minLines: 2,
+              maxLines: 4,
+              decoration: InputDecoration(
+                labelText: l10n.classAttendanceChangeNote,
+                helperText: l10n.classAttendanceChangeNoteHint,
+                helperMaxLines: 3,
+              ),
+            ),
+          ],
+          if (_problem != null)
+            Text(
+              _problem!,
+              key: const Key('change-problem'),
+              style: text.bodySmall?.copyWith(color: colors.danger),
+            ),
+          if (s.canChange) ...[
+            const SizedBox(height: AppSpacing.sm),
+            Wrap(
+              alignment: WrapAlignment.end,
+              spacing: AppSpacing.sm,
+              children: _open
+                  ? [
+                      TextButton(
+                        onPressed: _busy
+                            ? null
+                            : () => setState(() {
+                                _open = false;
+                                _problem = null;
+                              }),
+                        child: Text(l10n.classAttendanceChangeClose),
+                      ),
+                      FilledButton(
+                        key: const Key('change-save'),
+                        onPressed: _busy ? null : _save,
+                        child: Text(l10n.classAttendanceChangeSave),
+                      ),
+                    ]
+                  : [
+                      if (c != null)
+                        TextButton(
+                          key: const Key('change-undo'),
+                          onPressed: _busy ? null : _undo,
+                          child: Text(l10n.classAttendanceChangeUndo),
+                        ),
+                      OutlinedButton(
+                        key: const Key('change-open'),
+                        onPressed: _startForm,
+                        child: Text(
+                          c != null
+                              ? l10n.classAttendanceChangeEditChange
+                              : l10n.classAttendanceChangeOpen,
+                        ),
+                      ),
+                    ],
+            ),
+          ],
         ],
       ),
     );
