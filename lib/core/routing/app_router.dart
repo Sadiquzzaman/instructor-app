@@ -272,6 +272,13 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: AppRoutes.performance,
             builder: (context, state) => const PerformanceScreen(),
+            routes: [
+              GoRoute(
+                path: 'students/:id',
+                builder: (context, state) =>
+                    PerformanceScreen(studentId: state.pathParameters['id']!),
+              ),
+            ],
           ),
           GoRoute(
             path: AppRoutes.reportCards,

@@ -11,6 +11,7 @@ import 'package:instructor_app/core/time/org_time.dart';
 import 'package:instructor_app/core/widgets/app_card.dart';
 import 'package:instructor_app/core/widgets/state_views.dart';
 import 'package:instructor_app/core/widgets/status_pill.dart';
+import 'package:instructor_app/features/results/screens/section_performance_screen.dart';
 import 'package:instructor_app/features/results/screens/paper_exam_screens.dart';
 import 'package:instructor_app/features/results/data/results.dart';
 
@@ -255,7 +256,11 @@ class _SubjectTable extends StatelessWidget {
 
 /// The web's /performance for a student: their own published results.
 class PerformanceScreen extends ConsumerWidget {
-  const PerformanceScreen({super.key});
+  const PerformanceScreen({this.studentId, super.key});
+
+  /// A student a teacher opened (`/performance/students/:id`); null: the
+  /// signed-in student's own.
+  final String? studentId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -263,17 +268,24 @@ class PerformanceScreen extends ConsumerWidget {
     final language = Localizations.localeOf(context).languageCode;
     final text = Theme.of(context).textTheme;
     final colors = AppColors.of(context);
-    if (_staffGate(context, ref, l10n.performanceMyTitle) case final gate?) {
-      return gate;
+    final id = studentId;
+    // Staff see their sections (the web's ClassDashboard).
+    if (id == null && ref.watch(sessionProvider)?.role != 'STUDENT') {
+      return const SectionPerformanceScreen();
     }
-    final perf = ref.watch(myPerformanceProvider);
+    final provider = id == null
+        ? myPerformanceProvider
+        : studentPerformanceProvider(id);
+    final perf = ref.watch(provider);
     return _Page(
-      title: l10n.performanceMyTitle,
-      intro: l10n.performancePublishedOnly,
+      title: id == null
+          ? l10n.performanceMyTitle
+          : (perf.value?.name ?? l10n.performanceTitle),
+      intro: id == null ? l10n.performancePublishedOnly : null,
       onRefresh: () async {
-        ref.invalidate(myPerformanceProvider);
+        ref.invalidate(provider);
         await ref
-            .read(myPerformanceProvider.future)
+            .read(provider.future)
             .then<void>((_) {}, onError: (Object _) {});
       },
       body: perf.when(
@@ -289,7 +301,7 @@ class PerformanceScreen extends ConsumerWidget {
             child: ErrorView(
               title: l10n.performanceLoadFailed,
               retryLabel: l10n.uiErrorRetry,
-              onRetry: () => ref.invalidate(myPerformanceProvider),
+              onRetry: () => ref.invalidate(provider),
             ),
           ),
         ],
