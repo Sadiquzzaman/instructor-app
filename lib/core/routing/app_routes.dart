@@ -31,6 +31,9 @@ abstract final class AppRoutes {
   static const chat = '/chat';
   static const calendar = '/calendar';
   static const organization = '/organization';
+  static const orgTeachers = '/organization/teachers';
+  static const orgAssistants = '/organization/assistants';
+  static const orgStudents = '/organization/students';
 
   /// Pages the app has really built (not "use the website for now"). A
   /// notification's link opens in the app only for these; each stage adds
@@ -53,6 +56,9 @@ abstract final class AppRoutes {
     marks,
     behaviour,
     organization,
+    orgTeachers,
+    orgAssistants,
+    orgStudents,
     performance,
     reportCards,
     resources,
