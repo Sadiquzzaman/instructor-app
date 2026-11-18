@@ -11,6 +11,7 @@ import 'package:instructor_app/core/time/org_time.dart';
 import 'package:instructor_app/core/widgets/app_card.dart';
 import 'package:instructor_app/core/widgets/state_views.dart';
 import 'package:instructor_app/core/widgets/status_pill.dart';
+import 'package:instructor_app/features/results/screens/paper_exam_screens.dart';
 import 'package:instructor_app/features/results/data/results.dart';
 
 /// "80.5%" or "—" in the language's digits.
@@ -81,8 +82,9 @@ class MarksScreen extends ConsumerWidget {
     final language = Localizations.localeOf(context).languageCode;
     final text = Theme.of(context).textTheme;
     final colors = AppColors.of(context);
-    if (_staffGate(context, ref, l10n.marksMyTitle) case final gate?) {
-      return gate;
+    // Staff manage paper exams (the web's StaffExams).
+    if (ref.watch(sessionProvider)?.role != 'STUDENT') {
+      return const StaffMarksScreen();
     }
     final results = ref.watch(myPaperResultsProvider);
     return _Page(
