@@ -29,6 +29,7 @@ import 'package:instructor_app/features/tests/screens/take_test_screen.dart';
 import 'package:instructor_app/features/tests/screens/test_result_screen.dart';
 import 'package:instructor_app/features/organization/screens/organization_overview_screen.dart';
 import 'package:instructor_app/features/organization/screens/people_screen.dart';
+import 'package:instructor_app/features/organization/screens/subjects_classes_screens.dart';
 import 'package:instructor_app/features/results/screens/behaviour_screen.dart';
 import 'package:instructor_app/features/results/screens/paper_exam_screens.dart';
 import 'package:instructor_app/features/tests/screens/grading_screens.dart';
@@ -273,6 +274,14 @@ final routerProvider = Provider<GoRouter>((ref) {
               path: path,
               builder: (context, state) => PeopleScreen(kind: kind),
             ),
+          GoRoute(
+            path: AppRoutes.orgSubjects,
+            builder: (context, state) => const OrgSubjectsScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.orgClasses,
+            builder: (context, state) => const OrgClassesScreen(),
+          ),
           GoRoute(
             path: AppRoutes.marks,
             builder: (context, state) => const MarksScreen(),
