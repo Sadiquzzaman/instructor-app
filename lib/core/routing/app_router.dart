@@ -30,6 +30,7 @@ import 'package:instructor_app/features/tests/screens/test_result_screen.dart';
 import 'package:instructor_app/features/organization/screens/assignments_screen.dart';
 import 'package:instructor_app/features/organization/screens/organization_overview_screen.dart';
 import 'package:instructor_app/features/organization/screens/people_screen.dart';
+import 'package:instructor_app/features/organization/screens/sessions_screen.dart';
 import 'package:instructor_app/features/organization/screens/subjects_classes_screens.dart';
 import 'package:instructor_app/features/results/screens/behaviour_screen.dart';
 import 'package:instructor_app/features/results/screens/paper_exam_screens.dart';
@@ -286,6 +287,10 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: AppRoutes.orgAssignments,
             builder: (context, state) => const AssignmentsScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.sessions,
+            builder: (context, state) => const SessionsScreen(),
           ),
           GoRoute(
             path: AppRoutes.marks,
