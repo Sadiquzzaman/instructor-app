@@ -121,9 +121,9 @@ const logNamesPath = 'lib/features/organization/data/log_names.g.dart';
 /// channel, a status or an event. Keys the messages do not know return
 /// null; the caller shows the key, as on the web.
 String buildLogNames() {
-  final web =
-      jsonDecode(File('l10n/web/en.json').readAsStringSync())
-          as Map<String, dynamic>;
+  final web = jsonDecode(
+    File('l10n/web/en.json').readAsStringSync(),
+  ) as Map<String, dynamic>;
   String fn(String name, String doc, List<String> path) {
     Object? node = web;
     for (final p in path) {
