@@ -6994,6 +6994,181 @@
       }
     }
   },
+  "performanceSettingsTitle": "Performance settings",
+  "performanceSettingsIntro": "How each class's score is made up, and when a student needs attention.",
+  "performanceSettingsReadOnly": "You can see these settings; owners and admins change them.",
+  "performanceSettingsWeightsTitle": "Score weights",
+  "performanceSettingsWeightsIntro": "How much each part counts in a class's score. They must add up to 100%; a part can be 0%.",
+  "performanceSettingsSession": "Session",
+  "performanceSettingsLoadFailed": "Couldn't load the performance settings.",
+  "performanceSettingsNoClasses": "No classes in this session yet",
+  "performanceSettingsNoClassesHint": "Add classes and their [[sections]] first; their weights appear here.",
+  "performanceSettingsSessionClosed": "This session is closed, so its weights can't change.",
+  "performanceSettingsWeightsCaption": "Score weights for {session}",
+  "@performanceSettingsWeightsCaption": {
+    "placeholders": {
+      "session": {
+        "type": "String"
+      }
+    }
+  },
+  "performanceSettingsClass": "Class",
+  "performanceSettingsPartsExamsPct": "Exams %",
+  "performanceSettingsPartsHomeworkPct": "Homework %",
+  "performanceSettingsPartsAttendancePct": "Attendance %",
+  "performanceSettingsPartsBehaviourPct": "Behaviour %",
+  "performanceSettingsTotal": "Total",
+  "performanceSettingsActions": "Actions",
+  "performanceSettingsDefault": "Default",
+  "performanceSettingsPartFor": "{part} for {name}",
+  "@performanceSettingsPartFor": {
+    "placeholders": {
+      "part": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "performanceSettingsSaveFor": "Save weights for {name}",
+  "@performanceSettingsSaveFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "performanceSettingsSave": "Save",
+  "performanceSettingsWeightsSaved": "Weights saved; scores now use them",
+  "performanceSettingsMustAddUp": "Each class's weights must add up to 100%.",
+  "performanceSettingsWeightsHint": "A part with nothing to count yet is left out, and the others are scaled up to 100%.",
+  "performanceSettingsAtRiskTitle": "At risk",
+  "performanceSettingsAtRiskIntro": "A student is listed as at risk on the class dashboard when any of these is true.",
+  "performanceSettingsScoreBelow": "Score below (%)",
+  "performanceSettingsAttendanceBelow": "Attendance below (%)",
+  "performanceSettingsMissingHomework": "Missing homework (or more)",
+  "performanceSettingsLimitsInvalid": "Use whole numbers: percentages 0–100, missing homework 1–50.",
+  "performanceSettingsShowRank": "Show students their position",
+  "performanceSettingsShowRankHint": "Students see their merit position in the [[section]] on their page and report card.",
+  "performanceSettingsUndo": "Undo changes",
+  "performanceSettingsSaveSettings": "Save settings",
+  "performanceSettingsSettingsSaved": "Settings saved",
+  "performanceSettingsCriteriaHint": "Behaviour criteria (what teachers rate) are on the Behaviour page.",
+  "performanceSettingsCriteriaLink": "Open Behaviour",
+  "gradingScaleTitle": "Grading scale",
+  "gradingScaleIntro": "One scale for every mark in this workspace. The percentage is marks obtained ÷ total marks × 100; the grade is the band it falls in. Changing the scale changes grades everywhere at once, never the marks.",
+  "gradingScaleDefaultName": "Bangladesh national (default)",
+  "gradingScaleCustomName": "Custom",
+  "gradingScaleLoadFailed": "The grading scale did not load.",
+  "gradingScaleReadOnly": "Only owners and admins can change the grading scale.",
+  "gradingScaleBands": "Bands",
+  "gradingScaleEditHint": "Each band runs from one percentage to another, both included, with up to two decimals. Together the bands must cover 0% to 100% with no gaps.",
+  "gradingScaleName": "Scale name",
+  "gradingScaleNameHint": "Optional, for example \"English medium\".",
+  "gradingScaleFrom": "From",
+  "gradingScaleTo": "To",
+  "gradingScaleGrade": "Grade",
+  "gradingScaleGpa": "GPA",
+  "gradingScaleFromRow": "From (band {row})",
+  "@gradingScaleFromRow": {
+    "placeholders": {
+      "row": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "gradingScaleToRow": "To (band {row})",
+  "@gradingScaleToRow": {
+    "placeholders": {
+      "row": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "gradingScaleGradeRow": "Grade (band {row})",
+  "@gradingScaleGradeRow": {
+    "placeholders": {
+      "row": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "gradingScaleGpaRow": "GPA (band {row}, optional)",
+  "@gradingScaleGpaRow": {
+    "placeholders": {
+      "row": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "gradingScaleRemoveRow": "Remove band {row}",
+  "@gradingScaleRemoveRow": {
+    "placeholders": {
+      "row": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "gradingScaleAddBand": "Add a band",
+  "gradingScaleSave": "Save scale",
+  "gradingScaleSaved": "Grading scale saved",
+  "gradingScaleReset": "Reset to Bangladesh default",
+  "gradingScaleResetTitle": "Go back to the Bangladesh national scale?",
+  "gradingScaleResetDescription": "Every grade will be shown on the Bangladesh national scale again. Marks do not change, and your scale is kept in the activity log.",
+  "gradingScaleResetDone": "Back on the Bangladesh national scale",
+  "gradingScaleErrorsGRADINGSCALEEMPTY": "Add at least one band.",
+  "gradingScaleErrorsGRADINGSCALETOOMANYBANDS": "A scale can have at most 20 bands.",
+  "gradingScaleErrorsGRADINGSCALEBANDINVALID": "Band {row}: enter From and To between 0 and 100 (From not above To, up to two decimals), a grade of up to 5 characters, and a GPA from 0 to 9.99 or leave it empty.",
+  "@gradingScaleErrorsGRADINGSCALEBANDINVALID": {
+    "placeholders": {
+      "row": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "gradingScaleErrorsGRADINGSCALEMUSTSTARTAT0": "Band {row}: the lowest band must start at 0%.",
+  "@gradingScaleErrorsGRADINGSCALEMUSTSTARTAT0": {
+    "placeholders": {
+      "row": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "gradingScaleErrorsGRADINGSCALEMUSTENDAT100": "Band {row}: the highest band must end at 100%.",
+  "@gradingScaleErrorsGRADINGSCALEMUSTENDAT100": {
+    "placeholders": {
+      "row": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "gradingScaleErrorsGRADINGSCALEGAPOROVERLAP": "Band {row}: each band must start 0.01% above the one below it, with no gap or overlap.",
+  "@gradingScaleErrorsGRADINGSCALEGAPOROVERLAP": {
+    "placeholders": {
+      "row": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "gradingScaleErrorsGRADINGSCALEDUPLICATEGRADE": "Band {row}: this grade is already used.",
+  "@gradingScaleErrorsGRADINGSCALEDUPLICATEGRADE": {
+    "placeholders": {
+      "row": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "appNoConnection": "No internet connection. Check it and try again.",
   "appUpdateRequiredTitle": "Please update Instructor",
   "appUpdateRequiredBody": "This version of the app is no longer supported. Install the new version to continue.",

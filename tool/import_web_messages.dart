@@ -64,6 +64,8 @@ const webNamespaces = [
   'holidays',
   'branches',
   'classSetup',
+  'performanceSettings',
+  'gradingScale',
 ];
 
 const locales = ['en', 'bn'];
