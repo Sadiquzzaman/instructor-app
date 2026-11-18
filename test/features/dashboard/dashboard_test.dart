@@ -334,6 +334,30 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  testWidgets('"View all ›" sits at the card\'s right edge (seen on a phone)', (
+    tester,
+  ) async {
+    // A large phone: one column, with room to spare in the header.
+    tester.view.physicalSize = const Size(500 * 3, 900 * 3);
+    tester.view.devicePixelRatio = 3;
+    addTearDown(tester.view.reset);
+    await pumpInstructorApp(
+      tester,
+      api: _api((_) => ok(_full())),
+      session: _teacher(),
+    );
+    final section = find.byKey(const Key('section-upcoming'));
+    await _scrollTo(tester, section);
+    final link = find.descendant(
+      of: section,
+      matching: find.byType(TextButton),
+    );
+    final cardRight = tester.getTopRight(section).dx;
+    final linkRight = tester.getTopRight(link.first).dx;
+    // Only the card's padding between them.
+    expect(cardRight - linkRight, lessThan(24));
+  });
+
   testWidgets('in Bangla, with Bangla digits', (tester) async {
     final bn = AppLocalizationsBn();
     await pumpInstructorApp(
