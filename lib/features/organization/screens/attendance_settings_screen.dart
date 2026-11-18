@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'package:instructor_app/core/api/api_error_text.dart';
@@ -6,6 +7,7 @@ import 'package:instructor_app/core/api/api_exception.dart';
 import 'package:instructor_app/core/api/api_providers.dart';
 import 'package:instructor_app/core/l10n/l10n.dart';
 import 'package:instructor_app/core/l10n/level_text.dart';
+import 'package:instructor_app/core/routing/app_routes.dart';
 import 'package:instructor_app/core/theme/app_colors.dart';
 import 'package:instructor_app/core/theme/app_metrics.dart';
 import 'package:instructor_app/core/time/org_time.dart';
@@ -46,6 +48,7 @@ AttendanceSettings attendanceSettingsFromJson(Object? json) {
 typedef Branch = ({
   String id,
   String? name,
+  String? address,
   double? lat,
   double? lng,
   int radius,
@@ -58,6 +61,7 @@ Branch? branchFromJson(Object? b) {
   return (
     id: b['id'] as String,
     name: b['name'] as String?,
+    address: b['address'] as String?,
     lat: (b['geo_lat'] as num?)?.toDouble(),
     lng: (b['geo_lng'] as num?)?.toDouble(),
     radius: (b['checkin_radius_m'] as num?)?.toInt() ?? 100,
@@ -266,6 +270,16 @@ class _AttendanceSettingsScreenState
                                 style: muted,
                               ),
                             ],
+                          ),
+                        ),
+                      if (canEdit)
+                        Align(
+                          alignment: AlignmentDirectional.centerStart,
+                          child: TextButton(
+                            key: const Key('settings-branches'),
+                            onPressed: () =>
+                                context.push(AppRoutes.attendanceBranches),
+                            child: Text(l10n.attendanceSettingsManageBranches),
                           ),
                         ),
                     ],

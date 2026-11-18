@@ -40,6 +40,7 @@ abstract final class AppRoutes {
   static const sessions = '/sessions';
   static const attendanceSettings = '/attendance-settings';
   static const holidays = '/holidays';
+  static const attendanceBranches = '/attendance-branches';
 
   /// Pages the app has really built (not "use the website for now"). A
   /// notification's link opens in the app only for these; each stage adds
@@ -71,6 +72,7 @@ abstract final class AppRoutes {
     sessions,
     attendanceSettings,
     holidays,
+    attendanceBranches,
     performance,
     reportCards,
     resources,

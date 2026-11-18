@@ -104,6 +104,7 @@ void main() {
     expect(find.text(_en.branchesMainBranch), findsOneWidget);
     expect(find.text(_en.branchesRadiusShort('150')), findsOneWidget);
     expect(find.text(_en.branchesNoPin), findsOneWidget);
+    expect(find.byKey(const Key('settings-branches')), findsOneWidget);
   });
 
   testWidgets('change the grace, a day off and an SMS; save sends all', (
@@ -171,6 +172,7 @@ void main() {
     await _open(tester, _api(), role: 'TEACHER');
     expect(find.byKey(const Key('settings-read-only')), findsOneWidget);
     expect(find.byKey(const Key('settings-save')), findsNothing);
+    expect(find.byKey(const Key('settings-branches')), findsNothing);
   });
 
   testWidgets('a 360 px phone in Bangla', (tester) async {
