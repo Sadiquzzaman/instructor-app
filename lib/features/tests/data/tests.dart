@@ -5,8 +5,10 @@ import 'package:instructor_app/core/api/api_providers.dart';
 
 DateTime? _time(Object? v) => v is String ? DateTime.tryParse(v) : null;
 
-/// A test set to the student (`/student/exams/assigned`,
-/// `/student/exams/class/:id`).
+/// A test: set to the student (`/student/exams/assigned`,
+/// `/student/exams/class/:id`), or a teacher's (`/exams`,
+/// `/exams/class/:id`, `/exams/:id`), whose times sit in `publishState`
+/// and duration in `formState`.
 @immutable
 class TestItem {
   const TestItem({
@@ -21,6 +23,13 @@ class TestItem {
     this.participants = 0,
     this.submitted = 0,
     this.ielts = false,
+    this.active = true,
+    this.createdBy,
+    this.sessionId,
+    this.subjects = const [],
+    this.audience,
+    this.passingScore,
+    this.negativeMarking,
   });
 
   final String id;
@@ -37,20 +46,74 @@ class TestItem {
   final int submitted;
   final bool ielts;
 
+  /// Teachers: switched on (`is_active` 1) or off.
+  final bool active;
+
+  /// Teachers: who made it (they mark it, watch it live).
+  final String? createdBy;
+  final String? sessionId;
+
+  /// Teachers: each subject and how many questions it has.
+  final List<({String name, int questions})> subjects;
+
+  /// Teachers: CLASS, OFFERING or SPECIFIC students.
+  final String? audience;
+  final String? passingScore;
+
+  /// Teachers: the % taken off for a wrong answer; null when off.
+  final String? negativeMarking;
+
+  int get questionCount => subjects.fold(0, (n, s) => n + s.questions);
+
   static TestItem? fromJson(Object? j) {
     if (j is! Map || j['id'] is! String) return null;
+    final form = j['formState'] is Map
+        ? j['formState'] as Map
+        : const <String, Object?>{};
+    final publish = j['publishState'] is Map
+        ? j['publishState'] as Map
+        : const <String, Object?>{};
+    final subjects = <({String name, int questions})>[
+      if (j['subjects'] is List)
+        for (final s in j['subjects'] as List)
+          if (s is Map)
+            (
+              name: (s['name'] as String?) ?? '',
+              questions: s['questions'] is List
+                  ? [
+                      for (final q in s['questions'] as List)
+                        q is Map && q['childQuestions'] is List
+                            ? (q['childQuestions'] as List).length
+                            : 1,
+                    ].fold(0, (a, b) => a + b)
+                  : 0,
+            ),
+    ];
+    final names = subjects.map((s) => s.name).where((n) => n.isNotEmpty);
     return TestItem(
       id: j['id'] as String,
       name: (j['test_name'] as String?) ?? '',
       status: (j['status'] as String?) ?? 'pending',
-      subject: j['subject'] as String?,
+      subject:
+          j['subject'] as String? ?? (names.isEmpty ? null : names.join(', ')),
       className: j['class_name'] as String?,
-      startsAt: _time(j['exam_start_time']),
-      endsAt: _time(j['exam_end_time']),
-      durationMinutes: (j['duration_minutes'] as num?)?.toInt(),
+      startsAt: _time(j['exam_start_time']) ?? _time(publish['scheduleAt']),
+      endsAt: _time(j['exam_end_time']) ?? _time(publish['endingAt']),
+      durationMinutes:
+          (j['duration_minutes'] as num?)?.toInt() ??
+          (form['duration'] as num?)?.toInt(),
+      active: j['is_active'] != 0,
+      createdBy: j['created_by'] as String?,
+      sessionId: j['session_id'] as String?,
+      subjects: subjects,
+      audience: publish['testAudience'] as String?,
+      passingScore: form['passingScore']?.toString(),
+      negativeMarking: form['allowNegativeMarking'] == true
+          ? form['negativeMarking']?.toString()
+          : null,
       participants: (j['participant_count'] as num?)?.toInt() ?? 0,
       submitted: (j['submitted_count'] as num?)?.toInt() ?? 0,
-      ielts: j['exam_category'] == 'IELTS',
+      ielts: j['exam_category'] == 'IELTS' || form['examCategory'] == 'IELTS',
     );
   }
 
