@@ -13,6 +13,8 @@ import 'package:instructor_app/features/homework/screens/homework_detail_screen.
 import 'package:instructor_app/l10n/generated/app_localizations_bn.dart';
 import 'package:instructor_app/l10n/generated/app_localizations_en.dart';
 
+import 'package:instructor_app/features/homework/screens/staff_homework_screens.dart';
+
 import '../../helpers/fake_api.dart';
 import '../../helpers/pump_app.dart';
 
@@ -318,16 +320,19 @@ void main() {
     await tester.pump(const Duration(seconds: 1));
   });
 
-  testWidgets('teachers are sent to the website for now', (tester) async {
+  testWidgets('teachers get the staff list (staff_homework_test)', (
+    tester,
+  ) async {
     final p = sessionPayload();
     final c = await pumpInstructorApp(
       tester,
-      api: _api(),
+      api: _api()..on('GET /homework', (_) => ok(<Object>[])),
       session: Session.fromPayload({...p, 'role': 'TEACHER'}),
     );
     c.read(routerProvider).go(AppRoutes.homework);
     await tester.pumpAndSettle();
-    expect(find.text(_en.appNotYetBody), findsOneWidget);
+    expect(find.byType(StaffHomeworkListScreen), findsOneWidget);
+    expect(find.text(_en.appNotYetBody), findsNothing);
   });
 
   testWidgets('in Bangla', (tester) async {

@@ -41,7 +41,7 @@
     "locationOpenSettings": "Open settings",
     "attendanceRefresh": "Refresh",
     "resultNotPublished": "Your result shows here once your teacher publishes it.",
-    "resultQuestion":"Question {number, number}",
+    "resultQuestion": "Question {number, number}",
     "resultYourAnswer": "Your answer",
     "resultCorrectAnswer": "Correct answer",
     "resultCorrect": "Correct",
@@ -57,6 +57,7 @@
     "testLeftApp": "You left the app during the test. This is recorded for your teacher.",
     "testWarnLimit": "You have {count, number} flags. At {limit, number} the test ends.",
     "testChooseMatch": "Choose a match",
-    "savedCopy":"No internet connection. This was saved on your phone at {time}; pull down to try again."
+    "savedCopy": "No internet connection. This was saved on your phone at {time}; pull down to try again.",
+    "homeworkPlainText": "Instructions written on the website with bold, links or tables keep their words here, but saving from the app keeps plain text only."
   }
 }

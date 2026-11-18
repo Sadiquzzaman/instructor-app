@@ -4881,5 +4881,6 @@
         "type": "String"
       }
     }
-  }
+  },
+  "appHomeworkPlainText": "Instructions written on the website with bold, links or tables keep their words here, but saving from the app keeps plain text only."
 }
