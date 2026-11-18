@@ -22,6 +22,7 @@ abstract final class AppRoutes {
   static const homework = '/homework';
   static const classes = '/classes';
   static const tests = '/tests';
+  static const grading = '/grading';
   static const marks = '/marks';
   static const performance = '/performance';
   static const reportCards = '/report-cards';
@@ -47,6 +48,7 @@ abstract final class AppRoutes {
     classes,
     calendar,
     tests,
+    grading,
     marks,
     performance,
     reportCards,
@@ -58,7 +60,11 @@ abstract final class AppRoutes {
   };
 
   /// Built pages with an id at the end, as the web names them.
-  static const builtWithId = {'/homework/', '/classes/details/'};
+  static const builtWithId = {
+    '/homework/',
+    '/classes/details/',
+    '/grading/details/',
+  };
 
   static bool isAppPage(String link) {
     final uri = Uri.tryParse(link);

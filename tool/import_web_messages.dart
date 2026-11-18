@@ -43,6 +43,7 @@ const webNamespaces = [
   'plagiarism',
   'monitor',
   'integrity',
+  'grading',
   'leave',
   'routine',
   'homework',
