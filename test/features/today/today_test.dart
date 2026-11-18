@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'package:instructor_app/core/auth/session.dart';
+import 'package:instructor_app/core/routing/app_router.dart';
 import 'package:instructor_app/core/time/org_time.dart';
 import 'package:instructor_app/features/calendar/data/calendar_feed.dart';
 import 'package:instructor_app/features/attendance/screens/my_attendance_screen.dart';
@@ -248,7 +249,10 @@ void main() {
         'role': 'OWNER',
       },
     });
-    await pumpInstructorApp(tester, api: _api(), session: owner);
+    final app = await pumpInstructorApp(tester, api: _api(), session: owner);
+    // A teacher's home is the dashboard; Today is its own page.
+    app.read(routerProvider).go(AppRoutes.today);
+    await tester.pumpAndSettle();
     await tester.scrollUntilVisible(
       find.text(_en.todaySchoolTitle),
       200,

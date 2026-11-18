@@ -12,6 +12,7 @@ abstract final class AppRoutes {
   static const account = '/account';
   static const features = '/features';
   static const today = '/today';
+  static const dashboard = '/dashboard';
   static const myAttendance = '/my-attendance';
   static const leave = '/leave';
   static const routine = '/routine';
@@ -32,6 +33,7 @@ abstract final class AppRoutes {
   static const built = {
     home,
     today,
+    dashboard,
     myAttendance,
     leave,
     routine,
@@ -63,6 +65,10 @@ abstract final class AppRoutes {
           !uri.path.substring(p.length).contains('/'),
     );
   }
+
+  /// The page home shows for an account [role]: the dashboard for teachers
+  /// (as the web), Today for everyone else.
+  static String homePage(String? role) => role == 'TEACHER' ? dashboard : today;
 
   /// Screens for people who are not signed in.
   static bool isSignedOutOnly(String location) =>
