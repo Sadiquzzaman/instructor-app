@@ -406,6 +406,23 @@ class _TeacherTestScreenState extends ConsumerState<TeacherTestScreen> {
                 ),
               ),
             ),
+          // Marking: only the teacher who made it, while its session is open.
+          if (!sessionClosed &&
+              t.createdBy != null &&
+              t.createdBy == session?.userId &&
+              t.status == 'completed')
+            Padding(
+              padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+              child: Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: FilledButton.icon(
+                  key: const Key('test-grade'),
+                  onPressed: () => context.push('/grading/details/${t.id}'),
+                  icon: const Icon(Icons.fact_check_outlined),
+                  label: Text(l10n.testsCardGrade),
+                ),
+              ),
+            ),
           if (canMonitor && t.status != 'pending')
             Padding(
               padding: const EdgeInsets.only(bottom: AppSpacing.sm),

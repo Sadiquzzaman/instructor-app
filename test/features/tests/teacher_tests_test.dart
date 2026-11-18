@@ -243,6 +243,28 @@ void main() {
     expect(find.byKey(const Key('test-monitor')), findsNothing);
   });
 
+  testWidgets('their completed test: Grade and the integrity report', (
+    tester,
+  ) async {
+    await _open(
+      tester,
+      _api(
+        one: (_) => ok(
+          _exam(
+            'e1',
+            'Algebra quiz',
+            status: 'completed',
+            start: '2020-01-01T04:00:00.000Z',
+          ),
+        ),
+      ),
+      '/tests/e1',
+    );
+    expect(find.byKey(const Key('test-grade')), findsOneWidget);
+    expect(find.byKey(const Key('test-integrity')), findsOneWidget);
+    expect(find.byKey(const Key('test-monitor')), findsNothing);
+  });
+
   testWidgets('not theirs: not found', (tester) async {
     await _open(tester, _api(one: (_) => apiError(404)), '/tests/e1');
     expect(find.text(_en.testsDetailsNotFound), findsOneWidget);

@@ -2521,6 +2521,177 @@
   "integritySave": "Save decision",
   "integritySaved": "Decision saved",
   "integrityWriting": "The student is writing this test; review it once they finish.",
+  "gradingTitle": "Grading",
+  "gradingIntro": "Mark written answers and publish results.",
+  "gradingSearch": "Search by test, subject or [[class]]",
+  "gradingFilterALL": "All",
+  "gradingFilterNEEDSGRADING": "Needs grading",
+  "gradingFilterGRADED": "Graded",
+  "gradingFilterPUBLISHED": "Published",
+  "gradingStatusNEEDSGRADING": "Needs grading",
+  "gradingStatusGRADED": "Graded",
+  "gradingStatusPUBLISHED": "Published",
+  "gradingEmpty": "Nothing to grade",
+  "gradingEmptyDetail": "Tests with submissions appear here.",
+  "gradingNoMatch": "No tests match.",
+  "gradingCardSubmissions": "Submissions",
+  "gradingCardGraded": "Graded",
+  "gradingCardPending": "{count, plural, one{{count} waiting} other{{count} waiting}}",
+  "@gradingCardPending": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "gradingCardDownload": "Download results",
+  "gradingCardContinue": "Continue grading",
+  "gradingCardResults": "View results",
+  "gradingDetailsTitle": "Test details",
+  "gradingDetailsPublish": "Publish results",
+  "gradingDetailsPublishing": "Publishing…",
+  "gradingDetailsPublished": "Published",
+  "gradingDetailsPublishHint": "Publish once every submission is graded.",
+  "gradingDetailsPublishTitle": "Publish results?",
+  "gradingDetailsPublishDetail": "Students will see their marks and answer sheets.",
+  "gradingDetailsPublishedToast": "Results published.",
+  "gradingDetailsDownload": "Download results",
+  "gradingDetailsNoResultsTitle": "No results yet",
+  "gradingDetailsNoResults": "There are no submissions to download yet.",
+  "gradingDetailsTotalStudents": "Students",
+  "gradingDetailsSubmissions": "Submissions",
+  "gradingDetailsPending": "Waiting",
+  "gradingDetailsGraded": "Graded",
+  "gradingDetailsLoadFailed": "The test did not load.",
+  "gradingSubmissionsTitle": "Submissions",
+  "gradingSubmissionsSearch": "Search students",
+  "gradingSubmissionsStudent": "Student",
+  "gradingSubmissionsContact": "Email or phone",
+  "gradingSubmissionsSubmittedAt": "Submitted",
+  "gradingSubmissionsExamStatus": "Exam",
+  "gradingSubmissionsGrading": "Grading",
+  "gradingSubmissionsScore": "Score",
+  "gradingSubmissionsViolations": "Flags",
+  "gradingSubmissionsAction": "Action",
+  "gradingSubmissionsAnonymous": "Anonymous",
+  "gradingSubmissionsEmpty": "No submissions yet",
+  "gradingSubmissionsGradeStatusGRADED": "Graded",
+  "gradingSubmissionsGradeStatusPENDING": "Not graded",
+  "gradingSubmissionsStart": "Grade",
+  "gradingSubmissionsView": "View",
+  "gradingRosterTitle": "[[Class]] progress",
+  "gradingRosterLoadFailed": "The [[class]] list for this test did not load.",
+  "gradingRosterNotStarted": "Not started",
+  "gradingRosterInProgress": "In progress",
+  "gradingRosterSubmitted": "Submitted",
+  "gradingRosterAutoSubmitted": "Auto-submitted",
+  "gradingRosterDisqualified": "Disqualified",
+  "gradingRosterStudent": "Student",
+  "gradingRosterStatus": "Status",
+  "gradingRosterSubmittedAt": "Submitted",
+  "gradingRosterDuration": "Time taken",
+  "gradingRosterMinutes": "{minutes, plural, one{{minutes} min} other{{minutes} min}}",
+  "@gradingRosterMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "gradingRosterScore": "Score",
+  "gradingRosterGraded": "Graded",
+  "gradingRosterYes": "Yes",
+  "gradingRosterNo": "No",
+  "gradingRosterViolations": "Flags",
+  "gradingRosterDetails": "Proctoring details",
+  "gradingRosterDetailsFor": "Proctoring for {name}",
+  "@gradingRosterDetailsFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "gradingRosterBrowserSwitches": "Browser switches",
+  "gradingRosterTabSwitches": "Tab switches",
+  "gradingRosterRedFlagPoints": "Red-flag points",
+  "gradingRosterDisqualification": "Reason for disqualification",
+  "gradingRosterEvents": "Recorded flags",
+  "gradingRosterNoEvents": "No flags were recorded.",
+  "gradingModalGrade": "Grade submission",
+  "gradingModalResult": "Result",
+  "gradingModalEmpty": "This submission has no answers to show.",
+  "gradingModalAnswerSheet": "Answer sheet",
+  "gradingModalManualProgress": "Marked by hand: {done} of {total}",
+  "@gradingModalManualProgress": {
+    "placeholders": {
+      "done": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "total": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "gradingModalScore": "Score: {score}",
+  "@gradingModalScore": {
+    "placeholders": {
+      "score": {
+        "type": "String"
+      }
+    }
+  },
+  "gradingModalClose": "Close",
+  "gradingModalSubmit": "Save grades",
+  "gradingModalSubmitting": "Saving…",
+  "gradingModalSavedToast": "Grades saved.",
+  "gradingModalPassage": "Passage",
+  "gradingAnswerCorrect": "Correct",
+  "gradingAnswerIncorrect": "Incorrect",
+  "gradingAnswerNone": "No answer",
+  "gradingAnswerExplanation": "Feedback",
+  "gradingAnswerExplanationPlaceholder": "Write feedback for the student (optional)",
+  "gradingAnswerBelowZero": "Marks cannot be below 0.",
+  "gradingAnswerAboveMax": "Marks cannot be more than the question's points.",
+  "gradingAnswerStudentAnswer": "Student answer",
+  "gradingAnswerScore": "Marks",
+  "gradingAnswerScoreFor": "Marks for question {number}",
+  "@gradingAnswerScoreFor": {
+    "placeholders": {
+      "number": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "gradingAnswerMaxMarks": "Out of {points}",
+  "@gradingAnswerMaxMarks": {
+    "placeholders": {
+      "points": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "gradingAnswerYourAnswer": "Answer",
+  "gradingAnswerImageAlt": "Image for question {number}",
+  "@gradingAnswerImageAlt": {
+    "placeholders": {
+      "number": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "gradingAnswerChosenCorrect": "chosen, correct",
+  "gradingAnswerChosenWrong": "chosen, wrong",
+  "gradingAnswerCorrectOption": "correct answer",
+  "gradingAnswerMatched": "correct match",
+  "gradingAnswerNotMatched": "wrong match",
   "leaveTitle": "Leave",
   "leaveIntro": "Apply for leave with dates and a reason. Approved days show as Leave (blue) and never count as absent.",
   "leaveApply": "Apply for leave",
