@@ -15,6 +15,7 @@ abstract final class AppRoutes {
   static const dashboard = '/dashboard';
   static const myAttendance = '/my-attendance';
   static const attendance = '/attendance';
+  static const attendanceReports = '/attendance-reports';
   static const leave = '/leave';
   static const routine = '/routine';
   static const homework = '/homework';
@@ -37,6 +38,7 @@ abstract final class AppRoutes {
     dashboard,
     myAttendance,
     attendance,
+    attendanceReports,
     leave,
     routine,
     homework,
