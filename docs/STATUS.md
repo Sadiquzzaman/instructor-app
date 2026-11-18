@@ -8,7 +8,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 **Stage 0:** all 14 PRs done ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11), plus the #345 error codes; its end-of-stage device check is still to do.
 
-**Stage 2 (teachers):** plan approved 18 Nov ([STAGE-2-PLAN.md](STAGE-2-PLAN.md)). Done: PR 3 (leave approvals). Next: PR 1, the teacher dashboard.
+**Stage 2 (teachers):** plan approved 18 Nov ([STAGE-2-PLAN.md](STAGE-2-PLAN.md)). Done: PR 1 (dashboard), PR 3 (leave approvals). Next: PR 2, class attendance.
 
 **Stage 1 (students):** plan approved 17 Nov ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)). Done: all 16 PRs (files, Today, My attendance and check-in, read-only cache, leave, timetable, homework, classes, class discussions, calendar, tests and results, taking a test, results, resources, chat, student-flow tests). Still to do: the end-of-stage check on a 360 px phone, a tablet and iOS, done by hand (see "In progress").
 
@@ -88,6 +88,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 - Stage 1 PR 16: the student flows end to end through the app's own screens, against the fake API (`test/flows/student_flows.dart`): sign in → Today → "Check in" → My attendance → check in; homework list → a homework → typed answer and a photo (presign, upload, complete) → hand in → version 1 shown; Tests → Start → rules → answer → autosave → submit. They run in CI with `flutter test` and on a device with `flutter test integration_test -d <device>`.
 
 - Stage 2 PR 3: leave approvals (`/leave`, "To approve"). On Leave, people who approve (`can_approve`) get "To approve" with the waiting count; each request shows who asked and their class, with Approve (an optional comment) and Don't approve (a comment of 3 or more letters, as the web); the Waiting, Decided and All filter; "already decided" and other refusals in the web's words. Not yet checked on beta with a real request (demo.teacher1 has none waiting).
+- Stage 2 PR 1: the teacher dashboard (`/dashboard`, `GET /dashboard/teacher`), a teacher's home as on the web, with Today one tap away (Today stays home for students; the menu marks the right item). Needs marking (highlighted while anything waits), live tests one at a time with a countdown, who is taking it and how many submitted, the next test; upcoming tests (soonest first, duration), students (total, active, pending), classes with their students, top students by class (best first, 10 shown, search, another class). Side by side on tablets, one column on phones. The calendar and activity charts stay on the web; a class's page opens from the dashboard once PR 5 builds the teacher's class page.
 
 ## In progress
 

@@ -28,6 +28,7 @@ import 'package:instructor_app/features/tests/screens/take_test_screen.dart';
 import 'package:instructor_app/features/tests/screens/test_result_screen.dart';
 import 'package:instructor_app/features/tests/screens/tests_screen.dart';
 import 'package:instructor_app/features/today/screens/today_screen.dart';
+import 'package:instructor_app/features/dashboard/screens/teacher_dashboard_screen.dart';
 import 'package:instructor_app/features/shell/screens/not_yet_screen.dart';
 import 'package:instructor_app/features/workspace/screens/workspace_gate.dart';
 
@@ -96,16 +97,35 @@ final routerProvider = Provider<GoRouter>((ref) {
       // the shell (menu, switcher) around the page.
       ShellRoute(
         builder: (context, state, child) => WorkspaceGate(
-          child: AppShell(currentRoute: state.matchedLocation, child: child),
+          child: AppShell(
+            // Home is Today or, for teachers, the dashboard: its menu item.
+            currentRoute: state.matchedLocation == AppRoutes.home
+                ? AppRoutes.homePage(sessions.current?.role)
+                : state.matchedLocation,
+            child: child,
+          ),
         ),
         routes: [
+          // Home: the dashboard for teachers (as the web), Today for others.
           GoRoute(
             path: AppRoutes.home,
-            builder: (context, state) => const TodayScreen(),
+            builder: (context, state) =>
+                AppRoutes.homePage(sessions.current?.role) ==
+                    AppRoutes.dashboard
+                ? const TeacherDashboardScreen()
+                : const TodayScreen(),
           ),
-          // Today is home; the web's /today link opens it.
+          // The web's links to home's own page open home.
           GoRoute(
             path: AppRoutes.today,
+            redirect: (context, state) =>
+                AppRoutes.homePage(sessions.current?.role) == AppRoutes.today
+                ? AppRoutes.home
+                : null,
+            builder: (context, state) => const TodayScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.dashboard,
             redirect: (context, state) => AppRoutes.home,
           ),
           GoRoute(
