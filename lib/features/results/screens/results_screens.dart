@@ -11,6 +11,7 @@ import 'package:instructor_app/core/time/org_time.dart';
 import 'package:instructor_app/core/widgets/app_card.dart';
 import 'package:instructor_app/core/widgets/state_views.dart';
 import 'package:instructor_app/core/widgets/status_pill.dart';
+import 'package:instructor_app/features/results/screens/staff_report_cards_screen.dart';
 import 'package:instructor_app/features/results/screens/section_performance_screen.dart';
 import 'package:instructor_app/features/results/screens/paper_exam_screens.dart';
 import 'package:instructor_app/features/results/data/results.dart';
@@ -63,15 +64,6 @@ class _Page extends ConsumerWidget {
     );
   }
 }
-
-Widget? _staffGate(BuildContext context, WidgetRef ref, String title) =>
-    ref.watch(sessionProvider)?.role == 'STUDENT'
-    ? null
-    : EmptyView(
-        icon: Icons.public,
-        title: title,
-        message: context.l10n.appNotYetBody,
-      );
 
 /// The web's /marks for a student: paper-exam results once published.
 class MarksScreen extends ConsumerWidget {
@@ -426,8 +418,9 @@ class ReportCardsScreen extends ConsumerWidget {
     final l10n = context.l10n;
     final language = Localizations.localeOf(context).languageCode;
     final text = Theme.of(context).textTheme;
-    if (_staffGate(context, ref, l10n.reportCardsMyTitle) case final gate?) {
-      return gate;
+    // Staff make their sections' cards (the web's StaffCards).
+    if (ref.watch(sessionProvider)?.role != 'STUDENT') {
+      return const StaffReportCardsScreen();
     }
     final cards = ref.watch(myReportCardsProvider);
     return _Page(
