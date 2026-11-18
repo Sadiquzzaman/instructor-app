@@ -8,6 +8,8 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 **Stage 0:** all 14 PRs done ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11), plus the #345 error codes; its end-of-stage device check is still to do.
 
+**Stage 2 (teachers):** plan approved 18 Nov ([STAGE-2-PLAN.md](STAGE-2-PLAN.md)). Done: PR 3 (leave approvals). Next: PR 1, the teacher dashboard.
+
 **Stage 1 (students):** plan approved 17 Nov ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)). Done: all 16 PRs (files, Today, My attendance and check-in, read-only cache, leave, timetable, homework, classes, class discussions, calendar, tests and results, taking a test, results, resources, chat, student-flow tests). Still to do: the end-of-stage check on a 360 px phone, a tablet and iOS, done by hand (see "In progress").
 
 ## Done
@@ -85,12 +87,15 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 - Stage 1 PR 16: the student flows end to end through the app's own screens, against the fake API (`test/flows/student_flows.dart`): sign in → Today → "Check in" → My attendance → check in; homework list → a homework → typed answer and a photo (presign, upload, complete) → hand in → version 1 shown; Tests → Start → rules → answer → autosave → submit. They run in CI with `flutter test` and on a device with `flutter test integration_test -d <device>`.
 
+- Stage 2 PR 3: leave approvals (`/leave`, "To approve"). On Leave, people who approve (`can_approve`) get "To approve" with the waiting count; each request shows who asked and their class, with Approve (an optional comment) and Don't approve (a comment of 3 or more letters, as the web); the Waiting, Decided and All filter; "already decided" and other refusals in the web's words. Not yet checked on beta with a real request (demo.teacher1 has none waiting).
+
 ## In progress
 
 - The end-of-stage checks for Stage 0 and Stage 1, by hand: a 360 px phone, a tablet and iOS (Jubaer's Mac), including taking a test through the app's own screens on a phone. Not done yet: the emulator holds the owner's own signed-in session, which I did not sign out, and the integration tests were not run on a device for the same reason.
-- Stage 2 (teachers): the plan is written ([STAGE-2-PLAN.md](STAGE-2-PLAN.md)) and waits for the owner's approval (its §7 has six questions).
+
 ## Owner's decisions since the plan
 
+- 18 Nov: the Stage 2 plan approved as written, with each §7 suggestion: plain-text homework instructions; the dashboard as a teacher's home; the paper register as a grid (no CSV file); the live monitor on phones and tablets; the listed beta changes with the test accounts; changing classes in the app.
 - 17 Nov: the Stage 1 plan approved as written: `image_picker`, `file_picker`, `geolocator` and `socket_io_client`; location, camera and photo permissions; Light proctoring in the app (leaving the app reported like a tab switch, screenshots blocked on Android, no copy and paste in answers); reminders read-only; one test exam on beta for demo.student1; class discussions in Stage 1.
 - 17 Nov: the logo the owner sent (green ring with a yellow "i") replaces `logo.png` for the app icon and splash (PR 14). The black background was removed; PR 14 added it as `assets/brand/logo.png`.
 - 17 Nov: `cupertino_ui` approved as a direct dependency (Bangla texts for iOS-style menus; it already came with `material_ui`).
@@ -114,4 +119,4 @@ Live classes are postponed by the owner and left out of every stage.
 
 ## Decisions needed from the owner
 
-- The Stage 2 plan ([STAGE-2-PLAN.md](STAGE-2-PLAN.md) §7): homework instructions as plain text, the teacher's home, the paper register (grid or file), the live monitor on phones, beta data for the checks, and changing classes in the app.
+- None right now.
