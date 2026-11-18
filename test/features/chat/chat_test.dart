@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 
+import 'package:instructor_app/core/auth/session.dart';
 import 'package:instructor_app/core/routing/app_router.dart';
 import 'package:instructor_app/features/chat/data/chat.dart';
 import 'package:instructor_app/features/chat/screens/chat_screens.dart';
@@ -43,125 +44,144 @@ Map<String, Object?> _msg(
   'created_at': '2026-11-17T08:00:00Z',
 };
 
-FakeApi _api({bool announcementOnly = false}) => FakeApi()
-  ..on('GET /auth/contexts', (_) => ok(<Object>[]))
-  ..on('GET /me/entitlements', (_) => ok({'features': <String, bool>{}}))
-  ..on('GET /me/notifications/unread-count', (_) => ok({'count': 0}))
-  ..on('GET /workspace/level-labels', (_) => ok(<String, Object>{}))
-  ..on('GET /calendar/me', (_) => ok({'items': <Object>[]}))
-  ..on(
-    'GET /chat/groups',
-    (_) => ok([
-      {
-        'id': 'g1',
-        'class_id': 'c1',
-        'section_label': 'Class 6 A',
-        'subject': {'id': 'e', 'name': 'English'},
-        'role': 'STUDENT',
-        'announcement_only': announcementOnly,
-        'read_only': false,
+FakeApi _api({bool announcementOnly = false, bool teacher = false}) {
+  var pinned = false;
+  var onlyTeachers = announcementOnly;
+  return FakeApi()
+    ..on('GET /auth/contexts', (_) => ok(<Object>[]))
+    ..on('GET /me/entitlements', (_) => ok({'features': <String, bool>{}}))
+    ..on('GET /me/notifications/unread-count', (_) => ok({'count': 0}))
+    ..on('GET /workspace/level-labels', (_) => ok(<String, Object>{}))
+    ..on('GET /calendar/me', (_) => ok({'items': <Object>[]}))
+    ..on(
+      'GET /chat/groups',
+      (_) => ok([
+        {
+          'id': 'g1',
+          'class_id': 'c1',
+          'section_label': 'Class 6 A',
+          'subject': {'id': 'e', 'name': 'English'},
+          'role': 'STUDENT',
+          'announcement_only': announcementOnly,
+          'read_only': false,
+          'muted': false,
+          'unread': 2,
+          'teachers': [
+            {'id': 'u2', 'name': 'Karim Uddin'},
+          ],
+          'last_message': {
+            'author_name': 'Karim Uddin',
+            'preview': 'Hello class',
+            'created_at': '2026-11-17T08:00:00Z',
+          },
+        },
+      ]),
+    )
+    ..on('GET /chat/direct', (_) => ok(<Object>[]))
+    ..on(
+      'GET /chat/direct/contacts',
+      (_) => ok([
+        {
+          'id': 'u2',
+          'name': 'Karim Uddin',
+          'via': ['Class 6 A · English'],
+        },
+      ]),
+    )
+    ..on(
+      'POST /chat/direct',
+      (_) => ok({
+        'id': 'd1',
+        'other': {'id': 'u2', 'name': 'Karim Uddin', 'is_teacher': true},
+        'unread': 0,
+        'closed': false,
         'muted': false,
-        'unread': 2,
+      }),
+    )
+    ..on('GET /chat/direct/d1/messages', (_) => ok(<Object>[]))
+    ..on('POST /chat/direct/d1/read', (_) => ok(null))
+    ..on(
+      'POST /chat/direct/d1/messages',
+      (_) => ok(
+        _msg(
+          'm9',
+          author: 'user-1',
+          name: 'Test Student',
+          content: 'Sir, a question',
+          chat: 'd1',
+        ),
+      ),
+    )
+    ..on(
+      'GET /chat/groups/g1',
+      (_) => ok({
+        'id': 'g1',
+        'label': 'Class 6 A · English',
+        'class_id': 'c1',
+        'role': teacher ? 'TEACHER' : 'STUDENT',
+        'announcement_only': onlyTeachers,
+        'read_only': false,
+        'closed': false,
+        'muted': false,
         'teachers': [
           {'id': 'u2', 'name': 'Karim Uddin'},
         ],
-        'last_message': {
-          'author_name': 'Karim Uddin',
-          'preview': 'Hello class',
-          'created_at': '2026-11-17T08:00:00Z',
-        },
-      },
-    ]),
-  )
-  ..on('GET /chat/direct', (_) => ok(<Object>[]))
-  ..on(
-    'GET /chat/direct/contacts',
-    (_) => ok([
-      {
-        'id': 'u2',
-        'name': 'Karim Uddin',
-        'via': ['Class 6 A · English'],
-      },
-    ]),
-  )
-  ..on(
-    'POST /chat/direct',
-    (_) => ok({
-      'id': 'd1',
-      'other': {'id': 'u2', 'name': 'Karim Uddin', 'is_teacher': true},
-      'unread': 0,
-      'closed': false,
-      'muted': false,
-    }),
-  )
-  ..on('GET /chat/direct/d1/messages', (_) => ok(<Object>[]))
-  ..on('POST /chat/direct/d1/read', (_) => ok(null))
-  ..on(
-    'POST /chat/direct/d1/messages',
-    (_) => ok(
-      _msg(
-        'm9',
-        author: 'user-1',
-        name: 'Test Student',
-        content: 'Sir, a question',
-        chat: 'd1',
+        'pinned': [
+          if (pinned) {..._msg('m1'), 'pinned': true},
+        ],
+      }),
+    )
+    ..on('PUT /chat/groups/g1/messages/m1/pin', (r) {
+      pinned = (r.body as Map)['pinned'] == true;
+      return ok({
+        'pinned_ids': [if (pinned) 'm1'],
+      });
+    })
+    ..on('PATCH /chat/groups/g1', (r) {
+      onlyTeachers = (r.body as Map)['announcement_only'] == true;
+      return ok(null);
+    })
+    ..on(
+      'GET /chat/groups/g1/messages',
+      (_) => ok([
+        _msg('m1'),
+        _msg('m0', author: 'user-1', name: 'Test Student', content: 'Mine'),
+      ]),
+    )
+    ..on('POST /chat/groups/g1/read', (_) => ok(null))
+    ..on(
+      'POST /chat/groups/g1/messages',
+      (r) => ok(
+        _msg(
+          'm2',
+          author: 'user-1',
+          name: 'Test Student',
+          content: '${(r.body! as Map)['content']}',
+        ),
       ),
-    ),
-  )
-  ..on(
-    'GET /chat/groups/g1',
-    (_) => ok({
-      'id': 'g1',
-      'label': 'Class 6 A · English',
-      'class_id': 'c1',
-      'role': 'STUDENT',
-      'announcement_only': announcementOnly,
-      'read_only': false,
-      'closed': false,
-      'muted': false,
-      'teachers': [
-        {'id': 'u2', 'name': 'Karim Uddin'},
-      ],
-      'pinned': <Object>[],
-    }),
-  )
-  ..on(
-    'GET /chat/groups/g1/messages',
-    (_) => ok([
-      _msg('m1'),
-      _msg('m0', author: 'user-1', name: 'Test Student', content: 'Mine'),
-    ]),
-  )
-  ..on('POST /chat/groups/g1/read', (_) => ok(null))
-  ..on(
-    'POST /chat/groups/g1/messages',
-    (r) => ok(
-      _msg(
-        'm2',
-        author: 'user-1',
-        name: 'Test Student',
-        content: '${(r.body! as Map)['content']}',
-      ),
-    ),
-  )
-  ..on('DELETE /chat/groups/g1/messages/m0', (_) => ok(null))
-  ..on('PUT /chat/groups/g1/mute', (_) => ok(null))
-  ..on('POST /chat/reports', (_) => ok(null))
-  ..on(
-    'GET /chat/groups/g1/messages/m1/comments',
-    (_) => ok([_msg('k1', author: 'u3', name: 'Rahim', content: 'Thanks!')]),
-  );
+    )
+    ..on('DELETE /chat/groups/g1/messages/m0', (_) => ok(null))
+    ..on('PUT /chat/groups/g1/mute', (_) => ok(null))
+    ..on('POST /chat/reports', (_) => ok(null))
+    ..on(
+      'GET /chat/groups/g1/messages/m1/comments',
+      (_) => ok([_msg('k1', author: 'u3', name: 'Rahim', content: 'Thanks!')]),
+    );
+}
 
 Future<(FakeApi, _Live)> _open(
   WidgetTester tester, {
   bool announcementOnly = false,
+  bool teacher = false,
 }) async {
   final live = _Live();
-  final api = _api(announcementOnly: announcementOnly);
+  final api = _api(announcementOnly: announcementOnly, teacher: teacher);
   final c = await pumpInstructorApp(
     tester,
     api: api,
-    session: testSession(),
+    session: teacher
+        ? Session.fromPayload({...sessionPayload(), 'role': 'TEACHER'})
+        : testSession(),
     overrides: [chatLiveProvider.overrideWithValue(live)],
   );
   c.read(routerProvider).go(AppRoutes.chat);
@@ -279,5 +299,53 @@ void main() {
     expect(find.text('Sir, a question'), findsOneWidget);
     // Private chats are text only here, as on the web.
     expect(find.byKey(const Key('attach')), findsNothing);
+  });
+  testWidgets('teachers: the chat list, not the website', (tester) async {
+    await _open(tester, teacher: true);
+    expect(find.text(_en.appNotYetBody), findsNothing);
+    expect(find.byKey(const Key('group-g1')), findsOneWidget);
+  });
+
+  testWidgets('teachers post when only teachers can, and switch it off', (
+    tester,
+  ) async {
+    final (api, _) = await _open(tester, announcementOnly: true, teacher: true);
+    await _openGroup(tester);
+    expect(find.text(_en.chatTeachersOnly), findsNothing);
+    expect(find.byKey(const Key('chat-text')), findsOneWidget);
+    await tester.tap(find.byKey(const Key('announcement-only')));
+    await tester.pumpAndSettle();
+    expect(api.to('PATCH /chat/groups/g1').single.body, {
+      'announcement_only': false,
+    });
+    expect(
+      tester
+          .widget<SwitchListTile>(find.byKey(const Key('announcement-only')))
+          .value,
+      isFalse,
+    );
+  });
+
+  testWidgets("teachers pin a post and delete anyone's", (tester) async {
+    final (api, _) = await _open(tester, teacher: true);
+    await _openGroup(tester);
+    expect(find.text(_en.chatPinned), findsNothing);
+    await tester.tap(find.byKey(const Key('pin-m1')));
+    await tester.pumpAndSettle();
+    expect(api.to('PUT /chat/groups/g1/messages/m1/pin').single.body, {
+      'pinned': true,
+    });
+    expect(find.text(_en.chatPinned), findsOneWidget);
+    expect(find.text(_en.chatUnpin), findsOneWidget);
+    await tester.tap(find.byKey(const Key('delete-m1')));
+    await tester.pumpAndSettle();
+    expect(api.to('DELETE /chat/groups/g1/messages/m1'), hasLength(1));
+  });
+
+  testWidgets('students do not pin or switch', (tester) async {
+    await _open(tester);
+    await _openGroup(tester);
+    expect(find.byKey(const Key('pin-m1')), findsNothing);
+    expect(find.byKey(const Key('announcement-only')), findsNothing);
   });
 }

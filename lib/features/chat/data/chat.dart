@@ -70,10 +70,15 @@ class ChatGroupDetail {
     this.readOnly = false,
     this.closed = false,
     this.muted = false,
+    this.teacher = false,
   });
 
   final String id;
   final String label;
+
+  /// The caller teaches this class: posts when only teachers can, pins,
+  /// deletes anyone's message and sets "Only teachers can post".
+  final bool teacher;
   final String classId;
   final List<String> teachers;
   final List<ChatMessage> pinned;
@@ -98,6 +103,7 @@ class ChatGroupDetail {
       readOnly: j['read_only'] == true,
       closed: j['closed'] == true,
       muted: j['muted'] == true,
+      teacher: j['role'] == 'TEACHER',
     );
   }
 }
@@ -179,6 +185,22 @@ class ChatMessage {
   final bool pinned;
   final bool deleted;
   final DateTime? createdAt;
+
+  ChatMessage withPinned(bool on) => ChatMessage(
+    id: id,
+    chatId: chatId,
+    parentId: parentId,
+    authorId: authorId,
+    authorName: authorName,
+    authorIsTeacher: authorIsTeacher,
+    content: content,
+    files: files,
+    replyTo: replyTo,
+    commentCount: commentCount,
+    pinned: on,
+    deleted: deleted,
+    createdAt: createdAt,
+  );
 
   static ChatMessage? fromJson(Object? j) {
     if (j is! Map || j['id'] is! String) return null;
@@ -306,6 +328,14 @@ class ChatRepository {
 
   Future<void> delete(String path, String messageId) =>
       _api.delete('$path/messages/$messageId');
+
+  /// Teachers: pin a post (at most 3; the oldest pin drops off) or unpin it.
+  Future<void> pin(String path, String messageId, {required bool pinned}) =>
+      _api.put('$path/messages/$messageId/pin', data: {'pinned': pinned});
+
+  /// Teachers: turn "Only teachers can post" on or off.
+  Future<void> setAnnouncementOnly(String groupId, {required bool on}) =>
+      _api.patch('/chat/groups/$groupId', data: {'announcement_only': on});
 
   Future<void> read(String path) => _api.post('$path/read');
 
