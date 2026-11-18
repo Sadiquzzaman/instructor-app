@@ -28,6 +28,8 @@ import 'package:instructor_app/features/shell/screens/app_shell.dart';
 import 'package:instructor_app/features/tests/screens/take_test_screen.dart';
 import 'package:instructor_app/features/tests/screens/test_result_screen.dart';
 import 'package:instructor_app/features/organization/screens/assignments_screen.dart';
+import 'package:instructor_app/features/organization/screens/attendance_settings_screen.dart';
+import 'package:instructor_app/features/organization/screens/holidays_screen.dart';
 import 'package:instructor_app/features/organization/screens/organization_overview_screen.dart';
 import 'package:instructor_app/features/organization/screens/people_screen.dart';
 import 'package:instructor_app/features/organization/screens/sessions_screen.dart';
@@ -291,6 +293,14 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: AppRoutes.sessions,
             builder: (context, state) => const SessionsScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.attendanceSettings,
+            builder: (context, state) => const AttendanceSettingsScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.holidays,
+            builder: (context, state) => const HolidaysScreen(),
           ),
           GoRoute(
             path: AppRoutes.marks,

@@ -38,6 +38,8 @@ abstract final class AppRoutes {
   static const orgClasses = '/organization/classes';
   static const orgAssignments = '/organization/assignments';
   static const sessions = '/sessions';
+  static const attendanceSettings = '/attendance-settings';
+  static const holidays = '/holidays';
 
   /// Pages the app has really built (not "use the website for now"). A
   /// notification's link opens in the app only for these; each stage adds
@@ -67,6 +69,8 @@ abstract final class AppRoutes {
     orgClasses,
     orgAssignments,
     sessions,
+    attendanceSettings,
+    holidays,
     performance,
     reportCards,
     resources,
