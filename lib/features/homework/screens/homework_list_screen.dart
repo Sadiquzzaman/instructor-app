@@ -11,6 +11,7 @@ import 'package:instructor_app/core/widgets/app_card.dart';
 import 'package:instructor_app/core/widgets/state_views.dart';
 import 'package:instructor_app/core/widgets/status_pill.dart';
 import 'package:instructor_app/features/homework/data/homework.dart';
+import 'package:instructor_app/features/homework/screens/staff_homework_screens.dart';
 import 'package:instructor_app/features/homework/homework_text.dart';
 
 /// The web's /homework for a student: every homework set to them, with
@@ -25,12 +26,9 @@ class HomeworkListScreen extends ConsumerWidget {
     final text = Theme.of(context).textTheme;
     final colors = AppColors.of(context);
     // Teachers' homework (create, mark) is Stage 2: the website for now.
+    // Staff manage homework (the web's StaffHomework).
     if (ref.watch(sessionProvider)?.role != 'STUDENT') {
-      return EmptyView(
-        icon: Icons.public,
-        title: l10n.homeworkTitle,
-        message: l10n.appNotYetBody,
-      );
+      return const StaffHomeworkListScreen();
     }
     final items = ref.watch(myHomeworkProvider);
     return Center(

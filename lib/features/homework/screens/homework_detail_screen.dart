@@ -18,6 +18,7 @@ import 'package:instructor_app/core/widgets/app_text_field.dart';
 import 'package:instructor_app/core/widgets/state_views.dart';
 import 'package:instructor_app/core/widgets/status_pill.dart';
 import 'package:instructor_app/features/homework/data/homework.dart';
+import 'package:instructor_app/features/homework/screens/staff_homework_screens.dart';
 import 'package:instructor_app/features/homework/homework_text.dart';
 import 'package:instructor_app/features/shell/widgets/api_error_handling.dart';
 
@@ -36,12 +37,9 @@ class HomeworkDetailScreen extends ConsumerWidget {
     final language = Localizations.localeOf(context).languageCode;
     final text = Theme.of(context).textTheme;
     final colors = AppColors.of(context);
+    // Staff manage homework (the web's StaffHomework).
     if (ref.watch(sessionProvider)?.role != 'STUDENT') {
-      return EmptyView(
-        icon: Icons.public,
-        title: l10n.homeworkTitle,
-        message: l10n.appNotYetBody,
-      );
+      return StaffHomeworkDetailScreen(id: id);
     }
     final homework = ref.watch(homeworkProvider(id));
     return Center(

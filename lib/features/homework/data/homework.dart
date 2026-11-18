@@ -26,7 +26,27 @@ class HomeworkFile {
   ];
 }
 
-/// One homework (`/homework/mine`, `/homework/:id`).
+/// A subject class a homework is set to, with its chosen students (empty:
+/// everyone taking it).
+typedef HomeworkTarget = ({
+  String offeringId,
+  String sectionLabel,
+  List<String> studentIds,
+});
+
+/// A subject class the caller may set homework for
+/// (`GET /homework/subject-classes`).
+typedef HomeworkClassChoice = ({
+  String offeringId,
+  String sectionLabel,
+  String subjectId,
+  String subjectName,
+});
+
+/// A student taking a subject class (`GET /offerings/:id/roster`).
+typedef RosterStudent = ({String id, String name, String? rollNo});
+
+/// One homework (`/homework/mine`, `/homework/:id`, `/homework`).
 @immutable
 class Homework {
   const Homework({
@@ -40,6 +60,11 @@ class Homework {
     this.dueAt,
     this.attachments = const [],
     this.handedInVersion,
+    this.subjectId,
+    this.canEdit = false,
+    this.targets = const [],
+    this.studentCount = 0,
+    this.publishAt,
   });
 
   final String id;
@@ -58,6 +83,23 @@ class Homework {
 
   /// The student's latest hand-in, if any.
   final int? handedInVersion;
+
+  final String? subjectId;
+
+  /// Staff: the caller may change, publish or withdraw it.
+  final bool canEdit;
+
+  /// Staff: the subject classes it is set to, and chosen students if any.
+  final List<HomeworkTarget> targets;
+
+  /// Staff: how many students it is set to.
+  final int studentCount;
+
+  /// When a SCHEDULED homework will be published.
+  final DateTime? publishAt;
+
+  /// "Class 6 A, Class 6 B" (the web's `classesLabel`).
+  String get classesLabel => targets.map((t) => t.sectionLabel).join(', ');
 
   static Homework? fromJson(Object? j) {
     if (j is! Map || j['id'] is! String) return null;
@@ -79,6 +121,26 @@ class Homework {
           : null,
       attachments: HomeworkFile.listOf(j['attachments']),
       handedInVersion: mine is Map ? (mine['version'] as num?)?.toInt() : null,
+      subjectId: subject is Map ? subject['id'] as String? : null,
+      canEdit: j['can_edit'] == true,
+      targets: [
+        if (j['targets'] is List)
+          for (final t in j['targets'] as List)
+            if (t is Map && t['offering_id'] is String)
+              (
+                offeringId: t['offering_id'] as String,
+                sectionLabel: (t['section_label'] as String?) ?? '',
+                studentIds: [
+                  if (t['student_ids'] is List)
+                    for (final s in t['student_ids'] as List)
+                      if (s is String) s,
+                ],
+              ),
+      ],
+      studentCount: (j['student_count'] as num?)?.toInt() ?? 0,
+      publishAt: j['publish_at'] is String
+          ? DateTime.tryParse(j['publish_at'] as String)
+          : null,
     );
   }
 }
@@ -255,6 +317,87 @@ class HomeworkRepository {
     return MySubmissions.fromJson(r.payload);
   }
 }
+
+/// What staff do with homework (the web's HomeworkPage, HomeworkEditor and
+/// HomeworkDetail).
+extension StaffHomework on HomeworkRepository {
+  /// [status]: ACTIVE (draft, scheduled, published), DRAFT, SCHEDULED,
+  /// PUBLISHED or CANCELLED.
+  Future<List<Homework>> managed(String status) async {
+    final p = (await _api.get('/homework', query: {'status': status})).payload;
+    return [
+      if (p is List)
+        for (final h in p) ?Homework.fromJson(h),
+    ];
+  }
+
+  Future<List<HomeworkClassChoice>> classChoices() async {
+    final p = (await _api.get('/homework/subject-classes')).payload;
+    return [
+      if (p is List)
+        for (final c in p)
+          if (c is Map && c['offering_id'] is String && c['subject'] is Map)
+            (
+              offeringId: c['offering_id'] as String,
+              sectionLabel: (c['section_label'] as String?) ?? '',
+              subjectId: ((c['subject'] as Map)['id'] as String?) ?? '',
+              subjectName: ((c['subject'] as Map)['name'] as String?) ?? '',
+            ),
+    ];
+  }
+
+  Future<List<RosterStudent>> roster(String offeringId) async {
+    final p = (await _api.get('/offerings/$offeringId/roster')).payload;
+    return [
+      if (p is List)
+        for (final s in p)
+          if (s is Map && s['student_id'] is String)
+            (
+              id: s['student_id'] as String,
+              name: (s['full_name'] as String?) ?? '',
+              rollNo: s['roll_no'] as String?,
+            ),
+    ];
+  }
+
+  /// Writes a new homework (a draft) or changes one ([id]).
+  Future<Homework?> save(String? id, Map<String, Object?> body) async {
+    final r = id == null
+        ? await _api.post('/homework', data: body)
+        : await _api.patch('/homework/$id', data: body);
+    return Homework.fromJson(r.payload);
+  }
+
+  /// Publishes now, or at [at].
+  Future<Homework?> publish(String id, {DateTime? at}) async =>
+      Homework.fromJson(
+        (await _api.post(
+          '/homework/$id/publish',
+          data: {if (at != null) 'publish_at': at.toUtc().toIso8601String()},
+        )).payload,
+      );
+
+  /// Withdraws it (kept, never deleted).
+  Future<Homework?> withdraw(String id) async => Homework.fromJson(
+    (await _api.post(
+      '/homework/$id/cancel',
+      data: const <String, Object>{},
+    )).payload,
+  );
+}
+
+/// Homework the caller manages, by status filter.
+final managedHomeworkProvider = FutureProvider.autoDispose
+    .family<List<Homework>, String>((ref, status) {
+      ref.watch(workspaceKeyProvider);
+      return ref.read(homeworkRepositoryProvider).managed(status);
+    }, retry: (retryCount, error) => null);
+
+final homeworkClassChoicesProvider =
+    FutureProvider.autoDispose<List<HomeworkClassChoice>>((ref) {
+      ref.watch(workspaceKeyProvider);
+      return ref.read(homeworkRepositoryProvider).classChoices();
+    }, retry: (retryCount, error) => null);
 
 final homeworkRepositoryProvider = Provider<HomeworkRepository>(
   (ref) => HomeworkRepository(ref.watch(apiClientProvider)),
