@@ -1431,6 +1431,400 @@
   "myAttendanceErrorsATTENDANCECHECKINCANCELLED": "This class is cancelled today.",
   "myAttendanceOnLeaveToday": "You're on approved leave today. Your classes count as Leave unless you check in.",
   "myAttendanceLeaveLink": "Leave",
+  "classAttendanceTitle": "Class attendance",
+  "classAttendanceIntro": "Who checked in to each class. Students check themselves in; you only fix mistakes, with a reason.",
+  "classAttendanceDate": "Date",
+  "classAttendanceClassesOn": "Classes on {date}",
+  "@classAttendanceClassesOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "classAttendanceLoadFailed": "Couldn't load the classes.",
+  "classAttendanceEmpty": "No classes on this day",
+  "classAttendanceEmptyHint": "Classes come from the weekly schedules in Class setup.",
+  "classAttendanceClass": "Class",
+  "classAttendanceCheckIn": "Check-in",
+  "classAttendanceStudents": "Students",
+  "classAttendanceTeachers": "Teachers",
+  "classAttendanceActions": "Actions",
+  "classAttendanceClosedDay": "No classes (closed)",
+  "classAttendancePaperRegister": "Paper register",
+  "classAttendanceStateUPCOMING": "Not open yet",
+  "classAttendanceStateOPEN": "Open now",
+  "classAttendanceStateCLOSED": "Closed",
+  "classAttendanceCountsLabel": "{students} students: {present} present, {late} late, {absent} absent, {leave} on leave, {waiting} not in yet, {flagged} flagged",
+  "@classAttendanceCountsLabel": {
+    "placeholders": {
+      "students": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "present": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "late": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "absent": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "leave": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "waiting": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "flagged": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "classAttendanceCountPresent": "P {count}",
+  "@classAttendanceCountPresent": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "classAttendanceCountLate": "L {count}",
+  "@classAttendanceCountLate": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "classAttendanceCountAbsent": "A {count}",
+  "@classAttendanceCountAbsent": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "classAttendanceCountLeave": "LV {count}",
+  "@classAttendanceCountLeave": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "classAttendanceCountWaiting": "Not in yet {count}",
+  "@classAttendanceCountWaiting": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "classAttendanceCountFlagged": "Flagged {count}",
+  "@classAttendanceCountFlagged": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "classAttendanceView": "View",
+  "classAttendanceViewAndCorrect": "View and correct",
+  "classAttendanceOpenFor": "Open {section}",
+  "@classAttendanceOpenFor": {
+    "placeholders": {
+      "section": {
+        "type": "String"
+      }
+    }
+  },
+  "classAttendanceClosedWEEKLYOFF": "Weekly off day: no classes.",
+  "classAttendanceClosedHOLIDAY": "Holiday: no classes. {name}",
+  "@classAttendanceClosedHOLIDAY": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "classAttendanceTimeRange": "{start}–{end}",
+  "@classAttendanceTimeRange": {
+    "placeholders": {
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  },
+  "classAttendanceStudentsCount": "Students ({count})",
+  "@classAttendanceStudentsCount": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "classAttendanceNoStudents": "No students in this [[section]] yet.",
+  "classAttendanceNotStartedHint": "Corrections open when the class starts.",
+  "classAttendanceCheckedInAt": "checked in at {time}",
+  "@classAttendanceCheckedInAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "classAttendanceDistance": "{distance} m away (±{accuracy} m)",
+  "@classAttendanceDistance": {
+    "placeholders": {
+      "distance": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "accuracy": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "classAttendanceFlagEDGEACCURACY": "Unclear location at the edge",
+  "classAttendanceFlagIMPOSSIBLEJUMP": "Far from the last check-in",
+  "classAttendanceCorrect": "Correct",
+  "classAttendanceCorrectFor": "Correct {name}",
+  "@classAttendanceCorrectFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "classAttendanceTrailFor": "Corrections of {name}",
+  "@classAttendanceTrailFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "classAttendanceTrailLine": "{from} → {to} by {who}, {when}",
+  "@classAttendanceTrailLine": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      },
+      "who": {
+        "type": "String"
+      },
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "classAttendanceNoRecord": "No check-in",
+  "classAttendanceSomeone": "Someone",
+  "classAttendanceNewStatus": "New status",
+  "classAttendanceLateMinutes": "Minutes late",
+  "classAttendanceReason": "Reason",
+  "classAttendanceReasonHint": "Kept with the record, e.g. \"Phone had no internet; was in class\".",
+  "classAttendanceReasonRequired": "Write why you are correcting this (at least 3 characters).",
+  "classAttendanceCancel": "Cancel",
+  "classAttendanceSaving": "Saving…",
+  "classAttendanceSaveCorrection": "Save correction",
+  "classAttendanceCorrected": "Attendance of {name} corrected",
+  "@classAttendanceCorrected": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "classAttendanceErrorsATTENDANCECORRECTIONNOTSTARTED": "This class hasn't started yet.",
+  "classAttendanceErrorsATTENDANCECORRECTIONCLOSEDDAY": "There was no class that day.",
+  "classAttendanceErrorsATTENDANCECORRECTIONPERSONNOTFOUND": "This person isn't in this class.",
+  "classAttendanceErrorsATTENDANCECORRECTIONTEACHERRECORD": "Teachers correct students' attendance only.",
+  "classAttendanceErrorsATTENDANCECORRECTIONNOCHANGE": "The record already has this status.",
+  "classAttendanceErrorsATTENDANCECORRECTIONCANCELLED": "This class was cancelled.",
+  "classAttendanceErrorsATTENDANCECORRECTIONTOOOLD": "Teachers correct classes of the last 7 days. Ask the organisation's owner or admin.",
+  "classAttendanceErrorsATTENDANCECANCELCLOSEDDAY": "There is no class that day.",
+  "classAttendanceErrorsATTENDANCECANCELPAST": "A past class cannot be cancelled. Correct its attendance instead.",
+  "classAttendanceErrorsATTENDANCECANCELTOOFAR": "Classes can be cancelled up to 60 days ahead.",
+  "classAttendanceErrorsATTENDANCECANCELENDED": "This class has already ended.",
+  "classAttendanceErrorsATTENDANCECANCELALREADY": "This class is already cancelled.",
+  "classAttendanceErrorsATTENDANCECANCELNOTCANCELLED": "This class is not cancelled.",
+  "classAttendanceErrorsATTENDANCECHANGESTARTED": "Change a class before its check-in opens, while nobody has checked in.",
+  "classAttendanceErrorsATTENDANCECHANGETIMEINVALID": "Choose a start and a later end that have not passed yet.",
+  "classAttendanceErrorsATTENDANCECHANGEOVERLAP": "The section has another class at that time ({start}–{end}).",
+  "@classAttendanceErrorsATTENDANCECHANGEOVERLAP": {
+    "placeholders": {
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  },
+  "classAttendanceErrorsATTENDANCECHANGETEACHERINVALID": "Choose a teacher of your organisation.",
+  "classAttendanceErrorsATTENDANCECHANGENONE": "Nothing changed.",
+  "classAttendanceCancelled": "Cancelled",
+  "classAttendanceCancelClass": "Cancel this class",
+  "classAttendanceCancelClassFor": "Cancel the class of {section} on {date}",
+  "@classAttendanceCancelClassFor": {
+    "placeholders": {
+      "section": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "classAttendanceCancelIntro": "Students are not marked absent for a cancelled class, and they are told in the app.",
+  "classAttendanceCancelNote": "Note for students (optional)",
+  "classAttendanceCancelNoteHint": "For example: \"I am unwell; we will make it up on Monday\".",
+  "classAttendanceConfirmCancel": "Cancel the class",
+  "classAttendanceKeepClass": "Keep the class",
+  "classAttendanceCancelling": "Cancelling…",
+  "classAttendanceRestoreClass": "Restore the class",
+  "classAttendanceRestoring": "Restoring…",
+  "classAttendanceCancelledBanner": "Cancelled by {who}, {when}.",
+  "@classAttendanceCancelledBanner": {
+    "placeholders": {
+      "who": {
+        "type": "String"
+      },
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "classAttendanceCancelledBannerNote": "Note: {note}",
+  "@classAttendanceCancelledBannerNote": {
+    "placeholders": {
+      "note": {
+        "type": "String"
+      }
+    }
+  },
+  "classAttendanceCancelledToast": "The class of {section} is cancelled; students were told.",
+  "@classAttendanceCancelledToast": {
+    "placeholders": {
+      "section": {
+        "type": "String"
+      }
+    }
+  },
+  "classAttendanceRestoredToast": "The class of {section} will take place; students were told.",
+  "@classAttendanceRestoredToast": {
+    "placeholders": {
+      "section": {
+        "type": "String"
+      }
+    }
+  },
+  "classAttendanceTooOldHint": "Teachers correct classes of the last 7 days. Ask the organisation's owner or admin for older ones.",
+  "classAttendanceCancelledHint": "This class was cancelled: nobody is marked absent and it is not counted.",
+  "classAttendanceChanged": "Changed today",
+  "classAttendanceChangedToast": "{section}: changed for this day",
+  "@classAttendanceChangedToast": {
+    "placeholders": {
+      "section": {
+        "type": "String"
+      }
+    }
+  },
+  "classAttendanceChangeTitle": "Change for this day",
+  "classAttendanceChangeChangedTitle": "Changed for this day only",
+  "classAttendanceChangeRoutineTimes": "Routine {start}–{end}",
+  "@classAttendanceChangeRoutineTimes": {
+    "placeholders": {
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  },
+  "classAttendanceChangeDayTimes": "this day {start}–{end}",
+  "@classAttendanceChangeDayTimes": {
+    "placeholders": {
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  },
+  "classAttendanceChangeSubstituteIs": "Substitute teacher: {name}",
+  "@classAttendanceChangeSubstituteIs": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "classAttendanceChangeChangedBy": "Changed by {who}, {when}",
+  "@classAttendanceChangeChangedBy": {
+    "placeholders": {
+      "who": {
+        "type": "String"
+      },
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "classAttendanceChangeNoteIs": "Note: {note}",
+  "@classAttendanceChangeNoteIs": {
+    "placeholders": {
+      "note": {
+        "type": "String"
+      }
+    }
+  },
+  "classAttendanceChangeSomeone": "someone",
+  "classAttendanceChangeIntro": "Other times or another teacher for this day only. The weekly routine stays the same. Students and the teachers are told.",
+  "classAttendanceChangeStart": "Start",
+  "classAttendanceChangeEnd": "End",
+  "classAttendanceChangeSubstitute": "Teacher this day",
+  "classAttendanceChangeRoutineTeacher": "As in the routine ({name})",
+  "@classAttendanceChangeRoutineTeacher": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "classAttendanceChangeNoSubstitute": "As in the routine",
+  "classAttendanceChangeNote": "Note for students (optional)",
+  "classAttendanceChangeNoteHint": "E.g. why it moved",
+  "classAttendanceChangeClose": "Keep as is",
+  "classAttendanceChangeSave": "Save change",
+  "classAttendanceChangeUndo": "Undo change",
+  "classAttendanceChangeEditChange": "Edit change",
+  "classAttendanceChangeOpen": "Change time or teacher",
   "leaveTitle": "Leave",
   "leaveIntro": "Apply for leave with dates and a reason. Approved days show as Leave (blue) and never count as absent.",
   "leaveApply": "Apply for leave",

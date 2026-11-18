@@ -29,6 +29,7 @@ import 'package:instructor_app/features/tests/screens/test_result_screen.dart';
 import 'package:instructor_app/features/tests/screens/tests_screen.dart';
 import 'package:instructor_app/features/today/screens/today_screen.dart';
 import 'package:instructor_app/features/dashboard/screens/teacher_dashboard_screen.dart';
+import 'package:instructor_app/features/attendance/screens/class_attendance_screen.dart';
 import 'package:instructor_app/features/shell/screens/not_yet_screen.dart';
 import 'package:instructor_app/features/workspace/screens/workspace_gate.dart';
 
@@ -135,6 +136,19 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: AppRoutes.myAttendance,
             builder: (context, state) => const MyAttendanceScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.attendance,
+            builder: (context, state) => const ClassAttendanceScreen(),
+            routes: [
+              GoRoute(
+                path: ':slotId/:date',
+                builder: (context, state) => ClassSessionScreen(
+                  slotId: state.pathParameters['slotId']!,
+                  date: state.pathParameters['date']!,
+                ),
+              ),
+            ],
           ),
           GoRoute(
             path: AppRoutes.leave,
