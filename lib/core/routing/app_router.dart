@@ -16,6 +16,7 @@ import 'package:instructor_app/features/chat/screens/chat_screens.dart';
 import 'package:instructor_app/features/classes/screens/classes_screen.dart';
 import 'package:instructor_app/features/homework/screens/homework_detail_screen.dart';
 import 'package:instructor_app/features/homework/screens/homework_list_screen.dart';
+import 'package:instructor_app/features/homework/screens/plagiarism_screens.dart';
 import 'package:instructor_app/features/leave/screens/leave_screen.dart';
 import 'package:instructor_app/features/resources/resources_screen.dart';
 import 'package:instructor_app/features/results/screens/results_screens.dart';
@@ -176,8 +177,21 @@ final routerProvider = Provider<GoRouter>((ref) {
                 path: ':id',
                 builder: (context, state) =>
                     HomeworkDetailScreen(id: state.pathParameters['id']!),
+                routes: [
+                  GoRoute(
+                    path: 'similarity',
+                    builder: (context, state) => SimilarityScreen(
+                      homeworkId: state.pathParameters['id']!,
+                    ),
+                  ),
+                ],
               ),
             ],
+          ),
+          GoRoute(
+            path: '/integrity/matches/:id',
+            builder: (context, state) =>
+                MatchScreen(id: state.pathParameters['id']!),
           ),
           GoRoute(
             path: AppRoutes.classes,

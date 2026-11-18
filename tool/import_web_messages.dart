@@ -40,6 +40,7 @@ const webNamespaces = [
   'classAttendance',
   'reports',
   'register',
+  'plagiarism',
   'leave',
   'routine',
   'homework',
