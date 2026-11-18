@@ -6,6 +6,7 @@ import 'package:instructor_app/core/api/api_error_text.dart';
 import 'package:instructor_app/core/api/api_exception.dart';
 import 'package:instructor_app/core/api/api_providers.dart';
 import 'package:instructor_app/core/l10n/l10n.dart';
+import 'package:instructor_app/core/l10n/level_text.dart';
 import 'package:instructor_app/core/routing/app_routes.dart';
 import 'package:instructor_app/core/theme/app_colors.dart';
 import 'package:instructor_app/core/theme/app_metrics.dart';
@@ -154,8 +155,11 @@ class _StaffReportCardsScreenState
                       height: 260,
                       child: EmptyView(
                         icon: Icons.article_outlined,
-                        title: l10n.reportCardsNoSections,
-                        message: l10n.reportCardsNoSectionsHint,
+                        title: ref.levels(context, l10n.reportCardsNoSections),
+                        message: ref.levels(
+                          context,
+                          l10n.reportCardsNoSectionsHint,
+                        ),
                       ),
                     ),
                   ];
@@ -172,7 +176,7 @@ class _StaffReportCardsScreenState
                     initialValue: section,
                     isExpanded: true,
                     decoration: InputDecoration(
-                      labelText: l10n.reportCardsSection,
+                      labelText: ref.levels(context, l10n.reportCardsSection),
                     ),
                     items: [
                       for (final s in v.sections)
@@ -419,7 +423,7 @@ class _SectionCardsState extends ConsumerState<_SectionCards> {
     final colors = AppColors.of(context);
     if (l.rows.isEmpty) {
       return Text(
-        l10n.reportCardsNoStudents,
+        ref.levels(context, l10n.reportCardsNoStudents),
         style: text.bodyMedium?.copyWith(color: colors.inkMuted),
       );
     }

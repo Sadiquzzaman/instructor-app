@@ -5,6 +5,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:instructor_app/core/api/api_exception.dart';
 import 'package:instructor_app/core/api/api_providers.dart';
 import 'package:instructor_app/core/l10n/l10n.dart';
+import 'package:instructor_app/core/l10n/level_text.dart';
 import 'package:instructor_app/core/routing/app_routes.dart';
 import 'package:instructor_app/core/theme/app_colors.dart';
 import 'package:instructor_app/core/theme/app_metrics.dart';
@@ -217,7 +218,7 @@ class _SectionPerformanceScreenState
           children: [
             Text(l10n.performanceTitle, style: text.headlineSmall),
             Text(
-              l10n.performanceIntro,
+              ref.levels(context, l10n.performanceIntro),
               style: text.bodyMedium?.copyWith(color: colors.inkMuted),
             ),
             const SizedBox(height: AppSpacing.md),
@@ -251,8 +252,11 @@ class _SectionPerformanceScreenState
                       height: 260,
                       child: EmptyView(
                         icon: Icons.insights_outlined,
-                        title: l10n.performanceNoSections,
-                        message: l10n.performanceNoSectionsHint,
+                        title: ref.levels(context, l10n.performanceNoSections),
+                        message: ref.levels(
+                          context,
+                          l10n.performanceNoSectionsHint,
+                        ),
                       ),
                     ),
                   ];
@@ -269,7 +273,7 @@ class _SectionPerformanceScreenState
                     initialValue: section,
                     isExpanded: true,
                     decoration: InputDecoration(
-                      labelText: l10n.performanceSection,
+                      labelText: ref.levels(context, l10n.performanceSection),
                     ),
                     items: [
                       for (final s in v.sections)
@@ -543,7 +547,7 @@ class _SectionView extends ConsumerWidget {
             Text(l10n.performanceTableCaption(d.name), style: text.titleMedium),
             if (rows.isEmpty)
               Text(
-                l10n.performanceNoStudents,
+                ref.levels(context, l10n.performanceNoStudents),
                 style: text.bodySmall?.copyWith(color: colors.inkMuted),
               )
             else

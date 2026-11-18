@@ -6,6 +6,7 @@ import 'package:instructor_app/core/api/api_error_text.dart';
 import 'package:instructor_app/core/api/api_exception.dart';
 import 'package:instructor_app/core/api/api_providers.dart';
 import 'package:instructor_app/core/l10n/l10n.dart';
+import 'package:instructor_app/core/l10n/level_text.dart';
 import 'package:instructor_app/core/routing/app_routes.dart';
 import 'package:instructor_app/core/theme/app_colors.dart';
 import 'package:instructor_app/core/theme/app_metrics.dart';
@@ -119,7 +120,7 @@ class _TeacherTestsScreenState extends ConsumerState<TeacherTestsScreen> {
                 controller: _search,
                 onChanged: (_) => setState(() {}),
                 decoration: InputDecoration(
-                  hintText: l10n.testsSearch,
+                  hintText: ref.levels(context, l10n.testsSearch),
                   prefixIcon: const Icon(Icons.search),
                 ),
               ),
@@ -343,7 +344,7 @@ class _TeacherTestScreenState extends ConsumerState<TeacherTestScreen> {
         t.subjects.map((s) => s.name).where((s) => s.isNotEmpty).join(', '),
       ),
       (l10n.testsDetailsAudience, audience),
-      (l10n.testsDetailsClass, t.className ?? '—'),
+      (ref.levels(context, l10n.testsDetailsClass), t.className ?? '—'),
       (
         l10n.testsDetailsDuration,
         l10n.testsDetailsMinutes(t.durationMinutes ?? 0),

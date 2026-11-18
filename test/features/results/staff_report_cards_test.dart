@@ -93,6 +93,8 @@ void main() {
     await _open(tester, api);
     expect(find.byType(StaffReportCardsScreen), findsOneWidget);
     expect(find.text(_en.appNotYetBody), findsNothing);
+    // The section picker names the level in the school's words.
+    expect(find.textContaining('[['), findsNothing);
     expect(api.to('GET /report-cards').last.query['section_id'], 'sa');
     expect(find.text(_en.reportCardsMadeCount(0, 2)), findsOneWidget);
     // Teachers don't write the principal's remark.

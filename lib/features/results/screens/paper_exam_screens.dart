@@ -8,6 +8,7 @@ import 'package:instructor_app/core/api/api_error_text.dart';
 import 'package:instructor_app/core/api/api_exception.dart';
 import 'package:instructor_app/core/api/api_providers.dart';
 import 'package:instructor_app/core/l10n/l10n.dart';
+import 'package:instructor_app/core/l10n/level_text.dart';
 import 'package:instructor_app/core/routing/app_routes.dart';
 import 'package:instructor_app/core/theme/app_colors.dart';
 import 'package:instructor_app/core/theme/app_metrics.dart';
@@ -337,7 +338,7 @@ class _PaperExamFormScreenState extends ConsumerState<PaperExamFormScreen> {
             padding: const EdgeInsets.all(AppSpacing.lg),
             children: [
               Text(
-                l10n.marksFormIntro,
+                ref.levels(context, l10n.marksFormIntro),
                 style: text.bodySmall?.copyWith(color: colors.inkMuted),
               ),
               const SizedBox(height: AppSpacing.md),
@@ -350,7 +351,7 @@ class _PaperExamFormScreenState extends ConsumerState<PaperExamFormScreen> {
                   isExpanded: true,
                   hint: Text(l10n.marksChooseSubjectClass),
                   decoration: InputDecoration(
-                    labelText: l10n.marksSubjectClass,
+                    labelText: ref.levels(context, l10n.marksSubjectClass),
                     helperText: choices.isEmpty
                         ? l10n.marksNoSubjectClasses
                         : null,

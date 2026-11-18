@@ -4,6 +4,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:instructor_app/core/api/api_error_text.dart';
 import 'package:instructor_app/core/api/api_providers.dart';
 import 'package:instructor_app/core/l10n/l10n.dart';
+import 'package:instructor_app/core/l10n/level_text.dart';
 import 'package:instructor_app/core/theme/app_colors.dart';
 import 'package:instructor_app/core/theme/app_metrics.dart';
 import 'package:instructor_app/core/widgets/app_card.dart';
@@ -58,7 +59,7 @@ class _WorkspaceListState extends ConsumerState<WorkspaceList> {
             Text(l10n.dashboardStudentEmpty, style: text.titleMedium),
             const SizedBox(height: AppSpacing.xs),
             Text(
-              l10n.dashboardStudentEmptyDetail,
+              ref.levels(context, l10n.dashboardStudentEmptyDetail),
               textAlign: TextAlign.center,
               style: text.bodyMedium?.copyWith(color: colors.inkMuted),
             ),

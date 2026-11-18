@@ -206,7 +206,9 @@ class _TeacherClassesScreenState extends ConsumerState<TeacherClassesScreen> {
                 loading: () => [
                   SizedBox(
                     height: 240,
-                    child: LoadingView(semanticsLabel: l10n.classesTitle),
+                    child: LoadingView(
+                      semanticsLabel: ref.levels(context, l10n.classesTitle),
+                    ),
                   ),
                 ],
                 error: (e, _) => [
@@ -745,7 +747,9 @@ class _TeacherClassScreenState extends ConsumerState<TeacherClassScreen> {
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 960),
         child: c.when(
-          loading: () => LoadingView(semanticsLabel: l10n.classesTitle),
+          loading: () => LoadingView(
+            semanticsLabel: ref.levels(context, l10n.classesTitle),
+          ),
           error: (e, _) =>
               e is ApiException && (e.statusCode == 404 || e.statusCode == 403)
               ? _notFound()
@@ -885,7 +889,7 @@ class _TeacherClassScreenState extends ConsumerState<TeacherClassScreen> {
               child: EmptyView(
                 icon: Icons.group_outlined,
                 title: l10n.classesRosterEmpty,
-                message: l10n.classesRosterEmptyDetail,
+                message: ref.levels(context, l10n.classesRosterEmptyDetail),
               ),
             )
           else ...[
@@ -979,7 +983,10 @@ class _TeacherClassScreenState extends ConsumerState<TeacherClassScreen> {
                 ),
                 IconButton(
                   key: Key('remove-${m.studentId}'),
-                  tooltip: l10n.classesRosterRemove(memberName(context, m)),
+                  tooltip: ref.levels(
+                    context,
+                    l10n.classesRosterRemove(memberName(context, m)),
+                  ),
                   color: colors.danger,
                   onPressed: _busy ? null : () => _remove(m),
                   icon: const Icon(Icons.delete_outline),

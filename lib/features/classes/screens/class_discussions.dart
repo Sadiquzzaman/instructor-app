@@ -339,7 +339,9 @@ class _FeedState extends ConsumerState<_Feed> {
         else if (_posts == null)
           SizedBox(
             height: 120,
-            child: LoadingView(semanticsLabel: l10n.discussionsPublic),
+            child: LoadingView(
+              semanticsLabel: ref.levels(context, l10n.discussionsPublic),
+            ),
           )
         else if (_posts!.isEmpty)
           SizedBox(
