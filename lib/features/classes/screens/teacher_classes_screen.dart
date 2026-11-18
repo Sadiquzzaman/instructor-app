@@ -16,6 +16,7 @@ import 'package:instructor_app/core/widgets/app_card.dart';
 import 'package:instructor_app/core/widgets/state_views.dart';
 import 'package:instructor_app/core/widgets/status_pill.dart';
 import 'package:instructor_app/features/classes/data/teacher_classes.dart';
+import 'package:instructor_app/features/classes/screens/class_discussions.dart';
 import 'package:instructor_app/features/shell/widgets/api_error_handling.dart';
 
 /// A member's name as the web shows it: their name, else their contact,
@@ -563,10 +564,10 @@ class _CreateClassScreenState extends ConsumerState<CreateClassScreen> {
   }
 }
 
-/// A teacher's class page (the web's /classes/details/:id, Students tab):
-/// students who asked to join (approve or turn down) and members (joined
-/// or invited; view or remove), searchable and by section; Add students and
-/// Share class.
+/// A teacher's class page (the web's /classes/details/:id): Students, with
+/// those who asked to join (approve or turn down) and members (joined or
+/// invited; view or remove), searchable and by section; Discussions, with
+/// private messages to joined students; Add students and Share class.
 class TeacherClassScreen extends ConsumerStatefulWidget {
   const TeacherClassScreen({required this.id, super.key});
 
@@ -579,6 +580,9 @@ class TeacherClassScreen extends ConsumerStatefulWidget {
 class _TeacherClassScreenState extends ConsumerState<TeacherClassScreen> {
   final _search = TextEditingController();
   String? _section;
+
+  /// Students (false) or Discussions (true).
+  bool _discussions = false;
   bool _busy = false;
 
   @override
@@ -847,7 +851,37 @@ class _TeacherClassScreenState extends ConsumerState<TeacherClassScreen> {
             ],
           ),
           const SizedBox(height: AppSpacing.lg),
-          if (c.members.isEmpty)
+          SegmentedButton<bool>(
+            key: const Key('class-tabs'),
+            segments: [
+              ButtonSegment(
+                value: false,
+                label: Text(l10n.classesTabsStudents),
+              ),
+              ButtonSegment(
+                value: true,
+                label: Text(l10n.classesTabsDiscussions),
+              ),
+            ],
+            selected: {_discussions},
+            onSelectionChanged: (s) => setState(() => _discussions = s.first),
+          ),
+          const SizedBox(height: AppSpacing.lg),
+          if (_discussions)
+            ClassDiscussions(
+              classId: c.id,
+              students: [
+                for (final m in c.members)
+                  if (m.status == 'JOINED' && m.studentId.isNotEmpty)
+                    (
+                      id: m.studentId,
+                      name: m.phone != null && m.phone != memberName(context, m)
+                          ? '${memberName(context, m)} · ${m.phone}'
+                          : memberName(context, m),
+                    ),
+              ],
+            )
+          else if (c.members.isEmpty)
             SizedBox(
               height: 240,
               child: EmptyView(

@@ -271,15 +271,17 @@ class DiscussionsRepository {
     ];
   }
 
-  /// A student starts (or reopens) a conversation with a teacher.
-  Future<Conversation?> startWithTeacher(
+  /// Starts (or reopens) a conversation: a student with a teacher
+  /// ([teacherId]), or a teacher with a student ([studentId]).
+  Future<Conversation?> startConversation(
     String classId,
-    String subjectId,
-    String teacherId,
-  ) async {
+    String subjectId, {
+    String? teacherId,
+    String? studentId,
+  }) async {
     final r = await _api.post(
       '${_scope(classId, subjectId)}/private-conversations',
-      data: {'teacher_id': teacherId},
+      data: {'teacher_id': ?teacherId, 'student_id': ?studentId},
     );
     return Conversation.fromJson(r.payload);
   }

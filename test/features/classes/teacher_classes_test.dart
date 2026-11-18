@@ -318,6 +318,76 @@ void main() {
     expect(find.byKey(const Key('member-s2')), findsOneWidget);
   });
 
+  testWidgets('discussions: a teacher starts a private chat with a joined '
+      'student', (tester) async {
+    const scope = '/classes/c1/subjects/sub1';
+    final api = _api()
+      ..on(
+        'GET /classes/c1/discussion-subjects',
+        (_) => ok([
+          {
+            'id': 'sub1',
+            'class_subject': {
+              'id': 'sub1',
+              'subject': {'id': 'm', 'name': 'Mathematics', 'code': 'MAT'},
+            },
+            'teachers': [
+              {'id': 'user-1', 'name': 'Rina Akter'},
+            ],
+          },
+        ]),
+      )
+      ..on(
+        'GET $scope/discussions',
+        (_) => ok({
+          'items': <Object>[],
+          'meta': {'page': 1, 'total_pages': 1},
+        }),
+      )
+      ..on('GET $scope/private-conversations', (_) => ok(<Object>[]))
+      ..on(
+        'POST $scope/private-conversations',
+        (_) => ok({
+          'id': 'v1',
+          'student': {'id': 's1', 'name': 'Karim Hasan'},
+          'teacher': {'id': 'user-1', 'name': 'Rina Akter'},
+        }),
+      )
+      ..on(
+        'GET $scope/private-conversations/v1/messages',
+        (_) => ok({
+          'items': <Object>[],
+          'meta': {'page': 1, 'total_pages': 1},
+        }),
+      );
+    await _open(tester, api, '/classes/details/c1');
+    await tester.tap(find.text(_en.classesTabsDiscussions));
+    await tester.pumpAndSettle();
+    await tester.scrollUntilVisible(
+      find.text(_en.discussionsPrivate),
+      200,
+      scrollable: _scrollable(),
+    );
+    await tester.tap(find.text(_en.discussionsPrivate));
+    await tester.pumpAndSettle();
+    // Only joined students (not the invited or the one who asked).
+    expect(find.text(_en.discussionsChatStartWithStudent), findsOneWidget);
+    await tester.scrollUntilVisible(
+      find.byKey(const Key('chat-start')),
+      200,
+      scrollable: _scrollable(),
+    );
+    await tester.tap(find.byKey(const Key('chat-start')));
+    await tester.pumpAndSettle();
+    expect(api.to('POST $scope/private-conversations').single.body, {
+      'student_id': 's1',
+    });
+    // The other person is the student.
+    expect(find.text('Karim Hasan'), findsWidgets);
+    await tester.pumpWidget(const SizedBox());
+    await tester.pump(const Duration(seconds: 21));
+  });
+
   testWidgets('a class that is not theirs: not found', (tester) async {
     await _open(tester, _api(one: (_) => apiError(404)), '/classes/details/c1');
     expect(find.textContaining('not found'), findsOneWidget);

@@ -32,13 +32,17 @@ String _categoryName(AppLocalizations l10n, String c) => switch (c) {
   _ => l10n.discussionsCategoryGeneral,
 };
 
-/// A class's discussions, kept per subject (the web's ClassDiscussions for a
-/// student): the class discussion (posts by type, with files and replies)
-/// and private messages with the subject's teachers.
+/// A class's discussions, kept per subject (the web's ClassDiscussions):
+/// the class discussion (posts by type, with files and replies) and private
+/// messages: a student's with the subject's teachers, or, when [students]
+/// is given (a teacher), the teacher's with the class's joined students.
 class ClassDiscussions extends ConsumerStatefulWidget {
-  const ClassDiscussions({required this.classId, super.key});
+  const ClassDiscussions({required this.classId, this.students, super.key});
 
   final String classId;
+
+  /// The class's joined students, for a teacher; null for a student.
+  final List<Person>? students;
 
   @override
   ConsumerState<ClassDiscussions> createState() => _ClassDiscussionsState();
@@ -123,6 +127,7 @@ class _ClassDiscussionsState extends ConsumerState<ClassDiscussions> {
                 key: ValueKey('private-${subject.id}'),
                 classId: widget.classId,
                 subject: subject,
+                students: widget.students,
               )
             else
               _Feed(
@@ -592,11 +597,15 @@ class _PrivateMessages extends ConsumerStatefulWidget {
   const _PrivateMessages({
     required this.classId,
     required this.subject,
+    this.students,
     super.key,
   });
 
   final String classId;
   final DiscussionSubject subject;
+
+  /// A teacher's joined students; null for a student.
+  final List<Person>? students;
 
   @override
   ConsumerState<_PrivateMessages> createState() => _PrivateMessagesState();
@@ -607,7 +616,7 @@ class _PrivateMessagesState extends ConsumerState<_PrivateMessages> {
   List<Conversation>? _conversations;
   Conversation? _open;
   List<DiscussionNote>? _messages;
-  String? _teacher;
+  String? _with;
   List<UploadedFile> _files = const [];
   bool _uploading = false;
   bool _sending = false;
@@ -617,6 +626,15 @@ class _PrivateMessagesState extends ConsumerState<_PrivateMessages> {
 
   DiscussionsRepository get _repo => ref.read(discussionsRepositoryProvider);
   String get _subjectId => widget.subject.id;
+
+  bool get _teacher => widget.students != null;
+
+  /// Who a conversation can be started with.
+  List<Person> get _people => widget.students ?? widget.subject.teachers;
+
+  /// The other person in a conversation.
+  String _peer(Conversation c) =>
+      (_teacher ? c.student?.name : c.teacher?.name) ?? '';
 
   @override
   void initState() {
@@ -659,13 +677,14 @@ class _PrivateMessagesState extends ConsumerState<_PrivateMessages> {
   }
 
   Future<void> _start() async {
-    final teacher = _teacher ?? widget.subject.teachers.firstOrNull?.id;
-    if (teacher == null) return;
+    final person = _with ?? _people.firstOrNull?.id;
+    if (person == null) return;
     try {
-      final c = await _repo.startWithTeacher(
+      final c = await _repo.startConversation(
         widget.classId,
         _subjectId,
-        teacher,
+        teacherId: _teacher ? null : person,
+        studentId: _teacher ? person : null,
       );
       await _loadConversations();
       if (c != null && mounted) {
@@ -745,7 +764,7 @@ class _PrivateMessagesState extends ConsumerState<_PrivateMessages> {
     }
     final open = _open;
     if (open == null) {
-      final teachers = widget.subject.teachers;
+      final people = _people;
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -754,23 +773,31 @@ class _PrivateMessagesState extends ConsumerState<_PrivateMessages> {
             style: text.bodySmall?.copyWith(color: colors.inkMuted),
           ),
           const SizedBox(height: AppSpacing.sm),
-          if (teachers.isEmpty)
-            Text(l10n.discussionsChatNoTeachers, style: text.bodyMedium)
+          if (people.isEmpty)
+            Text(
+              _teacher
+                  ? ref.levels(context, l10n.discussionsChatNoStudents)
+                  : l10n.discussionsChatNoTeachers,
+              style: text.bodyMedium,
+            )
           else
             Row(
               children: [
                 Expanded(
                   child: DropdownButtonFormField<String>(
                     key: const Key('chat-teacher'),
-                    initialValue: _teacher ?? teachers.first.id,
+                    initialValue: _with ?? people.first.id,
+                    isExpanded: true,
                     decoration: InputDecoration(
-                      labelText: l10n.discussionsChatStartWithTeacher,
+                      labelText: _teacher
+                          ? l10n.discussionsChatStartWithStudent
+                          : l10n.discussionsChatStartWithTeacher,
                     ),
                     items: [
-                      for (final t in teachers)
+                      for (final t in people)
                         DropdownMenuItem(value: t.id, child: Text(t.name)),
                     ],
-                    onChanged: (v) => setState(() => _teacher = v),
+                    onChanged: (v) => setState(() => _with = v),
                   ),
                 ),
                 const SizedBox(width: AppSpacing.sm),
@@ -795,7 +822,7 @@ class _PrivateMessagesState extends ConsumerState<_PrivateMessages> {
                 key: Key('conversation-${c.id}'),
                 contentPadding: EdgeInsets.zero,
                 leading: const Icon(Icons.person_outline),
-                title: Text(c.teacher?.name ?? ''),
+                title: Text(_peer(c)),
                 trailing: const Icon(Icons.chevron_right),
                 onTap: () {
                   setState(() {
@@ -818,9 +845,7 @@ class _PrivateMessagesState extends ConsumerState<_PrivateMessages> {
               icon: const BackButtonIcon(),
               onPressed: () => setState(() => _open = null),
             ),
-            Expanded(
-              child: Text(open.teacher?.name ?? '', style: text.titleSmall),
-            ),
+            Expanded(child: Text(_peer(open), style: text.titleSmall)),
           ],
         ),
         if (_messages == null)
