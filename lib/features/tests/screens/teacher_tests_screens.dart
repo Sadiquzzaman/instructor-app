@@ -322,6 +322,12 @@ class _TeacherTestScreenState extends ConsumerState<TeacherTestScreen> {
         !sessionClosed &&
         t.startsAt != null &&
         DateTime.now().isBefore(t.startsAt!);
+    // The live monitor: the teacher who made the test, or the school's
+    // owners and admins (the web's canMonitor).
+    final session = ref.watch(sessionProvider);
+    final canMonitor =
+        (t.createdBy != null && t.createdBy == session?.userId) ||
+        const {'OWNER', 'ADMIN'}.contains(session?.memberRole);
     String n(num v) => OrgTime.number(v, language);
     final audience = switch (t.audience) {
       'anyone' => l10n.testsAudienceAnyone,
@@ -386,6 +392,20 @@ class _TeacherTestScreenState extends ConsumerState<TeacherTestScreen> {
             ],
           ),
           const SizedBox(height: AppSpacing.sm),
+          if (canMonitor && t.status != 'completed')
+            Padding(
+              padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+              child: Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: OutlinedButton.icon(
+                  key: const Key('test-monitor'),
+                  onPressed: () =>
+                      context.push('${AppRoutes.tests}/${t.id}/monitor'),
+                  icon: const Icon(Icons.visibility_outlined),
+                  label: Text(l10n.testsDetailsMonitor),
+                ),
+              ),
+            ),
           if (canModify)
             Align(
               alignment: AlignmentDirectional.centerStart,

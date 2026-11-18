@@ -143,6 +143,8 @@ void main() {
     await _open(tester, api, '/tests/e1');
     expect(find.text('Algebra quiz'), findsOneWidget);
     expect(find.text(_en.testsEnabled), findsOneWidget);
+    // They made it (created_by is them): the live monitor is theirs.
+    expect(find.byKey(const Key('test-monitor')), findsOneWidget);
     expect(find.text(_en.testsDetailsMinutes(40)), findsOneWidget);
     expect(find.text(_en.testsAudienceSelectedClass), findsOneWidget);
     expect(find.text('25%'), findsOneWidget);
@@ -221,6 +223,22 @@ void main() {
     await tester.pumpAndSettle();
     expect(api.to('GET /exams/class/c1'), hasLength(1));
     expect(find.byKey(const Key('test-e1')), findsOneWidget);
+  });
+
+  testWidgets('a completed test by another teacher: no live monitor', (
+    tester,
+  ) async {
+    await _open(
+      tester,
+      _api(
+        one: (_) => ok({
+          ..._exam('e1', 'Algebra quiz', status: 'completed'),
+          'created_by': 'someone-else',
+        }),
+      ),
+      '/tests/e1',
+    );
+    expect(find.byKey(const Key('test-monitor')), findsNothing);
   });
 
   testWidgets('not theirs: not found', (tester) async {

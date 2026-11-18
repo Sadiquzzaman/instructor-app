@@ -2323,6 +2323,204 @@
   "plagiarismMinWords": "Fewest words checked",
   "plagiarismSave": "Save",
   "plagiarismSettingsSaved": "Settings saved",
+  "monitorTitle": "Live monitor",
+  "monitorLive": "Live",
+  "monitorConnecting": "Connecting…",
+  "monitorRefresh": "Refresh",
+  "monitorNotAllowed": "You can't watch this test.",
+  "monitorLoadFailed": "Couldn't load the live monitor.",
+  "monitorEmpty": "Nobody has started yet",
+  "monitorEmptyHint": "Students appear here as they open the test.",
+  "monitorSummary": "{writing} writing · {lost} monitoring lost · {done} finished",
+  "@monitorSummary": {
+    "placeholders": {
+      "writing": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "lost": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "done": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "monitorTilesLabel": "Students taking the test",
+  "monitorTileLabel": "{name}: {status}, {count, plural, one{{count} flag} other{{count} flags}}",
+  "@monitorTileLabel": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "status": {
+        "type": "String"
+      },
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "monitorStatusWRITING": "Writing",
+  "monitorStatusSUBMITTED": "Submitted",
+  "monitorStatusENDED": "Ended",
+  "monitorStatusDISCONNECTED": "Disconnected",
+  "monitorStatusLOST": "Monitoring lost",
+  "monitorTimeLeft": "{clock} left",
+  "@monitorTimeLeft": {
+    "placeholders": {
+      "clock": {
+        "type": "String"
+      }
+    }
+  },
+  "monitorFlags": "{count, plural, one{{count} flag} other{{count} flags}}",
+  "@monitorFlags": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "monitorNoFlags": "No flags",
+  "monitorEventsTabSwitch": "Switched tab",
+  "monitorEventsWindowBlur": "Left the test window",
+  "monitorEventsFullscreenExit": "Left full screen",
+  "monitorEventsNoFace": "Face not visible",
+  "monitorEventsMultipleFaces": "More than one face",
+  "monitorEventsLookingAway": "Looked away",
+  "monitorEventsPhoneDetected": "Phone seen",
+  "monitorEventsPasteAttempt": "Tried to paste",
+  "monitorEventsRestrictedAction": "Blocked action",
+  "monitorEventsVoiceDetected": "Voices heard",
+  "monitorEventsIdleTooLong": "Idle for a while",
+  "monitorEventsDevtoolsOpen": "Opened developer tools",
+  "monitorEventsScreenSharing": "Screen sharing",
+  "monitorEventsCameraBlocked": "Camera blocked",
+  "monitorEventsScreenShareStopped": "Screen sharing stopped",
+  "monitorEventsDoubleDisplay": "Second display",
+  "monitorEventsMonitoringLost": "Monitoring lost",
+  "monitorEventsMonitoringBack": "Monitoring back",
+  "monitorEventsTeacherWarning": "Warning sent",
+  "monitorEventsTeacherEnded": "Exam ended by the teacher",
+  "monitorTimeline": "Timeline",
+  "monitorWarnLabel": "Warning to this student",
+  "monitorWarnPlaceholder": "For example: please keep your eyes on your own screen.",
+  "monitorWarn": "Send warning",
+  "monitorWarned": "Warning sent",
+  "monitorEnd": "End this student's exam",
+  "monitorEndReason": "Reason",
+  "monitorEndHint": "The student's answers so far are kept and marked; you can review the decision later.",
+  "monitorEndConfirm": "End exam",
+  "monitorEnded": "Exam ended for the student",
+  "monitorCancel": "Cancel",
+  "monitorAlertTitle": "Check {name}",
+  "@monitorAlertTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "monitorAlertDetail": "{count, plural, one{{count} flag} other{{count} flags}} so far.",
+  "@monitorAlertDetail": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "integrityTitle": "Integrity report",
+  "integrityPrint": "Print",
+  "integrityNotAllowed": "You can't see this test's integrity report.",
+  "integrityLoadFailed": "Couldn't load the integrity report.",
+  "integrityStudents": "Students",
+  "integrityFlagged": "Flagged",
+  "integrityDisqualified": "Disqualified",
+  "integrityReviewed": "Reviewed",
+  "integrityByCheck": "Flags by check",
+  "integrityCheckCount": "{count, plural, one{{count} flag} other{{count} flags}} · {students, plural, one{{students} student} other{{students} students}}",
+  "@integrityCheckCount": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "students": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "integrityNoFlags": "No flags",
+  "integrityOtherCheck": "Other",
+  "integrityTableCaption": "Students who took the test, most flagged first",
+  "integrityEmpty": "Nobody has taken this test yet.",
+  "integrityStudent": "Student",
+  "integrityResult": "Result",
+  "integrityScore": "Score",
+  "integrityScoreOf": "{score} of {max}",
+  "@integrityScoreOf": {
+    "placeholders": {
+      "score": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "max": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "integrityFlags": "Flags",
+  "integrityMostFlagged": "Most flagged",
+  "integrityReview": "Review",
+  "integrityActions": "Actions",
+  "integrityOpen": "Open",
+  "integrityOpenFor": "Open the report for {name}",
+  "@integrityOpenFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "integrityStatusSUBMITTED": "Submitted",
+  "integrityStatusAUTOSUBMITTED": "Submitted when time ran out",
+  "integrityStatusDISQUALIFIED": "Disqualified",
+  "integrityStatusINPROGRESS": "Writing",
+  "integrityWhy": "Reason",
+  "integrityTimeline": "Timeline",
+  "integrityHistory": "Earlier reviews",
+  "integrityDecidedBy": "{name} — reason: {reason}",
+  "@integrityDecidedBy": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "integrityDecide": "Your decision",
+  "integrityDecisionLegend": "What happens to this attempt?",
+  "integrityDecisionREINSTATE": "Reinstate",
+  "integrityDecisionRETAKE": "Allow a retake",
+  "integrityDecisionCONFIRM": "Confirm the result",
+  "integrityDecisionHintREINSTATE": "The attempt counts as submitted, with the marks it got.",
+  "integrityDecisionHintRETAKE": "The student takes the test again before it closes. Their earlier answers are kept in this review.",
+  "integrityDecisionHintCONFIRM": "The result stands as it is.",
+  "integrityReason": "Reason",
+  "integrityReasonHint": "The student sees this reason.",
+  "integritySave": "Save decision",
+  "integritySaved": "Decision saved",
+  "integrityWriting": "The student is writing this test; review it once they finish.",
   "leaveTitle": "Leave",
   "leaveIntro": "Apply for leave with dates and a reason. Approved days show as Leave (blue) and never count as absent.",
   "leaveApply": "Apply for leave",
