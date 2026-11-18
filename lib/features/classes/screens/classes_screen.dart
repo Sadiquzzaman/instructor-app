@@ -14,12 +14,13 @@ import 'package:instructor_app/core/widgets/app_card.dart';
 import 'package:instructor_app/core/widgets/state_views.dart';
 import 'package:instructor_app/features/classes/data/classes.dart';
 import 'package:instructor_app/features/classes/screens/class_discussions.dart';
+import 'package:instructor_app/features/classes/screens/teacher_classes_screen.dart';
 import 'package:instructor_app/features/tests/data/tests.dart';
 import 'package:instructor_app/features/tests/screens/tests_screen.dart';
 
 /// The web's /classes for a student: the classes they study in, in the
-/// current workspace. Each opens its page. Teachers' classes (students,
-/// sections, invitations) are Stage 2: the website for now.
+/// current workspace. Each opens its page. Teachers get their own list
+/// ([TeacherClassesScreen]).
 class ClassesScreen extends ConsumerWidget {
   const ClassesScreen({super.key});
 
@@ -30,6 +31,7 @@ class ClassesScreen extends ConsumerWidget {
     final text = Theme.of(context).textTheme;
     final colors = AppColors.of(context);
     final session = ref.watch(sessionProvider);
+    if (session?.role == 'TEACHER') return const TeacherClassesScreen();
     if (session?.role != 'STUDENT') {
       return EmptyView(
         icon: Icons.public,
@@ -134,6 +136,9 @@ class ClassDetailScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    if (ref.watch(sessionProvider)?.role == 'TEACHER') {
+      return TeacherClassScreen(id: id);
+    }
     final l10n = context.l10n;
     final language = Localizations.localeOf(context).languageCode;
     final text = Theme.of(context).textTheme;

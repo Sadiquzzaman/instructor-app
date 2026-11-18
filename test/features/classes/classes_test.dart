@@ -5,6 +5,7 @@ import 'package:instructor_app/core/auth/session.dart';
 import 'package:instructor_app/core/routing/app_router.dart';
 import 'package:instructor_app/features/classes/data/classes.dart';
 import 'package:instructor_app/features/classes/screens/classes_screen.dart';
+import 'package:instructor_app/features/classes/screens/teacher_classes_screen.dart';
 import 'package:instructor_app/l10n/generated/app_localizations_bn.dart';
 import 'package:instructor_app/l10n/generated/app_localizations_en.dart';
 
@@ -106,14 +107,17 @@ void main() {
     await tester.pump(const Duration(seconds: 1));
   });
 
-  testWidgets('teachers are sent to the website for now', (tester) async {
+  testWidgets('teachers get their own classes (teacher_classes_test)', (
+    tester,
+  ) async {
     await _open(
       tester,
-      _api(),
+      _api()..on('GET /classes', (_) => ok(<Object>[])),
       AppRoutes.classes,
       session: Session.fromPayload({...sessionPayload(), 'role': 'TEACHER'}),
     );
-    expect(find.text(_en.appNotYetBody), findsOneWidget);
+    expect(find.byType(TeacherClassesScreen), findsOneWidget);
+    expect(find.text(_en.appNotYetBody), findsNothing);
   });
 
   testWidgets('in Bangla', (tester) async {

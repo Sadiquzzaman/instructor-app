@@ -11,4 +11,10 @@ abstract final class AppConfig {
     'API_BASE_URL',
     defaultValue: 'https://api-beta.instructor.academy/api/v1',
   );
+
+  /// The web app's address, for links people share (a class's join link).
+  static const String webBaseUrl = String.fromEnvironment(
+    'WEB_BASE_URL',
+    defaultValue: 'https://beta.instructor.academy',
+  );
 }
