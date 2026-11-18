@@ -30,6 +30,7 @@ import 'package:instructor_app/features/tests/screens/test_result_screen.dart';
 import 'package:instructor_app/features/organization/screens/assignments_screen.dart';
 import 'package:instructor_app/features/organization/screens/attendance_settings_screen.dart';
 import 'package:instructor_app/features/organization/screens/branches_screen.dart';
+import 'package:instructor_app/features/organization/screens/chat_review_screen.dart';
 import 'package:instructor_app/features/organization/screens/class_setup_screen.dart';
 import 'package:instructor_app/features/organization/screens/holidays_screen.dart';
 import 'package:instructor_app/features/organization/screens/organization_overview_screen.dart';
@@ -329,6 +330,10 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: AppRoutes.gradingScale,
             builder: (context, state) => const GradingScaleScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.chatAdmin,
+            builder: (context, state) => const ChatReviewScreen(),
           ),
           GoRoute(
             path: AppRoutes.marks,

@@ -46,6 +46,7 @@ abstract final class AppRoutes {
   static const plagiarismSettings = '/plagiarism-settings';
   static const performanceSettings = '/performance-settings';
   static const gradingScale = '/grading-scale';
+  static const chatAdmin = '/chat-admin';
 
   /// Pages the app has really built (not "use the website for now"). A
   /// notification's link opens in the app only for these; each stage adds
@@ -83,6 +84,7 @@ abstract final class AppRoutes {
     plagiarismSettings,
     performanceSettings,
     gradingScale,
+    chatAdmin,
     performance,
     reportCards,
     resources,
