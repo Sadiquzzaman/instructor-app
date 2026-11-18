@@ -36,6 +36,7 @@ abstract final class AppRoutes {
   static const orgStudents = '/organization/students';
   static const orgSubjects = '/organization/subjects';
   static const orgClasses = '/organization/classes';
+  static const orgAssignments = '/organization/assignments';
 
   /// Pages the app has really built (not "use the website for now"). A
   /// notification's link opens in the app only for these; each stage adds
@@ -63,6 +64,7 @@ abstract final class AppRoutes {
     orgStudents,
     orgSubjects,
     orgClasses,
+    orgAssignments,
     performance,
     reportCards,
     resources,
