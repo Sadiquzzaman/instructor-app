@@ -44,6 +44,7 @@ const webNamespaces = [
   'monitor',
   'integrity',
   'grading',
+  'behaviour',
   'leave',
   'routine',
   'homework',
