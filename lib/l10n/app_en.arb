@@ -7169,6 +7169,125 @@
       }
     }
   },
+  "chatReviewTitle": "Chat review",
+  "chatReviewDescription": "Every chat in the school. Opening one needs a reason, which is logged; members are not told who reads.",
+  "chatReviewChats": "Chats",
+  "chatReviewReports": "Reports",
+  "chatReviewAccessLog": "Access log",
+  "chatReviewChat": "Chat",
+  "chatReviewType": "Type",
+  "chatReviewTypesGROUP": "Class chat",
+  "chatReviewTypesDIRECT": "Private",
+  "chatReviewState": "State",
+  "chatReviewClosed": "Closed",
+  "chatReviewOpen": "Open",
+  "chatReviewLastActivity": "Last message",
+  "chatReviewActions": "Actions",
+  "chatReviewOpenChat": "Open",
+  "chatReviewOpenFor": "Open {chat}",
+  "@chatReviewOpenFor": {
+    "placeholders": {
+      "chat": {
+        "type": "String"
+      }
+    }
+  },
+  "chatReviewNotAllowed": "Only owners and admins can review chats.",
+  "chatReviewLoadFailed": "Couldn't load this.",
+  "chatReviewChatsCaption": "Chats in the school",
+  "chatReviewNoChats": "No chats yet",
+  "chatReviewReasonTitle": "Why are you opening {chat}?",
+  "@chatReviewReasonTitle": {
+    "placeholders": {
+      "chat": {
+        "type": "String"
+      }
+    }
+  },
+  "chatReviewReasonDetail": "Your reason is kept in the access log, which the owner can read.",
+  "chatReviewReason": "Reason",
+  "chatReviewCancel": "Cancel",
+  "chatReviewReadingNote": "You are reading this chat for review; you are not shown as a member.",
+  "chatReviewCloseChat": "Closed",
+  "chatReviewCloseChatHint": "A closed chat is read-only for everyone.",
+  "chatReviewClosedDone": "Chat closed",
+  "chatReviewReopenedDone": "Chat reopened",
+  "chatReviewNoMessages": "No messages",
+  "chatReviewMessages": "Messages",
+  "chatReviewDelete": "Delete",
+  "chatReviewDeletedDone": "Message deleted",
+  "chatReviewMuteAuthor": "Mute {name}",
+  "@chatReviewMuteAuthor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chatReviewMuteTitle": "Mute {name} in this chat",
+  "@chatReviewMuteTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chatReviewMuteDetail": "They can read but not write here until the time is up.",
+  "chatReviewMuteFor": "For",
+  "chatReviewHours": "{count, plural, one{{count} hour} other{{count} hours}}",
+  "@chatReviewHours": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "chatReviewReasonOptional": "Reason (optional)",
+  "chatReviewMute": "Mute",
+  "chatReviewMutedDone": "Muted",
+  "chatReviewShow": "Show",
+  "chatReviewStatusOpen": "Waiting for review",
+  "chatReviewStatusResolved": "Resolved",
+  "chatReviewNoReports": "Nothing to review",
+  "chatReviewNoResolved": "No resolved reports yet",
+  "chatReviewReportedBy": "{name} reported: {reason}",
+  "@chatReviewReportedBy": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "chatReviewContext": "The message and the ones around it",
+  "chatReviewDeletedMessage": "(deleted)",
+  "chatReviewKeep": "Keep the message",
+  "chatReviewDeleteMessage": "Delete the message",
+  "chatReviewResolvedKEPT": "Kept",
+  "chatReviewResolvedDELETED": "Message deleted",
+  "chatReviewResolutionKEPT": "Kept by {name}",
+  "@chatReviewResolutionKEPT": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chatReviewResolutionDELETED": "Deleted by {name}",
+  "@chatReviewResolutionDELETED": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chatReviewWhen": "When",
+  "chatReviewWho": "Who",
+  "chatReviewAccessLogCaption": "Who opened which chat",
+  "chatReviewNoAccess": "Nobody has opened a chat yet",
   "appNoConnection": "No internet connection. Check it and try again.",
   "appUpdateRequiredTitle": "Please update Instructor",
   "appUpdateRequiredBody": "This version of the app is no longer supported. Install the new version to continue.",

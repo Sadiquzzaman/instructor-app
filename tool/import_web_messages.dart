@@ -66,6 +66,7 @@ const webNamespaces = [
   'classSetup',
   'performanceSettings',
   'gradingScale',
+  'chatReview',
 ];
 
 const locales = ['en', 'bn'];
