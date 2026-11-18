@@ -127,13 +127,6 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     final l10n = context.l10n;
     final text = Theme.of(context).textTheme;
     final colors = AppColors.of(context);
-    if (ref.watch(sessionProvider)?.role != 'STUDENT') {
-      return EmptyView(
-        icon: Icons.public,
-        title: l10n.chatTitle,
-        message: l10n.appNotYetBody,
-      );
-    }
     final groups = ref.watch(chatGroupsProvider);
     final direct = ref.watch(directChatsProvider);
     Widget failure(Object e, VoidCallback retry) => SizedBox(
@@ -441,7 +434,47 @@ class _ChatThreadScreenState extends ConsumerState<ChatThreadScreen> {
   bool get _canPost {
     final d = _detail;
     if (d == null) return true;
-    return !d.readOnly && !d.closed && !d.announcementOnly;
+    return !d.readOnly && !d.closed && (d.teacher || !d.announcementOnly);
+  }
+
+  bool get _teacher => widget.group && (_detail?.teacher ?? false);
+
+  Future<void> _pin(ChatMessage m) async {
+    try {
+      await _repo.pin(widget.path, m.id, pinned: !m.pinned);
+      final detail = await _repo.group(_chatId);
+      if (!mounted) return;
+      final ids = {for (final p in detail.pinned) p.id};
+      setState(() {
+        _detail = detail;
+        _messages = [
+          for (final x in _messages!)
+            x.pinned == ids.contains(x.id)
+                ? x
+                : x.withPinned(ids.contains(x.id)),
+        ];
+      });
+    } on ApiException catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(apiErrorText(context.l10n, e))));
+      }
+    }
+  }
+
+  Future<void> _setAnnouncementOnly(bool on) async {
+    try {
+      await _repo.setAnnouncementOnly(_chatId, on: on);
+      final detail = await _repo.group(_chatId);
+      if (mounted) setState(() => _detail = detail);
+    } on ApiException catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(apiErrorText(context.l10n, e))));
+      }
+    }
   }
 
   Future<void> _send() async {
@@ -580,6 +613,15 @@ class _ChatThreadScreenState extends ConsumerState<ChatThreadScreen> {
                         style: text.bodySmall?.copyWith(color: colors.inkMuted),
                       ),
                     ),
+                  if (d != null && _teacher && !d.readOnly && !d.closed)
+                    SwitchListTile(
+                      key: const Key('announcement-only'),
+                      dense: true,
+                      title: Text(l10n.chatAnnouncementOnly),
+                      subtitle: Text(l10n.chatAnnouncementOnlyHint),
+                      value: d.announcementOnly,
+                      onChanged: _setAnnouncementOnly,
+                    ),
                   Expanded(
                     child: ListView(
                       reverse: true,
@@ -593,6 +635,10 @@ class _ChatThreadScreenState extends ConsumerState<ChatThreadScreen> {
                             group: widget.group,
                             onReply: _canPost
                                 ? () => setState(() => _replyTo = m)
+                                : null,
+                            teacher: _teacher,
+                            onPin: _teacher && m.parentId == null
+                                ? () => _pin(m)
                                 : null,
                             onDelete: () => _delete(m),
                             onReport: () => _report(m),
@@ -653,7 +699,7 @@ class _ChatThreadScreenState extends ConsumerState<ChatThreadScreen> {
         ? l10n.chatClosedBySchool
         : d.readOnly
         ? l10n.chatReadOnly
-        : d.announcementOnly
+        : d.announcementOnly && !d.teacher
         ? l10n.chatTeachersOnly
         : null;
     return Material(
@@ -743,10 +789,16 @@ class _MessageTile extends ConsumerWidget {
     required this.onDelete,
     required this.onReport,
     this.onReply,
+    this.onPin,
+    this.teacher = false,
     super.key,
   });
 
   final ChatMessage message;
+
+  /// The caller teaches this class: may delete anyone's message.
+  final bool teacher;
+  final VoidCallback? onPin;
   final String path;
   final bool group;
   final VoidCallback? onReply;
@@ -850,13 +902,19 @@ class _MessageTile extends ConsumerWidget {
                     ),
                   if (onReply != null)
                     TextButton(onPressed: onReply, child: Text(l10n.chatReply)),
-                  if (mine)
+                  if (onPin != null)
+                    TextButton(
+                      key: Key('pin-${m.id}'),
+                      onPressed: onPin,
+                      child: Text(m.pinned ? l10n.chatUnpin : l10n.chatPin),
+                    ),
+                  if (mine || teacher)
                     TextButton(
                       key: Key('delete-${m.id}'),
                       onPressed: onDelete,
                       child: Text(l10n.chatDelete),
-                    )
-                  else
+                    ),
+                  if (!mine)
                     TextButton(
                       key: Key('report-${m.id}'),
                       onPressed: onReport,
