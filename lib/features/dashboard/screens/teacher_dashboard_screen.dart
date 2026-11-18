@@ -430,9 +430,13 @@ class _Section extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
               ),
+              // At the card's right edge; a long label (Bangla) wraps
+              // instead of pushing the title out.
               if (link != null)
-                Flexible(
+                ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 200),
                   child: TextButton(
+                    key: Key('link-$link'),
                     onPressed: onLink,
                     child: Text('$link ›', textAlign: TextAlign.end),
                   ),
