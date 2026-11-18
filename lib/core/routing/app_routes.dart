@@ -24,6 +24,7 @@ abstract final class AppRoutes {
   static const tests = '/tests';
   static const grading = '/grading';
   static const marks = '/marks';
+  static const behaviour = '/behaviour';
   static const performance = '/performance';
   static const reportCards = '/report-cards';
   static const resources = '/resources';
@@ -50,6 +51,7 @@ abstract final class AppRoutes {
     tests,
     grading,
     marks,
+    behaviour,
     performance,
     reportCards,
     resources,

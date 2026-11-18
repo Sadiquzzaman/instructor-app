@@ -2692,6 +2692,96 @@
   "gradingAnswerCorrectOption": "correct answer",
   "gradingAnswerMatched": "correct match",
   "gradingAnswerNotMatched": "wrong match",
+  "behaviourTitle": "Behaviour",
+  "behaviourIntro": "Rate each student from 1 (needs help) to 5 (excellent) for a lesson. Rate as often as you like: the term's average counts towards the score.",
+  "behaviourCriteria": "Criteria",
+  "behaviourSubjectClass": "Subject and section",
+  "behaviourDate": "Day",
+  "behaviourLoadFailed": "Couldn't load behaviour ratings.",
+  "behaviourNoClasses": "No subject classes yet",
+  "behaviourNoClassesHint": "You can rate behaviour in the subject classes you teach.",
+  "behaviourGridCaption": "Behaviour ratings",
+  "behaviourStudent": "Student",
+  "behaviourRemark": "Remark",
+  "behaviourRatingFor": "{criterion} for {name}",
+  "@behaviourRatingFor": {
+    "placeholders": {
+      "criterion": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "behaviourRemarkFor": "Remark for {name}",
+  "@behaviourRemarkFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "behaviourNoStudents": "No students take this subject class yet.",
+  "behaviourScale": "1 needs help · 2 fair · 3 good · 4 very good · 5 excellent. A rating once given can be changed but not cleared.",
+  "behaviourUnsaved": "{count, plural, =0{No changes} one{{count} change not saved} other{{count} changes not saved}}",
+  "@behaviourUnsaved": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "behaviourSave": "Save ratings",
+  "behaviourSaved": "Ratings saved",
+  "behaviourReadOnly": "You can see these ratings but not change them.",
+  "behaviourCriteriaSaved": "Criteria saved",
+  "behaviourCriteriaTitle": "Behaviour criteria",
+  "behaviourCriteriaIntro": "What teachers rate, in English and Bangla. A criterion you take off is kept for the ratings already given.",
+  "behaviourCriterionNumber": "Criterion {number}",
+  "@behaviourCriterionNumber": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "behaviourNameEn": "Name {number} (English)",
+  "@behaviourNameEn": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "behaviourNameBn": "Name {number} (Bangla)",
+  "@behaviourNameBn": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "behaviourRemoveCriterion": "Remove criterion {number}",
+  "@behaviourRemoveCriterion": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "behaviourAddCriterion": "Add a criterion",
+  "behaviourRetireHint": "Up to 10 criteria.",
+  "behaviourCancel": "Cancel",
+  "behaviourSaveCriteria": "Save criteria",
+  "behaviourErrorsRESULTSNOTALLOWED": "You can't rate behaviour in this subject class.",
+  "behaviourErrorsRESULTSNOTFOUND": "This subject class wasn't found.",
+  "behaviourErrorsRESULTSSESSIONCLOSED": "The session is closed, so its ratings can't change.",
+  "behaviourErrorsRESULTSCRITERIAINVALID": "Each criterion needs a different name in English and in Bangla.",
+  "behaviourErrorsRESULTSRATINGINVALID": "Ratings are 1 to 5, for today or an earlier day.",
+  "behaviourErrorsRESULTSREMARKNEEDSRATING": "Give at least one rating with a remark.",
+  "behaviourErrorsRESULTSSTUDENTNOTINCLASS": "A student no longer takes this subject class. Reload and try again.",
   "leaveTitle": "Leave",
   "leaveIntro": "Apply for leave with dates and a reason. Approved days show as Leave (blue) and never count as absent.",
   "leaveApply": "Apply for leave",
