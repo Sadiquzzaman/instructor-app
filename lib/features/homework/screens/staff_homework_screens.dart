@@ -21,6 +21,7 @@ import 'package:instructor_app/core/widgets/state_views.dart';
 import 'package:instructor_app/core/widgets/status_pill.dart';
 import 'package:instructor_app/features/homework/data/homework.dart';
 import 'package:instructor_app/features/homework/homework_text.dart';
+import 'package:instructor_app/features/homework/screens/homework_review_section.dart';
 import 'package:instructor_app/features/shell/widgets/api_error_handling.dart';
 
 const _types = ['FILE', 'TEXT', 'PAPER'];
@@ -310,7 +311,8 @@ Future<Homework?> openHomeworkEditor(BuildContext context, Homework? h) =>
 
 /// A homework's page for staff (the web's HomeworkDetail): status, due,
 /// what it is, instructions and files; Edit, Publish now or at a time, and
-/// Withdraw (kept, never deleted) when the caller may.
+/// Withdraw (kept, never deleted) when the caller may; then the hand-ins
+/// and marking ([HomeworkReviewSection]).
 class StaffHomeworkDetailScreen extends ConsumerStatefulWidget {
   const StaffHomeworkDetailScreen({required this.id, super.key});
 
@@ -641,6 +643,8 @@ class _StaffHomeworkDetailScreenState
             ),
           ),
         ],
+        const SizedBox(height: AppSpacing.md),
+        HomeworkReviewSection(homework: h),
         if (h.canEdit && h.status != 'CANCELLED') ...[
           const SizedBox(height: AppSpacing.lg),
           Align(

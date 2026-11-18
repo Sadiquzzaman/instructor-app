@@ -163,6 +163,7 @@ class HandIn {
     this.lateMinutes,
     this.text,
     this.files = const [],
+    this.id,
   });
 
   final int version;
@@ -174,6 +175,22 @@ class HandIn {
   final String status;
   final String? text;
   final List<HomeworkFile> files;
+
+  /// The hand-in's id (staff use it to open or return it).
+  final String? id;
+
+  factory HandIn.fromJson(Map<Object?, Object?> s) => HandIn(
+    id: s['id'] as String?,
+    version: (s['version'] as num?)?.toInt() ?? 1,
+    submittedAt: s['submitted_at'] is String
+        ? DateTime.tryParse(s['submitted_at'] as String)
+        : null,
+    isLate: s['is_late'] == true,
+    lateMinutes: (s['late_minutes'] as num?)?.toInt(),
+    status: (s['status'] as String?) ?? 'SUBMITTED',
+    text: s['text_answer'] as String?,
+    files: HomeworkFile.listOf(s['files']),
+  );
 }
 
 /// The student's score, once the teacher publishes it.
@@ -255,18 +272,7 @@ class MySubmissions {
     final handIns = [
       if (subs is List)
         for (final s in subs)
-          if (s is Map)
-            HandIn(
-              version: (s['version'] as num?)?.toInt() ?? 1,
-              submittedAt: s['submitted_at'] is String
-                  ? DateTime.tryParse(s['submitted_at'] as String)
-                  : null,
-              isLate: s['is_late'] == true,
-              lateMinutes: (s['late_minutes'] as num?)?.toInt(),
-              status: (s['status'] as String?) ?? 'SUBMITTED',
-              text: s['text_answer'] as String?,
-              files: HomeworkFile.listOf(s['files']),
-            ),
+          if (s is Map) HandIn.fromJson(s),
     ]..sort((a, b) => b.version.compareTo(a.version));
     return MySubmissions(
       handIns: handIns,
@@ -284,6 +290,9 @@ class HomeworkRepository {
   HomeworkRepository(this._api);
 
   final ApiClient _api;
+
+  /// For the staff calls in other files of this feature.
+  ApiClient get api => _api;
 
   Future<List<Homework>> mine() async {
     final r = await _api.get('/homework/mine');
