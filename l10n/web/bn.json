@@ -4051,5 +4051,415 @@
     "who": "কে",
     "accessLogCaption": "কে কোন চ্যাট খুলেছেন",
     "noAccess": "এখনো কেউ কোনো চ্যাট খোলেননি"
+  },
+  "audit": {
+    "title": "অডিট লগ",
+    "platformIntro": "কে, কোন প্রতিষ্ঠানে, কী বদলেছেন এবং কখন। বিস্তারিত দেখতে একটি সারি খুলুন।",
+    "organizationTitle": "কার্যক্রমের লগ",
+    "organizationIntro": "এই ওয়ার্কস্পেসে কে কী বদলেছেন এবং কখন: সদস্য, প্ল্যান ও ফলাফল। বিস্তারিত দেখতে একটি সারি খুলুন।",
+    "when": "কখন",
+    "who": "কে",
+    "organization": "প্রতিষ্ঠান",
+    "action": "কী",
+    "summary": "পরিবর্তন",
+    "record": "রেকর্ড",
+    "reason": "কারণ",
+    "reasonValue": "কারণ: {reason}",
+    "ip": "আইপি ঠিকানা",
+    "platform": "প্ল্যাটফর্ম",
+    "system": "সিস্টেম",
+    "unknownUser": "মুছে ফেলা ব্যবহারকারী",
+    "area": "বিভাগ",
+    "allAreas": "সব বিভাগ",
+    "from": "থেকে",
+    "to": "পর্যন্ত",
+    "organizationFilter": "প্রতিষ্ঠান: {name}",
+    "onlyThisOrganization": "শুধু এই প্রতিষ্ঠান দেখান",
+    "empty": "এখনো কিছু রেকর্ড হয়নি।",
+    "emptyFiltered": "এই ফিল্টারে কিছু মেলেনি।",
+    "changes": "কী বদলেছে",
+    "noChanges": "এই কাজের কোনো বিস্তারিত রেকর্ড নেই।",
+    "beforeAfter": "{before} থেকে {after}",
+    "more": "আরও {count, number}টি",
+    "yes": "হ্যাঁ",
+    "no": "না",
+    "byOn": "{who} করেছেন, {when}",
+    "noRecentChanges": "এখনো কোনো পরিবর্তন নেই।",
+    "loadFailed": "পরিবর্তনগুলো লোড হয়নি।",
+    "areas": {
+      "member": "সদস্য",
+      "subscription": "প্ল্যান ও সুইচ",
+      "plan": "প্ল্যান",
+      "payment": "পেমেন্ট",
+      "feature_request": "ফিচারের অনুরোধ",
+      "exam": "টেস্ট",
+      "grade": "নম্বর",
+      "grading_scale": "গ্রেডিং স্কেল",
+      "organization": "প্রতিষ্ঠান",
+      "teacher_request": "শিক্ষক হওয়ার অনুরোধ",
+      "user": "ব্যবহারকারী",
+      "teacher": "শিক্ষক",
+      "message_template": "মেসেজ টেমপ্লেট",
+      "sms_credits": "SMS ক্রেডিট",
+      "guardian": "অভিভাবক",
+      "student": "শিক্ষার্থী",
+      "attendance_settings": "উপস্থিতির সেটিংস",
+      "holiday": "ছুটির দিন",
+      "branch": "শাখা",
+      "section_attendance": "[[Section]] সেটআপ",
+      "schedule": "সময়সূচি",
+      "attendance": "উপস্থিতি",
+      "homework": "হোমওয়ার্ক",
+      "routine": "রুটিন",
+      "event": "ইভেন্ট",
+      "reminders": "রিমাইন্ডার",
+      "offline_exam": "লিখিত পরীক্ষা",
+      "behaviour": "আচরণ",
+      "score": "স্কোরের ভার",
+      "performance": "পারফরম্যান্স সেটিংস",
+      "report_card": "রিপোর্ট কার্ড"
+    },
+    "actions": {
+      "plan": {
+        "create": "প্ল্যান তৈরি",
+        "update": "প্ল্যান সম্পাদনা",
+        "delete": "প্ল্যান মুছে ফেলা",
+        "reorder": "প্ল্যানের ক্রম বদল",
+        "activate": "প্ল্যান চালু",
+        "deactivate": "প্ল্যান বন্ধ"
+      },
+      "subscription": {
+        "plan_assign": "প্ল্যান দেওয়া হয়েছে",
+        "cancel": "প্ল্যান বাতিল",
+        "override_set": "ফিচার বা সীমা বদল",
+        "override_remove": "ফিচার বা সীমা প্ল্যানে ফেরত"
+      },
+      "payment": {
+        "confirm": "পেমেন্ট নিশ্চিত"
+      },
+      "feature_request": {
+        "handled": "ফিচারের অনুরোধ সম্পন্ন"
+      },
+      "organization": {
+        "approve": "প্রতিষ্ঠান অনুমোদিত",
+        "reject": "প্রতিষ্ঠান প্রত্যাখ্যাত"
+      },
+      "teacher_request": {
+        "approve": "শিক্ষক হওয়ার অনুরোধ অনুমোদিত",
+        "reject": "শিক্ষক হওয়ার অনুরোধ প্রত্যাখ্যাত"
+      },
+      "user": {
+        "role_change": "অ্যাকাউন্টের ভূমিকা বদল",
+        "sign_out_devices": "ডিভাইস থেকে সাইন আউট"
+      },
+      "teacher": {
+        "status_change": "শিক্ষক চালু বা বন্ধ"
+      },
+      "member": {
+        "add": "সদস্য যোগ",
+        "role_change": "সদস্যের ভূমিকা বদল",
+        "remove": "সদস্য সরানো"
+      },
+      "exam": {
+        "results_publish": "ফলাফল প্রকাশ"
+      },
+      "grade": {
+        "update": "প্রকাশের পর নম্বর বদল"
+      },
+      "grading_scale": {
+        "update": "গ্রেডিং স্কেল বদল",
+        "reset": "গ্রেডিং স্কেল ডিফল্টে ফেরা"
+      },
+      "message_template": {
+        "update": "মেসেজ টেমপ্লেট সম্পাদিত"
+      },
+      "sms_credits": {
+        "top_up": "SMS ক্রেডিট যোগ হয়েছে"
+      },
+      "guardian": {
+        "create": "অভিভাবক যোগ",
+        "update": "অভিভাবকের তথ্য বদল",
+        "delete": "অভিভাবক সরানো"
+      },
+      "student": {
+        "import": "CSV থেকে শিক্ষার্থী ইমপোর্ট"
+      },
+      "file": {
+        "upload": "ফাইল আপলোড",
+        "delete": "ফাইল মুছে ফেলা"
+      },
+      "attendance_settings": {
+        "update": "উপস্থিতির সেটিংস পরিবর্তন করা হয়েছে"
+      },
+      "holiday": {
+        "create": "ছুটি যোগ করা হয়েছে",
+        "update": "ছুটি পরিবর্তন করা হয়েছে",
+        "remove": "ছুটি সরানো হয়েছে"
+      },
+      "branch": {
+        "create": "শাখা যোগ হয়েছে",
+        "update": "শাখা বদলানো হয়েছে",
+        "remove": "শাখা সরানো হয়েছে"
+      },
+      "section_attendance": {
+        "update": "[[Section]] সেটআপ বদলানো হয়েছে"
+      },
+      "schedule": {
+        "update": "সময়সূচি বদলানো হয়েছে"
+      },
+      "attendance": {
+        "correct": "উপস্থিতি সংশোধন করা হয়েছে",
+        "cancel": "ক্লাস বাতিল",
+        "restore": "ক্লাস আবার চালু",
+        "auto_absent": "চেক-ইন বন্ধ হলে অনুপস্থিতি সংরক্ষিত",
+        "import": "কাগজের হাজিরা খাতা ইমপোর্ট",
+        "change": "এক দিনের জন্য ক্লাস পরিবর্তন"
+      },
+      "homework": {
+        "create": "হোমওয়ার্ক লেখা হয়েছে",
+        "update": "হোমওয়ার্ক বদলানো হয়েছে",
+        "publish": "হোমওয়ার্ক প্রকাশিত",
+        "cancel": "হোমওয়ার্ক প্রত্যাহার",
+        "score": "হোমওয়ার্কে নম্বর দেওয়া হয়েছে",
+        "return": "হোমওয়ার্ক আবার করতে ফেরত",
+        "publish_scores": "হোমওয়ার্কের নম্বর প্রকাশিত",
+        "remind": "হোমওয়ার্কের রিমাইন্ডার পাঠানো হয়েছে"
+      },
+      "homework_settings": {
+        "update": "হোমওয়ার্কের সেটিংস বদলানো হয়েছে"
+      },
+      "routine": {
+        "add": "রুটিনে ক্লাস যোগ",
+        "change": "রুটিনের ক্লাস বদল",
+        "remove": "রুটিন থেকে ক্লাস সরানো",
+        "copy": "রুটিনের সপ্তাহ কপি"
+      },
+      "event": {
+        "create": "ইভেন্ট যোগ",
+        "update": "ইভেন্ট পরিবর্তন",
+        "cancel": "ইভেন্ট বাতিল"
+      },
+      "reminders": {
+        "defaults_update": "ডিফল্ট রিমাইন্ডার পরিবর্তন"
+      },
+      "offline_exam": {
+        "create": "লিখিত পরীক্ষা যোগ হয়েছে",
+        "update": "লিখিত পরীক্ষা বদলানো হয়েছে",
+        "remove": "লিখিত পরীক্ষা সরানো হয়েছে",
+        "publish": "লিখিত পরীক্ষার নম্বর প্রকাশিত",
+        "marks": "লিখিত পরীক্ষার নম্বর দেওয়া হয়েছে"
+      },
+      "behaviour": {
+        "criteria": "আচরণের মানদণ্ড বদলানো হয়েছে",
+        "rate": "আচরণ রেট করা হয়েছে"
+      },
+      "score": {
+        "weights": "স্কোরের ভার বদলানো হয়েছে"
+      },
+      "performance": {
+        "settings": "পারফরম্যান্স সেটিংস বদলানো হয়েছে"
+      },
+      "report_card": {
+        "generate": "রিপোর্ট কার্ড তৈরি হয়েছে",
+        "share": "রিপোর্ট কার্ড অভিভাবকদের পাঠানো হয়েছে"
+      },
+      "ielts": {
+        "course_create": "আইইএলটিএস কোর্স তৈরি",
+        "course_update": "আইইএলটিএস কোর্স বদল",
+        "course_remove": "আইইএলটিএস কোর্স সরানো"
+      }
+    },
+    "fields": {
+      "role": "ভূমিকা",
+      "status": "অবস্থা",
+      "active": "সক্রিয়",
+      "user_name": "সদস্য",
+      "user_id": "ব্যবহারকারী",
+      "via": "যেভাবে যোগ",
+      "reactivated": "আবার যোগ",
+      "plan_id": "প্ল্যান",
+      "plan_slug": "প্ল্যান",
+      "plan_name": "প্ল্যানের নাম",
+      "billing_cycle": "বিলিং মেয়াদ",
+      "end_date": "শেষ",
+      "key": "ফিচার বা সীমা",
+      "value": "মান",
+      "expires_at": "পর্যন্ত",
+      "name": "নাম",
+      "slug": "সংক্ষিপ্ত নাম",
+      "price_monthly": "মাসিক মূল্য",
+      "price_half_yearly": "ষাণ্মাসিক মূল্য",
+      "price_yearly": "বার্ষিক মূল্য",
+      "visibility": "দৃশ্যমানতা",
+      "is_custom": "কাস্টম",
+      "sort_order": "ক্রম",
+      "is_plan_active": "চালু",
+      "features": "ফিচার",
+      "limits": "সীমা",
+      "plan_ids": "ক্রম",
+      "amount": "পরিমাণ",
+      "transaction_id": "লেনদেন",
+      "subscription_id": "সাবস্ক্রিপশন",
+      "feature_key": "ফিচার",
+      "test_name": "টেস্ট",
+      "published_at": "প্রকাশিত",
+      "submissions": "জমা",
+      "total_score": "মোট নম্বর",
+      "marks": "নম্বর",
+      "exam_id": "টেস্ট",
+      "student_id": "শিক্ষার্থী",
+      "organization": "প্রতিষ্ঠান",
+      "organization_member": "সদস্য",
+      "account_subscription": "প্ল্যান",
+      "feature_override": "ফিচার বা সীমা",
+      "subscription_plan": "প্ল্যান",
+      "teacher_role_request": "শিক্ষক হওয়ার অনুরোধ",
+      "student_exam_submission": "উত্তরপত্র",
+      "exam": "টেস্ট",
+      "bands": "ধাপসমূহ",
+      "grading_scale": "গ্রেডিং স্কেল",
+      "event_type": "মেসেজ",
+      "channel": "মাধ্যম",
+      "locale": "ভাষা",
+      "subject": "বিষয়",
+      "body": "লেখা",
+      "message_template": "মেসেজ টেমপ্লেট",
+      "credits": "ক্রেডিট",
+      "top_up_left": "বাকি টপ-আপ ক্রেডিট",
+      "relation": "সম্পর্ক",
+      "phone": "মোবাইল নম্বর",
+      "is_primary": "প্রধান",
+      "sms_locale": "SMS-এর ভাষা",
+      "guardian": "অভিভাবক",
+      "class_name": "ক্লাস",
+      "session_name": "সেশন",
+      "rows": "সারি",
+      "imported": "ইমপোর্ট হয়েছে",
+      "skipped": "বাদ পড়েছে",
+      "enrolled": "যোগ হয়েছে",
+      "pending": "অপেক্ষায়",
+      "invited": "আমন্ত্রিত",
+      "guardians": "অভিভাবক",
+      "invitations_sent": "পাঠানো আমন্ত্রণ",
+      "class": "ক্লাস",
+      "attendance_method": "দৈনিক উপস্থিতি",
+      "selfie_required": "সেলফি বাধ্যতামূলক",
+      "class_attendance_mode": "ক্লাসের উপস্থিতি",
+      "weekly_off_days": "সাপ্তাহিক ছুটির দিন",
+      "student_entry_time": "শিক্ষার্থীদের প্রবেশের সময়",
+      "teacher_entry_time": "শিক্ষকদের প্রবেশের সময়",
+      "guardian_sms": "অভিভাবকের SMS",
+      "repeat_absence_days": "টানা অনুপস্থিতির সতর্কতা (দিন)",
+      "date_from": "প্রথম দিন",
+      "date_to": "শেষ দিন",
+      "org_settings": "সেটিংস",
+      "holiday": "ছুটি",
+      "late_grace_minutes": "দেরি ধরা হবে (মিনিট)",
+      "address": "ঠিকানা",
+      "geo_lat": "অক্ষাংশ",
+      "geo_lng": "দ্রাঘিমাংশ",
+      "checkin_radius_m": "চেক-ইনের দূরত্ব (মিটার)",
+      "branch": "শাখা",
+      "branch_id": "শাখা",
+      "class_type": "ক্লাসের ধরন",
+      "mode": "উপস্থিতির পদ্ধতি",
+      "grace_minutes": "দেরি ধরা হবে (মিনিট)",
+      "slots": "সময়সূচি",
+      "source": "কীভাবে",
+      "from_section_id": "যেখান থেকে কপি",
+      "section": "[[Section]]",
+      "late_minutes": "দেরির মিনিট",
+      "exams_pct": "পরীক্ষা %",
+      "homework_pct": "বাড়ির কাজ %",
+      "attendance_pct": "উপস্থিতি %",
+      "behaviour_pct": "আচরণ %",
+      "show_rank": "শিক্ষার্থীদের অবস্থান দেখানো",
+      "at_risk": "ঝুঁকির সীমা",
+      "part_marks": "অংশভিত্তিক নম্বর",
+      "is_absent": "অনুপস্থিত",
+      "ratings": "রেটিং",
+      "criteria": "মানদণ্ড",
+      "remark": "মন্তব্য"
+    }
+  },
+  "messageLog": {
+    "title": "মেসেজ লগ",
+    "intro": "এই ওয়ার্কস্পেস থেকে পাঠানো প্রতিটি SMS ও ইমেইল: কার কাছে, কখন, এবং গেছে কি না।",
+    "when": "কখন",
+    "to": "প্রাপক",
+    "type": "ধরন",
+    "channel": "মাধ্যম",
+    "status": "অবস্থা",
+    "message": "বার্তা",
+    "credits": "ক্রেডিট",
+    "from": "থেকে",
+    "toDay": "পর্যন্ত",
+    "allTypes": "সব ধরন",
+    "allChannels": "সব মাধ্যম",
+    "allStatuses": "সব অবস্থা",
+    "unknown": "অজানা",
+    "hidden": "কোড লুকানো",
+    "onlyRecipient": "শুধু {name}-এর বার্তা দেখুন",
+    "recipientFilter": "প্রাপক: {name}",
+    "empty": "এখনও কোনো বার্তা নেই।",
+    "emptyFiltered": "এই ফিল্টারে কোনো বার্তা নেই।",
+    "channels": {
+      "SMS": "এসএমএস",
+      "EMAIL": "ইমেইল",
+      "IN_APP": "অ্যাপে"
+    },
+    "statuses": {
+      "PENDING": "অপেক্ষমাণ",
+      "SENDING": "পাঠানো হচ্ছে",
+      "SENT": "পাঠানো হয়েছে",
+      "DELIVERED": "পৌঁছেছে",
+      "FAILED": "ব্যর্থ",
+      "NO_CREDIT": "পাঠানো হয়নি — ক্রেডিট নেই"
+    },
+    "areas": {
+      "exam": "টেস্ট",
+      "class": "ক্লাসের আমন্ত্রণ",
+      "organization": "প্রতিষ্ঠানের আমন্ত্রণ",
+      "sms": "SMS ক্রেডিট",
+      "attendance": "উপস্থিতি"
+    },
+    "events": {
+      "exam": {
+        "scheduled": "টেস্টের সময়সূচি"
+      },
+      "class": {
+        "invitation": "ক্লাসের আমন্ত্রণ"
+      },
+      "organization": {
+        "invitation": "প্রতিষ্ঠানের আমন্ত্রণ"
+      },
+      "sms": {
+        "low_credit": "SMS ক্রেডিট কমে আসছে"
+      },
+      "auth": {
+        "otp": "সাইন-আপ কোড",
+        "password_reset": "পাসওয়ার্ড রিসেট কোড"
+      },
+      "feature_request": {
+        "created": "ফিচারের অনুরোধ"
+      },
+      "attendance": {
+        "late": "দেরি (অভিভাবকের SMS)",
+        "absent": "অনুপস্থিত (অভিভাবকের SMS)",
+        "class_cancelled": "ক্লাস বাতিল",
+        "class_restored": "ক্লাস আবার চালু",
+        "repeat_absence": "বারবার অনুপস্থিতি",
+        "class_changed": "এক দিনের জন্য ক্লাস পরিবর্তন"
+      },
+      "calendar": {
+        "event_added": "ইভেন্ট যোগ",
+        "event_changed": "ইভেন্ট পরিবর্তন",
+        "event_cancelled": "ইভেন্ট বাতিল",
+        "reminder": "রিমাইন্ডার"
+      },
+      "report_card": {
+        "shared": "অভিভাবকদের রিপোর্ট কার্ড"
+      }
+    }
   }
 }
