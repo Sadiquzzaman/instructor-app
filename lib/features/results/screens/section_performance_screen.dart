@@ -12,13 +12,18 @@ import 'package:instructor_app/core/theme/app_metrics.dart';
 import 'package:instructor_app/core/time/org_time.dart';
 import 'package:instructor_app/core/widgets/app_card.dart';
 import 'package:instructor_app/core/widgets/state_views.dart';
+import 'package:instructor_app/features/results/screens/school_overview.dart';
 import 'package:instructor_app/core/widgets/status_pill.dart';
 
 /// A section, term or subject: its id and name.
 typedef Named = ({String id, String name});
 
 /// `GET /scores/sections`: the sections and terms the caller may see.
-typedef VisibleSections = ({List<Named> sections, List<Named> terms});
+typedef VisibleSections = ({
+  String? sessionId,
+  List<Named> sections,
+  List<Named> terms,
+});
 
 /// A score line: the four parts, the score and the grade.
 typedef ScorePart = ({
@@ -164,6 +169,9 @@ final visibleSectionsProvider = FutureProvider.autoDispose<VisibleSections>((
           ),
   ];
   return (
+    sessionId: j['session'] is Map
+        ? (j['session'] as Map)['id'] as String?
+        : null,
     sections: list(j['sections'], section: true),
     terms: list(j['terms']),
   );
@@ -188,8 +196,8 @@ final sectionScoresProvider = FutureProvider.autoDispose
 /// (or the whole session), optionally one subject; the average, highest and
 /// lowest, homework and attendance rates, the students at risk, and every
 /// student's score with their position. A name opens the student's page.
-/// The charts, the whole-school view (owners) and the weights stay on the
-/// web.
+/// Owners, admins and assistants start on the whole school (each section
+/// and each subject); a section opens its view. The charts stay on the web.
 class SectionPerformanceScreen extends ConsumerStatefulWidget {
   const SectionPerformanceScreen({super.key});
 
@@ -203,6 +211,7 @@ class _SectionPerformanceScreenState
   String? _sectionId;
   String? _termId;
   String? _subjectId;
+  bool _school = true;
 
   @override
   Widget build(BuildContext context) {
@@ -210,6 +219,9 @@ class _SectionPerformanceScreenState
     final text = Theme.of(context).textTheme;
     final colors = AppColors.of(context);
     final visible = ref.watch(visibleSectionsProvider);
+    final role = ref.watch(sessionProvider)?.memberRole;
+    final manager = role == 'OWNER' || role == 'ADMIN' || role == 'ASSISTANT';
+    final school = manager && _school;
     return Center(
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 960),
@@ -268,22 +280,44 @@ class _SectionPerformanceScreenState
                     ? _termId
                     : null;
                 return [
-                  DropdownButtonFormField<String>(
-                    key: const Key('perf-section'),
-                    initialValue: section,
-                    isExpanded: true,
-                    decoration: InputDecoration(
-                      labelText: ref.levels(context, l10n.performanceSection),
+                  if (manager) ...[
+                    SegmentedButton<bool>(
+                      key: const Key('perf-view'),
+                      segments: [
+                        ButtonSegment(
+                          value: true,
+                          label: Text(l10n.performanceWholeSchool),
+                        ),
+                        ButtonSegment(
+                          value: false,
+                          label: Text(
+                            ref.levels(context, l10n.performanceOneSection),
+                          ),
+                        ),
+                      ],
+                      selected: {school},
+                      onSelectionChanged: (s) =>
+                          setState(() => _school = s.first),
                     ),
-                    items: [
-                      for (final s in v.sections)
-                        DropdownMenuItem(value: s.id, child: Text(s.name)),
-                    ],
-                    onChanged: (x) => setState(() {
-                      _sectionId = x;
-                      _subjectId = null;
-                    }),
-                  ),
+                    const SizedBox(height: AppSpacing.sm),
+                  ],
+                  if (!school)
+                    DropdownButtonFormField<String>(
+                      key: const Key('perf-section'),
+                      initialValue: section,
+                      isExpanded: true,
+                      decoration: InputDecoration(
+                        labelText: ref.levels(context, l10n.performanceSection),
+                      ),
+                      items: [
+                        for (final s in v.sections)
+                          DropdownMenuItem(value: s.id, child: Text(s.name)),
+                      ],
+                      onChanged: (x) => setState(() {
+                        _sectionId = x;
+                        _subjectId = null;
+                      }),
+                    ),
                   if (v.terms.isNotEmpty) ...[
                     const SizedBox(height: AppSpacing.sm),
                     DropdownButtonFormField<String?>(
@@ -307,13 +341,24 @@ class _SectionPerformanceScreenState
                     ),
                   ],
                   const SizedBox(height: AppSpacing.md),
-                  _SectionView(
-                    key: ValueKey('$section/$term'),
-                    sectionId: section,
-                    termId: term,
-                    subjectId: _subjectId,
-                    onSubject: (s) => setState(() => _subjectId = s),
-                  ),
+                  if (school)
+                    SchoolOverviewView(
+                      sessionId: v.sessionId,
+                      termId: term,
+                      onOpen: (id) => setState(() {
+                        _sectionId = id;
+                        _subjectId = null;
+                        _school = false;
+                      }),
+                    )
+                  else
+                    _SectionView(
+                      key: ValueKey('$section/$term'),
+                      sectionId: section,
+                      termId: term,
+                      subjectId: _subjectId,
+                      onSubject: (s) => setState(() => _subjectId = s),
+                    ),
                 ];
               },
             ),
