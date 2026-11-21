@@ -16,6 +16,8 @@ const gradedChoiceTypes = [
   'multiple-choice',
   'multiple-response',
   'true-false',
+  'fill-in-the-blanks',
+  'matching-ordering',
 ];
 
 String typeName(AppLocalizations l10n, String subType) => switch (subType) {
@@ -28,11 +30,23 @@ String typeName(AppLocalizations l10n, String subType) => switch (subType) {
 
 /// The web's validation message for one of [questionProblems]' keys.
 String problemText(AppLocalizations l10n, String key) {
-  if (key.startsWith('optionEmpty:')) {
-    return l10n.createTestValidationOptionEmpty(int.parse(key.split(':')[1]));
+  final parts = key.split(':');
+  final n = parts.length > 1 ? int.parse(parts[1]) : 0;
+  switch (parts.first) {
+    case 'optionEmpty':
+      return l10n.createTestValidationOptionEmpty(n);
+    case 'leftEmpty':
+      return l10n.createTestValidationLeftChoiceEmpty(n);
+    case 'rightEmpty':
+      return l10n.createTestValidationRightChoiceEmpty(n);
   }
   return switch (key) {
     'title' => l10n.createTestValidationTitleOrImageMissing,
+    'titleText' => l10n.createTestValidationTitleMissing,
+    'pairs' => l10n.createTestValidationMatchingPairs(
+      minMatchingPairs,
+      maxMatchingPairs,
+    ),
     'points' => l10n.createTestValidationPointsPositive,
     'optionCount' => l10n.createTestValidationOptionCount(
       minVariableOptions,
@@ -43,6 +57,9 @@ String problemText(AppLocalizations l10n, String key) {
     _ => l10n.createTestValidationAnswerMissing,
   };
 }
+
+/// Narrower than this, a matching pair stacks left over right.
+const _pairRowWidth = 420.0;
 
 /// One question being written (the web's QuestionCard): its type, text,
 /// an instruction, an image (when the plan allows), points, the options
@@ -75,11 +92,38 @@ class _QuestionEditorState extends ConsumerState<QuestionEditor> {
   );
   late final _points = TextEditingController(text: '${widget.question.points}');
   final _options = <String, TextEditingController>{};
+  late final _answers = [
+    for (var i = 0; i < 2; i++)
+      TextEditingController(
+        text:
+            i < widget.question.answer.length &&
+                widget.question.subType == 'fill-in-the-blanks'
+            ? widget.question.answer[i]
+            : '',
+      ),
+  ];
   int _imageRound = 0;
 
   @override
+  void didUpdateWidget(QuestionEditor old) {
+    super.didUpdateWidget(old);
+    // A new type starts with an empty answer: so do its fields.
+    if (old.question.subType != widget.question.subType) {
+      for (final c in _answers) {
+        c.clear();
+      }
+    }
+  }
+
+  @override
   void dispose() {
-    for (final c in [_text, _instruction, _points, ..._options.values]) {
+    for (final c in [
+      _text,
+      _instruction,
+      _points,
+      ..._answers,
+      ..._options.values,
+    ]) {
       c.dispose();
     }
     super.dispose();
@@ -98,6 +142,9 @@ class _QuestionEditorState extends ConsumerState<QuestionEditor> {
     final problems = questionProblems(q);
     final multi = q.subType == 'multiple-response';
     final fixed = q.subType == 'true-false';
+    final blanks = q.subType == 'fill-in-the-blanks';
+    final matching = q.subType == 'matching-ordering';
+    final choice = !blanks && !matching;
     final canImage =
         ref.watch(entitlementsProvider).value?.has('allow_question_images') ??
         false;
@@ -163,7 +210,9 @@ class _QuestionEditorState extends ConsumerState<QuestionEditor> {
             maxLines: 6,
             decoration: InputDecoration(
               labelText: l10n.createTestStepsQuestions,
-              hintText: l10n.createTestPromptsDefault,
+              hintText: blanks
+                  ? l10n.createTestPromptsBlank
+                  : l10n.createTestPromptsDefault,
             ),
             onChanged: (v) => widget.onChanged(q.copyWith(text: v)),
           ),
@@ -209,62 +258,65 @@ class _QuestionEditorState extends ConsumerState<QuestionEditor> {
                   if (url != null) widget.onChanged(q.copyWith(image: url));
                 },
               ),
-          for (final (i, o) in q.options.indexed)
-            Row(
-              children: [
-                Checkbox(
-                  key: Key('option-correct-${o.id}'),
-                  value: q.answer.contains(o.id),
-                  onChanged: (_) => toggle(o.id),
-                ),
-                Expanded(
-                  child: fixed
-                      ? Text(o.text, key: Key('option-fixed-${o.id}'))
-                      : TextField(
-                          key: Key('option-text-${o.id}'),
-                          controller: _option(o),
-                          decoration: InputDecoration(
-                            hintText: '${l10n.createTestCardOption} ${i + 1}',
-                          ),
-                          onChanged: (v) => widget.onChanged(
-                            q.copyWith(
-                              options: [
-                                for (final x in q.options)
-                                  x.id == o.id ? x.copyWith(text: v) : x,
-                              ],
+          if (blanks) ..._blankAnswers(l10n),
+          if (matching) ..._pairs(l10n, text, colors),
+          if (choice)
+            for (final (i, o) in q.options.indexed)
+              Row(
+                children: [
+                  Checkbox(
+                    key: Key('option-correct-${o.id}'),
+                    value: q.answer.contains(o.id),
+                    onChanged: (_) => toggle(o.id),
+                  ),
+                  Expanded(
+                    child: fixed
+                        ? Text(o.text, key: Key('option-fixed-${o.id}'))
+                        : TextField(
+                            key: Key('option-text-${o.id}'),
+                            controller: _option(o),
+                            decoration: InputDecoration(
+                              hintText: '${l10n.createTestCardOption} ${i + 1}',
                             ),
-                          ),
-                        ),
-                ),
-                if (!fixed)
-                  IconButton(
-                    key: Key('option-delete-${o.id}'),
-                    tooltip: l10n.createTestCardDeleteOption(i + 1),
-                    icon: const Icon(Icons.close),
-                    onPressed: q.options.length <= minVariableOptions
-                        ? null
-                        : () => widget.onChanged(
-                            q.copyWith(
-                              options: [
-                                for (final x in q.options)
-                                  if (x.id != o.id) x,
-                              ],
-                              answer: [
-                                for (final a in q.answer)
-                                  if (a != o.id) a,
-                              ],
+                            onChanged: (v) => widget.onChanged(
+                              q.copyWith(
+                                options: [
+                                  for (final x in q.options)
+                                    x.id == o.id ? x.copyWith(text: v) : x,
+                                ],
+                              ),
                             ),
                           ),
                   ),
-              ],
-            ),
+                  if (!fixed)
+                    IconButton(
+                      key: Key('option-delete-${o.id}'),
+                      tooltip: l10n.createTestCardDeleteOption(i + 1),
+                      icon: const Icon(Icons.close),
+                      onPressed: q.options.length <= minVariableOptions
+                          ? null
+                          : () => widget.onChanged(
+                              q.copyWith(
+                                options: [
+                                  for (final x in q.options)
+                                    if (x.id != o.id) x,
+                                ],
+                                answer: [
+                                  for (final a in q.answer)
+                                    if (a != o.id) a,
+                                ],
+                              ),
+                            ),
+                    ),
+                ],
+              ),
           if (fixed)
             Text(l10n.createTestValidationFixedOptions, style: text.bodySmall),
           Wrap(
             spacing: AppSpacing.sm,
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
-              if (!fixed)
+              if (choice && !fixed)
                 TextButton.icon(
                   key: Key('option-add-${q.id}'),
                   icon: const Icon(Icons.add),
@@ -280,7 +332,7 @@ class _QuestionEditorState extends ConsumerState<QuestionEditor> {
                           ),
                         ),
                 ),
-              if (!fixed && q.options.length >= maxVariableOptions)
+              if (choice && !fixed && q.options.length >= maxVariableOptions)
                 Text(
                   l10n.createTestCardMaxOptions(maxVariableOptions),
                   style: text.bodySmall?.copyWith(color: colors.inkMuted),
@@ -312,5 +364,158 @@ class _QuestionEditorState extends ConsumerState<QuestionEditor> {
         ],
       ),
     );
+  }
+
+  /// The expected answer and one alternative (the web's correct-answer
+  /// input); the alternative waits until there is an answer.
+  List<Widget> _blankAnswers(AppLocalizations l10n) {
+    void set(int i, String v) {
+      final next = [
+        for (var k = 0; k < 2; k++) k < q.answer.length ? q.answer[k] : '',
+      ];
+      next[i] = v;
+      widget.onChanged(q.copyWith(answer: next));
+    }
+
+    final hasPrimary = q.answer.isNotEmpty && q.answer.first.trim().isNotEmpty;
+    return [
+      TextField(
+        key: Key('blank-answer-${q.id}'),
+        controller: _answers[0],
+        decoration: InputDecoration(
+          labelText: l10n.createTestCardCorrectAnswer,
+          hintText: l10n.createTestPromptsExpectedAnswer,
+        ),
+        onChanged: (v) => set(0, v),
+      ),
+      TextField(
+        key: Key('blank-alternative-${q.id}'),
+        controller: _answers[1],
+        enabled: hasPrimary,
+        decoration: InputDecoration(
+          labelText: l10n.createTestCardAlternativeAnswer,
+          hintText: l10n.createTestCardAlternativePlaceholder,
+        ),
+        onChanged: (v) => set(1, v),
+      ),
+    ];
+  }
+
+  /// Matching pairs, left and right, in the right order (students see them
+  /// shuffled). On a narrow phone each pair stacks.
+  List<Widget> _pairs(AppLocalizations l10n, TextTheme text, AppColors colors) {
+    DraftOption at(List<DraftOption> side, int i) =>
+        i < side.length ? side[i] : DraftOption(id: newId());
+    final count = q.left.length > q.right.length
+        ? q.left.length
+        : q.right.length;
+    List<DraftOption> edit(List<DraftOption> side, String id, String v) => [
+      for (final x in side) x.id == id ? x.copyWith(text: v) : x,
+    ];
+    Widget field(DraftOption o, bool isLeft) => TextField(
+      key: Key('pair-${isLeft ? 'left' : 'right'}-${o.id}'),
+      controller: _option(o),
+      decoration: InputDecoration(
+        hintText: l10n.createTestCardChoicePlaceholder,
+      ),
+      onChanged: (v) => widget.onChanged(
+        isLeft
+            ? q.copyWith(left: edit(q.left, o.id, v))
+            : q.copyWith(right: edit(q.right, o.id, v)),
+      ),
+    );
+    return [
+      Text(
+        l10n.createTestCardMatchingHint,
+        style: text.bodySmall?.copyWith(color: colors.inkMuted),
+      ),
+      for (var i = 0; i < count; i++)
+        Padding(
+          padding: const EdgeInsets.only(top: AppSpacing.xs),
+          child: LayoutBuilder(
+            builder: (context, box) {
+              final l = at(q.left, i);
+              final r = at(q.right, i);
+              final remove = IconButton(
+                key: Key('pair-delete-${q.id}-$i'),
+                tooltip: l10n.createTestCardDeletePair(i + 1),
+                icon: const Icon(Icons.close),
+                onPressed: count <= minMatchingPairs
+                    ? null
+                    : () => widget.onChanged(
+                        q.copyWith(
+                          left: [
+                            for (final (k, x) in q.left.indexed)
+                              if (k != i) x,
+                          ],
+                          right: [
+                            for (final (k, x) in q.right.indexed)
+                              if (k != i) x,
+                          ],
+                        ),
+                      ),
+              );
+              final number = Text('${i + 1}.', style: text.bodyMedium);
+              if (box.maxWidth < _pairRowWidth) {
+                return Row(
+                  children: [
+                    number,
+                    const SizedBox(width: AppSpacing.xs),
+                    Expanded(
+                      child: Column(
+                        children: [field(l, true), field(r, false)],
+                      ),
+                    ),
+                    remove,
+                  ],
+                );
+              }
+              return Row(
+                children: [
+                  number,
+                  const SizedBox(width: AppSpacing.xs),
+                  Expanded(child: field(l, true)),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: AppSpacing.xs),
+                    child: Icon(Icons.arrow_forward),
+                  ),
+                  Expanded(child: field(r, false)),
+                  remove,
+                ],
+              );
+            },
+          ),
+        ),
+      Wrap(
+        spacing: AppSpacing.sm,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          TextButton.icon(
+            key: Key('pair-add-${q.id}'),
+            icon: const Icon(Icons.add),
+            label: Text(l10n.createTestCardAddPair),
+            onPressed: count >= maxMatchingPairs
+                ? null
+                : () => widget.onChanged(
+                    q.copyWith(
+                      left: [
+                        ...q.left,
+                        DraftOption(id: newId()),
+                      ],
+                      right: [
+                        ...q.right,
+                        DraftOption(id: newId()),
+                      ],
+                    ),
+                  ),
+          ),
+          if (count >= maxMatchingPairs)
+            Text(
+              l10n.createTestCardMaxPairs(maxMatchingPairs),
+              style: text.bodySmall?.copyWith(color: colors.inkMuted),
+            ),
+        ],
+      ),
+    ];
   }
 }

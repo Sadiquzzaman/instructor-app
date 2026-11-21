@@ -62,6 +62,8 @@ class DraftQuestion {
     this.instruction = '',
     this.image,
     this.options = const [],
+    this.left = const [],
+    this.right = const [],
     this.answer = const [],
     this.points = 1,
   });
@@ -78,6 +80,9 @@ class DraftQuestion {
     type: 'graded',
     subType: subType,
     options: _startOptions(subType),
+    left: _startPairs(subType),
+    right: _startPairs(subType),
+    answer: subType == 'fill-in-the-blanks' ? const ['', ''] : const [],
   );
 
   /// The same question as another type, keeping what still fits (the web's
@@ -93,8 +98,16 @@ class DraftQuestion {
       instruction: instruction,
       image: image,
       options: keep ? options : _startOptions(next),
+      left: next == 'matching-ordering'
+          ? (left.isEmpty ? _startPairs(next) : left)
+          : const [],
+      right: next == 'matching-ordering'
+          ? (right.isEmpty ? _startPairs(next) : right)
+          : const [],
       answer: keep
           ? (next == 'multiple-choice' ? answer.take(1).toList() : answer)
+          : next == 'fill-in-the-blanks'
+          ? const ['', '']
           : const [],
       points: points,
     );
@@ -110,7 +123,13 @@ class DraftQuestion {
   final String? image;
   final List<DraftOption> options;
 
-  /// The correct option ids (or texts, by type).
+  /// Matching: left item i pairs with right item i (the web's
+  /// `matchingOptions`; students see them shuffled).
+  final List<DraftOption> left;
+  final List<DraftOption> right;
+
+  /// The correct option ids; for fill in the blanks the answer and an
+  /// alternative.
   final List<String> answer;
   final num points;
 
@@ -120,6 +139,8 @@ class DraftQuestion {
     String? image,
     bool clearImage = false,
     List<DraftOption>? options,
+    List<DraftOption>? left,
+    List<DraftOption>? right,
     List<String>? answer,
     num? points,
   }) => DraftQuestion(
@@ -130,6 +151,8 @@ class DraftQuestion {
     instruction: instruction ?? this.instruction,
     image: clearImage ? null : image ?? this.image,
     options: options ?? this.options,
+    left: left ?? this.left,
+    right: right ?? this.right,
     answer: answer ?? this.answer,
     points: points ?? this.points,
   );
@@ -142,6 +165,8 @@ class DraftQuestion {
     'instruction': instruction,
     'image': image,
     'options': [for (final o in options) o.toJson()],
+    'left': [for (final o in left) o.toJson()],
+    'right': [for (final o in right) o.toJson()],
     'answer': answer,
     'points': points,
   };
@@ -158,6 +183,8 @@ class DraftQuestion {
         for (final o in j['options'] as List)
           if (o is Map) DraftOption.fromJson(o.cast<String, Object?>()),
     ],
+    left: _optionsFrom(j['left']),
+    right: _optionsFrom(j['right']),
     answer: [
       if (j['answer'] is List)
         for (final a in j['answer'] as List) '$a',
@@ -178,10 +205,55 @@ class DraftQuestion {
         for (final o in options)
           {'id': o.id, 'text': o.text.trim(), 'image': o.image},
       ],
-    'answer': {'type': 'optionId', 'value': answer},
+    if (subType == 'matching-ordering')
+      'matchingOptions': {
+        'left': [
+          for (final o in left) {'id': o.id, 'text': o.text.trim()},
+        ],
+        'right': [
+          for (final o in right) {'id': o.id, 'text': o.text.trim()},
+        ],
+      },
+    'answer': _answerBody(),
     'points': points,
   };
+
+  Map<String, Object?> _answerBody() {
+    if (subType == 'matching-ordering') {
+      return {
+        'type': 'matchingOrdering',
+        'value': [
+          for (var i = 0; i < left.length && i < right.length; i++)
+            '${left[i].id}$matchingPairDelimiter${right[i].id}',
+        ],
+      };
+    }
+    if (subType == 'fill-in-the-blanks') {
+      final primary = answer.isEmpty ? '' : answer.first.trim();
+      final alternative = answer.length > 1 ? answer[1].trim() : '';
+      return {
+        'type': 'text',
+        'value': [primary, if (primary.isEmpty) '' else alternative],
+      };
+    }
+    return {'type': 'optionId', 'value': answer};
+  }
 }
+
+List<DraftOption> _optionsFrom(Object? raw) => [
+  if (raw is List)
+    for (final o in raw)
+      if (o is Map) DraftOption.fromJson(o.cast<String, Object?>()),
+];
+
+/// The web's matching limits and pair delimiter.
+const minMatchingPairs = 2;
+const maxMatchingPairs = 5;
+const matchingPairDelimiter = '::';
+
+List<DraftOption> _startPairs(String subType) => subType == 'matching-ordering'
+    ? [for (var i = 0; i < minMatchingPairs; i++) DraftOption(id: newId())]
+    : const [];
 
 /// The web's option limits for multiple choice and multiple response.
 const minVariableOptions = 3;
@@ -439,12 +511,40 @@ class TestDraft {
   }
 }
 
-/// What is wrong with a question, as the web's validation keys: `title`,
-/// `points`, `optionCount`, `optionEmpty:<n>`, `pickOne`, `pickTwo`.
+/// What is wrong with a question, as the web's validation keys: `title`
+/// (text or image), `titleText` (text), `points`, `answer`, `optionCount`,
+/// `optionEmpty:<n>`, `pickOne`, `pickTwo`, `pairs`, `leftEmpty:<n>`,
+/// `rightEmpty:<n>`.
 List<String> questionProblems(DraftQuestion q) {
   final out = <String>[];
-  if (q.text.trim().isEmpty && q.image == null) out.add('title');
+  final matching = q.subType == 'matching-ordering';
+  if (matching && q.text.trim().isEmpty) {
+    out.add('titleText');
+  } else if (q.text.trim().isEmpty && q.image == null) {
+    out.add('title');
+  }
   if (q.points <= 0) out.add('points');
+  if (q.subType == 'fill-in-the-blanks' &&
+      (q.answer.isEmpty || q.answer.first.trim().isEmpty)) {
+    out.add('answer');
+  }
+  if (matching) {
+    final l = q.left.length;
+    final r = q.right.length;
+    if (l < minMatchingPairs ||
+        l > maxMatchingPairs ||
+        r < minMatchingPairs ||
+        r > maxMatchingPairs ||
+        l != r) {
+      out.add('pairs');
+    }
+    for (final (i, o) in q.left.indexed) {
+      if (o.text.trim().isEmpty) out.add('leftEmpty:${i + 1}');
+    }
+    for (final (i, o) in q.right.indexed) {
+      if (o.text.trim().isEmpty) out.add('rightEmpty:${i + 1}');
+    }
+  }
   final choice = isVariableChoice(q.subType);
   if (choice) {
     if (q.options.length < minVariableOptions ||
