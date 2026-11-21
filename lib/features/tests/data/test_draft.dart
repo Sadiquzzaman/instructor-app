@@ -353,7 +353,15 @@ bool isVariableChoice(String subType) =>
 const passageType = 'passage-question';
 const passageSubType = 'passage';
 
-/// What a teacher may add under each category (the web's tabs).
+/// What a teacher may add under each category (the web's tabs; IELTS types
+/// come with Stage 5).
+const gradedTypes = [
+  'multiple-choice',
+  'multiple-response',
+  'true-false',
+  'fill-in-the-blanks',
+  'matching-ordering',
+];
 const ungradedTypes = ['true-false', 'essay', 'fill-in-the-gaps'];
 
 List<DraftOption> _startOptions(String subType, String type) =>
@@ -443,6 +451,7 @@ class TestDraft {
     this.excluded = const [],
     this.order = const [],
     this.activeSubjectId,
+    this.keptProctoring = const {},
   });
 
   final int step;
@@ -472,6 +481,10 @@ class TestDraft {
 
   /// The subject whose questions are open (a model test has several).
   final String? activeSubjectId;
+
+  /// A loaded test's proctoring settings the app doesn't edit (checks
+  /// that are off, auto-disqualify, alerts), sent back as they were.
+  final Map<String, Object?> keptProctoring;
 
   DraftSubject? get subject => subjects.isEmpty ? null : subjects.first;
 
@@ -527,6 +540,7 @@ class TestDraft {
     List<String>? excluded,
     List<String>? order,
     String? activeSubjectId,
+    Map<String, Object?>? keptProctoring,
   }) => TestDraft(
     step: step ?? this.step,
     name: name ?? this.name,
@@ -548,6 +562,7 @@ class TestDraft {
     excluded: excluded ?? this.excluded,
     order: order ?? this.order,
     activeSubjectId: activeSubjectId ?? this.activeSubjectId,
+    keptProctoring: keptProctoring ?? this.keptProctoring,
   );
 
   Map<String, Object?> toJson() => {
@@ -569,6 +584,7 @@ class TestDraft {
     'excluded': excluded,
     'order': order,
     'activeSubjectId': activeSubjectId,
+    if (keptProctoring.isNotEmpty) 'keptProctoring': keptProctoring,
   };
 
   static TestDraft fromJson(Map<String, Object?> j) => TestDraft(
@@ -604,6 +620,9 @@ class TestDraft {
         for (final e in j['order'] as List) '$e',
     ],
     activeSubjectId: j['activeSubjectId'] as String?,
+    keptProctoring: j['keptProctoring'] is Map
+        ? (j['keptProctoring']! as Map).cast<String, Object?>()
+        : const {},
   );
 
   /// The web's `POST /exams` body (`CreateExamWizardDto`). [now] fills the
@@ -627,7 +646,8 @@ class TestDraft {
         'isModelTest': isModelTest,
         'allowNegativeMarking': negative,
         if (negative) 'negativeMarking': num.tryParse(negativePercent.trim()),
-        if (proctoringLevel != null) 'proctoring': {'level': proctoringLevel},
+        if (proctoringLevel != null)
+          'proctoring': {...keptProctoring, 'level': proctoringLevel},
       },
       'subjects': [
         for (final s in withQuestions)

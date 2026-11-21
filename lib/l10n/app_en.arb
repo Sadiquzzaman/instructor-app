@@ -8480,5 +8480,8 @@
     }
   },
   "appHomeworkPlainText": "Instructions written on the website with bold, links or tables keep their words here, but saving from the app keeps plain text only.",
-  "appOpenOnWebsite": "Open on the website"
+  "appOpenOnWebsite": "Open on the website",
+  "appTestEditOnWebsiteTitle": "Edit this test on the website",
+  "appTestEditOnWebsiteBody": "This test has formatting, maths, media or question types the app can't edit yet. To keep it exactly as it is, edit it on the website.",
+  "appTestEditOnWebsite": "Edit on the website"
 }

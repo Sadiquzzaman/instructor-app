@@ -147,6 +147,8 @@ void main() {
     expect(find.byKey(const Key('test-monitor')), findsOneWidget);
     // Nothing to report before it starts.
     expect(find.byKey(const Key('test-integrity')), findsNothing);
+    // It can still change: Edit is offered.
+    expect(find.byKey(const Key('test-edit')), findsOneWidget);
     expect(find.text(_en.testsDetailsMinutes(40)), findsOneWidget);
     expect(find.text(_en.testsAudienceSelectedClass), findsOneWidget);
     expect(find.text('25%'), findsOneWidget);
@@ -191,6 +193,7 @@ void main() {
       '/tests/e1',
     );
     expect(find.byKey(const Key('test-toggle')), findsNothing);
+    expect(find.byKey(const Key('test-edit')), findsNothing);
     expect(find.text(_en.testsDetailsLocked), findsOneWidget);
   });
 

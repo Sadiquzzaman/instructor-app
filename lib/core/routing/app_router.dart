@@ -47,6 +47,7 @@ import 'package:instructor_app/features/results/screens/paper_exam_screens.dart'
 import 'package:instructor_app/features/tests/screens/grading_screens.dart';
 import 'package:instructor_app/features/tests/screens/integrity_screen.dart';
 import 'package:instructor_app/features/tests/screens/create_test_screen.dart';
+import 'package:instructor_app/features/tests/screens/edit_test_screen.dart';
 import 'package:instructor_app/features/tests/screens/monitor_screen.dart';
 import 'package:instructor_app/features/tests/screens/teacher_tests_screens.dart';
 import 'package:instructor_app/features/tests/screens/tests_screen.dart';
@@ -246,6 +247,11 @@ final routerProvider = Provider<GoRouter>((ref) {
                 path: ':id',
                 builder: (context, state) =>
                     TeacherTestScreen(id: state.pathParameters['id']!),
+              ),
+              GoRoute(
+                path: ':id/edit',
+                builder: (context, state) =>
+                    EditTestScreen(id: state.pathParameters['id']!),
               ),
               GoRoute(
                 path: ':id/monitor',
