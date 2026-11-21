@@ -9,7 +9,7 @@ Each item: what, and why it waits.
 - Homework photos: the web combines several photos into one PDF before handing in; the app uploads each photo (up to the homework's file limit). Combining needs a PDF package (owner's approval).
 - Class discussions: editing a post or deleting a comment (the web has both) is not in the app yet; a teacher-side view (start a conversation with a student) comes with Stage 2.
 - Chat: teachers deleting other people's comments inside a post's thread is on the web only; it waits for a second pass on chat after Stage 2.
-- Test authoring, IELTS question types (sentence, summary and table completion, diagram label, short answer, yes/no/not given, writing and speaking): the web offers them only under IELTS; they come with Stage 5. The academic builder's five graded types are in the app.
+- Test authoring: tests made with the IELTS category in the academic wizard still open read-only for editing ("Edit on the website"); the IELTS builder is the main way to make IELTS tests.
 - Test authoring: passage images and audio, images on matching items, and option reordering are on the web only; a test that has them opens with "Edit on the website" so nothing is lost.
 - IELTS Reading: highlighting text in the passage and notes kept on the device (the web has both) are not in the app's test screen yet; the passage is selectable text.
 - iOS microphone text: `NSMicrophoneUsageDescription` is in English only; a Bangla `bn.lproj/InfoPlist.strings` needs the Xcode project changed on Jubaer's Mac.
