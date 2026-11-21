@@ -66,6 +66,8 @@ class DraftQuestion {
     this.right = const [],
     this.answer = const [],
     this.points = 1,
+    this.children = const [],
+    this.language = 'bn',
   });
 
   /// A new multiple-choice question with the fewest options it may have.
@@ -75,15 +77,67 @@ class DraftQuestion {
   /// A new graded question of [subType], as the web's `createQuestion`:
   /// choice types start with [minVariableOptions] empty options, true/false
   /// with its fixed three.
-  factory DraftQuestion.create(String subType) => DraftQuestion(
+  ///
+  /// [type] is graded, ungraded (no options or answer: the teacher marks
+  /// it) or passage-question (a question inside a passage).
+  factory DraftQuestion.create(String subType, {String type = 'graded'}) =>
+      DraftQuestion(
+        id: newId(),
+        type: type,
+        subType: subType,
+        options: _startOptions(subType, type),
+        left: _startPairs(subType),
+        right: _startPairs(subType),
+        answer: subType == 'fill-in-the-blanks' ? const ['', ''] : const [],
+      );
+
+  /// A new passage with one multiple-choice question under it (the web's
+  /// `createPassageQuestion`); instructions in Bangla by default.
+  factory DraftQuestion.passage() => DraftQuestion(
     id: newId(),
-    type: 'graded',
-    subType: subType,
-    options: _startOptions(subType),
-    left: _startPairs(subType),
-    right: _startPairs(subType),
-    answer: subType == 'fill-in-the-blanks' ? const ['', ''] : const [],
+    type: passageType,
+    subType: passageSubType,
+    children: [DraftQuestion.create('multiple-choice', type: passageType)],
   );
+
+  bool get isPassage => subType == passageSubType;
+
+  /// The marks this item adds: a passage adds its questions'.
+  num get marks =>
+      isPassage ? children.fold<num>(0, (s, c) => s + c.points) : points;
+
+  /// Whether the teacher marks it by hand (no answer to send).
+  bool get manual => type == 'ungraded' || subType == 'essay';
+
+  /// A copy with new ids throughout; the correct answers follow the copied
+  /// options.
+  DraftQuestion duplicate() {
+    final ids = <String, String>{};
+    List<DraftOption> copy(List<DraftOption> side) => [
+      for (final o in side)
+        DraftOption(
+          id: ids.putIfAbsent(o.id, newId),
+          text: o.text,
+          image: o.image,
+        ),
+    ];
+    final options = copy(this.options);
+    return DraftQuestion(
+      id: newId(),
+      type: type,
+      subType: subType,
+      text: text,
+      instruction: instruction,
+      image: image,
+      options: options,
+      left: copy(left),
+      right: copy(right),
+      answer: [for (final a in answer) ids[a] ?? a],
+      points: points,
+      children: [for (final c in children) c.duplicate()],
+      language: language,
+    );
+  }
 
   /// The same question as another type, keeping what still fits (the web's
   /// `changeQuestionSubtype`).
@@ -97,7 +151,7 @@ class DraftQuestion {
       text: text,
       instruction: instruction,
       image: image,
-      options: keep ? options : _startOptions(next),
+      options: keep ? options : _startOptions(next, type),
       left: next == 'matching-ordering'
           ? (left.isEmpty ? _startPairs(next) : left)
           : const [],
@@ -110,6 +164,7 @@ class DraftQuestion {
           ? const ['', '']
           : const [],
       points: points,
+      language: language,
     );
   }
 
@@ -133,6 +188,12 @@ class DraftQuestion {
   final List<String> answer;
   final num points;
 
+  /// A passage's questions ([text] is the passage itself).
+  final List<DraftQuestion> children;
+
+  /// A passage's instruction language: bn or en.
+  final String language;
+
   DraftQuestion copyWith({
     String? text,
     String? instruction,
@@ -143,6 +204,8 @@ class DraftQuestion {
     List<DraftOption>? right,
     List<String>? answer,
     num? points,
+    List<DraftQuestion>? children,
+    String? language,
   }) => DraftQuestion(
     id: id,
     type: type,
@@ -155,6 +218,8 @@ class DraftQuestion {
     right: right ?? this.right,
     answer: answer ?? this.answer,
     points: points ?? this.points,
+    children: children ?? this.children,
+    language: language ?? this.language,
   );
 
   Map<String, Object?> toJson() => {
@@ -169,6 +234,8 @@ class DraftQuestion {
     'right': [for (final o in right) o.toJson()],
     'answer': answer,
     'points': points,
+    if (children.isNotEmpty) 'children': [for (final c in children) c.toJson()],
+    'language': language,
   };
 
   static DraftQuestion fromJson(Map<String, Object?> j) => DraftQuestion(
@@ -190,10 +257,27 @@ class DraftQuestion {
         for (final a in j['answer'] as List) '$a',
     ],
     points: (j['points'] as num?) ?? 1,
+    children: [
+      if (j['children'] is List)
+        for (final c in j['children'] as List)
+          if (c is Map) DraftQuestion.fromJson(c.cast<String, Object?>()),
+    ],
+    language: j['language'] == 'en' ? 'en' : 'bn',
   );
 
-  /// The web's wizard body for this question.
-  Map<String, Object?> toBody() => {
+  /// The web's wizard body for this question (`WizardPassageQuestionDto`
+  /// for a passage).
+  Map<String, Object?> toBody() => isPassage
+      ? {
+          'id': id,
+          'type': passageType,
+          'passageText': plainToHtml(text),
+          'instructionLanguage': language,
+          'childQuestions': [for (final c in children) c.toBody()],
+        }
+      : _questionBody();
+
+  Map<String, Object?> _questionBody() => {
     'id': id,
     'type': type,
     'subType': subType,
@@ -214,7 +298,7 @@ class DraftQuestion {
           for (final o in right) {'id': o.id, 'text': o.text.trim()},
         ],
       },
-    'answer': _answerBody(),
+    if (!manual) 'answer': _answerBody(),
     'points': points,
   };
 
@@ -265,7 +349,17 @@ const trueFalseOptions = ['True', 'False', 'Not Given'];
 bool isVariableChoice(String subType) =>
     subType == 'multiple-choice' || subType == 'multiple-response';
 
-List<DraftOption> _startOptions(String subType) => subType == 'true-false'
+/// The web's passage block type, and the app's marker for a passage.
+const passageType = 'passage-question';
+const passageSubType = 'passage';
+
+/// What a teacher may add under each category (the web's tabs).
+const ungradedTypes = ['true-false', 'essay', 'fill-in-the-gaps'];
+
+List<DraftOption> _startOptions(String subType, String type) =>
+    type == 'ungraded' ? const [] : _choiceOptions(subType);
+
+List<DraftOption> _choiceOptions(String subType) => subType == 'true-false'
     ? [for (final t in trueFalseOptions) DraftOption(id: newId(), text: t)]
     : isVariableChoice(subType)
     ? [for (var i = 0; i < minVariableOptions; i++) DraftOption(id: newId())]
@@ -302,7 +396,13 @@ class DraftSubject {
   DraftSubject copyWith({List<DraftQuestion>? questions}) =>
       DraftSubject(id: id, name: name, questions: questions ?? this.questions);
 
-  num get totalMarks => questions.fold<num>(0, (s, q) => s + q.points);
+  num get totalMarks => questions.fold<num>(0, (s, q) => s + q.marks);
+
+  /// Questions, counting each of a passage's (the web's count).
+  int get questionCount => questions.fold<int>(
+    0,
+    (s, q) => s + (q.isPassage ? q.children.length : 1),
+  );
 
   Map<String, Object?> toJson() => {
     'id': id,
@@ -515,7 +615,16 @@ class TestDraft {
 /// (text or image), `titleText` (text), `points`, `answer`, `optionCount`,
 /// `optionEmpty:<n>`, `pickOne`, `pickTwo`, `pairs`, `leftEmpty:<n>`,
 /// `rightEmpty:<n>`.
+///
+/// A passage has `passage` (no text) and `children` (one of its questions
+/// has a problem, shown under that question).
 List<String> questionProblems(DraftQuestion q) {
+  if (q.isPassage) {
+    return [
+      if (q.text.trim().isEmpty) 'passage',
+      if (q.children.isEmpty || q.children.any(_hasProblems)) 'children',
+    ];
+  }
   final out = <String>[];
   final matching = q.subType == 'matching-ordering';
   if (matching && q.text.trim().isEmpty) {
@@ -562,7 +671,7 @@ List<String> questionProblems(DraftQuestion q) {
     if (q.subType == 'multiple-choice' && picked != 1) out.add('pickOne');
     if (q.subType == 'multiple-response' && picked < 2) out.add('pickTwo');
   }
-  if (q.subType == 'true-false' && q.type == 'graded') {
+  if (q.subType == 'true-false' && q.type != 'ungraded') {
     final picked = q.answer
         .where((a) => q.options.any((o) => o.id == a))
         .length;
@@ -570,6 +679,8 @@ List<String> questionProblems(DraftQuestion q) {
   }
   return out;
 }
+
+bool _hasProblems(DraftQuestion q) => questionProblems(q).isNotEmpty;
 
 const _draftPrefix = 'draft.test.';
 

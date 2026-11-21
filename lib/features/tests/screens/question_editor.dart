@@ -20,11 +20,35 @@ const gradedChoiceTypes = [
   'matching-ordering',
 ];
 
-String typeName(AppLocalizations l10n, String subType) => switch (subType) {
-  'multiple-response' => l10n.createTestTypesGradedMultipleResponse,
-  'true-false' => l10n.createTestTypesGradedTrueFalse,
-  'fill-in-the-blanks' => l10n.createTestTypesGradedFillInTheBlanks,
-  'matching-ordering' => l10n.createTestTypesGradedMatchingOrdering,
+/// The types a question of [type] may take (the web's tabs per category).
+List<String> typesFor(String type) => switch (type) {
+  'ungraded' => ungradedTypes,
+  passageType => [...gradedChoiceTypes, 'essay'],
+  _ => gradedChoiceTypes,
+};
+
+/// The web's name for [subType] under [type]'s category.
+String typeName(
+  AppLocalizations l10n,
+  String subType, {
+  String type = 'graded',
+}) => switch ((type, subType)) {
+  ('ungraded', 'true-false') => l10n.createTestTypesUngradedTrueFalse,
+  ('ungraded', 'fill-in-the-gaps') => l10n.createTestTypesUngradedFillInTheGaps,
+  ('ungraded', _) => l10n.createTestTypesUngradedEssay,
+  (passageType, 'essay') => l10n.createTestTypesPassageQuestionEssay,
+  (passageType, 'multiple-response') =>
+    l10n.createTestTypesPassageQuestionMultipleResponse,
+  (passageType, 'true-false') => l10n.createTestTypesPassageQuestionTrueFalse,
+  (passageType, 'fill-in-the-blanks') =>
+    l10n.createTestTypesPassageQuestionFillInTheBlanks,
+  (passageType, 'matching-ordering') =>
+    l10n.createTestTypesPassageQuestionMatchingOrdering,
+  (passageType, _) => l10n.createTestTypesPassageQuestionMultipleChoice,
+  (_, 'multiple-response') => l10n.createTestTypesGradedMultipleResponse,
+  (_, 'true-false') => l10n.createTestTypesGradedTrueFalse,
+  (_, 'fill-in-the-blanks') => l10n.createTestTypesGradedFillInTheBlanks,
+  (_, 'matching-ordering') => l10n.createTestTypesGradedMatchingOrdering,
   _ => l10n.createTestTypesGradedMultipleChoice,
 };
 
@@ -43,6 +67,7 @@ String problemText(AppLocalizations l10n, String key) {
   return switch (key) {
     'title' => l10n.createTestValidationTitleOrImageMissing,
     'titleText' => l10n.createTestValidationTitleMissing,
+    'passage' => l10n.createTestValidationPassageMissing,
     'pairs' => l10n.createTestValidationMatchingPairs(
       minMatchingPairs,
       maxMatchingPairs,
@@ -72,13 +97,19 @@ class QuestionEditor extends ConsumerStatefulWidget {
     required this.onChanged,
     required this.onDelete,
     required this.onDuplicate,
+    this.label,
     super.key,
   });
 
   final int number;
+
+  /// Shown in place of [number] (a passage's questions: 2.1, 2.2).
+  final String? label;
   final DraftQuestion question;
   final ValueChanged<DraftQuestion> onChanged;
-  final VoidCallback onDelete;
+
+  /// Null when it can't be removed (a passage's only question).
+  final VoidCallback? onDelete;
   final VoidCallback onDuplicate;
 
   @override
@@ -144,7 +175,8 @@ class _QuestionEditorState extends ConsumerState<QuestionEditor> {
     final fixed = q.subType == 'true-false';
     final blanks = q.subType == 'fill-in-the-blanks';
     final matching = q.subType == 'matching-ordering';
-    final choice = !blanks && !matching;
+    final choice = !blanks && !matching && !q.manual;
+    final gaps = blanks || q.subType == 'fill-in-the-gaps';
     final canImage =
         ref.watch(entitlementsProvider).value?.has('allow_question_images') ??
         false;
@@ -167,7 +199,7 @@ class _QuestionEditorState extends ConsumerState<QuestionEditor> {
         children: [
           Row(
             children: [
-              Text('${widget.number}.', style: text.titleSmall),
+              Text('${widget.label ?? widget.number}.', style: text.titleSmall),
               const SizedBox(width: AppSpacing.sm),
               Expanded(
                 child: DropdownButtonFormField<String>(
@@ -178,10 +210,10 @@ class _QuestionEditorState extends ConsumerState<QuestionEditor> {
                     labelText: l10n.createTestCardType,
                   ),
                   items: [
-                    for (final t in gradedChoiceTypes)
+                    for (final t in typesFor(q.type))
                       DropdownMenuItem(
                         value: t,
-                        child: Text(typeName(l10n, t)),
+                        child: Text(typeName(l10n, t, type: q.type)),
                       ),
                   ],
                   onChanged: (v) {
@@ -210,8 +242,10 @@ class _QuestionEditorState extends ConsumerState<QuestionEditor> {
             maxLines: 6,
             decoration: InputDecoration(
               labelText: l10n.createTestStepsQuestions,
-              hintText: blanks
+              hintText: gaps
                   ? l10n.createTestPromptsBlank
+                  : q.type == passageType && q.subType == 'essay'
+                  ? l10n.createTestPromptsEssayCq
                   : l10n.createTestPromptsDefault,
             ),
             onChanged: (v) => widget.onChanged(q.copyWith(text: v)),
@@ -310,7 +344,7 @@ class _QuestionEditorState extends ConsumerState<QuestionEditor> {
                     ),
                 ],
               ),
-          if (fixed)
+          if (choice && fixed)
             Text(l10n.createTestValidationFixedOptions, style: text.bodySmall),
           Wrap(
             spacing: AppSpacing.sm,

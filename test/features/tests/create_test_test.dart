@@ -26,65 +26,66 @@ Session _teacher() {
   });
 }
 
-FakeApi _api({FakeHandler? create}) => FakeApi()
-  ..on('GET /auth/contexts', (_) => ok(<Object>[]))
-  ..on('GET /me/entitlements', (_) => ok({'features': <String, bool>{}}))
-  ..on('GET /me/notifications/unread-count', (_) => ok({'count': 0}))
-  ..on('GET /workspace/level-labels', (_) => ok(<String, Object>{}))
-  ..on('GET /dashboard/teacher', (_) => ok(<String, Object>{}))
-  ..on(
-    'GET /classes',
-    (_) => ok([
-      {'id': 'c6', 'class_name': 'Class 6'},
-      {'id': 'c7', 'class_name': 'Class 7'},
-    ]),
-  )
-  ..on(
-    'GET /sections',
-    (_) => ok([
-      {'id': 'sa', 'name': 'A', 'class_id': 'c6'},
-      {'id': 'sb', 'name': 'A', 'class_id': 'c7'},
-    ]),
-  )
-  ..on(
-    'GET /offerings',
-    (_) => ok([
-      {
-        'id': 'oa',
-        'section_id': 'sa',
-        'subject': {'id': 'm', 'name': 'Mathematics'},
-        'teachers': [
-          {'id': 'me', 'full_name': 'Rina'},
-        ],
-      },
-      {
-        'id': 'ob',
-        'section_id': 'sb',
-        'subject': {'id': 'm', 'name': 'Mathematics'},
-        'teachers': <Object>[],
-      },
-    ]),
-  )
-  ..on(
-    'GET /classes/c6/subjects/assigned',
-    (_) => ok([
-      {'subject_id': 'm', 'name': 'Mathematics', 'code': 'M'},
-    ]),
-  )
-  ..on(
-    'GET /exams/proctoring-options',
-    (_) => ok({
-      'levels': [
-        {'level': 'OFF', 'available': true},
-        {'level': 'LIGHT', 'available': true},
-        {'level': 'STRICT', 'available': false},
-      ],
-      'default_level': 'LIGHT',
-    }),
-  )
-  ..on('POST /exams', create ?? (_) => ok({'id': 'e9'}))
-  ..on('GET /exams/e9', (_) => ok({'id': 'e9', 'test_name': 'Algebra'}))
-  ..on('GET /exams', (_) => ok(<Object>[]));
+FakeApi _api({FakeHandler? create, Map<String, bool> features = const {}}) =>
+    FakeApi()
+      ..on('GET /auth/contexts', (_) => ok(<Object>[]))
+      ..on('GET /me/entitlements', (_) => ok({'features': features}))
+      ..on('GET /me/notifications/unread-count', (_) => ok({'count': 0}))
+      ..on('GET /workspace/level-labels', (_) => ok(<String, Object>{}))
+      ..on('GET /dashboard/teacher', (_) => ok(<String, Object>{}))
+      ..on(
+        'GET /classes',
+        (_) => ok([
+          {'id': 'c6', 'class_name': 'Class 6'},
+          {'id': 'c7', 'class_name': 'Class 7'},
+        ]),
+      )
+      ..on(
+        'GET /sections',
+        (_) => ok([
+          {'id': 'sa', 'name': 'A', 'class_id': 'c6'},
+          {'id': 'sb', 'name': 'A', 'class_id': 'c7'},
+        ]),
+      )
+      ..on(
+        'GET /offerings',
+        (_) => ok([
+          {
+            'id': 'oa',
+            'section_id': 'sa',
+            'subject': {'id': 'm', 'name': 'Mathematics'},
+            'teachers': [
+              {'id': 'me', 'full_name': 'Rina'},
+            ],
+          },
+          {
+            'id': 'ob',
+            'section_id': 'sb',
+            'subject': {'id': 'm', 'name': 'Mathematics'},
+            'teachers': <Object>[],
+          },
+        ]),
+      )
+      ..on(
+        'GET /classes/c6/subjects/assigned',
+        (_) => ok([
+          {'subject_id': 'm', 'name': 'Mathematics', 'code': 'M'},
+        ]),
+      )
+      ..on(
+        'GET /exams/proctoring-options',
+        (_) => ok({
+          'levels': [
+            {'level': 'OFF', 'available': true},
+            {'level': 'LIGHT', 'available': true},
+            {'level': 'STRICT', 'available': false},
+          ],
+          'default_level': 'LIGHT',
+        }),
+      )
+      ..on('POST /exams', create ?? (_) => ok({'id': 'e9'}))
+      ..on('GET /exams/e9', (_) => ok({'id': 'e9', 'test_name': 'Algebra'}))
+      ..on('GET /exams', (_) => ok(<Object>[]));
 
 Future<void> _open(WidgetTester tester, FakeApi api, {String? lang}) async {
   final app = await pumpInstructorApp(
@@ -309,6 +310,61 @@ void main() {
     await _tap(tester, find.byKey(const Key('create-next')));
     await _tap(tester, find.byKey(const Key('create-publish')));
     expect(find.byType(CreateTestScreen), findsOneWidget);
+  });
+
+  testWidgets('ungraded and passages need the plan', (tester) async {
+    await _open(tester, _api());
+    await _basics(tester);
+    await _tap(tester, find.byKey(const Key('create-next')));
+    ChoiceChip chip(String c) =>
+        tester.widget(find.byKey(Key('create-category-$c')));
+    expect(chip('graded').onSelected, isNotNull);
+    expect(chip('ungraded').onSelected, isNull);
+    expect(chip('passage-question').onSelected, isNull);
+    expect(find.text(_en.createTestQuestionsNotInPlan), findsOneWidget);
+  });
+
+  testWidgets('a passage and an ungraded question are sent', (tester) async {
+    final api = _api(
+      features: {
+        'allow_ungraded_questions': true,
+        'allow_passage_questions': true,
+      },
+    );
+    await _open(tester, api);
+    await _basics(tester);
+    await _tap(tester, find.byKey(const Key('create-next')));
+    expect(find.text(_en.createTestQuestionsNotInPlan), findsNothing);
+
+    await _tap(tester, find.byKey(const Key('create-category-ungraded')));
+    await _tap(tester, find.byKey(const Key('create-add-question')));
+    await _type(
+      tester,
+      find
+          .byWidgetPredicate(
+            (w) =>
+                w is TextField &&
+                (w.key as ValueKey?)?.value.toString().startsWith(
+                      'question-text-',
+                    ) ==
+                    true,
+          )
+          .first,
+      'Describe your village.',
+    );
+
+    await _tap(
+      tester,
+      find.byKey(const Key('create-category-passage-question')),
+    );
+    await _tap(tester, find.byKey(const Key('create-add-question')));
+    expect(find.text(_en.createTestQuestionsAddPassage), findsOneWidget);
+    expect(find.textContaining('Questions added: 2'), findsOneWidget);
+
+    // The passage's question is still empty: the step stops.
+    await _tap(tester, find.byKey(const Key('create-next')));
+    expect(find.text(_en.createTestToastFixQuestions), findsOneWidget);
+    expect(api.to('POST /exams'), isEmpty);
   });
 
   testWidgets('a 360 px phone in Bangla', (tester) async {
