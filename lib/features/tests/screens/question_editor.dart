@@ -17,6 +17,7 @@ const gradedChoiceTypes = gradedTypes;
 /// The types a question of [type] may take (the web's tabs per category).
 List<String> typesFor(String type) => switch (type) {
   'ungraded' => ungradedTypes,
+  'ielts' => ieltsTypes,
   passageType => [...gradedChoiceTypes, 'essay'],
   _ => gradedChoiceTypes,
 };
@@ -30,6 +31,23 @@ String typeName(
   ('ungraded', 'true-false') => l10n.createTestTypesUngradedTrueFalse,
   ('ungraded', 'fill-in-the-gaps') => l10n.createTestTypesUngradedFillInTheGaps,
   ('ungraded', _) => l10n.createTestTypesUngradedEssay,
+  ('ielts', 'multiple-response') => l10n.createTestTypesIeltsMultipleResponse,
+  ('ielts', 'true-false-not-given') => l10n.createTestTypesIeltsTrueFalse,
+  ('ielts', 'yes-no-not-given') => l10n.createTestTypesIeltsYesNoNotGiven,
+  ('ielts', 'matching-ordering') => l10n.createTestTypesIeltsMatchingOrdering,
+  ('ielts', 'fill-in-the-blanks') => l10n.createTestTypesIeltsFillInTheBlanks,
+  ('ielts', 'sentence-completion') =>
+    l10n.createTestTypesIeltsSentenceCompletion,
+  ('ielts', 'summary-completion') => l10n.createTestTypesIeltsSummaryCompletion,
+  ('ielts', 'table-completion') => l10n.createTestTypesIeltsTableCompletion,
+  ('ielts', 'diagram-label') => l10n.createTestTypesIeltsDiagramLabel,
+  ('ielts', 'short-answer') => l10n.createTestTypesIeltsShortAnswer,
+  ('ielts', 'writing-task-1') => l10n.createTestTypesIeltsWritingTask1,
+  ('ielts', 'writing-task-2') => l10n.createTestTypesIeltsWritingTask2,
+  ('ielts', 'speaking-part-1') => l10n.createTestTypesIeltsSpeakingPart1,
+  ('ielts', 'speaking-part-2') => l10n.createTestTypesIeltsSpeakingPart2,
+  ('ielts', 'speaking-part-3') => l10n.createTestTypesIeltsSpeakingPart3,
+  ('ielts', _) => l10n.createTestTypesIeltsMultipleChoice,
   (passageType, 'essay') => l10n.createTestTypesPassageQuestionEssay,
   (passageType, 'multiple-response') =>
     l10n.createTestTypesPassageQuestionMultipleResponse,
@@ -122,7 +140,7 @@ class _QuestionEditorState extends ConsumerState<QuestionEditor> {
       TextEditingController(
         text:
             i < widget.question.answer.length &&
-                widget.question.subType == 'fill-in-the-blanks'
+                isTextAnswer(widget.question.subType)
             ? widget.question.answer[i]
             : '',
       ),
@@ -166,8 +184,8 @@ class _QuestionEditorState extends ConsumerState<QuestionEditor> {
     final colors = AppColors.of(context);
     final problems = questionProblems(q);
     final multi = q.subType == 'multiple-response';
-    final fixed = q.subType == 'true-false';
-    final blanks = q.subType == 'fill-in-the-blanks';
+    final fixed = isFixedChoice(q.subType);
+    final blanks = isTextAnswer(q.subType);
     final matching = q.subType == 'matching-ordering';
     final choice = !blanks && !matching && !q.manual;
     final gaps = blanks || q.subType == 'fill-in-the-gaps';

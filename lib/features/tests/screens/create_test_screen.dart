@@ -397,6 +397,7 @@ class _BasicsStep extends ConsumerWidget {
     final list = subjects?.value;
     if (!personal &&
         !d.isModelTest &&
+        d.examCategory != 'ielts' &&
         list != null &&
         list.length == 1 &&
         d.subject?.id != list.first.id) {
@@ -474,27 +475,100 @@ class _BasicsStep extends ConsumerWidget {
                       ),
                     ],
             ),
-          SwitchListTile(
-            key: const Key('create-model-test'),
-            contentPadding: EdgeInsets.zero,
-            title: Text(l10n.createTestBasicModelTest),
-            subtitle: canModelTest
-                ? null
-                : Text(l10n.createTestBasicModelTestLocked, style: muted),
-            value: d.isModelTest && canModelTest,
-            onChanged: canModelTest
-                ? (v) => onChanged(
-                    d.copyWith(
-                      isModelTest: v,
-                      // Back to one subject: the open one stays.
-                      subjects: v || d.activeSubject == null
-                          ? null
-                          : [d.activeSubject!],
-                    ),
-                  )
-                : null,
+          const SizedBox(height: AppSpacing.sm),
+          Text(l10n.createTestBasicCategory, style: text.titleSmall),
+          const SizedBox(height: AppSpacing.xs),
+          SegmentedButton<String>(
+            key: const Key('create-exam-category'),
+            segments: [
+              ButtonSegment(
+                value: 'academic',
+                label: Text(l10n.createTestBasicAcademic),
+              ),
+              ButtonSegment(
+                value: 'ielts',
+                label: Text(l10n.createTestCategoriesIelts),
+              ),
+            ],
+            selected: {d.examCategory},
+            onSelectionChanged: (v) => onChanged(
+              d.copyWith(
+                examCategory: v.first,
+                isModelTest: false,
+                subjects: v.first == 'ielts'
+                    ? [
+                        DraftSubject(
+                          id: ieltsWizardModules.first.id,
+                          name: ieltsWizardModules.first.name,
+                        ),
+                      ]
+                    : const [],
+                activeSubjectId: v.first == 'ielts'
+                    ? ieltsWizardModules.first.id
+                    : null,
+              ),
+            ),
           ),
-          if (d.isModelTest && canModelTest)
+          if (d.examCategory == 'ielts') ...[
+            const SizedBox(height: AppSpacing.sm),
+            Text(l10n.createTestBasicIeltsModules, style: text.titleSmall),
+            Text(l10n.createTestBasicIeltsModulesHint, style: muted),
+            Wrap(
+              spacing: AppSpacing.sm,
+              children: [
+                for (final m in ieltsWizardModules)
+                  FilterChip(
+                    key: Key('create-module-${m.id}'),
+                    label: Text(m.name),
+                    selected: d.subjects.any((x) => x.id == m.id),
+                    onSelected: (on) {
+                      final has = d.subjects.any((x) => x.id == m.id);
+                      if (on && !has) {
+                        onChanged(
+                          d.copyWith(
+                            subjects: [
+                              ...d.subjects,
+                              DraftSubject(id: m.id, name: m.name),
+                            ],
+                          ),
+                        );
+                      } else if (!on && has && d.subjects.length > 1) {
+                        onChanged(
+                          d.copyWith(
+                            subjects: [
+                              for (final x in d.subjects)
+                                if (x.id != m.id) x,
+                            ],
+                          ),
+                        );
+                      }
+                    },
+                  ),
+              ],
+            ),
+          ],
+          if (d.examCategory != 'ielts')
+            SwitchListTile(
+              key: const Key('create-model-test'),
+              contentPadding: EdgeInsets.zero,
+              title: Text(l10n.createTestBasicModelTest),
+              subtitle: canModelTest
+                  ? null
+                  : Text(l10n.createTestBasicModelTestLocked, style: muted),
+              value: d.isModelTest && canModelTest,
+              onChanged: canModelTest
+                  ? (v) => onChanged(
+                      d.copyWith(
+                        isModelTest: v,
+                        // Back to one subject: the open one stays.
+                        subjects: v || d.activeSubject == null
+                            ? null
+                            : [d.activeSubject!],
+                      ),
+                    )
+                  : null,
+            ),
+          if ((d.isModelTest && canModelTest) || d.examCategory == 'ielts')
             const SizedBox.shrink()
           else if (subjects == null)
             Text(
@@ -684,6 +758,7 @@ class _QuestionsStepState extends ConsumerState<_QuestionsStep> {
 
   String _categoryName(AppLocalizations l10n, String c) => switch (c) {
     'ungraded' => l10n.createTestCategoriesUngraded,
+    'ielts' => l10n.createTestCategoriesIelts,
     passageType => l10n.createTestCategoriesPassageQuestion,
     _ => l10n.createTestCategoriesGraded,
   };
@@ -699,11 +774,21 @@ class _QuestionsStepState extends ConsumerState<_QuestionsStep> {
       return feature == null || (entitlements?.has(feature) ?? false);
     }
 
-    final category = allowed(_category) ? _category : 'graded';
-    final model = draft.isModelTest;
+    final ielts = draft.examCategory == 'ielts';
+    final kinds = ielts
+        ? const ['ielts', passageType]
+        : _categories.keys.toList();
+    final category = ielts
+        ? (_category == passageType && allowed(passageType)
+              ? passageType
+              : 'ielts')
+        : allowed(_category)
+        ? _category
+        : 'graded';
+    final model = draft.isModelTest || ielts;
     final subject = draft.activeSubject;
     final tabs = model
-        ? _SubjectTabs(draft: draft, onChanged: onChanged)
+        ? _SubjectTabs(draft: draft, onChanged: onChanged, fixed: ielts)
         : null;
     if (subject == null) {
       return Column(
@@ -776,7 +861,7 @@ class _QuestionsStepState extends ConsumerState<_QuestionsStep> {
           spacing: AppSpacing.sm,
           runSpacing: AppSpacing.xs,
           children: [
-            for (final c in _categories.keys)
+            for (final c in kinds)
               ChoiceChip(
                 key: Key('create-category-$c'),
                 label: Text(_categoryName(l10n, c)),
@@ -787,7 +872,7 @@ class _QuestionsStepState extends ConsumerState<_QuestionsStep> {
               ),
           ],
         ),
-        if (_categories.keys.any((c) => !allowed(c)))
+        if (kinds.any((c) => c != 'ielts' && !allowed(c)))
           Text(
             l10n.createTestQuestionsNotInPlan,
             key: const Key('create-category-not-in-plan'),
@@ -809,6 +894,10 @@ class _QuestionsStepState extends ConsumerState<_QuestionsStep> {
               switch (category) {
                 passageType => DraftQuestion.passage(),
                 'ungraded' => DraftQuestion.create('essay', type: 'ungraded'),
+                'ielts' => DraftQuestion.create(
+                  'multiple-choice',
+                  type: 'ielts',
+                ),
                 _ => DraftQuestion.multipleChoice(),
               },
             ]),
@@ -823,10 +912,17 @@ class _QuestionsStepState extends ConsumerState<_QuestionsStep> {
 /// one, add another of the class's subjects, or remove one with its
 /// questions after asking.
 class _SubjectTabs extends ConsumerWidget {
-  const _SubjectTabs({required this.draft, required this.onChanged});
+  const _SubjectTabs({
+    required this.draft,
+    required this.onChanged,
+    this.fixed = false,
+  });
 
   final TestDraft draft;
   final ValueChanged<TestDraft> onChanged;
+
+  /// The subjects are chosen elsewhere (an IELTS test's modules).
+  final bool fixed;
 
   Future<void> _remove(BuildContext context, DraftSubject s) async {
     final l10n = context.l10n;
@@ -897,9 +993,9 @@ class _SubjectTabs extends ConsumerWidget {
                   deleteButtonTooltipMessage: l10n.createTestSubjectsRemove(
                     s.name,
                   ),
-                  onDeleted: () => _remove(context, s),
+                  onDeleted: fixed ? null : () => _remove(context, s),
                 ),
-              if (left.isNotEmpty)
+              if (!fixed && left.isNotEmpty)
                 PopupMenuButton<String>(
                   key: const Key('create-subject-add'),
                   tooltip: l10n.createTestSubjectsAdd,

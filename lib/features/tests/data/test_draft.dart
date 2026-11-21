@@ -88,7 +88,7 @@ class DraftQuestion {
         options: _startOptions(subType, type),
         left: _startPairs(subType),
         right: _startPairs(subType),
-        answer: subType == 'fill-in-the-blanks' ? const ['', ''] : const [],
+        answer: isTextAnswer(subType) ? const ['', ''] : const [],
       );
 
   /// A new passage with one multiple-choice question under it (the web's
@@ -107,7 +107,8 @@ class DraftQuestion {
       isPassage ? children.fold<num>(0, (s, c) => s + c.points) : points;
 
   /// Whether the teacher marks it by hand (no answer to send).
-  bool get manual => type == 'ungraded' || subType == 'essay';
+  bool get manual =>
+      type == 'ungraded' || subType == 'essay' || isIeltsManual(subType);
 
   /// A copy with new ids throughout; the correct answers follow the copied
   /// options.
@@ -299,6 +300,9 @@ class DraftQuestion {
         ],
       },
     if (!manual) 'answer': _answerBody(),
+    // The web's defaults for IELTS Writing and Speaking tasks.
+    if (subType.startsWith('writing-task')) 'wordLimit': 150,
+    if (subType.startsWith('speaking-part')) 'timeLimitSeconds': 120,
     'points': points,
   };
 
@@ -312,7 +316,7 @@ class DraftQuestion {
         ],
       };
     }
-    if (subType == 'fill-in-the-blanks') {
+    if (isTextAnswer(subType)) {
       final primary = answer.isEmpty ? '' : answer.first.trim();
       final alternative = answer.length > 1 ? answer[1].trim() : '';
       return {
@@ -349,6 +353,63 @@ const trueFalseOptions = ['True', 'False', 'Not Given'];
 bool isVariableChoice(String subType) =>
     subType == 'multiple-choice' || subType == 'multiple-response';
 
+/// Yes / No / Not Given (IELTS), as the web's fixed options.
+const yesNoOptions = ['Yes', 'No', 'Not Given'];
+
+/// Types with a fixed set of options and one right answer.
+bool isFixedChoice(String subType) => const {
+  'true-false',
+  'true-false-not-given',
+  'yes-no-not-given',
+}.contains(subType);
+
+List<String> fixedOptionsFor(String subType) =>
+    subType == 'yes-no-not-given' ? yesNoOptions : trueFalseOptions;
+
+/// Types answered by writing the answer (and one alternative).
+bool isTextAnswer(String subType) => const {
+  'fill-in-the-blanks',
+  'sentence-completion',
+  'summary-completion',
+  'table-completion',
+  'diagram-label',
+  'short-answer',
+}.contains(subType);
+
+/// IELTS Writing and Speaking tasks, marked by hand.
+bool isIeltsManual(String subType) =>
+    subType.startsWith('writing-task') || subType.startsWith('speaking-part');
+
+/// The IELTS types of the academic wizard (exam category IELTS). The
+/// server names IELTS true/false "true-false-not-given".
+const ieltsTypes = [
+  'multiple-choice',
+  'multiple-response',
+  'true-false-not-given',
+  'yes-no-not-given',
+  'matching-ordering',
+  'fill-in-the-blanks',
+  'sentence-completion',
+  'summary-completion',
+  'table-completion',
+  'diagram-label',
+  'short-answer',
+  'writing-task-1',
+  'writing-task-2',
+  'speaking-part-1',
+  'speaking-part-2',
+  'speaking-part-3',
+];
+
+/// The IELTS modules a test made in the academic wizard covers, as its
+/// subjects (the web's IELTS_MODULES).
+const ieltsWizardModules = [
+  (id: 'ielts.reading', name: 'Reading'),
+  (id: 'ielts.writing', name: 'Writing'),
+  (id: 'ielts.listening', name: 'Listening'),
+  (id: 'ielts.speaking', name: 'Speaking'),
+];
+
 /// The web's passage block type, and the app's marker for a passage.
 const passageType = 'passage-question';
 const passageSubType = 'passage';
@@ -367,8 +428,11 @@ const ungradedTypes = ['true-false', 'essay', 'fill-in-the-gaps'];
 List<DraftOption> _startOptions(String subType, String type) =>
     type == 'ungraded' ? const [] : _choiceOptions(subType);
 
-List<DraftOption> _choiceOptions(String subType) => subType == 'true-false'
-    ? [for (final t in trueFalseOptions) DraftOption(id: newId(), text: t)]
+List<DraftOption> _choiceOptions(String subType) => isFixedChoice(subType)
+    ? [
+        for (final t in fixedOptionsFor(subType))
+          DraftOption(id: newId(), text: t),
+      ]
     : isVariableChoice(subType)
     ? [for (var i = 0; i < minVariableOptions; i++) DraftOption(id: newId())]
     : const [];
@@ -438,6 +502,7 @@ class TestDraft {
     this.duration = '',
     this.passingScore = '',
     this.isModelTest = false,
+    this.examCategory = 'academic',
     this.negative = false,
     this.negativePercent = '',
     this.proctoringLevel,
@@ -459,6 +524,9 @@ class TestDraft {
   final String duration;
   final String passingScore;
   final bool isModelTest;
+
+  /// academic, or ielts (IELTS modules as subjects, IELTS question types).
+  final String examCategory;
   final bool negative;
   final String negativePercent;
 
@@ -525,6 +593,7 @@ class TestDraft {
     String? duration,
     String? passingScore,
     bool? isModelTest,
+    String? examCategory,
     bool? negative,
     String? negativePercent,
     String? proctoringLevel,
@@ -547,6 +616,7 @@ class TestDraft {
     duration: duration ?? this.duration,
     passingScore: passingScore ?? this.passingScore,
     isModelTest: isModelTest ?? this.isModelTest,
+    examCategory: examCategory ?? this.examCategory,
     negative: negative ?? this.negative,
     negativePercent: negativePercent ?? this.negativePercent,
     proctoringLevel: proctoringLevel ?? this.proctoringLevel,
@@ -571,6 +641,7 @@ class TestDraft {
     'duration': duration,
     'passingScore': passingScore,
     'isModelTest': isModelTest,
+    'examCategory': examCategory,
     'negative': negative,
     'negativePercent': negativePercent,
     'proctoringLevel': proctoringLevel,
@@ -593,6 +664,7 @@ class TestDraft {
     duration: (j['duration'] as String?) ?? '',
     passingScore: (j['passingScore'] as String?) ?? '',
     isModelTest: j['isModelTest'] == true,
+    examCategory: j['examCategory'] == 'ielts' ? 'ielts' : 'academic',
     negative: j['negative'] == true,
     negativePercent: (j['negativePercent'] as String?) ?? '',
     proctoringLevel: j['proctoringLevel'] as String?,
@@ -639,7 +711,7 @@ class TestDraft {
     return {
       'formState': {
         'testName': name.trim(),
-        'examCategory': 'academic',
+        'examCategory': examCategory,
         'duration': num.tryParse(duration.trim()),
         if (passingScore.trim().isNotEmpty)
           'passingScore': num.tryParse(passingScore.trim()),
@@ -653,6 +725,7 @@ class TestDraft {
         for (final s in withQuestions)
           {
             'id': s.id,
+            if (s.id.startsWith('ielts.')) 'moduleKey': s.id,
             'name': s.name,
             'questions': [for (final q in s.questions) q.toBody()],
           },
@@ -695,7 +768,7 @@ List<String> questionProblems(DraftQuestion q) {
     out.add('title');
   }
   if (q.points <= 0) out.add('points');
-  if (q.subType == 'fill-in-the-blanks' &&
+  if (isTextAnswer(q.subType) &&
       (q.answer.isEmpty || q.answer.first.trim().isEmpty)) {
     out.add('answer');
   }
@@ -733,7 +806,7 @@ List<String> questionProblems(DraftQuestion q) {
     if (q.subType == 'multiple-choice' && picked != 1) out.add('pickOne');
     if (q.subType == 'multiple-response' && picked < 2) out.add('pickTwo');
   }
-  if (q.subType == 'true-false' && q.type != 'ungraded') {
+  if (isFixedChoice(q.subType) && q.type != 'ungraded') {
     final picked = q.answer
         .where((a) => q.options.any((o) => o.id == a))
         .length;
