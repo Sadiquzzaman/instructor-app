@@ -575,6 +575,7 @@ class _BasicsStep extends ConsumerWidget {
             const SizedBox(height: AppSpacing.sm),
             Text(l10n.createTestProctoringTitle, style: text.titleSmall),
             Text(l10n.createTestProctoringIntro, style: muted),
+            const SizedBox(height: AppSpacing.md),
             DropdownButtonFormField<String>(
               key: const Key('create-proctoring'),
               initialValue: levels.levels.contains(d.proctoringLevel)
