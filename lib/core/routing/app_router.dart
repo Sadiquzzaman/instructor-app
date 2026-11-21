@@ -48,6 +48,7 @@ import 'package:instructor_app/features/tests/screens/grading_screens.dart';
 import 'package:instructor_app/features/tests/screens/integrity_screen.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_builder_screen.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_courses_screens.dart';
+import 'package:instructor_app/features/ielts/screens/ielts_openings_screen.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_overview_screen.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_students_screens.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_tests_screens.dart';
@@ -436,6 +437,11 @@ final routerProvider = Provider<GoRouter>((ref) {
                 path: ':id',
                 builder: (context, state) =>
                     IeltsBuilderScreen(id: state.pathParameters['id']!),
+              ),
+              GoRoute(
+                path: ':id/openings',
+                builder: (context, state) =>
+                    IeltsOpeningsScreen(testId: state.pathParameters['id']!),
               ),
             ],
           ),
