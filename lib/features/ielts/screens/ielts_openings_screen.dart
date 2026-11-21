@@ -630,6 +630,18 @@ class _Results extends ConsumerWidget {
                                     ),
                                     if (m == 'SPEAKING')
                                       _speakingAction(context, ref, r),
+                                    if (m == 'WRITING' &&
+                                        r.modules['WRITING'] != null &&
+                                        r.modules['WRITING']!.status !=
+                                            'IN_PROGRESS' &&
+                                        r.modules['WRITING']!.band == null)
+                                      TextButton(
+                                        key: Key('mark-writing-${r.studentId}'),
+                                        onPressed: () => context.push(
+                                          '/ielts/marking/${r.modules['WRITING']!.attemptId}',
+                                        ),
+                                        child: Text(l10n.ieltsOpeningsMarkNow),
+                                      ),
                                   ],
                                 ),
                             ],

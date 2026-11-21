@@ -38,7 +38,7 @@ Future<void> _openMenu(WidgetTester tester) async {
   await tester.pumpAndSettle();
 }
 
-/// A teacher of an IELTS centre (Marking is not built yet).
+/// A teacher of an IELTS centre.
 Session _ielts() => Session.fromPayload(
   sessionPayload()
     ..['role'] = 'TEACHER'
@@ -86,25 +86,20 @@ void main() {
     expect(find.text('My attendance'), findsNothing);
   });
 
-  testWidgets('IELTS pages not built yet say "use the website for IELTS"', (
-    tester,
-  ) async {
+  test('every IELTS page of the web menu is built in the app', () {
+    final missing = [
+      for (final i in webMenu)
+        if (i.route.startsWith('/ielts') && !AppRoutes.built.contains(i.route))
+          i.route,
+    ];
+    expect(missing, isEmpty);
+  });
+
+  testWidgets('an IELTS teacher opens an IELTS page', (tester) async {
     final app = await pumpInstructorApp(tester, api: _api(), session: _ielts());
-    // An IELTS menu page the app has not built yet.
-    final page = webMenu.firstWhere(
-      (i) =>
-          i.route.startsWith('/ielts') &&
-          (i.workspaces?.contains('IELTS') ?? false) &&
-          !AppRoutes.built.contains(i.route),
-    );
-    app.read(routerProvider).go(page.route);
+    app.read(routerProvider).go('/ielts/marking');
     await tester.pumpAndSettle();
-    expect(
-      find.text(
-        'IELTS pages are not in the app yet. Please use the website for IELTS for now.',
-      ),
-      findsOneWidget,
-    );
+    expect(find.byType(NotYetScreen), findsNothing);
   });
 
   testWidgets('tablet: the menu stays open, no drawer button', (tester) async {
