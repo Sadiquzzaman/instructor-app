@@ -234,6 +234,19 @@ class _MyIeltsTestsScreenState extends ConsumerState<MyIeltsTestsScreen> {
                                   ),
                                   style: muted,
                                 ),
+                                if (o.attempts.values.any(
+                                  (a) => a.band != null,
+                                ))
+                                  Align(
+                                    alignment: AlignmentDirectional.centerStart,
+                                    child: TextButton(
+                                      key: Key('ielts-report-${o.id}'),
+                                      onPressed: () => context.push(
+                                        '/ielts/report/${o.id}/me',
+                                      ),
+                                      child: Text(l10n.ieltsTakeBandReport),
+                                    ),
+                                  ),
                                 for (final m in o.modules)
                                   Padding(
                                     padding: const EdgeInsets.only(

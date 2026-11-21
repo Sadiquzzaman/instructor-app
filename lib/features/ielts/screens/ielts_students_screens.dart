@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'package:instructor_app/core/api/api_error_text.dart';
@@ -178,6 +179,18 @@ class _IeltsStudentsScreenState extends ConsumerState<IeltsStudentsScreen> {
                                           style: text.bodySmall,
                                         ),
                                       ],
+                                    ),
+                                  ),
+                                  TextButton(
+                                    key: Key('ielts-progress-${p.studentId}'),
+                                    onPressed: () => context.push(
+                                      '/ielts/progress/${p.studentId}',
+                                    ),
+                                    child: Text(
+                                      l10n.ieltsProgress,
+                                      semanticsLabel: l10n.ieltsProgressFor(
+                                        p.name,
+                                      ),
                                     ),
                                   ),
                                   OutlinedButton(

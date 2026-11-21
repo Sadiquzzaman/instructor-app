@@ -321,6 +321,22 @@ class IeltsOpeningsScreen extends ConsumerWidget {
                                               .ieltsOpeningsResultsFor(o.batch),
                                         ),
                                       ),
+                                      if (modules.contains('WRITING'))
+                                        TextButton(
+                                          key: Key(
+                                            'opening-plagiarism-${o.id}',
+                                          ),
+                                          onPressed: () => context.push(
+                                            '/ielts/assignments/${o.id}/similarity',
+                                          ),
+                                          child: Text(
+                                            l10n.ieltsOpeningsPlagiarism,
+                                            semanticsLabel: l10n
+                                                .ieltsOpeningsPlagiarismFor(
+                                                  o.batch,
+                                                ),
+                                          ),
+                                        ),
                                       TextButton(
                                         key: Key('opening-change-${o.id}'),
                                         onPressed: () => _edit(context, ref, o),
@@ -609,7 +625,20 @@ class _Results extends ConsumerWidget {
                               Row(
                                 children: [
                                   Expanded(
-                                    child: Text(r.name, style: text.titleSmall),
+                                    child: InkWell(
+                                      key: Key('report-${r.studentId}'),
+                                      onTap: () => context.push(
+                                        '/ielts/report/${opening.id}/${r.studentId}',
+                                      ),
+                                      child: Text(
+                                        r.name,
+                                        style: text.titleSmall?.copyWith(
+                                          color: AppColors.of(context).primary,
+                                        ),
+                                        semanticsLabel: l10n
+                                            .ieltsOpeningsReportFor(r.name),
+                                      ),
+                                    ),
                                   ),
                                   if (modules.length == 4)
                                     Text(
