@@ -7790,6 +7790,52 @@
     }
   },
   "smsCreditsNoCreditHint": "Each SMS part uses one credit (160 English or 70 Bangla characters). With no credits left, SMS stop; in-app messages and emails still go out.",
+  "levelLabelsTitle": "Names for classes and sections",
+  "levelLabelsIntro": "Choose what your workspace calls its classes and sections. The names are used across the app, in English and Bangla.",
+  "levelLabelsChoice": "Names",
+  "levelLabelsPresetsCLASSSECTION": "Class and Section",
+  "levelLabelsPresetsCOURSEBATCH": "Course and Batch",
+  "levelLabelsPresetsCUSTOM": "Our own words",
+  "levelLabelsPresetHintsCLASSSECTION": "For schools: Class 6, Section A",
+  "levelLabelsPresetHintsCOURSEBATCH": "For coaching centres: HSC Physics, Batch 1",
+  "levelLabelsPresetHintsCUSTOM": "Type the names in English and Bangla",
+  "levelLabelsClassLevel": "Main level (like a class)",
+  "levelLabelsSectionLevel": "Group inside it (like a section)",
+  "levelLabelsOne": "English, one",
+  "levelLabelsOther": "English, more than one",
+  "levelLabelsBn": "Bangla",
+  "levelLabelsPreview": "Preview",
+  "levelLabelsPreviewEnglish": "English: {one} / {other}",
+  "@levelLabelsPreviewEnglish": {
+    "placeholders": {
+      "one": {
+        "type": "String"
+      },
+      "other": {
+        "type": "String"
+      }
+    }
+  },
+  "levelLabelsPreviewBangla": "Bangla: {name}",
+  "@levelLabelsPreviewBangla": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "levelLabelsRequired": "Enter every name, up to {max} characters.",
+  "@levelLabelsRequired": {
+    "placeholders": {
+      "max": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "levelLabelsSave": "Save names",
+  "levelLabelsSaved": "Names saved",
+  "levelLabelsLoadFailed": "The names did not load.",
   "appNoConnection": "No internet connection. Check it and try again.",
   "appUpdateRequiredTitle": "Please update Instructor",
   "appUpdateRequiredBody": "This version of the app is no longer supported. Install the new version to continue.",

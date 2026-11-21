@@ -39,6 +39,7 @@ import 'package:instructor_app/features/organization/screens/organization_overvi
 import 'package:instructor_app/features/organization/screens/people_screen.dart';
 import 'package:instructor_app/features/organization/screens/perf_grading_screens.dart';
 import 'package:instructor_app/features/organization/screens/sessions_screen.dart';
+import 'package:instructor_app/features/organization/screens/setup_wizard_screen.dart';
 import 'package:instructor_app/features/organization/screens/settings_forms_screens.dart';
 import 'package:instructor_app/features/organization/screens/subjects_classes_screens.dart';
 import 'package:instructor_app/features/results/screens/behaviour_screen.dart';
@@ -275,6 +276,10 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: AppRoutes.organization,
             builder: (context, state) => const OrganizationOverviewScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.orgSetup,
+            builder: (context, state) => const SetupWizardScreen(),
           ),
           for (final (path, kind) in [
             (AppRoutes.orgTeachers, PeopleKind.teachers),

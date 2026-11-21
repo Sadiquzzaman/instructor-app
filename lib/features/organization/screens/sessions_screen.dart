@@ -111,7 +111,7 @@ class SessionsScreen extends ConsumerWidget {
   ) async {
     final saved = await showDialog<bool>(
       context: context,
-      builder: (_) => _SessionDialog(session: s),
+      builder: (_) => SessionDialog(session: s),
     );
     if (saved == true) ref.invalidate(sessionsProvider);
   }
@@ -336,16 +336,16 @@ class SessionsScreen extends ConsumerWidget {
 
 /// Add or change a session: a name and its dates; a new one can become the
 /// default at once. Pops true when saved.
-class _SessionDialog extends ConsumerStatefulWidget {
-  const _SessionDialog({this.session});
+class SessionDialog extends ConsumerStatefulWidget {
+  const SessionDialog({this.session, super.key});
 
   final AcademicSession? session;
 
   @override
-  ConsumerState<_SessionDialog> createState() => _SessionDialogState();
+  ConsumerState<SessionDialog> createState() => _SessionDialogState();
 }
 
-class _SessionDialogState extends ConsumerState<_SessionDialog> {
+class _SessionDialogState extends ConsumerState<SessionDialog> {
   late final _name = TextEditingController(text: widget.session?.name ?? '');
   late String? _start = widget.session?.start;
   late String? _end = widget.session?.end;

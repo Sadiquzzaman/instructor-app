@@ -4,6 +4,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:instructor_app/core/auth/session.dart';
 import 'package:instructor_app/core/routing/app_router.dart';
 import 'package:instructor_app/features/organization/screens/organization_overview_screen.dart';
+import 'package:instructor_app/features/organization/screens/setup_wizard_screen.dart';
 import 'package:instructor_app/l10n/generated/app_localizations_bn.dart';
 import 'package:instructor_app/l10n/generated/app_localizations_en.dart';
 
@@ -111,13 +112,24 @@ void main() {
     expect(find.text(_en.organizationStatusesApproved), findsOneWidget);
     expect(find.text(_en.organizationRolesOWNER), findsOneWidget);
 
+    await _show(tester, 'org-settings');
+    expect(find.text(_en.academicsSettingsTitle), findsOneWidget);
+    await tester.scrollUntilVisible(
+      find.byKey(const Key('setup-banner')),
+      -200,
+      scrollable: find
+          .descendant(
+            of: find.byType(OrganizationOverviewScreen),
+            matching: find.byType(Scrollable),
+          )
+          .first,
+    );
     expect(find.byKey(const Key('setup-banner')), findsOneWidget);
     await tester.tap(find.byKey(const Key('setup-open')));
     await tester.pumpAndSettle();
-    expect(links.single.path, '/organization/setup');
-
-    await _show(tester, 'org-settings');
-    expect(find.text(_en.academicsSettingsTitle), findsOneWidget);
+    // The wizard opens in the app.
+    expect(find.byType(SetupWizardScreen), findsOneWidget);
+    expect(links, isEmpty);
   });
 
   testWidgets('a setting saves at once', (tester) async {

@@ -1,6 +1,6 @@
 # Stage 4 plan: authoring on tablets
 
-**Status: waiting for the owner's answers to §7** (questions 1 and 2 decide which packages, if any, the stage uses). Written 21 Nov 2026 against tes-taker `develop` `31f14b0` and beta.
+**Approved by the owner on 21 Nov 2026 with each §7 suggestion** ("continue code according to your recommendation"): plain text first (§7.1 A, no packages), phones and tablets, imports on the web, drafts on the device, beta checks with the demo accounts. Written 21 Nov 2026 against tes-taker `develop` `31f14b0` and beta.
 
 Stage 4 ([HANDOVER.md](HANDOVER.md) §4) lets teachers and owners build things on a tablet that today need the website:
 - **create and edit a test**: the web's five-step wizard with its question types;
