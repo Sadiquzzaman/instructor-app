@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'package:instructor_app/core/api/api_error_text.dart';
@@ -499,6 +502,59 @@ class _Results extends ConsumerWidget {
   final IeltsOpening opening;
   final List<String> modules;
 
+  /// Starts (or resumes) a live Speaking session and opens the examiner.
+  Future<void> _examine(
+    BuildContext context,
+    WidgetRef ref,
+    String studentId,
+  ) async {
+    final l10n = context.l10n;
+    final messenger = ScaffoldMessenger.of(context);
+    final router = GoRouter.of(context);
+    try {
+      final r = await ref
+          .read(apiClientProvider)
+          .post(
+            '/ielts/assignments/${opening.id}/speaking',
+            data: {'student_id': studentId},
+          );
+      final id = r.payload is Map ? (r.payload! as Map)['attempt_id'] : null;
+      if (id != null) unawaited(router.push('/ielts/speaking/$id'));
+    } catch (e) {
+      messenger.showSnackBar(SnackBar(content: Text(apiErrorText(l10n, e))));
+    }
+  }
+
+  /// Examine, continue the live session, or mark a practice recording.
+  Widget _speakingAction(
+    BuildContext context,
+    WidgetRef ref,
+    IeltsResultRow r,
+  ) {
+    final l10n = context.l10n;
+    final a = r.modules['SPEAKING'];
+    if (a == null || (a.status == 'IN_PROGRESS' && a.mode == 'LIVE')) {
+      return TextButton(
+        key: Key('examine-${r.studentId}'),
+        onPressed: () => _examine(context, ref, r.studentId),
+        child: Text(
+          a == null
+              ? l10n.ieltsOpeningsExamine
+              : l10n.ieltsOpeningsContinueExam,
+          semanticsLabel: l10n.ieltsOpeningsExamineFor(r.name),
+        ),
+      );
+    }
+    if (a.status != 'IN_PROGRESS' && a.band == null) {
+      return TextButton(
+        key: Key('mark-speaking-${r.studentId}'),
+        onPressed: () => context.push('/ielts/speaking/${a.attemptId}'),
+        child: Text(l10n.ieltsOpeningsMarkNow),
+      );
+    }
+    return const SizedBox.shrink();
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
@@ -564,9 +620,17 @@ class _Results extends ConsumerWidget {
                                 ],
                               ),
                               for (final m in modules)
-                                Text(
-                                  '${ieltsModuleShort(l10n, m)}: ${cell(r, m)}',
-                                  style: muted,
+                                Wrap(
+                                  spacing: AppSpacing.sm,
+                                  crossAxisAlignment: WrapCrossAlignment.center,
+                                  children: [
+                                    Text(
+                                      '${ieltsModuleShort(l10n, m)}: ${cell(r, m)}',
+                                      style: muted,
+                                    ),
+                                    if (m == 'SPEAKING')
+                                      _speakingAction(context, ref, r),
+                                  ],
                                 ),
                             ],
                           ),

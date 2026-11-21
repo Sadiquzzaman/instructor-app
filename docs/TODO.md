@@ -12,3 +12,4 @@ Each item: what, and why it waits.
 - Test authoring, IELTS question types (sentence, summary and table completion, diagram label, short answer, yes/no/not given, writing and speaking): the web offers them only under IELTS; they come with Stage 5. The academic builder's five graded types are in the app.
 - Test authoring: passage images and audio, images on matching items, and option reordering are on the web only; a test that has them opens with "Edit on the website" so nothing is lost.
 - IELTS Reading: highlighting text in the passage and notes kept on the device (the web has both) are not in the app's test screen yet; the passage is selectable text.
+- iOS microphone text: `NSMicrophoneUsageDescription` is in English only; a Bangla `bn.lproj/InfoPlist.strings` needs the Xcode project changed on Jubaer's Mac.

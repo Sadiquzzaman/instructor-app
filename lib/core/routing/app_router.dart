@@ -52,6 +52,7 @@ import 'package:instructor_app/features/ielts/screens/ielts_openings_screen.dart
 import 'package:instructor_app/features/ielts/screens/ielts_overview_screen.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_students_screens.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_take_screens.dart';
+import 'package:instructor_app/features/ielts/screens/speaking_screens.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_tests_screens.dart';
 import 'package:instructor_app/features/tests/screens/create_test_screen.dart';
 import 'package:instructor_app/features/tests/screens/edit_test_screen.dart';
@@ -453,6 +454,11 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: AppRoutes.ieltsMy,
             builder: (context, state) => const MyIeltsTestsScreen(),
+          ),
+          GoRoute(
+            path: '/ielts/speaking/:id',
+            builder: (context, state) =>
+                IeltsExaminerScreen(attemptId: state.pathParameters['id']!),
           ),
           GoRoute(
             path: '/ielts/attempts/:id',
