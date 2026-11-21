@@ -4526,5 +4526,32 @@
     "buy": "Buy",
     "buyPack": "Buy {count, number} SMS",
     "noCreditHint": "Each SMS part uses one credit (160 English or 70 Bangla characters). With no credits left, SMS stop; in-app messages and emails still go out."
+  },
+  "levelLabels": {
+    "title": "Names for classes and sections",
+    "intro": "Choose what your workspace calls its classes and sections. The names are used across the app, in English and Bangla.",
+    "choice": "Names",
+    "presets": {
+      "CLASS_SECTION": "Class and Section",
+      "COURSE_BATCH": "Course and Batch",
+      "CUSTOM": "Our own words"
+    },
+    "presetHints": {
+      "CLASS_SECTION": "For schools: Class 6, Section A",
+      "COURSE_BATCH": "For coaching centres: HSC Physics, Batch 1",
+      "CUSTOM": "Type the names in English and Bangla"
+    },
+    "classLevel": "Main level (like a class)",
+    "sectionLevel": "Group inside it (like a section)",
+    "one": "English, one",
+    "other": "English, more than one",
+    "bn": "Bangla",
+    "preview": "Preview",
+    "previewEnglish": "English: {one} / {other}",
+    "previewBangla": "Bangla: {name}",
+    "required": "Enter every name, up to {max, number} characters.",
+    "save": "Save names",
+    "saved": "Names saved",
+    "loadFailed": "The names did not load."
   }
 }

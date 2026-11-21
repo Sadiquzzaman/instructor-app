@@ -72,6 +72,7 @@ const webNamespaces = [
   'billing',
   'storage',
   'smsCredits',
+  'levelLabels',
 ];
 
 const locales = ['en', 'bn'];

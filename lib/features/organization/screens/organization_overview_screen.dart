@@ -1,13 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'package:instructor_app/core/api/api_error_text.dart';
 import 'package:instructor_app/core/api/api_exception.dart';
 import 'package:instructor_app/core/api/api_providers.dart';
-import 'package:instructor_app/core/config/app_config.dart';
 import 'package:instructor_app/core/l10n/l10n.dart';
 import 'package:instructor_app/core/l10n/level_text.dart';
-import 'package:instructor_app/core/links/open_link.dart';
+import 'package:instructor_app/core/routing/app_routes.dart';
 import 'package:instructor_app/core/theme/app_colors.dart';
 import 'package:instructor_app/core/theme/app_metrics.dart';
 import 'package:instructor_app/core/time/org_time.dart';
@@ -252,7 +252,7 @@ class OrganizationOverviewScreen extends ConsumerWidget {
                 ),
                 if (manages) ...[
                   const SizedBox(height: AppSpacing.md),
-                  const _SettingsCard(),
+                  const OrganizationSettingsCard(),
                 ],
               ],
             ],
@@ -374,12 +374,13 @@ class _SetupBanner extends ConsumerWidget {
               style: text.bodySmall?.copyWith(color: colors.inkMuted),
             ),
             const SizedBox(height: AppSpacing.sm),
-            OutlinedButton.icon(
+            FilledButton(
               key: const Key('setup-open'),
-              icon: const Icon(Icons.open_in_new),
-              label: Text(l10n.appOpenOnWebsite),
-              onPressed: () => ref.read(openLinkProvider)(
-                Uri.parse('${AppConfig.webBaseUrl}/organization/setup'),
+              onPressed: () => context.push(AppRoutes.orgSetup),
+              child: Text(
+                setup.started
+                    ? l10n.academicsSetupBannerContinue
+                    : l10n.academicsSetupBannerStart,
               ),
             ),
           ],
@@ -392,14 +393,14 @@ class _SetupBanner extends ConsumerWidget {
 /// Organisation settings (owners and admins): class teachers, branches,
 /// guardians, the language for members who haven't chosen one, and the
 /// guardian SMS language. Each change saves at once, as on the web.
-class _SettingsCard extends ConsumerStatefulWidget {
-  const _SettingsCard();
+class OrganizationSettingsCard extends ConsumerStatefulWidget {
+  const OrganizationSettingsCard({super.key});
 
   @override
-  ConsumerState<_SettingsCard> createState() => _SettingsCardState();
+  ConsumerState<OrganizationSettingsCard> createState() => _SettingsCardState();
 }
 
-class _SettingsCardState extends ConsumerState<_SettingsCard> {
+class _SettingsCardState extends ConsumerState<OrganizationSettingsCard> {
   OrganizationSettings? _saved;
   bool _saving = false;
 

@@ -32,6 +32,7 @@ abstract final class AppRoutes {
   static const calendar = '/calendar';
   static const organization = '/organization';
   static const orgTeachers = '/organization/teachers';
+  static const orgSetup = '/organization/setup';
   static const orgAssistants = '/organization/assistants';
   static const orgStudents = '/organization/students';
   static const orgSubjects = '/organization/subjects';
@@ -73,6 +74,7 @@ abstract final class AppRoutes {
     behaviour,
     organization,
     orgTeachers,
+    orgSetup,
     orgAssistants,
     orgStudents,
     orgSubjects,
