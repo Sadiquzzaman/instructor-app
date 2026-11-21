@@ -21,10 +21,11 @@ import 'package:instructor_app/features/ielts/data/builder.dart';
 import 'package:instructor_app/features/ielts/data/ielts.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_overview_screen.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_tests_screens.dart';
+import 'package:instructor_app/features/ielts/screens/listening_player.dart';
 
 /// Modules the app takes on screen; the others say "not on screen yet".
-/// Listening and Speaking join with their audio (Stage 5 PRs 8 and 9).
-const ieltsOnScreen = {'READING', 'WRITING'};
+/// Speaking joins with its recorder (Stage 5 PR 9).
+const ieltsOnScreen = {'LISTENING', 'READING', 'WRITING'};
 
 /// Mocks need a computer or a tablet (the owner's decision, 15 Nov 2026).
 const ieltsMinMockWidth = 768.0;
@@ -514,6 +515,7 @@ class _IeltsAttemptScreenState extends ConsumerState<IeltsAttemptScreen> {
       _ => '',
     };
     final writing = v.module == 'WRITING';
+    final listening = v.module == 'LISTENING';
     final groups = [
       for (final g in part.groups)
         Padding(
@@ -538,6 +540,19 @@ class _IeltsAttemptScreenState extends ConsumerState<IeltsAttemptScreen> {
       children: children,
     );
     final source = <Widget>[
+      if (listening) ...[
+        Text(
+          ieltsPartName(l10n, part.module, part.partNo),
+          style: text.titleMedium,
+        ),
+        const SizedBox(height: AppSpacing.sm),
+        ListeningPlayer(
+          key: ValueKey('player-${v.id}-${part.id}'),
+          attemptId: v.id,
+          part: part,
+        ),
+        const SizedBox(height: AppSpacing.md),
+      ],
       if (part.title?.isNotEmpty ?? false)
         Text(part.title!, style: text.titleMedium),
       if (part.content?.isNotEmpty ?? false)
@@ -620,7 +635,7 @@ class _IeltsAttemptScreenState extends ConsumerState<IeltsAttemptScreen> {
         ),
         const Divider(height: 1),
         Expanded(
-          child: wide
+          child: wide && !listening
               ? Row(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [

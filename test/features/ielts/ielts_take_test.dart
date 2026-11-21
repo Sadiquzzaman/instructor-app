@@ -233,7 +233,9 @@ void main() {
     );
   });
 
-  testWidgets('my tests: what is not on screen yet, or waits', (tester) async {
+  testWidgets('my tests: a mock runs in order; Speaking with the teacher', (
+    tester,
+  ) async {
     await _open(
       tester,
       _api(
@@ -249,7 +251,8 @@ void main() {
       ),
       '/ielts/my',
     );
-    expect(find.text(_en.ieltsTakeNotOnScreenYet), findsOneWidget);
+    // Listening comes first in a mock and can start.
+    expect(find.byKey(const Key('ielts-start-a1-LISTENING')), findsOneWidget);
     expect(find.text(_en.ieltsTakeBandShort('6.5')), findsOneWidget);
     expect(find.text(_en.ieltsTakeAfterPrevious), findsOneWidget);
     expect(find.text(_en.ieltsTakeWithTeacher), findsOneWidget);
