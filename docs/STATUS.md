@@ -6,7 +6,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 ## Current stage
 
-**Stage 0:** all 14 PRs done ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11), plus the #345 error codes; its end-of-stage device check is still to do.
+**Stage 0:** all 14 PRs done ([STAGE-0-PLAN.md](STAGE-0-PLAN.md) §11), plus the #345 error codes; end-of-stage check on 21 Nov on the Pixel 8 emulator against beta, in Bangla at 360 dp: login, sign-up (choice and student form), forgot password and notifications, with no layout errors. Still to do: iOS.
 
 **Stage 2 (teachers):** plan approved 18 Nov ([STAGE-2-PLAN.md](STAGE-2-PLAN.md)). Done: PR 1 (dashboard), PR 2 (class attendance), PR 3 (leave approvals), PR 4 (attendance reports and the paper register), PR 5 (classes, students and discussions), PR 6 (setting homework), PR 7 (hand-ins and marking), PR 8 (plagiarism), PR 9 (tests for teachers), PR 10 (live monitor and integrity report), PR 11 (marking written answers), PR 12 (paper-exam marks and behaviour), PR 13 (section performance and report cards), PR 14 (chat and resources), PR 15 (teacher-flow tests). End-of-stage check on 19 Nov, on the Pixel 8 emulator (Android 16) against beta as demo.teacher1, in Bangla: every teacher screen at 360 dp and on a tablet (800 dp), with no layout errors. It found two bugs, both fixed: "[[Section]]" level tokens shown raw (#60), and the resource form opening inside the menu frame. The teacher flows also pass on the emulator. Still to do: iOS on Jubaer's Mac.
 
@@ -16,7 +16,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 **Stage 5 (IELTS):** plan written 21 Nov ([STAGE-5-PLAN.md](STAGE-5-PLAN.md)), started on the owner's standing instruction with each §7 answer as recommended. Asked the backend for demo IELTS accounts (tes-taker#352). Done: PR 1 (IELTS overview), PR 2 (courses), PR 3 (students and profiles), PR 4 (band tables, tests list), PR 5 (test builder), PR 6 (openings and results), PR 7 (taking Reading and Writing), PR 8 (Listening; package just_audio), PR 9 (Speaking; package record), PR 10 (marking), PR 11 (progress, band report, Writing plagiarism), PR 12 (IELTS in the academic wizard; asked tes-taker#353 about the true/false name)., PR 13 (IELTS flows). Every IELTS page of the web is in the app. Still open: beta checks need demo IELTS accounts (tes-taker#352; until then IELTS is tested on the fake API only), a real phone's microphone and audio, and iOS on Jubaer's Mac.
 
-**Stage 1 (students):** plan approved 17 Nov ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)). Done: all 16 PRs (files, Today, My attendance and check-in, read-only cache, leave, timetable, homework, classes, class discussions, calendar, tests and results, taking a test, results, resources, chat, student-flow tests). Still to do: the end-of-stage check on a 360 px phone, a tablet and iOS, done by hand (see "In progress").
+**Stage 1 (students):** plan approved 17 Nov ([STAGE-1-PLAN.md](STAGE-1-PLAN.md)). Done: all 16 PRs (files, Today, My attendance and check-in, read-only cache, leave, timetable, homework, classes, class discussions, calendar, tests and results, taking a test, results, resources, chat, student-flow tests). End-of-stage check on 21 Nov on the Pixel 8 emulator against beta as demo.student1: all 15 student pages at 360 dp and 14 on a tablet (800 dp), with no layout errors in logcat. Still to do: taking a test end to end on a phone (the demo student has no open test) and iOS.
 
 ## Done
 
@@ -113,7 +113,7 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 ## In progress
 
-- The end-of-stage checks for Stage 0 and Stage 1, by hand: a 360 px phone, a tablet and iOS (Jubaer's Mac), including taking a test through the app's own screens on a phone. Not done yet: the emulator holds the owner's own signed-in session, which I did not sign out, and the integration tests were not run on a device for the same reason.
+- iOS checks for every stage on Jubaer's Mac, and taking a test end to end on a phone once a demo test is open. The integration tests pass on the computer; they are not run on the emulator because they reinstall the app and wipe its session.
 
 ## Owner's decisions since the plan
 
