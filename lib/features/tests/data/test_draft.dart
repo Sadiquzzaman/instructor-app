@@ -66,13 +66,39 @@ class DraftQuestion {
     this.points = 1,
   });
 
-  /// A new multiple-choice question with four empty options.
-  factory DraftQuestion.multipleChoice() => DraftQuestion(
+  /// A new multiple-choice question with the fewest options it may have.
+  factory DraftQuestion.multipleChoice() =>
+      DraftQuestion.create('multiple-choice');
+
+  /// A new graded question of [subType], as the web's `createQuestion`:
+  /// choice types start with [minVariableOptions] empty options, true/false
+  /// with its fixed three.
+  factory DraftQuestion.create(String subType) => DraftQuestion(
     id: newId(),
     type: 'graded',
-    subType: 'multiple-choice',
-    options: [for (var i = 0; i < 4; i++) DraftOption(id: newId())],
+    subType: subType,
+    options: _startOptions(subType),
   );
+
+  /// The same question as another type, keeping what still fits (the web's
+  /// `changeQuestionSubtype`).
+  DraftQuestion withSubType(String next) {
+    if (next == subType) return this;
+    final keep = isVariableChoice(subType) && isVariableChoice(next);
+    return DraftQuestion(
+      id: id,
+      type: type,
+      subType: next,
+      text: text,
+      instruction: instruction,
+      image: image,
+      options: keep ? options : _startOptions(next),
+      answer: keep
+          ? (next == 'multiple-choice' ? answer.take(1).toList() : answer)
+          : const [],
+      points: points,
+    );
+  }
 
   final String id;
 
@@ -156,6 +182,22 @@ class DraftQuestion {
     'points': points,
   };
 }
+
+/// The web's option limits for multiple choice and multiple response.
+const minVariableOptions = 3;
+const maxVariableOptions = 5;
+
+/// True / False / Not Given, as the web's fixed options (data, sent as is).
+const trueFalseOptions = ['True', 'False', 'Not Given'];
+
+bool isVariableChoice(String subType) =>
+    subType == 'multiple-choice' || subType == 'multiple-response';
+
+List<DraftOption> _startOptions(String subType) => subType == 'true-false'
+    ? [for (final t in trueFalseOptions) DraftOption(id: newId(), text: t)]
+    : isVariableChoice(subType)
+    ? [for (var i = 0; i < minVariableOptions; i++) DraftOption(id: newId())]
+    : const [];
 
 /// Plain text as the simple HTML the web stores: paragraphs, with the
 /// characters HTML needs escaped.
@@ -403,10 +445,12 @@ List<String> questionProblems(DraftQuestion q) {
   final out = <String>[];
   if (q.text.trim().isEmpty && q.image == null) out.add('title');
   if (q.points <= 0) out.add('points');
-  final choice =
-      q.subType == 'multiple-choice' || q.subType == 'multiple-response';
+  final choice = isVariableChoice(q.subType);
   if (choice) {
-    if (q.options.length < 2 || q.options.length > 6) out.add('optionCount');
+    if (q.options.length < minVariableOptions ||
+        q.options.length > maxVariableOptions) {
+      out.add('optionCount');
+    }
     for (final (i, o) in q.options.indexed) {
       if (o.text.trim().isEmpty && o.image == null) {
         out.add('optionEmpty:${i + 1}');
@@ -417,6 +461,12 @@ List<String> questionProblems(DraftQuestion q) {
         .length;
     if (q.subType == 'multiple-choice' && picked != 1) out.add('pickOne');
     if (q.subType == 'multiple-response' && picked < 2) out.add('pickTwo');
+  }
+  if (q.subType == 'true-false' && q.type == 'graded') {
+    final picked = q.answer
+        .where((a) => q.options.any((o) => o.id == a))
+        .length;
+    if (picked != 1) out.add('pickOne');
   }
   return out;
 }

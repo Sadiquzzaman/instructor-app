@@ -152,7 +152,7 @@ Future<void> _question(WidgetTester tester) async {
         (w.key as ValueKey?)?.value.toString().startsWith('option-text-') ==
             true,
   );
-  for (final (i, v) in ['3', '4', '5', '6'].indexed) {
+  for (final (i, v) in ['3', '4', '5'].indexed) {
     await _type(tester, options.at(i), v);
   }
   final correct = find.byWidgetPredicate(
