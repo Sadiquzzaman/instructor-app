@@ -41,7 +41,11 @@ enum FilePurpose {
   homework('HOMEWORK', [..._images, ..._documents]),
 
   /// The resource library: documents, slides, images and audio.
-  resource('RESOURCE', [..._images, ..._documents, ..._slides, ..._audio]);
+  resource('RESOURCE', [..._images, ..._documents, ..._slides, ..._audio]),
+
+  /// IELTS tests: Listening recordings and pictures (charts, maps); Speaking
+  /// recordings.
+  ielts('IELTS', [..._images, ..._audio]);
 
   const FilePurpose(this.apiValue, this.mimes);
 

@@ -62,6 +62,7 @@
     "openOnWebsite": "Open on the website",
     "testEditOnWebsiteTitle": "Edit this test on the website",
     "testEditOnWebsiteBody": "This test has formatting, maths, media or question types the app can't edit yet. To keep it exactly as it is, edit it on the website.",
-    "testEditOnWebsite": "Edit on the website"
+    "testEditOnWebsite": "Edit on the website",
+    "ieltsPartFormatted": "This text has formatting the app can't edit yet, so it is shown as it is. Edit it on the website."
   }
 }

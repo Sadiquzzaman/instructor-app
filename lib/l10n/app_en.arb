@@ -9680,5 +9680,6 @@
   "appOpenOnWebsite": "Open on the website",
   "appTestEditOnWebsiteTitle": "Edit this test on the website",
   "appTestEditOnWebsiteBody": "This test has formatting, maths, media or question types the app can't edit yet. To keep it exactly as it is, edit it on the website.",
-  "appTestEditOnWebsite": "Edit on the website"
+  "appTestEditOnWebsite": "Edit on the website",
+  "appIeltsPartFormatted": "This text has formatting the app can't edit yet, so it is shown as it is. Edit it on the website."
 }

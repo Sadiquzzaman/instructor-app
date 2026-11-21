@@ -46,6 +46,7 @@ import 'package:instructor_app/features/results/screens/behaviour_screen.dart';
 import 'package:instructor_app/features/results/screens/paper_exam_screens.dart';
 import 'package:instructor_app/features/tests/screens/grading_screens.dart';
 import 'package:instructor_app/features/tests/screens/integrity_screen.dart';
+import 'package:instructor_app/features/ielts/screens/ielts_builder_screen.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_courses_screens.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_overview_screen.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_students_screens.dart';
@@ -431,10 +432,10 @@ final routerProvider = Provider<GoRouter>((ref) {
             path: AppRoutes.ieltsTests,
             builder: (context, state) => const IeltsTestsScreen(),
             routes: [
-              // The builder comes with Stage 5 PR 5.
               GoRoute(
                 path: ':id',
-                builder: (context, state) => const IeltsTestPlaceholder(),
+                builder: (context, state) =>
+                    IeltsBuilderScreen(id: state.pathParameters['id']!),
               ),
             ],
           ),

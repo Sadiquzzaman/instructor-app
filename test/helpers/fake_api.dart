@@ -94,6 +94,7 @@ FakeReply apiError(
   String? code,
   Object? message,
   String? feature,
+  Object? details,
 }) => (
   status,
   {
@@ -104,6 +105,7 @@ FakeReply apiError(
     'message': message ?? 'Failed',
     'code': ?code,
     'feature': ?feature,
+    'details': ?details,
   },
 );
 
