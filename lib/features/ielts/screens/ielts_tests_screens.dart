@@ -41,20 +41,7 @@ String ieltsPartName(AppLocalizations l10n, String module, int no) =>
       _ => l10n.ieltsTestsPartNamesSPEAKING(no),
     };
 
-/// A test's page until the builder lands (Stage 5 PR 5): "use the website
-/// for IELTS for now".
-class IeltsTestPlaceholder extends StatelessWidget {
-  const IeltsTestPlaceholder({super.key});
-
-  @override
-  Widget build(BuildContext context) => EmptyView(
-    icon: Icons.translate,
-    title: context.l10n.ieltsTestsPageTitle,
-    message: context.l10n.appNotYetIelts,
-  );
-}
-
-/// Where a test opens: the builder (PR 5 of Stage 5).
+/// Where a test opens: the builder.
 String ieltsTestRoute(String id) => '/ielts/tests/$id';
 
 /// Academic exams made for IELTS before the IELTS builder (P10-08).
