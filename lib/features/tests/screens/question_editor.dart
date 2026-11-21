@@ -1,13 +1,30 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 
+import 'package:instructor_app/core/files/attachment_field.dart';
+import 'package:instructor_app/core/files/file_uploader.dart';
 import 'package:instructor_app/core/l10n/l10n.dart';
 import 'package:instructor_app/core/theme/app_colors.dart';
 import 'package:instructor_app/core/theme/app_metrics.dart';
 import 'package:instructor_app/core/widgets/app_card.dart';
+import 'package:instructor_app/features/shell/data/entitlements.dart';
 import 'package:instructor_app/features/tests/data/test_draft.dart';
 
-const maxOptions = 6;
+/// The graded types the web's builder offers for an academic test (IELTS
+/// types come with Stage 5).
+const gradedChoiceTypes = [
+  'multiple-choice',
+  'multiple-response',
+  'true-false',
+];
+
+String typeName(AppLocalizations l10n, String subType) => switch (subType) {
+  'multiple-response' => l10n.createTestTypesGradedMultipleResponse,
+  'true-false' => l10n.createTestTypesGradedTrueFalse,
+  'fill-in-the-blanks' => l10n.createTestTypesGradedFillInTheBlanks,
+  'matching-ordering' => l10n.createTestTypesGradedMatchingOrdering,
+  _ => l10n.createTestTypesGradedMultipleChoice,
+};
 
 /// The web's validation message for one of [questionProblems]' keys.
 String problemText(AppLocalizations l10n, String key) {
@@ -17,16 +34,20 @@ String problemText(AppLocalizations l10n, String key) {
   return switch (key) {
     'title' => l10n.createTestValidationTitleOrImageMissing,
     'points' => l10n.createTestValidationPointsPositive,
-    'optionCount' => l10n.createTestValidationOptionCount(2, maxOptions),
+    'optionCount' => l10n.createTestValidationOptionCount(
+      minVariableOptions,
+      maxVariableOptions,
+    ),
     'pickTwo' => l10n.createTestValidationPickTwoCorrect,
     'pickOne' => l10n.createTestValidationPickOneCorrect,
     _ => l10n.createTestValidationAnswerMissing,
   };
 }
 
-/// One question being written (the web's QuestionCard): its text, an
-/// instruction, points, the options with the correct one marked, and
-/// duplicate or delete. The web's problems show under it.
+/// One question being written (the web's QuestionCard): its type, text,
+/// an instruction, an image (when the plan allows), points, the options
+/// with the correct ones marked, and duplicate or delete. The web's
+/// problems show under it.
 class QuestionEditor extends ConsumerStatefulWidget {
   const QuestionEditor({
     required this.number,
@@ -54,6 +75,7 @@ class _QuestionEditorState extends ConsumerState<QuestionEditor> {
   );
   late final _points = TextEditingController(text: '${widget.question.points}');
   final _options = <String, TextEditingController>{};
+  int _imageRound = 0;
 
   @override
   void dispose() {
@@ -75,6 +97,10 @@ class _QuestionEditorState extends ConsumerState<QuestionEditor> {
     final colors = AppColors.of(context);
     final problems = questionProblems(q);
     final multi = q.subType == 'multiple-response';
+    final fixed = q.subType == 'true-false';
+    final canImage =
+        ref.watch(entitlementsProvider).value?.has('allow_question_images') ??
+        false;
     void toggle(String id) => widget.onChanged(
       q.copyWith(
         answer: multi
@@ -94,10 +120,26 @@ class _QuestionEditorState extends ConsumerState<QuestionEditor> {
         children: [
           Row(
             children: [
+              Text('${widget.number}.', style: text.titleSmall),
+              const SizedBox(width: AppSpacing.sm),
               Expanded(
-                child: Text(
-                  '${widget.number}. ${l10n.createTestTypesGradedMultipleChoice}',
-                  style: text.titleSmall,
+                child: DropdownButtonFormField<String>(
+                  key: Key('question-type-${q.id}'),
+                  initialValue: q.subType,
+                  isExpanded: true,
+                  decoration: InputDecoration(
+                    labelText: l10n.createTestCardType,
+                  ),
+                  items: [
+                    for (final t in gradedChoiceTypes)
+                      DropdownMenuItem(
+                        value: t,
+                        child: Text(typeName(l10n, t)),
+                      ),
+                  ],
+                  onChanged: (v) {
+                    if (v != null) widget.onChanged(q.withSubType(v));
+                  },
                 ),
               ),
               IconButton(
@@ -121,6 +163,7 @@ class _QuestionEditorState extends ConsumerState<QuestionEditor> {
             maxLines: 6,
             decoration: InputDecoration(
               labelText: l10n.createTestStepsQuestions,
+              hintText: l10n.createTestPromptsDefault,
             ),
             onChanged: (v) => widget.onChanged(q.copyWith(text: v)),
           ),
@@ -133,6 +176,39 @@ class _QuestionEditorState extends ConsumerState<QuestionEditor> {
             ),
             onChanged: (v) => widget.onChanged(q.copyWith(instruction: v)),
           ),
+          if (canImage)
+            if (q.image != null)
+              Row(
+                children: [
+                  const Icon(Icons.image_outlined),
+                  const SizedBox(width: AppSpacing.xs),
+                  Expanded(
+                    child: Text(
+                      l10n.createTestCardQuestionImageAlt(widget.number),
+                      style: text.bodySmall,
+                    ),
+                  ),
+                  TextButton(
+                    key: Key('question-image-remove-${q.id}'),
+                    onPressed: () {
+                      setState(() => _imageRound++);
+                      widget.onChanged(q.copyWith(clearImage: true));
+                    },
+                    child: Text(l10n.createTestCardRemoveQuestionImage),
+                  ),
+                ],
+              )
+            else
+              AttachmentField(
+                key: ValueKey('question-image-${q.id}-$_imageRound'),
+                label: l10n.createTestCardUploadQuestionImage,
+                purpose: FilePurpose.exam,
+                maxFiles: 1,
+                onChanged: (files) {
+                  final url = files.isEmpty ? null : files.first.url;
+                  if (url != null) widget.onChanged(q.copyWith(image: url));
+                },
+              ),
           for (final (i, o) in q.options.indexed)
             Row(
               children: [
@@ -142,65 +218,71 @@ class _QuestionEditorState extends ConsumerState<QuestionEditor> {
                   onChanged: (_) => toggle(o.id),
                 ),
                 Expanded(
-                  child: TextField(
-                    key: Key('option-text-${o.id}'),
-                    controller: _option(o),
-                    decoration: InputDecoration(
-                      hintText: '${l10n.createTestCardOption} ${i + 1}',
-                    ),
-                    onChanged: (v) => widget.onChanged(
-                      q.copyWith(
-                        options: [
-                          for (final x in q.options)
-                            x.id == o.id ? x.copyWith(text: v) : x,
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                IconButton(
-                  key: Key('option-delete-${o.id}'),
-                  tooltip: l10n.createTestCardDeleteOption(i + 1),
-                  icon: const Icon(Icons.close),
-                  onPressed: q.options.length <= 2
-                      ? null
-                      : () => widget.onChanged(
-                          q.copyWith(
-                            options: [
-                              for (final x in q.options)
-                                if (x.id != o.id) x,
-                            ],
-                            answer: [
-                              for (final a in q.answer)
-                                if (a != o.id) a,
-                            ],
+                  child: fixed
+                      ? Text(o.text, key: Key('option-fixed-${o.id}'))
+                      : TextField(
+                          key: Key('option-text-${o.id}'),
+                          controller: _option(o),
+                          decoration: InputDecoration(
+                            hintText: '${l10n.createTestCardOption} ${i + 1}',
+                          ),
+                          onChanged: (v) => widget.onChanged(
+                            q.copyWith(
+                              options: [
+                                for (final x in q.options)
+                                  x.id == o.id ? x.copyWith(text: v) : x,
+                              ],
+                            ),
                           ),
                         ),
                 ),
+                if (!fixed)
+                  IconButton(
+                    key: Key('option-delete-${o.id}'),
+                    tooltip: l10n.createTestCardDeleteOption(i + 1),
+                    icon: const Icon(Icons.close),
+                    onPressed: q.options.length <= minVariableOptions
+                        ? null
+                        : () => widget.onChanged(
+                            q.copyWith(
+                              options: [
+                                for (final x in q.options)
+                                  if (x.id != o.id) x,
+                              ],
+                              answer: [
+                                for (final a in q.answer)
+                                  if (a != o.id) a,
+                              ],
+                            ),
+                          ),
+                  ),
               ],
             ),
+          if (fixed)
+            Text(l10n.createTestValidationFixedOptions, style: text.bodySmall),
           Wrap(
             spacing: AppSpacing.sm,
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
-              TextButton.icon(
-                key: Key('option-add-${q.id}'),
-                icon: const Icon(Icons.add),
-                label: Text(l10n.createTestCardAddOption),
-                onPressed: q.options.length >= maxOptions
-                    ? null
-                    : () => widget.onChanged(
-                        q.copyWith(
-                          options: [
-                            ...q.options,
-                            DraftOption(id: newId()),
-                          ],
+              if (!fixed)
+                TextButton.icon(
+                  key: Key('option-add-${q.id}'),
+                  icon: const Icon(Icons.add),
+                  label: Text(l10n.createTestCardAddOption),
+                  onPressed: q.options.length >= maxVariableOptions
+                      ? null
+                      : () => widget.onChanged(
+                          q.copyWith(
+                            options: [
+                              ...q.options,
+                              DraftOption(id: newId()),
+                            ],
+                          ),
                         ),
-                      ),
-              ),
-              if (q.options.length >= maxOptions)
+                ),
+              if (!fixed && q.options.length >= maxVariableOptions)
                 Text(
-                  l10n.createTestCardMaxOptions(maxOptions),
+                  l10n.createTestCardMaxOptions(maxVariableOptions),
                   style: text.bodySmall?.copyWith(color: colors.inkMuted),
                 ),
               SizedBox(
