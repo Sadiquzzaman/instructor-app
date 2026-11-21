@@ -13,7 +13,9 @@ import 'package:instructor_app/core/theme/app_metrics.dart';
 import 'package:instructor_app/core/time/org_time.dart';
 import 'package:instructor_app/core/widgets/app_card.dart';
 import 'package:instructor_app/core/widgets/date_field.dart';
+import 'package:instructor_app/features/shell/data/entitlements.dart';
 import 'package:instructor_app/features/tests/data/test_draft.dart';
+import 'package:instructor_app/features/tests/screens/passage_editor.dart';
 import 'package:instructor_app/features/tests/screens/question_editor.dart';
 
 typedef Choice = ({String id, String label});
@@ -588,16 +590,47 @@ class _FieldState extends State<_Field> {
   );
 }
 
-class _QuestionsStep extends StatelessWidget {
+class _QuestionsStep extends ConsumerStatefulWidget {
   const _QuestionsStep({required this.draft, required this.onChanged});
 
   final TestDraft draft;
   final ValueChanged<TestDraft> onChanged;
 
   @override
+  ConsumerState<_QuestionsStep> createState() => _QuestionsStepState();
+}
+
+/// The web's question categories and the plan switch each needs.
+const _categories = {
+  'graded': null,
+  'ungraded': 'allow_ungraded_questions',
+  passageType: 'allow_passage_questions',
+};
+
+class _QuestionsStepState extends ConsumerState<_QuestionsStep> {
+  String _category = 'graded';
+
+  TestDraft get draft => widget.draft;
+  ValueChanged<TestDraft> get onChanged => widget.onChanged;
+
+  String _categoryName(AppLocalizations l10n, String c) => switch (c) {
+    'ungraded' => l10n.createTestCategoriesUngraded,
+    passageType => l10n.createTestCategoriesPassageQuestion,
+    _ => l10n.createTestCategoriesGraded,
+  };
+
+  @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final text = Theme.of(context).textTheme;
+    final colors = AppColors.of(context);
+    final entitlements = ref.watch(entitlementsProvider).value;
+    bool allowed(String c) {
+      final feature = _categories[c];
+      return feature == null || (entitlements?.has(feature) ?? false);
+    }
+
+    final category = allowed(_category) ? _category : 'graded';
     final subject = draft.subject;
     if (subject == null) {
       return Text(l10n.createTestQuestionsSubjectFirst);
@@ -610,45 +643,86 @@ class _QuestionsStep extends StatelessWidget {
       children: [
         Text(l10n.createTestQuestionsTitle, style: text.titleMedium),
         Text(
-          '${subject.name} · ${l10n.createTestQuestionsAdded(qs.length)} · '
+          '${subject.name} · ${l10n.createTestQuestionsAdded(subject.questionCount)} · '
           '${l10n.createTestQuestionsTotalMarks(subject.totalMarks)}',
           key: const Key('create-questions-summary'),
           style: text.bodySmall,
         ),
         for (final (i, q) in qs.indexed) ...[
           const SizedBox(height: AppSpacing.sm),
-          QuestionEditor(
-            key: ValueKey(q.id),
-            number: i + 1,
-            question: q,
-            onChanged: (next) =>
-                setQuestions([for (final x in qs) x.id == q.id ? next : x]),
-            onDelete: () => setQuestions([
-              for (final x in qs)
-                if (x.id != q.id) x,
-            ]),
-            onDuplicate: () {
-              final copy = DraftQuestion.fromJson({
-                ...q.toJson(),
-                'id': newId(),
-                'options': [
-                  for (final o in q.options) {...o.toJson(), 'id': newId()},
-                ],
-                'answer': <String>[],
-              });
-              setQuestions([...qs.take(i + 1), copy, ...qs.skip(i + 1)]);
-            },
-          ),
+          if (q.isPassage)
+            PassageEditor(
+              key: ValueKey(q.id),
+              number: i + 1,
+              passage: q,
+              onChanged: (next) =>
+                  setQuestions([for (final x in qs) x.id == q.id ? next : x]),
+              onDelete: () => setQuestions([
+                for (final x in qs)
+                  if (x.id != q.id) x,
+              ]),
+            )
+          else
+            QuestionEditor(
+              key: ValueKey(q.id),
+              number: i + 1,
+              question: q,
+              onChanged: (next) =>
+                  setQuestions([for (final x in qs) x.id == q.id ? next : x]),
+              onDelete: () => setQuestions([
+                for (final x in qs)
+                  if (x.id != q.id) x,
+              ]),
+              onDuplicate: () => setQuestions([
+                ...qs.take(i + 1),
+                q.duplicate(),
+                ...qs.skip(i + 1),
+              ]),
+            ),
         ],
         const SizedBox(height: AppSpacing.md),
+        Text(l10n.createTestQuestionsQuestionCategory, style: text.bodySmall),
+        const SizedBox(height: AppSpacing.xs),
+        Wrap(
+          spacing: AppSpacing.sm,
+          runSpacing: AppSpacing.xs,
+          children: [
+            for (final c in _categories.keys)
+              ChoiceChip(
+                key: Key('create-category-$c'),
+                label: Text(_categoryName(l10n, c)),
+                selected: category == c,
+                onSelected: allowed(c)
+                    ? (_) => setState(() => _category = c)
+                    : null,
+              ),
+          ],
+        ),
+        if (_categories.keys.any((c) => !allowed(c)))
+          Text(
+            l10n.createTestQuestionsNotInPlan,
+            key: const Key('create-category-not-in-plan'),
+            style: text.bodySmall?.copyWith(color: colors.inkMuted),
+          ),
+        const SizedBox(height: AppSpacing.sm),
         Align(
           alignment: AlignmentDirectional.centerStart,
           child: FilledButton.icon(
             key: const Key('create-add-question'),
             icon: const Icon(Icons.add),
-            label: Text(l10n.createTestQuestionsAddQuestion),
-            onPressed: () =>
-                setQuestions([...qs, DraftQuestion.multipleChoice()]),
+            label: Text(
+              category == passageType && qs.any((q) => q.isPassage)
+                  ? l10n.createTestQuestionsAddPassage
+                  : l10n.createTestQuestionsAddQuestion,
+            ),
+            onPressed: () => setQuestions([
+              ...qs,
+              switch (category) {
+                passageType => DraftQuestion.passage(),
+                'ungraded' => DraftQuestion.create('essay', type: 'ungraded'),
+                _ => DraftQuestion.multipleChoice(),
+              },
+            ]),
           ),
         ),
       ],
