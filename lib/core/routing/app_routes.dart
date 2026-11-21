@@ -52,6 +52,8 @@ abstract final class AppRoutes {
   static const messageLog = '/message-log';
   static const billing = '/billing';
   static const ieltsOverview = '/ielts/overview';
+  static const ieltsCourses = '/ielts/courses';
+  static const ieltsMyCourses = '/ielts/my-courses';
 
   /// Pages the app has really built (not "use the website for now"). A
   /// notification's link opens in the app only for these; each stage adds
@@ -59,6 +61,8 @@ abstract final class AppRoutes {
   static const built = {
     home,
     ieltsOverview,
+    ieltsCourses,
+    ieltsMyCourses,
     today,
     dashboard,
     myAttendance,
