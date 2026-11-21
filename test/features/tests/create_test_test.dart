@@ -26,66 +26,70 @@ Session _teacher() {
   });
 }
 
-FakeApi _api({FakeHandler? create, Map<String, bool> features = const {}}) =>
-    FakeApi()
-      ..on('GET /auth/contexts', (_) => ok(<Object>[]))
-      ..on('GET /me/entitlements', (_) => ok({'features': features}))
-      ..on('GET /me/notifications/unread-count', (_) => ok({'count': 0}))
-      ..on('GET /workspace/level-labels', (_) => ok(<String, Object>{}))
-      ..on('GET /dashboard/teacher', (_) => ok(<String, Object>{}))
-      ..on(
-        'GET /classes',
-        (_) => ok([
-          {'id': 'c6', 'class_name': 'Class 6'},
-          {'id': 'c7', 'class_name': 'Class 7'},
-        ]),
-      )
-      ..on(
-        'GET /sections',
-        (_) => ok([
-          {'id': 'sa', 'name': 'A', 'class_id': 'c6'},
-          {'id': 'sb', 'name': 'A', 'class_id': 'c7'},
-        ]),
-      )
-      ..on(
-        'GET /offerings',
-        (_) => ok([
-          {
-            'id': 'oa',
-            'section_id': 'sa',
-            'subject': {'id': 'm', 'name': 'Mathematics'},
-            'teachers': [
-              {'id': 'me', 'full_name': 'Rina'},
-            ],
-          },
-          {
-            'id': 'ob',
-            'section_id': 'sb',
-            'subject': {'id': 'm', 'name': 'Mathematics'},
-            'teachers': <Object>[],
-          },
-        ]),
-      )
-      ..on(
-        'GET /classes/c6/subjects/assigned',
-        (_) => ok([
-          {'subject_id': 'm', 'name': 'Mathematics', 'code': 'M'},
-        ]),
-      )
-      ..on(
-        'GET /exams/proctoring-options',
-        (_) => ok({
-          'levels': [
-            {'level': 'OFF', 'available': true},
-            {'level': 'LIGHT', 'available': true},
-            {'level': 'STRICT', 'available': false},
-          ],
-          'default_level': 'LIGHT',
-        }),
-      )
-      ..on('POST /exams', create ?? (_) => ok({'id': 'e9'}))
-      ..on('GET /exams/e9', (_) => ok({'id': 'e9', 'test_name': 'Algebra'}))
-      ..on('GET /exams', (_) => ok(<Object>[]));
+FakeApi _api({
+  FakeHandler? create,
+  Map<String, bool> features = const {},
+  bool twoSubjects = false,
+}) => FakeApi()
+  ..on('GET /auth/contexts', (_) => ok(<Object>[]))
+  ..on('GET /me/entitlements', (_) => ok({'features': features}))
+  ..on('GET /me/notifications/unread-count', (_) => ok({'count': 0}))
+  ..on('GET /workspace/level-labels', (_) => ok(<String, Object>{}))
+  ..on('GET /dashboard/teacher', (_) => ok(<String, Object>{}))
+  ..on(
+    'GET /classes',
+    (_) => ok([
+      {'id': 'c6', 'class_name': 'Class 6'},
+      {'id': 'c7', 'class_name': 'Class 7'},
+    ]),
+  )
+  ..on(
+    'GET /sections',
+    (_) => ok([
+      {'id': 'sa', 'name': 'A', 'class_id': 'c6'},
+      {'id': 'sb', 'name': 'A', 'class_id': 'c7'},
+    ]),
+  )
+  ..on(
+    'GET /offerings',
+    (_) => ok([
+      {
+        'id': 'oa',
+        'section_id': 'sa',
+        'subject': {'id': 'm', 'name': 'Mathematics'},
+        'teachers': [
+          {'id': 'me', 'full_name': 'Rina'},
+        ],
+      },
+      {
+        'id': 'ob',
+        'section_id': 'sb',
+        'subject': {'id': 'm', 'name': 'Mathematics'},
+        'teachers': <Object>[],
+      },
+    ]),
+  )
+  ..on(
+    'GET /classes/c6/subjects/assigned',
+    (_) => ok([
+      {'subject_id': 'm', 'name': 'Mathematics', 'code': 'M'},
+      if (twoSubjects) {'subject_id': 'p', 'name': 'Physics', 'code': 'P'},
+    ]),
+  )
+  ..on(
+    'GET /exams/proctoring-options',
+    (_) => ok({
+      'levels': [
+        {'level': 'OFF', 'available': true},
+        {'level': 'LIGHT', 'available': true},
+        {'level': 'STRICT', 'available': false},
+      ],
+      'default_level': 'LIGHT',
+    }),
+  )
+  ..on('POST /exams', create ?? (_) => ok({'id': 'e9'}))
+  ..on('GET /exams/e9', (_) => ok({'id': 'e9', 'test_name': 'Algebra'}))
+  ..on('GET /exams', (_) => ok(<Object>[]));
 
 Future<void> _open(WidgetTester tester, FakeApi api, {String? lang}) async {
   final app = await pumpInstructorApp(
@@ -224,6 +228,11 @@ void main() {
     await _tap(tester, find.byKey(const Key('create-next')));
     await _question(tester);
     await _tap(tester, find.byKey(const Key('create-next')));
+    // Review, then order, then publish.
+    expect(find.text(_en.createTestReviewSummary), findsOneWidget);
+    await _tap(tester, find.byKey(const Key('create-next')));
+    expect(find.text(_en.createTestReorderTitle), findsOneWidget);
+    await _tap(tester, find.byKey(const Key('create-next')));
     expect(find.text('Class 6'), findsOneWidget);
     await _tap(tester, find.byKey(const Key('create-publish')));
 
@@ -308,6 +317,8 @@ void main() {
     await _tap(tester, find.byKey(const Key('create-next')));
     await _question(tester);
     await _tap(tester, find.byKey(const Key('create-next')));
+    await _tap(tester, find.byKey(const Key('create-next')));
+    await _tap(tester, find.byKey(const Key('create-next')));
     await _tap(tester, find.byKey(const Key('create-publish')));
     expect(find.byType(CreateTestScreen), findsOneWidget);
   });
@@ -365,6 +376,106 @@ void main() {
     await _tap(tester, find.byKey(const Key('create-next')));
     expect(find.text(_en.createTestToastFixQuestions), findsOneWidget);
     expect(api.to('POST /exams'), isEmpty);
+  });
+
+  testWidgets('model tests need the plan', (tester) async {
+    await _open(tester, _api());
+    final s = tester.widget<SwitchListTile>(
+      find.byKey(const Key('create-model-test')),
+    );
+    expect(s.onChanged, isNull);
+    expect(find.text(_en.createTestBasicModelTestLocked), findsOneWidget);
+  });
+
+  testWidgets('a model test: two subjects, reordered, published', (
+    tester,
+  ) async {
+    final api = _api(features: {'allow_model_tests': true}, twoSubjects: true);
+    await _open(tester, api);
+    await _type(tester, find.byKey(const Key('create-name')), 'Mock');
+    await tester.tap(find.byKey(const Key('create-class')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Class 6').last);
+    await tester.pumpAndSettle();
+    await _type(tester, find.byKey(const Key('create-duration')), '60');
+    await _tap(tester, find.byKey(const Key('create-model-test')));
+    // The subject is picked with the questions, not here.
+    expect(find.byKey(const Key('create-subject')), findsNothing);
+    await _tap(tester, find.byKey(const Key('create-next')));
+
+    expect(find.byKey(const Key('create-subject-first')), findsOneWidget);
+    Future<void> addSubject(String name) async {
+      await _tap(tester, find.byKey(const Key('create-subject-add')));
+      await tester.tap(find.text(name).last);
+      await tester.pumpAndSettle();
+    }
+
+    await addSubject('Mathematics (M)');
+    await _question(tester);
+    await addSubject('Physics (P)');
+    // Physics is open and empty; Mathematics keeps its question.
+    expect(find.textContaining('Questions added: 0'), findsOneWidget);
+    await _question(tester);
+
+    await _tap(tester, find.byKey(const Key('create-next')));
+    expect(find.text('Mathematics (M)'), findsWidgets);
+    expect(find.text('Physics (P)'), findsWidgets);
+    await _tap(tester, find.byKey(const Key('create-next')));
+    await _tap(tester, find.byKey(const Key('order-down-0')));
+    await _tap(tester, find.byKey(const Key('create-next')));
+    await _tap(tester, find.byKey(const Key('create-publish')));
+
+    final body = api.to('POST /exams').single.body! as Map;
+    expect((body['formState'] as Map)['isModelTest'], isTrue);
+    final subjects = body['subjects'] as List;
+    expect([for (final s in subjects) (s as Map)['id']], ['m', 'p']);
+    String firstId(int i) =>
+        (((subjects[i] as Map)['questions'] as List).single as Map)['id']
+            as String;
+    // Moved down: Physics' question comes first.
+    expect(body['questionOrder'], [firstId(1), firstId(0)]);
+  });
+
+  testWidgets('removing a subject asks first', (tester) async {
+    final api = _api(features: {'allow_model_tests': true}, twoSubjects: true);
+    await _open(tester, api);
+    await _type(tester, find.byKey(const Key('create-name')), 'Mock');
+    await tester.tap(find.byKey(const Key('create-class')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Class 6').last);
+    await tester.pumpAndSettle();
+    await _type(tester, find.byKey(const Key('create-duration')), '60');
+    await _tap(tester, find.byKey(const Key('create-model-test')));
+    await _tap(tester, find.byKey(const Key('create-next')));
+    await _tap(tester, find.byKey(const Key('create-subject-add')));
+    await tester.tap(find.text('Physics (P)').last);
+    await tester.pumpAndSettle();
+
+    final chip = find.byKey(const Key('create-subject-tab-p'));
+    await tester.tap(
+      find.byTooltip(_en.createTestSubjectsRemove('Physics (P)')),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text(_en.createTestSubjectsRemoveDetail), findsOneWidget);
+    await tester.tap(find.byKey(const Key('create-subject-remove-confirm')));
+    await tester.pumpAndSettle();
+    expect(chip, findsNothing);
+    expect(find.byKey(const Key('create-subject-first')), findsOneWidget);
+  });
+
+  test('the order follows moves and keeps new questions at the end', () {
+    final a = DraftQuestion.multipleChoice();
+    final b = DraftQuestion.multipleChoice();
+    final c = DraftQuestion.multipleChoice();
+    final d = TestDraft(
+      subjects: [
+        DraftSubject(id: 'm', name: 'M', questions: [a, b]),
+        DraftSubject(id: 'p', name: 'P', questions: [c]),
+      ],
+      order: [b.id, 'gone', a.id],
+    );
+    expect([for (final (_, q) in d.ordered) q.id], [b.id, a.id, c.id]);
+    expect(d.toBody(DateTime(2026))['questionOrder'], [b.id, a.id, c.id]);
   });
 
   testWidgets('a 360 px phone in Bangla', (tester) async {

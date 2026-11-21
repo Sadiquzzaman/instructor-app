@@ -17,6 +17,7 @@ import 'package:instructor_app/features/shell/data/entitlements.dart';
 import 'package:instructor_app/features/tests/data/test_draft.dart';
 import 'package:instructor_app/features/tests/screens/passage_editor.dart';
 import 'package:instructor_app/features/tests/screens/question_editor.dart';
+import 'package:instructor_app/features/tests/screens/review_order_steps.dart';
 
 typedef Choice = ({String id, String label});
 
@@ -147,6 +148,9 @@ class CreateTestScreen extends ConsumerStatefulWidget {
   ConsumerState<CreateTestScreen> createState() => _CreateTestScreenState();
 }
 
+/// Basic info, questions, review, order, publish.
+const _stepCount = 5;
+
 class _CreateTestScreenState extends ConsumerState<CreateTestScreen> {
   late TestDraft _d =
       ref.read(testDraftStoreProvider).load() ?? const TestDraft();
@@ -171,7 +175,10 @@ class _CreateTestScreenState extends ConsumerState<CreateTestScreen> {
         if (!_personal && _d.classId == null) {
           return ref.levels(context, l10n.createTestToastClassRequired);
         }
-        if (_d.subject == null) return l10n.createTestToastSubjectRequired;
+        // A model test's subjects are added with its questions.
+        if (!_d.isModelTest && _d.subject == null) {
+          return l10n.createTestToastSubjectRequired;
+        }
         final minutes = num.tryParse(_d.duration.trim());
         if (minutes == null || minutes < 1) {
           return l10n.createTestToastDurationRequired;
@@ -180,6 +187,7 @@ class _CreateTestScreenState extends ConsumerState<CreateTestScreen> {
           return l10n.createTestToastNegativeRequired;
         }
       case 1:
+        if (_d.subjects.isEmpty) return l10n.createTestToastSubjectRequired;
         if (_d.questions.isEmpty) return l10n.createTestToastQuestionRequired;
         if (_d.questions.any((q) => questionProblems(q).isNotEmpty)) {
           return l10n.createTestToastFixQuestions;
@@ -188,6 +196,8 @@ class _CreateTestScreenState extends ConsumerState<CreateTestScreen> {
         if (passing != null && _d.totalMarks < passing) {
           return l10n.createTestToastMarksBelowPassing(_d.totalMarks, passing);
         }
+      case 2 || 3:
+        return null;
       default:
         if (!_d.publishNow && (_d.scheduleAt == null || _d.endingAt == null)) {
           return l10n.createTestToastScheduleRequired;
@@ -211,10 +221,13 @@ class _CreateTestScreenState extends ConsumerState<CreateTestScreen> {
 
   Future<void> _publish() async {
     final l10n = context.l10n;
-    final p = _problem(2);
-    if (p != null) {
-      _snack(p);
-      return;
+    // Every step's checks, in case an earlier one changed since.
+    for (var s = 0; s < _stepCount; s++) {
+      final p = _problem(s);
+      if (p != null) {
+        _snack(p);
+        return;
+      }
     }
     final router = GoRouter.of(context);
     setState(() => _saving = true);
@@ -245,6 +258,8 @@ class _CreateTestScreenState extends ConsumerState<CreateTestScreen> {
     final steps = [
       l10n.createTestStepsBasicInfo,
       l10n.createTestStepsQuestions,
+      l10n.createTestStepsReview,
+      l10n.createTestStepsReorder,
       l10n.createTestStepsPublish,
     ];
     final step = _d.step.clamp(0, steps.length - 1);
@@ -277,6 +292,8 @@ class _CreateTestScreenState extends ConsumerState<CreateTestScreen> {
             switch (step) {
               0 => _BasicsStep(draft: _d, onChanged: _set),
               1 => _QuestionsStep(draft: _d, onChanged: _set),
+              2 => ReviewStep(draft: _d),
+              3 => OrderStep(draft: _d, onChanged: _set),
               _ => _PublishStep(draft: _d, onChanged: _set),
             },
             const SizedBox(height: AppSpacing.lg),
@@ -347,9 +364,13 @@ class _BasicsStep extends ConsumerWidget {
         ? null
         : ref.watch(assignedSubjectsProvider(d.classId!));
     final levels = ref.watch(proctoringLevelsProvider).value;
+    final canModelTest =
+        ref.watch(entitlementsProvider).value?.has('allow_model_tests') ??
+        false;
     // One subject in the class: it is chosen for them, as on the web.
     final list = subjects?.value;
     if (!personal &&
+        !d.isModelTest &&
         list != null &&
         list.length == 1 &&
         d.subject?.id != list.first.id) {
@@ -427,8 +448,29 @@ class _BasicsStep extends ConsumerWidget {
                       ),
                     ],
             ),
-          const SizedBox(height: AppSpacing.sm),
-          if (subjects == null)
+          SwitchListTile(
+            key: const Key('create-model-test'),
+            contentPadding: EdgeInsets.zero,
+            title: Text(l10n.createTestBasicModelTest),
+            subtitle: canModelTest
+                ? null
+                : Text(l10n.createTestBasicModelTestLocked, style: muted),
+            value: d.isModelTest && canModelTest,
+            onChanged: canModelTest
+                ? (v) => onChanged(
+                    d.copyWith(
+                      isModelTest: v,
+                      // Back to one subject: the open one stays.
+                      subjects: v || d.activeSubject == null
+                          ? null
+                          : [d.activeSubject!],
+                    ),
+                  )
+                : null,
+          ),
+          if (d.isModelTest && canModelTest)
+            const SizedBox.shrink()
+          else if (subjects == null)
             Text(
               ref.levels(context, l10n.createTestBasicPickClassFirst),
               style: muted,
@@ -631,17 +673,37 @@ class _QuestionsStepState extends ConsumerState<_QuestionsStep> {
     }
 
     final category = allowed(_category) ? _category : 'graded';
-    final subject = draft.subject;
+    final model = draft.isModelTest;
+    final subject = draft.activeSubject;
+    final tabs = model
+        ? _SubjectTabs(draft: draft, onChanged: onChanged)
+        : null;
     if (subject == null) {
-      return Text(l10n.createTestQuestionsSubjectFirst);
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          ?tabs,
+          Text(
+            l10n.createTestQuestionsSubjectFirst,
+            key: const Key('create-subject-first'),
+          ),
+        ],
+      );
     }
-    void setQuestions(List<DraftQuestion> qs) =>
-        onChanged(draft.copyWith(subjects: [subject.copyWith(questions: qs)]));
+    void setQuestions(List<DraftQuestion> qs) => onChanged(
+      draft.copyWith(
+        subjects: [
+          for (final s in draft.subjects)
+            s.id == subject.id ? s.copyWith(questions: qs) : s,
+        ],
+      ),
+    );
     final qs = subject.questions;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(l10n.createTestQuestionsTitle, style: text.titleMedium),
+        ?tabs,
         Text(
           '${subject.name} · ${l10n.createTestQuestionsAdded(subject.questionCount)} · '
           '${l10n.createTestQuestionsTotalMarks(subject.totalMarks)}',
@@ -726,6 +788,119 @@ class _QuestionsStepState extends ConsumerState<_QuestionsStep> {
           ),
         ),
       ],
+    );
+  }
+}
+
+/// A model test's subjects (the web's QuestionSubjectTabs): pick the open
+/// one, add another of the class's subjects, or remove one with its
+/// questions after asking.
+class _SubjectTabs extends ConsumerWidget {
+  const _SubjectTabs({required this.draft, required this.onChanged});
+
+  final TestDraft draft;
+  final ValueChanged<TestDraft> onChanged;
+
+  Future<void> _remove(BuildContext context, DraftSubject s) async {
+    final l10n = context.l10n;
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.createTestSubjectsRemoveTitle(s.name)),
+        content: Text(l10n.createTestSubjectsRemoveDetail),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text(l10n.createTestSubjectsCancel),
+          ),
+          FilledButton(
+            key: const Key('create-subject-remove-confirm'),
+            onPressed: () => Navigator.of(context).pop(true),
+            child: Text(l10n.createTestSubjectsRemoveConfirm),
+          ),
+        ],
+      ),
+    );
+    if (ok != true) return;
+    onChanged(
+      draft.copyWith(
+        subjects: [
+          for (final x in draft.subjects)
+            if (x.id != s.id) x,
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
+    final text = Theme.of(context).textTheme;
+    final personal = !(ref.watch(sessionProvider)?.isOrganization ?? false);
+    final options = personal
+        ? ref.watch(catalogSubjectsProvider).value
+        : draft.classId == null
+        ? null
+        : ref.watch(assignedSubjectsProvider(draft.classId!)).value;
+    final taken = {for (final s in draft.subjects) s.id};
+    final left = [
+      for (final o in options ?? const <Choice>[])
+        if (!taken.contains(o.id)) o,
+    ];
+    final active = draft.activeSubject?.id;
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: AppSpacing.xs),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(l10n.createTestSubjectsLabel, style: text.bodySmall),
+          const SizedBox(height: AppSpacing.xs),
+          Wrap(
+            spacing: AppSpacing.sm,
+            runSpacing: AppSpacing.xs,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: [
+              for (final s in draft.subjects)
+                InputChip(
+                  key: Key('create-subject-tab-${s.id}'),
+                  label: Text(s.name),
+                  selected: s.id == active,
+                  onSelected: (_) =>
+                      onChanged(draft.copyWith(activeSubjectId: s.id)),
+                  deleteButtonTooltipMessage: l10n.createTestSubjectsRemove(
+                    s.name,
+                  ),
+                  onDeleted: () => _remove(context, s),
+                ),
+              if (left.isNotEmpty)
+                PopupMenuButton<String>(
+                  key: const Key('create-subject-add'),
+                  tooltip: l10n.createTestSubjectsAdd,
+                  onSelected: (id) {
+                    final o = left.firstWhere((x) => x.id == id);
+                    onChanged(
+                      draft.copyWith(
+                        subjects: [
+                          ...draft.subjects,
+                          DraftSubject(id: o.id, name: o.label),
+                        ],
+                        activeSubjectId: o.id,
+                      ),
+                    );
+                  },
+                  itemBuilder: (_) => [
+                    for (final o in left)
+                      PopupMenuItem(value: o.id, child: Text(o.label)),
+                  ],
+                  child: Chip(
+                    avatar: const Icon(Icons.add),
+                    label: Text(l10n.createTestSubjectsAdd),
+                  ),
+                ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
