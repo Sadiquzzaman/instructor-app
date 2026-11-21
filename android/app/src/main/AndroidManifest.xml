@@ -2,6 +2,7 @@
     <!-- Check-in to in-person classes: one location fix while the app is open (Stage 1). -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <application
         android:label="Instructor"
         android:name="${applicationName}"

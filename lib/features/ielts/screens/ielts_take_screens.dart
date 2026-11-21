@@ -22,10 +22,11 @@ import 'package:instructor_app/features/ielts/data/ielts.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_overview_screen.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_tests_screens.dart';
 import 'package:instructor_app/features/ielts/screens/listening_player.dart';
+import 'package:instructor_app/features/ielts/screens/speaking_screens.dart';
 
-/// Modules the app takes on screen; the others say "not on screen yet".
-/// Speaking joins with its recorder (Stage 5 PR 9).
-const ieltsOnScreen = {'LISTENING', 'READING', 'WRITING'};
+/// Modules the app takes on screen (Speaking as practice recordings; a
+/// live session is run by the teacher).
+const ieltsOnScreen = {'LISTENING', 'READING', 'WRITING', 'SPEAKING'};
 
 /// Mocks need a computer or a tablet (the owner's decision, 15 Nov 2026).
 const ieltsMinMockWidth = 768.0;
@@ -439,7 +440,10 @@ class _IeltsAttemptScreenState extends ConsumerState<IeltsAttemptScreen> {
     final v = _view!;
     final parts = v.parts ?? const [];
     final writing = v.module == 'WRITING';
-    final missing = writing
+    final speaking = v.module == 'SPEAKING';
+    final missing = speaking
+        ? parts.where((p) => v.recordings[p.id] == null).length
+        : writing
         ? parts.where((p) => essayWords(_answers[p.id] ?? '') == 0).length
         : unansweredNumbers(parts, _answers);
     final ok = await showDialog<bool>(
@@ -449,6 +453,8 @@ class _IeltsAttemptScreenState extends ConsumerState<IeltsAttemptScreen> {
         content: Text(
           missing == 0
               ? l10n.ieltsTakeHandInAll
+              : speaking
+              ? l10n.ieltsTakeHandInNoRecording(missing)
               : writing
               ? l10n.ieltsTakeHandInEmptyTasks(missing)
               : l10n.ieltsTakeHandInUnanswered(missing),
@@ -516,6 +522,7 @@ class _IeltsAttemptScreenState extends ConsumerState<IeltsAttemptScreen> {
     };
     final writing = v.module == 'WRITING';
     final listening = v.module == 'LISTENING';
+    final speaking = v.module == 'SPEAKING';
     final groups = [
       for (final g in part.groups)
         Padding(
@@ -564,6 +571,31 @@ class _IeltsAttemptScreenState extends ConsumerState<IeltsAttemptScreen> {
             icon: const Icon(Icons.image_outlined),
             label: Text(l10n.ieltsTakePicture),
             onPressed: () => openFile(context, ref, part.imageFileId!),
+          ),
+        ),
+    ];
+    final speakingPane = <Widget>[
+      Text(l10n.ieltsTakeSpeakingPracticeHint, style: text.bodySmall),
+      for (final p in parts)
+        Padding(
+          padding: const EdgeInsets.only(top: AppSpacing.md),
+          child: SpeakingPartCard(
+            key: ValueKey('${p.id}-${v.recordings[p.id]}'),
+            partId: p.id,
+            partNo: p.partNo,
+            title: p.title,
+            content: p.content,
+            recordingId: v.recordings[p.id],
+            onRecorded: (fileId) async {
+              final r = await ref
+                  .read(apiClientProvider)
+                  .put(
+                    '/ielts/my/attempts/${v.id}/recordings',
+                    data: {'part_id': p.id, 'file_id': fileId},
+                  );
+              final next = attemptFromJson(r.payload);
+              if (mounted && next != null) setState(() => _take(next));
+            },
           ),
         ),
     ];
@@ -635,7 +667,9 @@ class _IeltsAttemptScreenState extends ConsumerState<IeltsAttemptScreen> {
         ),
         const Divider(height: 1),
         Expanded(
-          child: wide && !listening
+          child: speaking
+              ? pane(speakingPane, Key('speaking-${v.id}'))
+              : wide && !listening
               ? Row(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -1145,6 +1179,20 @@ class _ResultView extends ConsumerWidget {
                   ),
                 ),
               ],
+              if (speaking)
+                for (final p in parts ?? const <PaperPart>[])
+                  Padding(
+                    padding: const EdgeInsets.only(top: AppSpacing.md),
+                    child: SpeakingPartCard(
+                      partId: p.id,
+                      partNo: p.partNo,
+                      title: p.title,
+                      content: p.content,
+                      recordingId: v.recordings[p.id],
+                      readOnly: true,
+                      onRecorded: (_) async {},
+                    ),
+                  ),
               if (writing)
                 for (final p in parts ?? const <PaperPart>[])
                   Padding(
