@@ -51,6 +51,7 @@ import 'package:instructor_app/features/ielts/screens/ielts_courses_screens.dart
 import 'package:instructor_app/features/ielts/screens/ielts_marking_screens.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_openings_screen.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_overview_screen.dart';
+import 'package:instructor_app/features/ielts/screens/ielts_progress_screens.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_students_screens.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_take_screens.dart';
 import 'package:instructor_app/features/ielts/screens/speaking_screens.dart';
@@ -467,6 +468,31 @@ final routerProvider = Provider<GoRouter>((ref) {
                 ),
               ),
             ],
+          ),
+          GoRoute(
+            path: '/ielts/progress',
+            builder: (context, state) => const IeltsProgressScreen(),
+            routes: [
+              GoRoute(
+                path: ':studentId',
+                builder: (context, state) => IeltsProgressScreen(
+                  studentId: state.pathParameters['studentId'],
+                ),
+              ),
+            ],
+          ),
+          GoRoute(
+            path: '/ielts/report/:assignmentId/:studentId',
+            builder: (context, state) => IeltsBandReportScreen(
+              assignmentId: state.pathParameters['assignmentId']!,
+              studentId: state.pathParameters['studentId']!,
+            ),
+          ),
+          GoRoute(
+            path: '/ielts/assignments/:id/similarity',
+            builder: (context, state) => SimilarityScreen.ieltsWriting(
+              assignmentId: state.pathParameters['id']!,
+            ),
           ),
           GoRoute(
             path: '/ielts/speaking/:id',

@@ -283,9 +283,20 @@ class _StudentOverview extends ConsumerWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Text(
-                          l10n.ieltsOverviewTargetsTitle,
-                          style: text.titleSmall,
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                l10n.ieltsOverviewTargetsTitle,
+                                style: text.titleSmall,
+                              ),
+                            ),
+                            TextButton(
+                              key: const Key('ielts-see-progress'),
+                              onPressed: () => context.push('/ielts/progress'),
+                              child: Text(l10n.ieltsOverviewSeeProgress),
+                            ),
+                          ],
                         ),
                         _BandTable(
                           header: [

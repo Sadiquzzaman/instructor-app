@@ -58,9 +58,20 @@ Widget _failure(BuildContext context, Object e, VoidCallback retry) {
 /// check now. Staff only; opening it after the due date runs the first
 /// check by itself.
 class SimilarityScreen extends ConsumerStatefulWidget {
-  const SimilarityScreen({required this.homeworkId, super.key});
+  const SimilarityScreen({required this.homeworkId, super.key})
+    : scopeType = 'HOMEWORK';
 
+  /// An IELTS opening's Writing (the web's
+  /// /ielts/assignments/:id/similarity).
+  const SimilarityScreen.ieltsWriting({required String assignmentId, super.key})
+    : homeworkId = assignmentId,
+      scopeType = 'IELTS_WRITING';
+
+  /// The homework, or the IELTS opening.
   final String homeworkId;
+  final String scopeType;
+
+  bool get ielts => scopeType == 'IELTS_WRITING';
 
   @override
   ConsumerState<SimilarityScreen> createState() => _SimilarityScreenState();
@@ -77,7 +88,7 @@ class _SimilarityScreenState extends ConsumerState<SimilarityScreen> {
     try {
       final r = await ref
           .read(plagiarismRepositoryProvider)
-          .run(widget.homeworkId);
+          .run(widget.homeworkId, scopeType: widget.scopeType);
       if (!mounted) return;
       setState(() => _latest = r);
       messenger.showSnackBar(SnackBar(content: Text(l10n.plagiarismRan)));
@@ -98,8 +109,13 @@ class _SimilarityScreenState extends ConsumerState<SimilarityScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final loaded = ref.watch(similarityReportProvider(widget.homeworkId));
-    final title = ref.watch(homeworkProvider(widget.homeworkId)).value?.title;
+    final provider = widget.ielts
+        ? ieltsSimilarityProvider(widget.homeworkId)
+        : similarityReportProvider(widget.homeworkId);
+    final loaded = ref.watch(provider);
+    final title = widget.ielts
+        ? null
+        : ref.watch(homeworkProvider(widget.homeworkId)).value?.title;
     final r = _latest ?? loaded.value;
     return Center(
       child: ConstrainedBox(
@@ -107,12 +123,7 @@ class _SimilarityScreenState extends ConsumerState<SimilarityScreen> {
         child: r != null
             ? _page(r, title)
             : loaded.hasError
-            ? _failure(
-                context,
-                loaded.error!,
-                () =>
-                    ref.invalidate(similarityReportProvider(widget.homeworkId)),
-              )
+            ? _failure(context, loaded.error!, () => ref.invalidate(provider))
             : LoadingView(semanticsLabel: l10n.plagiarismCrumb),
       ),
     );

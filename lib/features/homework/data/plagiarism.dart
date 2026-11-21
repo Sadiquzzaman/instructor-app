@@ -201,21 +201,27 @@ class PlagiarismRepository {
 
   final ApiClient _api;
 
-  Future<SimilarityReport> latest(String homeworkId) async =>
-      SimilarityReport.fromJson(
-        (await _api.get(
-          '/integrity/checks/latest',
-          query: {'scope_type': 'HOMEWORK', 'scope_id': homeworkId},
-        )).payload,
-      );
+  /// The latest check of a homework, or of an IELTS opening's Writing
+  /// ([scopeType] IELTS_WRITING).
+  Future<SimilarityReport> latest(
+    String scopeId, {
+    String scopeType = 'HOMEWORK',
+  }) async => SimilarityReport.fromJson(
+    (await _api.get(
+      '/integrity/checks/latest',
+      query: {'scope_type': scopeType, 'scope_id': scopeId},
+    )).payload,
+  );
 
-  Future<SimilarityReport> run(String homeworkId) async =>
-      SimilarityReport.fromJson(
-        (await _api.post(
-          '/integrity/checks',
-          data: {'scope_type': 'HOMEWORK', 'scope_id': homeworkId},
-        )).payload,
-      );
+  Future<SimilarityReport> run(
+    String scopeId, {
+    String scopeType = 'HOMEWORK',
+  }) async => SimilarityReport.fromJson(
+    (await _api.post(
+      '/integrity/checks',
+      data: {'scope_type': scopeType, 'scope_id': scopeId},
+    )).payload,
+  );
 
   Future<SimilarityMatch> match(String id) async => SimilarityMatch.fromJson(
     (await _api.get('/integrity/matches/$id')).payload,
@@ -245,6 +251,15 @@ final similarityReportProvider = FutureProvider.autoDispose
     .family<SimilarityReport, String>((ref, homeworkId) {
       ref.watch(workspaceKeyProvider);
       return ref.read(plagiarismRepositoryProvider).latest(homeworkId);
+    }, retry: (retryCount, error) => null);
+
+/// An IELTS opening's Writing check.
+final ieltsSimilarityProvider = FutureProvider.autoDispose
+    .family<SimilarityReport, String>((ref, assignmentId) {
+      ref.watch(workspaceKeyProvider);
+      return ref
+          .read(plagiarismRepositoryProvider)
+          .latest(assignmentId, scopeType: 'IELTS_WRITING');
     }, retry: (retryCount, error) => null);
 
 final similarityMatchProvider = FutureProvider.autoDispose
