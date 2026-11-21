@@ -7836,6 +7836,513 @@
   "levelLabelsSave": "Save names",
   "levelLabelsSaved": "Names saved",
   "levelLabelsLoadFailed": "The names did not load.",
+  "createTestTitle": "Create test",
+  "createTestEditTitle": "Edit test",
+  "createTestStepsBasicInfo": "Basic info",
+  "createTestStepsQuestions": "Questions",
+  "createTestStepsReview": "Review",
+  "createTestStepsReorder": "Order",
+  "createTestStepsPublish": "Publish",
+  "createTestFooterCancel": "Cancel",
+  "createTestFooterBack": "Back",
+  "createTestFooterNext": "Next",
+  "createTestFooterPublish": "Publish test",
+  "createTestFooterSave": "Save changes",
+  "createTestFooterPublishing": "Publishing…",
+  "createTestBasicName": "Test name",
+  "createTestBasicNamePlaceholder": "e.g. Algebra midterm",
+  "createTestBasicClass": "[[Class]]",
+  "createTestBasicBatch": "Batch",
+  "createTestBasicSelectClass": "Select [[class]]",
+  "createTestBasicSelectBatch": "Select batch",
+  "createTestBasicNoClass": "You are not assigned to a subject in any [[class]].",
+  "createTestBasicNoBatch": "You are not assigned to a subject in any batch.",
+  "createTestBasicCategory": "Exam type",
+  "createTestBasicAcademic": "Academic",
+  "createTestBasicIeltsModules": "IELTS modules",
+  "createTestBasicIeltsModulesHint": "Choose at least one.",
+  "createTestBasicModelTest": "Model test (several subjects)",
+  "createTestBasicModelTestLocked": "Model tests are on the Pro plan.",
+  "createTestBasicUpgrade": "Upgrade",
+  "createTestBasicSubject": "Subject",
+  "createTestBasicSelectSubject": "Select subject",
+  "createTestBasicOrgSubject": "Organisation subject",
+  "createTestBasicPickClassFirst": "Select a [[class]] to choose its subject.",
+  "createTestBasicLoadingSubjects": "Loading your subjects…",
+  "createTestBasicNoSubject": "You are not assigned to a subject in this [[class]].",
+  "createTestBasicDuration": "Duration",
+  "createTestBasicDurationPlaceholder": "e.g. 90",
+  "createTestBasicMinutes": "minutes",
+  "createTestBasicPassingScore": "Passing score",
+  "createTestBasicPassingPlaceholder": "e.g. 40",
+  "createTestBasicNegativeMarking": "Negative marking",
+  "createTestBasicNegativeMarkingHint": "Share of the question's points taken off for a wrong answer.",
+  "createTestBasicNegativePercent": "Deduction",
+  "createTestIeltsReading": "Reading",
+  "createTestIeltsWriting": "Writing",
+  "createTestIeltsListening": "Listening",
+  "createTestIeltsSpeaking": "Speaking",
+  "createTestToastNameRequired": "Please enter a test name.",
+  "createTestToastSubjectRequired": "Please select a subject.",
+  "createTestToastModuleRequired": "Please select at least one IELTS module.",
+  "createTestToastClassRequired": "Please select a [[class]].",
+  "createTestToastBatchRequired": "Please select a batch.",
+  "createTestToastDurationRequired": "Please enter a duration.",
+  "createTestToastNegativeRequired": "Please enter how much negative marking takes off.",
+  "createTestToastQuestionRequired": "Add at least one question before continuing.",
+  "createTestToastOneSubject": "A test that is not a model test uses exactly one subject.",
+  "createTestToastQuestionSubject": "Every question needs a subject.",
+  "createTestToastMarksBelowPassing": "Total marks ({total}) are below the passing score ({passing}). Add questions or lower the passing score.",
+  "@createTestToastMarksBelowPassing": {
+    "placeholders": {
+      "total": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "passing": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "createTestToastFixQuestions": "Fix the highlighted questions before continuing.",
+  "createTestToastScheduleRequired": "Choose both the start and the end date and time.",
+  "createTestToastProctoringInvalid": "Check the proctoring: the number of flags is 1–100 and at least one check counts.",
+  "createTestCategoriesGraded": "Graded",
+  "createTestCategoriesUngraded": "Ungraded",
+  "createTestCategoriesPassageQuestion": "Passage / CQ",
+  "createTestCategoriesIelts": "IELTS",
+  "createTestTypesGradedMultipleChoice": "Multiple choice",
+  "createTestTypesGradedMultipleResponse": "Multiple response",
+  "createTestTypesGradedTrueFalse": "True / False",
+  "createTestTypesGradedFillInTheBlanks": "Fill in the blanks",
+  "createTestTypesGradedMatchingOrdering": "Matching / Ordering",
+  "createTestTypesUngradedTrueFalse": "True / False",
+  "createTestTypesUngradedEssay": "Essay",
+  "createTestTypesUngradedFillInTheGaps": "Fill in the blanks",
+  "createTestTypesPassageQuestionMultipleChoice": "Multiple choice",
+  "createTestTypesPassageQuestionMultipleResponse": "Multiple response",
+  "createTestTypesPassageQuestionTrueFalse": "True / False",
+  "createTestTypesPassageQuestionFillInTheBlanks": "Fill in the blanks",
+  "createTestTypesPassageQuestionMatchingOrdering": "Matching / Ordering",
+  "createTestTypesPassageQuestionEssay": "Short / Essay",
+  "createTestTypesIeltsMultipleChoice": "Multiple choice",
+  "createTestTypesIeltsMultipleResponse": "Multiple response",
+  "createTestTypesIeltsTrueFalse": "True / False / Not Given",
+  "createTestTypesIeltsYesNoNotGiven": "Yes / No / Not Given",
+  "createTestTypesIeltsMatchingOrdering": "Matching / Ordering",
+  "createTestTypesIeltsFillInTheBlanks": "Fill in the blanks",
+  "createTestTypesIeltsSentenceCompletion": "Sentence completion",
+  "createTestTypesIeltsSummaryCompletion": "Summary completion",
+  "createTestTypesIeltsTableCompletion": "Table completion",
+  "createTestTypesIeltsDiagramLabel": "Diagram label",
+  "createTestTypesIeltsShortAnswer": "Short answer",
+  "createTestTypesIeltsWritingTask1": "Writing task 1",
+  "createTestTypesIeltsWritingTask2": "Writing task 2",
+  "createTestTypesIeltsSpeakingPart1": "Speaking part 1",
+  "createTestTypesIeltsSpeakingPart2": "Speaking part 2",
+  "createTestTypesIeltsSpeakingPart3": "Speaking part 3",
+  "createTestPromptsDefault": "Write your question here",
+  "createTestPromptsBlank": "Write your question here (use ______ for the blank)",
+  "createTestPromptsEssayCq": "Write your question here (e.g. ক / খ / গ / ঘ)",
+  "createTestPromptsSummary": "Write the summary instruction here",
+  "createTestPromptsTable": "Write the table instruction here",
+  "createTestPromptsDiagram": "Write the diagram instruction here",
+  "createTestPromptsTask1": "Write the task 1 prompt here",
+  "createTestPromptsTask2": "Write the task 2 prompt here",
+  "createTestPromptsSpeaking1": "Write the speaking part 1 prompt here",
+  "createTestPromptsSpeaking2": "Write the speaking part 2 prompt here",
+  "createTestPromptsSpeaking3": "Write the speaking part 3 prompt here",
+  "createTestPromptsExpectedAnswer": "Enter the expected answer",
+  "createTestQuestionsTitle": "Questions",
+  "createTestQuestionsAdded": "Questions added: {count}",
+  "@createTestQuestionsAdded": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "createTestQuestionsTotalMarks": "Total marks: {marks}",
+  "@createTestQuestionsTotalMarks": {
+    "placeholders": {
+      "marks": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "createTestQuestionsAddPassage": "Add another passage",
+  "createTestQuestionsAddQuestion": "Add a question",
+  "createTestQuestionsQuestionCategory": "Question category",
+  "createTestQuestionsNotInPlan": "Not in your plan.",
+  "createTestQuestionsSubjectFirst": "Add a subject before creating questions.",
+  "createTestValidationMatchingPairs": "Use between {min} and {max} pairs.",
+  "@createTestValidationMatchingPairs": {
+    "placeholders": {
+      "min": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "max": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "createTestValidationLeftChoiceEmpty": "Left item {number} is empty.",
+  "@createTestValidationLeftChoiceEmpty": {
+    "placeholders": {
+      "number": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "createTestValidationRightChoiceEmpty": "Right item {number} is empty.",
+  "@createTestValidationRightChoiceEmpty": {
+    "placeholders": {
+      "number": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "createTestValidationFixedOptions": "Keep the fixed answer options.",
+  "createTestValidationOptionCount": "Use between {min} and {max} options.",
+  "@createTestValidationOptionCount": {
+    "placeholders": {
+      "min": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "max": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "createTestValidationOptionEmpty": "Option {number} needs text or an image.",
+  "@createTestValidationOptionEmpty": {
+    "placeholders": {
+      "number": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "createTestValidationPickTwoCorrect": "Mark at least two correct options.",
+  "createTestValidationPickOneCorrect": "Mark the correct option.",
+  "createTestValidationTitleMissing": "Add the question.",
+  "createTestValidationTitleOrImageMissing": "Add the question text or an image.",
+  "createTestValidationPointsPositive": "Points must be more than 0.",
+  "createTestValidationAnswerMissing": "Add the correct answer.",
+  "createTestValidationPassageMissing": "Add the passage text.",
+  "createTestPassageInstructionLanguage": "Instruction language",
+  "createTestPassageBangla": "Bangla",
+  "createTestPassageEnglish": "English",
+  "createTestPassageDelete": "Delete passage",
+  "createTestPassageDrag": "Drag passage to reorder",
+  "createTestPassagePlaceholder": "Write the passage here…",
+  "createTestPassageAudio": "Audio link",
+  "createTestPassageAudioHint": "Optional. A link to the recording students listen to.",
+  "createTestCardInvalidImage": "Please choose an image file.",
+  "createTestCardImageTooLarge": "The image must be 20 MB or smaller.",
+  "createTestCardUploadFailed": "The image could not be uploaded right now.",
+  "createTestCardDrag": "Drag question to reorder",
+  "createTestCardOption": "Option",
+  "createTestCardOptionImageAlt": "Image for option {number}",
+  "@createTestCardOptionImageAlt": {
+    "placeholders": {
+      "number": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "createTestCardReplaceOptionImage": "Replace option image",
+  "createTestCardRemoveOptionImage": "Remove option image",
+  "createTestCardDeleteOption": "Delete option {number}",
+  "@createTestCardDeleteOption": {
+    "placeholders": {
+      "number": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "createTestCardAddOption": "Add an option",
+  "createTestCardMaxOptions": "{max, plural, other{Up to {max} options}}",
+  "@createTestCardMaxOptions": {
+    "placeholders": {
+      "max": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "createTestCardAddOptionImage": "Add an option with an image",
+  "createTestCardPoints": "Points",
+  "createTestCardMaxPoints": "Max points",
+  "createTestCardPointsPerMatch": "Points per <b>match</b>",
+  "createTestCardType": "Type",
+  "createTestCardSubject": "Subject",
+  "createTestCardShuffleMandatory": "Matching items are always shuffled",
+  "createTestCardShuffle": "Shuffle options",
+  "createTestCardDuplicate": "Duplicate question",
+  "createTestCardDelete": "Delete question",
+  "createTestCardPastedFull": "Question, options and answer were read from your paste.",
+  "createTestCardPastedText": "Question text was read from your paste.",
+  "createTestCardQuestionImageAlt": "Image for question {number}",
+  "@createTestCardQuestionImageAlt": {
+    "placeholders": {
+      "number": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "createTestCardReplaceQuestionImage": "Replace question image",
+  "createTestCardRemoveQuestionImage": "Remove question image",
+  "createTestCardUploadQuestionImage": "Add a question image",
+  "createTestCardInstructionPlaceholder": "Add an instruction (optional)",
+  "createTestCardAddPair": "Add another pair",
+  "createTestCardMaxPairs": "{max, plural, other{Up to {max} pairs}}",
+  "@createTestCardMaxPairs": {
+    "placeholders": {
+      "max": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "createTestCardChoicePlaceholder": "Add an item",
+  "createTestCardDeletePair": "Delete pair {number}",
+  "@createTestCardDeletePair": {
+    "placeholders": {
+      "number": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "createTestCardMatchingHint": "Write each pair in the right order (left – right). Students see them shuffled.",
+  "createTestCardAlternativePlaceholder": "Add an alternative answer",
+  "createTestCardCorrectAnswer": "Correct answer",
+  "createTestCardAlternativeAnswer": "Alternative answer",
+  "createTestCardNotInPlan": "Not in your plan.",
+  "createTestCardUpgrade": "Upgrade",
+  "createTestReviewSummary": "Test summary",
+  "createTestReviewPreview": "Preview",
+  "createTestReviewName": "Test name",
+  "createTestReviewSubjects": "Subjects",
+  "createTestReviewDuration": "Duration",
+  "createTestReviewMinutes": "{minutes, plural, one{{minutes} minute} other{{minutes} minutes}}",
+  "@createTestReviewMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "createTestReviewQuestions": "Questions",
+  "createTestReviewMarks": "Total marks",
+  "createTestReviewPassing": "Passing score",
+  "createTestReviewNegative": "Negative marking",
+  "createTestReviewNone": "None",
+  "createTestReviewEmpty": "Add questions to see the preview.",
+  "createTestReviewPassage": "Passage",
+  "createTestReviewQuestionMeta": "{number}. {type} · {points, plural, one{{points} point} other{{points} points}}",
+  "@createTestReviewQuestionMeta": {
+    "placeholders": {
+      "number": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "type": {
+        "type": "String"
+      },
+      "points": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "createTestReorderTitle": "Question order",
+  "createTestReorderIntro": "Drag questions to change the order students see.",
+  "createTestReorderPassageQuestion": "Passage question",
+  "createTestReorderUntitled": "Untitled question",
+  "createTestReorderDrag": "Drag to reorder",
+  "createTestReorderMoveUp": "Move question {number} up",
+  "@createTestReorderMoveUp": {
+    "placeholders": {
+      "number": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "createTestReorderMoveDown": "Move question {number} down",
+  "@createTestReorderMoveDown": {
+    "placeholders": {
+      "number": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "createTestReorderQuestionNumber": "Q{number}",
+  "@createTestReorderQuestionNumber": {
+    "placeholders": {
+      "number": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "createTestPointsCount": "{points, plural, one{{points} point} other{{points} points}}",
+  "@createTestPointsCount": {
+    "placeholders": {
+      "points": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "createTestPublishTiming": "When can students take it?",
+  "createTestPublishNow": "Publish now",
+  "createTestPublishNowDetail": "Students can start it straight away.",
+  "createTestPublishLater": "Schedule",
+  "createTestPublishLaterDetail": "It opens and closes at the times you choose.",
+  "createTestPublishStartsAt": "Opens",
+  "createTestPublishEndsAt": "Closes",
+  "createTestPublishDate": "Date",
+  "createTestPublishTime": "Time",
+  "createTestPublishTimeZoneNote": "Times are in Bangladesh time (Asia/Dhaka).",
+  "createTestPublishAudience": "Who can take it?",
+  "createTestPublishAudienceLabel": "Audience",
+  "createTestPublishAnyone": "Anyone with the link",
+  "createTestPublishClassAudience": "A group or [[class]]",
+  "createTestPublishClass": "[[Class]]",
+  "createTestPublishBatch": "Batch",
+  "createTestPublishSelectClass": "Select [[class]]",
+  "createTestPublishSelectBatch": "Select batch",
+  "createTestPublishFromBasicInfo": "Chosen in Basic info",
+  "createTestPublishClassStudents": "Students in this [[class]] can take the test.",
+  "createTestPublishBatchStudents": "Students in this batch can take the test.",
+  "createTestPublishExclude": "Leave out students",
+  "createTestPublishExcludeHint": "Optional. Email or phone number of each student who should not take it.",
+  "createTestPublishExcludePlaceholder": "Email or phone",
+  "createTestPublishAdd": "Add",
+  "createTestPublishLink": "Test link",
+  "createTestPublishCopy": "Copy",
+  "createTestPublishCopied": "Copied",
+  "createTestPublishLinkLater": "The link is ready after you publish.",
+  "createTestPublishLinkNow": "Copy the link now or later to share it with students.",
+  "createTestPublishLinkUnavailableTitle": "No link yet",
+  "createTestPublishLinkUnavailable": "Publish or save the test first to get its link.",
+  "createTestPublishInvalidTitle": "Not an email or phone number",
+  "createTestPublishInvalid": "Enter a valid email address or phone number.",
+  "createTestPublishInvalidPhoneTitle": "Invalid phone number",
+  "createTestPublishInvalidPhone": "Phone numbers have 11 digits.",
+  "createTestPublishSubjectClass": "[[Section]] and subject",
+  "createTestPublishSubjectClassHint": "Optional. Only the students who take this subject in this [[section]] get the test, e.g. a religion or elective subject.",
+  "createTestPublishWholeClass": "The whole [[class]]",
+  "createTestPublishSubjectClassOption": "[[Section]] {section} · {subject}",
+  "@createTestPublishSubjectClassOption": {
+    "placeholders": {
+      "section": {
+        "type": "String"
+      },
+      "subject": {
+        "type": "String"
+      }
+    }
+  },
+  "createTestSubjectsAdd": "Add subject",
+  "createTestSubjectsRemove": "Remove {name}",
+  "@createTestSubjectsRemove": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "createTestSubjectsLabel": "Subjects in this test",
+  "createTestSubjectsAddTitle": "Add subject",
+  "createTestSubjectsAddIntro": "Search the subject list and add one to this model test.",
+  "createTestSubjectsSearch": "Search subjects",
+  "createTestSubjectsNone": "No subjects found",
+  "createTestSubjectsRemoveTitle": "Remove {name}?",
+  "@createTestSubjectsRemoveTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "createTestSubjectsRemoveDetail": "All questions and sections under this subject will be deleted.",
+  "createTestSubjectsRemoveConfirm": "Remove subject",
+  "createTestSubjectsNewTitle": "New subject",
+  "createTestSubjectsNewIntro": "Add a subject to your library with a clear name and a short code.",
+  "createTestSubjectsName": "Subject name",
+  "createTestSubjectsNamePlaceholder": "e.g. Mathematics",
+  "createTestSubjectsCode": "Subject code",
+  "createTestSubjectsCodePlaceholder": "e.g. MATH",
+  "createTestSubjectsCancel": "Cancel",
+  "createTestSubjectsSave": "Add subject",
+  "createTestSubjectsSaving": "Adding…",
+  "createTestProctoringTitle": "Proctoring",
+  "createTestProctoringIntro": "What is watched while students take this test. A quick class quiz may need no camera.",
+  "createTestProctoringLevel": "Proctoring level",
+  "createTestProctoringLevelsOFF": "Off",
+  "createTestProctoringLevelsLIGHT": "Light",
+  "createTestProctoringLevelsSTRICT": "Strict",
+  "createTestProctoringLevelHintsOFF": "No checks.",
+  "createTestProctoringLevelHintsLIGHT": "Browser checks only: tab switches, leaving full screen and the like. No camera.",
+  "createTestProctoringLevelHintsSTRICT": "Browser checks plus camera, microphone and phone detection.",
+  "createTestProctoringNotOnPlan": "Not on your plan.",
+  "createTestProctoringChecks": "Checks (switch off any you don't need)",
+  "createTestProctoringAutoDisqualify": "Disqualify automatically",
+  "createTestProctoringAutoDisqualifyHint": "Off by default: false alarms in a noisy room should not fail a student. You can review flags after the test.",
+  "createTestProctoringAutoDisqualifyNotOnPlan": "Not on your plan.",
+  "createTestProctoringThreshold": "Disqualify after this many flags",
+  "createTestProctoringThresholdInvalid": "Use a number from 1 to 100.",
+  "createTestProctoringWarnAt": "Students are warned at {count, plural, one{{count} flag} other{{count} flags}}.",
+  "@createTestProctoringWarnAt": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "createTestProctoringCounted": "Flags that count",
+  "createTestProctoringCountedNone": "Choose at least one check.",
+  "createTestProctoringSummaryOff": "Nothing is watched; students start without camera or microphone.",
+  "createTestProctoringSummaryBrowser": "{count, plural, one{{count} check runs} other{{count} checks run}} in the browser; no camera.",
+  "@createTestProctoringSummaryBrowser": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "createTestProctoringSummaryCamera": "{count, plural, one{{count} check runs} other{{count} checks run}}; students turn on camera and microphone before starting.",
+  "@createTestProctoringSummaryCamera": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "createTestProctoringAlerts": "Alert me during the test",
+  "createTestProctoringAlertsHint": "You get a notice when a student reaches this many flags (at most one per student every 5 minutes).",
+  "createTestProctoringAlertAt": "Alert at this many flags",
   "appNoConnection": "No internet connection. Check it and try again.",
   "appUpdateRequiredTitle": "Please update Instructor",
   "appUpdateRequiredBody": "This version of the app is no longer supported. Install the new version to continue.",

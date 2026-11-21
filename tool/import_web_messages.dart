@@ -73,6 +73,7 @@ const webNamespaces = [
   'storage',
   'smsCredits',
   'levelLabels',
+  'createTest',
 ];
 
 const locales = ['en', 'bn'];
@@ -264,7 +265,7 @@ Map<String, String> flatten(Map<String, dynamic> tree) {
 /// ['ui', 'fileDrop', 'prompt'] → uiFileDropPrompt.
 String camelKey(List<String> path) {
   final words = path
-      .expand((p) => p.split(RegExp('[-_]')))
+      .expand((p) => p.split(RegExp('[-_ ]')))
       .where((w) => w.isNotEmpty)
       .toList();
   return words.first[0].toLowerCase() +

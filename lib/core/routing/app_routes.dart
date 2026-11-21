@@ -107,6 +107,7 @@ abstract final class AppRoutes {
     '/homework/',
     '/classes/details/',
     '/grading/details/',
+    '/tests/create',
     '/marks/',
     '/performance/students/',
   };
