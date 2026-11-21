@@ -74,6 +74,19 @@ const webNamespaces = [
   'smsCredits',
   'levelLabels',
   'createTest',
+  'ielts',
+  'ieltsTests',
+  'ieltsBands',
+  'ieltsBuilder',
+  'ieltsTake',
+  'ieltsOpenings',
+  'ieltsMarking',
+  'ieltsSpeaking',
+  'ieltsOverview',
+  'ieltsProgress',
+  'ieltsReport',
+  'ieltsConvert',
+  'ieltsCourses',
 ];
 
 const locales = ['en', 'bn'];
