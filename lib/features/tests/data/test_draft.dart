@@ -441,6 +441,8 @@ class TestDraft {
     this.endingAt,
     this.audience = 'selected_class',
     this.excluded = const [],
+    this.order = const [],
+    this.activeSubjectId,
   });
 
   final int step;
@@ -464,7 +466,39 @@ class TestDraft {
   final String audience;
   final List<String> excluded;
 
+  /// The order students see (the web's `questionOrder`: question and
+  /// passage ids across subjects); empty until reordered.
+  final List<String> order;
+
+  /// The subject whose questions are open (a model test has several).
+  final String? activeSubjectId;
+
   DraftSubject? get subject => subjects.isEmpty ? null : subjects.first;
+
+  /// The open subject: [activeSubjectId], or the first.
+  DraftSubject? get activeSubject =>
+      subjects.where((s) => s.id == activeSubjectId).firstOrNull ?? subject;
+
+  /// Every question and passage in the order students see: [order] where
+  /// it still applies, then any added since, subject by subject.
+  List<(DraftSubject, DraftQuestion)> get ordered {
+    final all = {
+      for (final s in subjects)
+        for (final q in s.questions) q.id: (s, q),
+    };
+    final out = [
+      for (final id in order)
+        if (all.containsKey(id)) all[id]!,
+    ];
+    final seen = {for (final (_, q) in out) q.id};
+    return [
+      ...out,
+      for (final e in all.entries)
+        if (!seen.contains(e.key)) e.value,
+    ];
+  }
+
+  int get questionCount => subjects.fold<int>(0, (s, x) => s + x.questionCount);
 
   List<DraftQuestion> get questions => [
     for (final s in subjects) ...s.questions,
@@ -491,6 +525,8 @@ class TestDraft {
     DateTime? endingAt,
     String? audience,
     List<String>? excluded,
+    List<String>? order,
+    String? activeSubjectId,
   }) => TestDraft(
     step: step ?? this.step,
     name: name ?? this.name,
@@ -510,6 +546,8 @@ class TestDraft {
     endingAt: endingAt ?? this.endingAt,
     audience: audience ?? this.audience,
     excluded: excluded ?? this.excluded,
+    order: order ?? this.order,
+    activeSubjectId: activeSubjectId ?? this.activeSubjectId,
   );
 
   Map<String, Object?> toJson() => {
@@ -529,6 +567,8 @@ class TestDraft {
     'endingAt': endingAt?.toUtc().toIso8601String(),
     'audience': audience,
     'excluded': excluded,
+    'order': order,
+    'activeSubjectId': activeSubjectId,
   };
 
   static TestDraft fromJson(Map<String, Object?> j) => TestDraft(
@@ -559,6 +599,11 @@ class TestDraft {
       if (j['excluded'] is List)
         for (final e in j['excluded'] as List) '$e',
     ],
+    order: [
+      if (j['order'] is List)
+        for (final e in j['order'] as List) '$e',
+    ],
+    activeSubjectId: j['activeSubjectId'] as String?,
   );
 
   /// The web's `POST /exams` body (`CreateExamWizardDto`). [now] fills the
@@ -592,10 +637,7 @@ class TestDraft {
             'questions': [for (final q in s.questions) q.toBody()],
           },
       ],
-      'questionOrder': [
-        for (final s in withQuestions)
-          for (final q in s.questions) q.id,
-      ],
+      'questionOrder': [for (final (_, q) in ordered) q.id],
       'publishState': {
         'testAudience': audience,
         'publishTiming': publishNow ? 'immediately' : 'later',
