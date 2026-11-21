@@ -3,7 +3,8 @@ import 'dart:async';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 
-import 'package:instructor_app/core/routing/app_routes.dart';
+import 'package:instructor_app/core/routing/app_router.dart';
+import 'package:instructor_app/features/shell/menu/menu_items.g.dart';
 import 'package:instructor_app/core/api/api_exception.dart';
 import 'package:instructor_app/core/auth/session.dart';
 import 'package:instructor_app/features/today/screens/today_screen.dart';
@@ -37,13 +38,15 @@ Future<void> _openMenu(WidgetTester tester) async {
   await tester.pumpAndSettle();
 }
 
+/// A teacher of an IELTS centre (Marking is not built yet).
 Session _ielts() => Session.fromPayload(
   sessionPayload()
+    ..['role'] = 'TEACHER'
     ..['workspace_type'] = 'IELTS'
     ..['organization'] = {
       'id': 'org-2',
       'name': 'Bright Path IELTS',
-      'role': 'STUDENT',
+      'role': 'TEACHER',
       'status': 'approved',
       'workspace_type': 'IELTS',
     },
@@ -86,18 +89,15 @@ void main() {
   testWidgets('IELTS pages not built yet say "use the website for IELTS"', (
     tester,
   ) async {
-    await pumpInstructorApp(tester, api: _api(), session: _ielts());
-    await _openMenu(tester);
-    final ieltsLink = find.byWidgetPredicate(
-      (w) =>
-          w.key is ValueKey<String> &&
-          (w.key! as ValueKey<String>).value.startsWith('menu-/ielts') &&
-          !AppRoutes.built.contains(
-            (w.key! as ValueKey<String>).value.substring('menu-'.length),
-          ),
+    final app = await pumpInstructorApp(tester, api: _api(), session: _ielts());
+    // An IELTS menu page the app has not built yet.
+    final page = webMenu.firstWhere(
+      (i) =>
+          i.route.startsWith('/ielts') &&
+          (i.workspaces?.contains('IELTS') ?? false) &&
+          !AppRoutes.built.contains(i.route),
     );
-    expect(ieltsLink, findsWidgets);
-    await tester.tap(ieltsLink.first);
+    app.read(routerProvider).go(page.route);
     await tester.pumpAndSettle();
     expect(
       find.text(

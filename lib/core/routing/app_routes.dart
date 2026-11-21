@@ -58,6 +58,7 @@ abstract final class AppRoutes {
   static const ieltsMe = '/ielts/me';
   static const ieltsTests = '/ielts/tests';
   static const ieltsBandTables = '/ielts/band-tables';
+  static const ieltsMy = '/ielts/my';
 
   /// Pages the app has really built (not "use the website for now"). A
   /// notification's link opens in the app only for these; each stage adds
@@ -71,6 +72,7 @@ abstract final class AppRoutes {
     ieltsMe,
     ieltsTests,
     ieltsBandTables,
+    ieltsMy,
     today,
     dashboard,
     myAttendance,
