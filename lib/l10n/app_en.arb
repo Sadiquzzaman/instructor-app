@@ -8343,6 +8343,1203 @@
   "createTestProctoringAlerts": "Alert me during the test",
   "createTestProctoringAlertsHint": "You get a notice when a student reaches this many flags (at most one per student every 5 minutes).",
   "createTestProctoringAlertAt": "Alert at this many flags",
+  "ieltsStudentsTitle": "IELTS students",
+  "ieltsStudentsDescription": "Each student's test type, target bands and test date.",
+  "ieltsStudentsCaption": "Students and their IELTS targets",
+  "ieltsStudent": "Student",
+  "ieltsBatch": "Batch",
+  "ieltsAllBatches": "All batches",
+  "ieltsTestType": "Test type",
+  "ieltsTypesACADEMIC": "Academic",
+  "ieltsTypesGENERAL": "General Training",
+  "ieltsTargetOverall": "Target overall band",
+  "ieltsModulesLISTENING": "Listening",
+  "ieltsModulesREADING": "Reading",
+  "ieltsModulesWRITING": "Writing",
+  "ieltsModulesSPEAKING": "Speaking",
+  "ieltsTestDate": "Test date",
+  "ieltsTestDateHint": "The booked IELTS test, if there is one.",
+  "ieltsDaysLeft": "{count, plural, one{{count} day left} other{{count} days left}}",
+  "@ieltsDaysLeft": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsActions": "Actions",
+  "ieltsEdit": "Edit",
+  "ieltsEditFor": "Edit {name}'s profile",
+  "@ieltsEditFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsNoStudents": "No students in this batch yet",
+  "ieltsNotAvailable": "IELTS pages are for IELTS centres.",
+  "ieltsLoadFailed": "Couldn't load this.",
+  "ieltsProfileDescription": "Test type, target bands and test date",
+  "ieltsNoTarget": "Not set",
+  "ieltsCancel": "Cancel",
+  "ieltsSave": "Save",
+  "ieltsSaved": "Profile saved",
+  "ieltsMyTitle": "My IELTS profile",
+  "ieltsModuleTargets": "Target band per module",
+  "ieltsNoProfile": "Your profile isn't set yet",
+  "ieltsNoProfileHint": "Your teacher will add your test type, target bands and test date.",
+  "ieltsDaysToTest": "Days to the test",
+  "ieltsProgress": "Progress",
+  "ieltsProgressFor": "Progress of {name}",
+  "@ieltsProgressFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsTargetsByModule": "Targets (L / R / W / S)",
+  "ieltsTestsPageTitle": "IELTS tests",
+  "ieltsTestsPageDescription": "Mock tests in the real format and practice sets of single parts. Publish a test when every part is ready.",
+  "ieltsTestsNewTest": "New test",
+  "ieltsTestsNewTestDescription": "A mock gets every part of the modules you choose. A practice set gets the parts you pick from one module.",
+  "ieltsTestsCreate": "Create",
+  "ieltsTestsCancel": "Cancel",
+  "ieltsTestsTitle": "Title",
+  "ieltsTestsPurpose": "Kind",
+  "ieltsTestsPurposesMOCK": "Mock test",
+  "ieltsTestsPurposesPRACTICE": "Practice set",
+  "ieltsTestsPurposeHintsMOCK": "The real template: Listening parts 1–4, Reading passages 1–3, Writing tasks 1–2, Speaking parts 1–3.",
+  "ieltsTestsPurposeHintsPRACTICE": "Any parts, passages or tasks of one module.",
+  "ieltsTestsTestType": "Test type",
+  "ieltsTestsTypesACADEMIC": "Academic",
+  "ieltsTestsTypesGENERAL": "General Training",
+  "ieltsTestsModules": "Modules",
+  "ieltsTestsModule": "Module",
+  "ieltsTestsModulesShortLISTENING": "Listening",
+  "ieltsTestsModulesShortREADING": "Reading",
+  "ieltsTestsModulesShortWRITING": "Writing",
+  "ieltsTestsModulesShortSPEAKING": "Speaking",
+  "ieltsTestsParts": "Parts",
+  "ieltsTestsPartNamesLISTENING": "Part {no}",
+  "@ieltsTestsPartNamesLISTENING": {
+    "placeholders": {
+      "no": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsTestsPartNamesREADING": "Passage {no}",
+  "@ieltsTestsPartNamesREADING": {
+    "placeholders": {
+      "no": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsTestsPartNamesWRITING": "Task {no}",
+  "@ieltsTestsPartNamesWRITING": {
+    "placeholders": {
+      "no": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsTestsPartNamesSPEAKING": "Part {no}",
+  "@ieltsTestsPartNamesSPEAKING": {
+    "placeholders": {
+      "no": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsTestsQuestions": "Questions",
+  "ieltsTestsStatus": "Status",
+  "ieltsTestsStatusesDRAFT": "Draft",
+  "ieltsTestsStatusesPUBLISHED": "Published",
+  "ieltsTestsStatusesARCHIVED": "Archived",
+  "ieltsTestsAllPurposes": "All kinds",
+  "ieltsTestsAllStatuses": "All statuses",
+  "ieltsTestsUpdated": "Last changed",
+  "ieltsTestsActions": "Actions",
+  "ieltsTestsCopy": "Copy",
+  "ieltsTestsCopyFor": "Copy {title}",
+  "@ieltsTestsCopyFor": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsTestsCopied": "Copy made. It is your draft.",
+  "ieltsTestsArchive": "Archive",
+  "ieltsTestsArchiveFor": "Archive {title}",
+  "@ieltsTestsArchiveFor": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsTestsArchived": "Test archived",
+  "ieltsTestsDelete": "Delete",
+  "ieltsTestsDeleteFor": "Delete {title}",
+  "@ieltsTestsDeleteFor": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsTestsDeleteTitle": "Delete this test?",
+  "ieltsTestsDeleteDescription": "“{title}” will be removed from the list. Results already given are kept.",
+  "@ieltsTestsDeleteDescription": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsTestsDeleted": "Test deleted",
+  "ieltsTestsNeedsReview": "Converted — check before use",
+  "ieltsTestsCaption": "IELTS tests",
+  "ieltsTestsEmpty": "No IELTS tests yet",
+  "ieltsTestsEmptyHint": "Start with a mock test or a practice set.",
+  "ieltsTestsNotAvailable": "IELTS tests are for IELTS centres with the IELTS feature.",
+  "ieltsTestsLoadFailed": "The tests could not be loaded.",
+  "ieltsBandsPageTitle": "Band tables",
+  "ieltsBandsPageDescription": "How a Listening or Reading raw score out of 40 becomes a band. Each centre starts on the default tables and can change its own copy.",
+  "ieltsBandsTablesLISTENING": "Listening",
+  "ieltsBandsTablesREADINGACADEMIC": "Academic Reading",
+  "ieltsBandsTablesREADINGGENERAL": "General Training Reading",
+  "ieltsBandsCustomised": "Changed by your centre",
+  "ieltsBandsDefault": "Default",
+  "ieltsBandsMinRaw": "Raw score from",
+  "ieltsBandsBand": "Band",
+  "ieltsBandsAddRow": "Add a row",
+  "ieltsBandsRemoveRow": "Remove row {index}",
+  "@ieltsBandsRemoveRow": {
+    "placeholders": {
+      "index": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsBandsSave": "Save",
+  "ieltsBandsReset": "Back to default",
+  "ieltsBandsSaved": "Band table saved",
+  "ieltsBandsResetDone": "Band table back to the default",
+  "ieltsBandsRule": "Raw scores go down from 40 to 0; the last row starts at 0 and bands never go up.",
+  "ieltsBandsReadOnly": "Only owners and admins can change band tables.",
+  "ieltsBandsNotAvailable": "Band tables are for IELTS centres with the IELTS feature.",
+  "ieltsBandsLoadFailed": "The band tables could not be loaded.",
+  "ieltsBandsRemove": "Remove",
+  "ieltsBuilderCrumb": "Test builder",
+  "ieltsBuilderNotFound": "This test was not found.",
+  "ieltsBuilderLoadFailed": "The test could not be loaded.",
+  "ieltsBuilderDetails": "Details",
+  "ieltsBuilderPublish": "Publish",
+  "ieltsBuilderPublished": "Test published",
+  "ieltsBuilderMoveToDrafts": "Move to drafts",
+  "ieltsBuilderMovedToDrafts": "Test moved to drafts",
+  "ieltsBuilderLockedPublished": "Published and archived tests cannot be changed. Move the test to drafts to change it.",
+  "ieltsBuilderLockedNotYours": "Only the teacher who made this test, an owner or an admin can change it. You can make a copy.",
+  "ieltsBuilderNotReady": "Not ready to publish yet",
+  "ieltsBuilderProblemsNORECORDING": "{part} of {module}: add the recording.",
+  "@ieltsBuilderProblemsNORECORDING": {
+    "placeholders": {
+      "part": {
+        "type": "String"
+      },
+      "module": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsBuilderProblemsNOTEXT": "{part} of {module}: add the text.",
+  "@ieltsBuilderProblemsNOTEXT": {
+    "placeholders": {
+      "part": {
+        "type": "String"
+      },
+      "module": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsBuilderProblemsNOQUESTIONS": "{part} of {module}: add questions.",
+  "@ieltsBuilderProblemsNOQUESTIONS": {
+    "placeholders": {
+      "part": {
+        "type": "String"
+      },
+      "module": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsBuilderProblemsNOPICTURE": "{part} of {module}: add the chart or diagram.",
+  "@ieltsBuilderProblemsNOPICTURE": {
+    "placeholders": {
+      "part": {
+        "type": "String"
+      },
+      "module": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsBuilderProblemsNOT40": "{module}: {count} of 40 questions so far.",
+  "@ieltsBuilderProblemsNOT40": {
+    "placeholders": {
+      "module": {
+        "type": "String"
+      },
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsBuilderPartTitle": "Title (optional)",
+  "ieltsBuilderContentLabelREADING": "Passage",
+  "ieltsBuilderContentLabelWRITING": "Task",
+  "ieltsBuilderContentLabelSPEAKING": "Questions or cue card",
+  "ieltsBuilderContentHintREADING": "Paste or write the reading passage.",
+  "ieltsBuilderContentHintWRITING": "Write the task as students will see it.",
+  "ieltsBuilderContentHintSPEAKING": "Write the examiner's questions or the cue card.",
+  "ieltsBuilderSavePart": "Save part",
+  "ieltsBuilderPartSaved": "Part saved",
+  "ieltsBuilderRecording": "Recording",
+  "ieltsBuilderNoRecording": "No recording yet.",
+  "ieltsBuilderAddRecording": "Recording (played once in the test)",
+  "ieltsBuilderReplaceRecording": "Replace the recording",
+  "ieltsBuilderUploading": "Uploading…",
+  "ieltsBuilderAudioTypes": "MP3, M4A, OGG or WAV, up to 20 MB",
+  "ieltsBuilderPicture": "Picture",
+  "ieltsBuilderAddPicture": "Picture (chart, map or diagram)",
+  "ieltsBuilderReplacePicture": "Replace the picture",
+  "ieltsBuilderRemovePicture": "Remove picture",
+  "ieltsBuilderImageTypes": "JPG, PNG, WebP or GIF, up to 20 MB",
+  "ieltsBuilderGroups": "Question groups",
+  "ieltsBuilderNoGroups": "No question groups yet.",
+  "ieltsBuilderGroupsOf": "Question groups of {part}",
+  "@ieltsBuilderGroupsOf": {
+    "placeholders": {
+      "part": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsBuilderNoQuestionsYet": "No questions yet",
+  "ieltsBuilderQuestionNumber": "Question {from}",
+  "@ieltsBuilderQuestionNumber": {
+    "placeholders": {
+      "from": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsBuilderQuestionRange": "Questions {from}–{to}",
+  "@ieltsBuilderQuestionRange": {
+    "placeholders": {
+      "from": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "to": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsBuilderGroupTypesMCQSINGLE": "Multiple choice (one answer)",
+  "ieltsBuilderGroupTypesMCQMULTI": "Multiple choice (more than one answer)",
+  "ieltsBuilderGroupTypesTFNG": "True / False / Not Given",
+  "ieltsBuilderGroupTypesYNNG": "Yes / No / Not Given",
+  "ieltsBuilderGroupTypesMATCHHEADINGS": "Matching headings",
+  "ieltsBuilderGroupTypesMATCHINFO": "Matching information",
+  "ieltsBuilderGroupTypesMATCHFEATURES": "Matching features",
+  "ieltsBuilderGroupTypesMATCHENDINGS": "Matching sentence endings",
+  "ieltsBuilderGroupTypesSENTENCECOMPLETION": "Sentence completion",
+  "ieltsBuilderGroupTypesSUMMARYCOMPLETION": "Summary completion",
+  "ieltsBuilderGroupTypesNOTECOMPLETION": "Note completion",
+  "ieltsBuilderGroupTypesTABLECOMPLETION": "Table completion",
+  "ieltsBuilderGroupTypesFLOWCHARTCOMPLETION": "Flow-chart completion",
+  "ieltsBuilderGroupTypesFORMCOMPLETION": "Form completion",
+  "ieltsBuilderGroupTypesDIAGRAMLABEL": "Diagram, map or plan labelling",
+  "ieltsBuilderGroupTypesSHORTANSWER": "Short answer",
+  "ieltsBuilderMoveUp": "Move group {n} up",
+  "@ieltsBuilderMoveUp": {
+    "placeholders": {
+      "n": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsBuilderMoveDown": "Move group {n} down",
+  "@ieltsBuilderMoveDown": {
+    "placeholders": {
+      "n": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsBuilderUp": "Up",
+  "ieltsBuilderDown": "Down",
+  "ieltsBuilderEdit": "Edit",
+  "ieltsBuilderEditGroupN": "Edit group {n}",
+  "@ieltsBuilderEditGroupN": {
+    "placeholders": {
+      "n": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsBuilderRemove": "Remove",
+  "ieltsBuilderRemoveGroupN": "Remove group {n}",
+  "@ieltsBuilderRemoveGroupN": {
+    "placeholders": {
+      "n": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsBuilderAddGroup": "Add question group",
+  "ieltsBuilderEditGroup": "Edit question group",
+  "ieltsBuilderGroupSaved": "Question group saved",
+  "ieltsBuilderGroupRemoved": "Question group removed",
+  "ieltsBuilderOrderSaved": "Order saved",
+  "ieltsBuilderRemoveGroupTitle": "Remove this question group?",
+  "ieltsBuilderRemoveGroupDescription": "The group and its questions leave the test. Later questions are numbered again.",
+  "ieltsBuilderCancel": "Cancel",
+  "ieltsBuilderSave": "Save",
+  "ieltsBuilderMinutesFor": "Minutes for {module}",
+  "@ieltsBuilderMinutesFor": {
+    "placeholders": {
+      "module": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsBuilderListeningReview": "Students get 2 more minutes at the end to check their answers.",
+  "ieltsBuilderGroupType": "Question type",
+  "ieltsBuilderInstruction": "Instruction",
+  "ieltsBuilderInstructionHint": "For example: Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.",
+  "ieltsBuilderUseWordBox": "Answers come from a box of words (letters)",
+  "ieltsBuilderWordLimit": "Word limit",
+  "ieltsBuilderNoWordLimit": "No limit",
+  "ieltsBuilderWords": "{count, plural, one{{count} word} other{{count} words}}",
+  "@ieltsBuilderWords": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsBuilderSharedList": "List to choose from",
+  "ieltsBuilderWordBox": "Box of words",
+  "ieltsBuilderGapText": "Text with gaps (optional)",
+  "ieltsBuilderGapTextHint": "Mark each gap with its question's place in the group: {example}",
+  "@ieltsBuilderGapTextHint": {
+    "placeholders": {
+      "example": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsBuilderGroupPicture": "Picture (map, plan or diagram, optional)",
+  "ieltsBuilderPictureAdded": "Picture added",
+  "ieltsBuilderQuestions": "Questions",
+  "ieltsBuilderQuestionN": "Question {n}",
+  "@ieltsBuilderQuestionN": {
+    "placeholders": {
+      "n": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsBuilderRemoveQuestion": "Remove question {n}",
+  "@ieltsBuilderRemoveQuestion": {
+    "placeholders": {
+      "n": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsBuilderPrompt": "Question",
+  "ieltsBuilderOptions": "Options",
+  "ieltsBuilderAcceptedAnswers": "Accepted answers",
+  "ieltsBuilderAcceptedHint": "Add every spelling you accept, e.g. colour and color. Capitals and extra spaces do not matter.",
+  "ieltsBuilderRightAnswers": "Right answers",
+  "ieltsBuilderRightAnswer": "Right answer",
+  "ieltsBuilderChooseAnswer": "Choose the answer",
+  "ieltsBuilderAddQuestion": "Add question",
+  "ieltsBuilderLetter": "Letter",
+  "ieltsBuilderOptionText": "Text",
+  "ieltsBuilderRemoveOption": "Remove option {key}",
+  "@ieltsBuilderRemoveOption": {
+    "placeholders": {
+      "key": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsBuilderAddOption": "Add option",
+  "ieltsBuilderOpenings": "Openings",
+  "ieltsTakeMyTitle": "My IELTS tests",
+  "ieltsTakeMyDescription": "Mock tests and practice sets opened for your batch. Each module has its own timer.",
+  "ieltsTakeNoneOpen": "No IELTS tests for you yet",
+  "ieltsTakeNoneOpenHint": "Your teacher opens tests for your batch; they show here.",
+  "ieltsTakeWindow": "Open {from} to {to}",
+  "@ieltsTakeWindow": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsTakeMinutes": "{count, plural, one{{count} minute} other{{count} minutes}}",
+  "@ieltsTakeMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsTakeStart": "Start",
+  "ieltsTakeContinue": "Continue",
+  "ieltsTakeViewResult": "View",
+  "ieltsTakeWaitingForMarks": "Waiting for marks",
+  "ieltsTakeBandShort": "Band {band}",
+  "@ieltsTakeBandShort": {
+    "placeholders": {
+      "band": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsTakeNotOnScreenYet": "Not on screen yet",
+  "ieltsTakeNotOpen": "Not open now",
+  "ieltsTakeAfterPrevious": "After the module before",
+  "ieltsTakeStartTitle": "Start {module}?",
+  "@ieltsTakeStartTitle": {
+    "placeholders": {
+      "module": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsTakeStartListening": "You have {minutes} minutes, including 2 minutes at the end to check your answers. Each recording plays once.",
+  "@ieltsTakeStartListening": {
+    "placeholders": {
+      "minutes": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsTakeStartOther": "You have {minutes} minutes. The timer keeps running once you start.",
+  "@ieltsTakeStartOther": {
+    "placeholders": {
+      "minutes": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsTakeNotYet": "Not yet",
+  "ieltsTakeLoadFailed": "The test could not be loaded.",
+  "ieltsTakeNotFound": "This test was not found.",
+  "ieltsTakeNeedComputer": "Mock tests are taken on a computer or a tablet. Please open this test on a bigger screen.",
+  "ieltsTakeBackToTests": "Back to my IELTS tests",
+  "ieltsTakeSaving": "Saving…",
+  "ieltsTakeSaved": "Saved",
+  "ieltsTakeSaveFailed": "Not saved — trying again",
+  "ieltsTakeTimeLeft": "Time left",
+  "ieltsTakeHandIn": "Hand in",
+  "ieltsTakePassage": "Passage",
+  "ieltsTakeQuestions": "Questions",
+  "ieltsTakeNavigator": "Questions 1 to 40",
+  "ieltsTakeGoTo": "Question {number}: {state, select, flagged{flagged for review} answered{answered already} other{not answered yet}}",
+  "@ieltsTakeGoTo": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      },
+      "state": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsTakeHandInTitle": "Hand in this module?",
+  "ieltsTakeHandInUnanswered": "{count, plural, one{{count} question is} other{{count} questions are}} not answered. You cannot change your answers after handing in.",
+  "@ieltsTakeHandInUnanswered": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsTakeHandInAll": "Every question is answered. You cannot change your answers after handing in.",
+  "ieltsTakeKeepWorking": "Keep working",
+  "ieltsTakeResultTitle": "{module} result",
+  "@ieltsTakeResultTitle": {
+    "placeholders": {
+      "module": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsTakeRawScore": "Score",
+  "ieltsTakeBand": "Band",
+  "ieltsTakeAnswersLater": "Right answers are shown after the test closes.",
+  "ieltsTakeQuestionLabel": "Question {number}",
+  "@ieltsTakeQuestionLabel": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsTakeGroupLabel": "Questions {from}–{to}",
+  "@ieltsTakeGroupLabel": {
+    "placeholders": {
+      "from": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "to": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsTakeChoose": "Choose",
+  "ieltsTakeChooseN": "{count, plural, one{Choose {count} answer} other{Choose {count} answers}}",
+  "@ieltsTakeChooseN": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsTakeFlag": "Flag",
+  "ieltsTakeFlagged": "Flagged",
+  "ieltsTakeFlagLabel": "Flag question {number} for review",
+  "@ieltsTakeFlagLabel": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsTakePicture": "Picture",
+  "ieltsTakeListToChoose": "List to choose from",
+  "ieltsTakeRight": "Right",
+  "ieltsTakeWrong": "Not right",
+  "ieltsTakeRightAnswer": "right answer: {answer}",
+  "@ieltsTakeRightAnswer": {
+    "placeholders": {
+      "answer": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsTakeNoRecording": "This part has no recording.",
+  "ieltsTakePlayPart": "Play the Part {no} recording",
+  "@ieltsTakePlayPart": {
+    "placeholders": {
+      "no": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsTakePlaying": "Playing…",
+  "ieltsTakePlayed": "Played",
+  "ieltsTakeRecordingProgress": "Recording",
+  "ieltsTakeVolume": "Volume",
+  "ieltsTakeHighlight": "Highlight",
+  "ieltsTakeClearHighlights": "Clear highlights",
+  "ieltsTakeNotes": "Notes",
+  "ieltsTakeNotesHint": "Kept on this device while you take the test.",
+  "ieltsTakeTask": "Task",
+  "ieltsTakeYourAnswer": "Your answer",
+  "ieltsTakeAnswerFor": "Your answer to Task {no}",
+  "@ieltsTakeAnswerFor": {
+    "placeholders": {
+      "no": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsTakeWordCount": "{count, plural, one{{count} word} other{{count} words}}",
+  "@ieltsTakeWordCount": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsTakeUnderMinimum": "fewer than {count}",
+  "@ieltsTakeUnderMinimum": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsTakeHandInEmptyTasks": "{count, plural, one{{count} task is} other{{count} tasks are}} empty. You cannot change your answers after handing in.",
+  "@ieltsTakeHandInEmptyTasks": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsTakeWaitingForTeacher": "Handed in. Your teacher will mark it against the four criteria.",
+  "ieltsTakeFeedback": "Feedback",
+  "ieltsTakeTaskBand": "Task band {band}",
+  "@ieltsTakeTaskBand": {
+    "placeholders": {
+      "band": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsTakeCriteriaTA": "Task Achievement",
+  "ieltsTakeCriteriaTR": "Task Response",
+  "ieltsTakeCriteriaCC": "Coherence and Cohesion",
+  "ieltsTakeCriteriaLR": "Lexical Resource",
+  "ieltsTakeCriteriaGRA": "Grammatical Range and Accuracy",
+  "ieltsTakeCriteriaFC": "Fluency and Coherence",
+  "ieltsTakeCriteriaP": "Pronunciation",
+  "ieltsTakeSpeakingPracticeHint": "Record your answer to each part. You can record a part again before handing in.",
+  "ieltsTakeHandInNoRecording": "{count, plural, one{{count} part has} other{{count} parts have}} no recording. You cannot change your recordings after handing in.",
+  "@ieltsTakeHandInNoRecording": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsTakeWaitingForTeacherSpeaking": "Handed in. Your teacher will mark your Speaking.",
+  "ieltsTakeWithTeacher": "With your teacher",
+  "ieltsTakeStartSpeaking": "Record your answers to Parts 1 to 3. Part 2 gives you 1 minute to prepare and 2 minutes to talk.",
+  "ieltsTakeBandReport": "Band report",
+  "ieltsTakeScoreOutOf": "{score} / {total}",
+  "@ieltsTakeScoreOutOf": {
+    "placeholders": {
+      "score": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "total": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsOpeningsCrumb": "Openings",
+  "ieltsOpeningsTitle": "Openings of {test}",
+  "@ieltsOpeningsTitle": {
+    "placeholders": {
+      "test": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsOpeningsTitleLoading": "Openings",
+  "ieltsOpeningsDescription": "Open the test for a batch between two times. Students of the batch take it from My IELTS tests.",
+  "ieltsOpeningsOpen": "Open for a batch",
+  "ieltsOpeningsPublishFirst": "Publish the test before opening it for a batch.",
+  "ieltsOpeningsBatch": "Batch",
+  "ieltsOpeningsWindow": "Open",
+  "ieltsOpeningsHandedIn": "Handed in",
+  "ieltsOpeningsActions": "Actions",
+  "ieltsOpeningsResults": "Results",
+  "ieltsOpeningsResultsFor": "Results of {batch}",
+  "@ieltsOpeningsResultsFor": {
+    "placeholders": {
+      "batch": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsOpeningsChange": "Change",
+  "ieltsOpeningsChangeFor": "Change the window of {batch}",
+  "@ieltsOpeningsChangeFor": {
+    "placeholders": {
+      "batch": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsOpeningsRemove": "Remove",
+  "ieltsOpeningsRemoveFor": "Remove the opening for {batch}",
+  "@ieltsOpeningsRemoveFor": {
+    "placeholders": {
+      "batch": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsOpeningsRemoveTitle": "Remove this opening?",
+  "ieltsOpeningsRemoveDescription": "{batch} will no longer see the test. Answers already given are kept.",
+  "@ieltsOpeningsRemoveDescription": {
+    "placeholders": {
+      "batch": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsOpeningsRemoved": "Opening removed",
+  "ieltsOpeningsSaved": "Opening saved",
+  "ieltsOpeningsCancel": "Cancel",
+  "ieltsOpeningsSave": "Save",
+  "ieltsOpeningsCaption": "Openings of this test",
+  "ieltsOpeningsNone": "Not open for any batch yet",
+  "ieltsOpeningsNoneHint": "Open the test for a batch to let its students take it.",
+  "ieltsOpeningsLoadFailed": "The openings could not be loaded.",
+  "ieltsOpeningsChangeTitle": "Change the window for {batch}",
+  "@ieltsOpeningsChangeTitle": {
+    "placeholders": {
+      "batch": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsOpeningsTimeZoneNote": "Times are in the centre's time zone (Bangladesh).",
+  "ieltsOpeningsChooseBatch": "Choose a batch",
+  "ieltsOpeningsOpensOn": "Opens on",
+  "ieltsOpeningsOpensAt": "at",
+  "ieltsOpeningsClosesOn": "Closes on",
+  "ieltsOpeningsClosesAt": "at",
+  "ieltsOpeningsResultsTitle": "Results of {batch}",
+  "@ieltsOpeningsResultsTitle": {
+    "placeholders": {
+      "batch": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsOpeningsResultsCaption": "Band per module (score out of 40)",
+  "ieltsOpeningsStudent": "Student",
+  "ieltsOpeningsNotStarted": "Not started",
+  "ieltsOpeningsInProgress": "Taking it now",
+  "ieltsOpeningsWaitingForMarks": "Waiting for marks",
+  "ieltsOpeningsNoStudents": "No students in this batch",
+  "ieltsOpeningsExamine": "Examine",
+  "ieltsOpeningsContinueExam": "Continue",
+  "ieltsOpeningsExamineFor": "Examine {name}'s Speaking",
+  "@ieltsOpeningsExamineFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsOpeningsMarkNow": "Mark",
+  "ieltsOpeningsReportFor": "Band report of {name}",
+  "@ieltsOpeningsReportFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsOpeningsOverall": "Overall",
+  "ieltsOpeningsPlagiarism": "Plagiarism",
+  "ieltsOpeningsPlagiarismFor": "Plagiarism check of {batch}",
+  "@ieltsOpeningsPlagiarismFor": {
+    "placeholders": {
+      "batch": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsMarkingTitle": "Marking",
+  "ieltsMarkingCrumb": "Mark Writing",
+  "ieltsMarkingDescription": "IELTS Writing handed in by students. Give a band for each criterion; a task's band is their average to the nearest half band, and Task 2 counts double.",
+  "ieltsMarkingWaiting": "Waiting",
+  "ieltsMarkingMarked": "Marked",
+  "ieltsMarkingStudent": "Student",
+  "ieltsMarkingBatch": "Batch",
+  "ieltsMarkingTest": "Test",
+  "ieltsMarkingHandedIn": "Handed in",
+  "ieltsMarkingBand": "Band",
+  "ieltsMarkingActions": "Actions",
+  "ieltsMarkingMark": "Mark",
+  "ieltsMarkingChange": "Change marks",
+  "ieltsMarkingMarkFor": "Mark {name}'s Writing",
+  "@ieltsMarkingMarkFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsMarkingCaption": "Writing to mark",
+  "ieltsMarkingNoneWaiting": "Nothing waiting to be marked",
+  "ieltsMarkingNoneMarked": "Nothing marked yet",
+  "ieltsMarkingLoadFailed": "The Writing could not be loaded.",
+  "ieltsMarkingNotHandedIn": "This Writing has not been handed in yet.",
+  "ieltsMarkingMarkTitle": "Writing by {name}",
+  "@ieltsMarkingMarkTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsMarkingWritingBand": "Writing band",
+  "ieltsMarkingTaskN": "Task {no}",
+  "@ieltsMarkingTaskN": {
+    "placeholders": {
+      "no": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsMarkingTaskBandPending": "Give all four criteria to see the task band.",
+  "ieltsMarkingComment": "Comment on this task",
+  "ieltsMarkingRule": "Writing band = (Task 1 + 2 × Task 2) ÷ 3, to the nearest half band.",
+  "ieltsMarkingSaveMarks": "Save marks",
+  "ieltsMarkingSaved": "Marks saved",
+  "ieltsMarkingModule": "Module",
+  "ieltsMarkingModulesWRITING": "Writing",
+  "ieltsMarkingModulesSPEAKING": "Speaking",
+  "ieltsMarkingMarkSpeakingFor": "Mark {name}'s Speaking",
+  "@ieltsMarkingMarkSpeakingFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsMarkingCaptionSpeaking": "Speaking to mark",
+  "ieltsMarkingDescriptionSpeaking": "IELTS Speaking to mark: practice recordings handed in by students and live sessions. Give a band for each of the four criteria; the Speaking band is their average to the nearest half band.",
+  "ieltsSpeakingCrumb": "Speaking",
+  "ieltsSpeakingPartN": "Part {no}",
+  "@ieltsSpeakingPartN": {
+    "placeholders": {
+      "no": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsSpeakingPartHint1": "Introduction and interview: 4–5 minutes of questions on familiar topics.",
+  "ieltsSpeakingPartHint2": "Long turn: 1 minute to prepare, then up to 2 minutes on the cue card.",
+  "ieltsSpeakingPartHint3": "Discussion: 4–5 minutes of deeper questions linked to Part 2.",
+  "ieltsSpeakingStartPreparation": "Start 1 minute to prepare",
+  "ieltsSpeakingStartTalking": "Start 2 minutes to talk",
+  "ieltsSpeakingPrepare": "Prepare",
+  "ieltsSpeakingTalk": "Talk",
+  "ieltsSpeakingPreparationTime": "Preparation time",
+  "ieltsSpeakingTalkTime": "Talking time",
+  "ieltsSpeakingRecord": "Record",
+  "ieltsSpeakingRecordAgain": "Record again",
+  "ieltsSpeakingStopRecording": "Stop recording",
+  "ieltsSpeakingNoRecording": "Not recorded",
+  "ieltsSpeakingRecordingOf": "Recording of Part {no}",
+  "@ieltsSpeakingRecordingOf": {
+    "placeholders": {
+      "no": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsSpeakingNoMicrophoneSupport": "This browser cannot record. Try Chrome, Edge or Firefox.",
+  "ieltsSpeakingMicrophoneDenied": "The microphone is blocked. Allow it in the browser to record.",
+  "ieltsSpeakingExaminerTitle": "Speaking with {name}",
+  "@ieltsSpeakingExaminerTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsSpeakingLive": "Live session",
+  "ieltsSpeakingPractice": "Practice recordings",
+  "ieltsSpeakingSpeakingBand": "Speaking band",
+  "ieltsSpeakingMarks": "Marks",
+  "ieltsSpeakingBandPending": "Give all four criteria to see the band.",
+  "ieltsSpeakingBandPreview": "Speaking band {band}",
+  "@ieltsSpeakingBandPreview": {
+    "placeholders": {
+      "band": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsSpeakingNotes": "Notes for the student",
+  "ieltsSpeakingSaveAndEnd": "Save marks and end the session",
+  "ieltsSpeakingSaveMarks": "Save marks",
+  "ieltsSpeakingSaved": "Marks saved",
+  "ieltsSpeakingLoadFailed": "The Speaking could not be loaded.",
+  "ieltsSpeakingNotHandedIn": "The student has not handed this in yet.",
+  "ieltsOverviewTitle": "IELTS overview",
+  "ieltsOverviewStaffDescription": "Batches, mock tests coming up, Writing and Speaking to mark, and average bands per batch.",
+  "ieltsOverviewStudentDescription": "Your targets, your latest bands and your next test.",
+  "ieltsOverviewLoadFailed": "The overview could not be loaded.",
+  "ieltsOverviewBatches": "Batches",
+  "ieltsOverviewStudents": "Students",
+  "ieltsOverviewWritingWaiting": "Writing to mark",
+  "ieltsOverviewSpeakingWaiting": "Speaking to mark",
+  "ieltsOverviewGoToMarking": "Go to marking",
+  "ieltsOverviewUpcomingTitle": "Mock tests now and in the next 7 days",
+  "ieltsOverviewUpcomingDescription": "Openings of mock tests for your batches.",
+  "ieltsOverviewNoUpcoming": "No mock tests coming up",
+  "ieltsOverviewBatchBandsTitle": "Average band per module",
+  "ieltsOverviewBatchBandsDescription": "Marked attempts in the last 90 days.",
+  "ieltsOverviewBatch": "Batch",
+  "ieltsOverviewNoBands": "No bands yet",
+  "ieltsOverviewTargetOverall": "Target overall band",
+  "ieltsOverviewDaysToTest": "Days to your test",
+  "ieltsOverviewOpenNow": "Tests open now",
+  "ieltsOverviewNextTitle": "Your next test",
+  "ieltsOverviewNoNext": "Nothing to take right now",
+  "ieltsOverviewGoToTests": "Go to my IELTS tests",
+  "ieltsOverviewTargetsTitle": "Targets and latest bands",
+  "ieltsOverviewSeeProgress": "See my progress",
+  "ieltsOverviewModule": "Module",
+  "ieltsOverviewTarget": "Target",
+  "ieltsOverviewLatest": "Latest",
+  "ieltsOverviewGap": "To go",
+  "ieltsOverviewReached": "Reached",
+  "ieltsOverviewToGo": "{gap} to go",
+  "@ieltsOverviewToGo": {
+    "placeholders": {
+      "gap": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsProgressTitle": "My IELTS progress",
+  "ieltsProgressTitleFor": "IELTS progress of {name}",
+  "@ieltsProgressTitleFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsProgressCrumb": "Progress",
+  "ieltsProgressTarget": "Target overall band {band}",
+  "@ieltsProgressTarget": {
+    "placeholders": {
+      "band": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsProgressNoTarget": "No target band set yet",
+  "ieltsProgressNotFound": "This student was not found.",
+  "ieltsProgressLoadFailed": "The progress could not be loaded.",
+  "ieltsProgressNoBands": "No marked bands yet",
+  "ieltsProgressChartLabel": "{module} bands in order: {bands}",
+  "@ieltsProgressChartLabel": {
+    "placeholders": {
+      "module": {
+        "type": "String"
+      },
+      "bands": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsProgressTargetShort": "Target {band}",
+  "@ieltsProgressTargetShort": {
+    "placeholders": {
+      "band": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsProgressBandShort": "Band {band}",
+  "@ieltsProgressBandShort": {
+    "placeholders": {
+      "band": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsProgressMocksTitle": "Mock tests",
+  "ieltsProgressMocksDescription": "Mock tests with all four modules marked, with the overall band.",
+  "ieltsProgressTest": "Test",
+  "ieltsProgressDate": "Date",
+  "ieltsProgressOverall": "Overall",
+  "ieltsProgressNoMocks": "No complete mock tests yet",
+  "ieltsProgressTypesTitle": "Question types",
+  "ieltsProgressTypesDescription": "Listening and Reading answers by question type, weakest first.",
+  "ieltsProgressQuestionType": "Question type",
+  "ieltsProgressRight": "Right",
+  "ieltsProgressRightOf": "{right} of {total}",
+  "@ieltsProgressRightOf": {
+    "placeholders": {
+      "right": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "total": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsProgressPercent": "Right %",
+  "ieltsProgressNoTypes": "No Listening or Reading answers yet",
+  "ieltsReportTitle": "IELTS band report",
+  "ieltsReportPrint": "Print",
+  "ieltsReportNotFound": "This report was not found.",
+  "ieltsReportLoadFailed": "The report could not be loaded.",
+  "ieltsReportBandsCaption": "Bands per module",
+  "ieltsReportModule": "Module",
+  "ieltsReportBand": "Band",
+  "ieltsReportTarget": "Target",
+  "ieltsReportOverall": "Overall band",
+  "ieltsReportNotMarked": "not marked yet",
+  "ieltsReportTestDate": "Booked test date: {date}",
+  "@ieltsReportTestDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsConvertTitle": "IELTS exams from the old test builder",
+  "ieltsConvertDescription": "Copy each into the new format. The copy is a draft marked \"Converted — check before use\"; the old exam stays as it is.",
+  "ieltsConvertConvert": "Copy into the new format",
+  "ieltsConvertConvertFor": "Copy {title} into the new format",
+  "@ieltsConvertConvertFor": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsConvertOpenCopy": "Open the copy",
+  "ieltsConvertDoneTitle": "Copied into the new format",
+  "ieltsConvertDoneDescription": "{count, plural, one{{count} question was copied.} other{{count} questions were copied.}} Check the copy, add recordings and publish it.",
+  "@ieltsConvertDoneDescription": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsConvertSkipped": "{count, plural, one{{count} question did not fit and was left out:} other{{count} questions did not fit and were left out:}}",
+  "@ieltsConvertSkipped": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsConvertSkippedList": "Questions left out",
+  "ieltsConvertNothingSkipped": "Every question was copied.",
+  "ieltsConvertClose": "Close",
+  "ieltsCoursesTitle": "Courses",
+  "ieltsCoursesIntro": "Each course has its branch, dates, modules and teachers. Add students and the timetable from the course's page.",
+  "ieltsCoursesNew": "New course",
+  "ieltsCoursesEdit": "Change course",
+  "ieltsCoursesFormIntro": "The title says what the course is, for example \"Band 7 Academic — Jan 2027, evening\" or \"Writing crash course\".",
+  "ieltsCoursesCourse": "Course",
+  "ieltsCoursesCourseTitle": "Course title",
+  "ieltsCoursesCourseTitleHint": "Up to 150 characters.",
+  "ieltsCoursesBranch": "Branch",
+  "ieltsCoursesMainBranch": "Main branch",
+  "ieltsCoursesStartDate": "Starts",
+  "ieltsCoursesEndDate": "Ends",
+  "ieltsCoursesDates": "Dates",
+  "ieltsCoursesStatus": "Status",
+  "ieltsCoursesAllStatuses": "All courses",
+  "ieltsCoursesStatusesUPCOMING": "Upcoming",
+  "ieltsCoursesStatusesRUNNING": "Running",
+  "ieltsCoursesStatusesENDED": "Ended",
+  "ieltsCoursesModules": "Modules",
+  "ieltsCoursesStudents": "Students",
+  "ieltsCoursesSeatsTaken": "{taken} of {limit}",
+  "@ieltsCoursesSeatsTaken": {
+    "placeholders": {
+      "taken": {
+        "type": "num",
+        "format": "decimalPattern"
+      },
+      "limit": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "ieltsCoursesSeatLimit": "Seat limit",
+  "ieltsCoursesSeatLimitHint": "Leave empty for no limit. When the course is full, nobody else can be added.",
+  "ieltsCoursesTeachers": "Teachers",
+  "ieltsCoursesTeacherFor": "{module} teacher",
+  "@ieltsCoursesTeacherFor": {
+    "placeholders": {
+      "module": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsCoursesNoTeacher": "No teacher yet",
+  "ieltsCoursesActions": "Actions",
+  "ieltsCoursesStudentsAndTimetable": "Students and timetable",
+  "ieltsCoursesStudentsHint": "After saving, add students and the weekly timetable from the course's page.",
+  "ieltsCoursesCancel": "Cancel",
+  "ieltsCoursesSave": "Save",
+  "ieltsCoursesCreated": "Course created",
+  "ieltsCoursesSaved": "Course saved",
+  "ieltsCoursesRemove": "Remove",
+  "ieltsCoursesRemoved": "Course removed",
+  "ieltsCoursesRemoveTitle": "Remove {title}?",
+  "@ieltsCoursesRemoveTitle": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "ieltsCoursesRemoveDetail": "Only a course with no students can be removed. It is hidden, not deleted.",
+  "ieltsCoursesLoadFailed": "Couldn't load the courses.",
+  "ieltsCoursesEmpty": "No courses yet",
+  "ieltsCoursesEmptyHint": "Make your first course with New course.",
+  "ieltsCoursesMyTitle": "My courses",
+  "ieltsCoursesMyIntro": "Your IELTS courses, their dates and your teachers.",
+  "ieltsCoursesMyEmpty": "You are not in any course yet",
   "appNoConnection": "No internet connection. Check it and try again.",
   "appUpdateRequiredTitle": "Please update Instructor",
   "appUpdateRequiredBody": "This version of the app is no longer supported. Install the new version to continue.",

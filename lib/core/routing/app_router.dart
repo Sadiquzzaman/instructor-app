@@ -46,6 +46,7 @@ import 'package:instructor_app/features/results/screens/behaviour_screen.dart';
 import 'package:instructor_app/features/results/screens/paper_exam_screens.dart';
 import 'package:instructor_app/features/tests/screens/grading_screens.dart';
 import 'package:instructor_app/features/tests/screens/integrity_screen.dart';
+import 'package:instructor_app/features/ielts/screens/ielts_overview_screen.dart';
 import 'package:instructor_app/features/tests/screens/create_test_screen.dart';
 import 'package:instructor_app/features/tests/screens/edit_test_screen.dart';
 import 'package:instructor_app/features/tests/screens/monitor_screen.dart';
@@ -406,6 +407,10 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: AppRoutes.chat,
             builder: (context, state) => const ChatScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.ieltsOverview,
+            builder: (context, state) => const IeltsOverviewScreen(),
           ),
           GoRoute(
             path: AppRoutes.account,

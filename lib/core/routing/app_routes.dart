@@ -51,12 +51,14 @@ abstract final class AppRoutes {
   static const activityLog = '/activity-log';
   static const messageLog = '/message-log';
   static const billing = '/billing';
+  static const ieltsOverview = '/ielts/overview';
 
   /// Pages the app has really built (not "use the website for now"). A
   /// notification's link opens in the app only for these; each stage adds
   /// its pages here.
   static const built = {
     home,
+    ieltsOverview,
     today,
     dashboard,
     myAttendance,
