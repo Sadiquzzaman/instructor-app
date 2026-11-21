@@ -18,6 +18,7 @@ import 'package:instructor_app/features/tests/data/test_draft.dart';
 import 'package:instructor_app/features/tests/screens/passage_editor.dart';
 import 'package:instructor_app/features/tests/screens/question_editor.dart';
 import 'package:instructor_app/features/tests/screens/review_order_steps.dart';
+import 'package:instructor_app/features/tests/screens/teacher_tests_screens.dart';
 
 typedef Choice = ({String id, String label});
 
@@ -142,7 +143,12 @@ final classOfferingsProvider = FutureProvider.autoDispose
 /// kept on the device as it is built (Stage 4 plan §7.4) and cleared when
 /// saved. Questions are plain text in the app (§7.1).
 class CreateTestScreen extends ConsumerStatefulWidget {
-  const CreateTestScreen({super.key});
+  const CreateTestScreen({super.key, this.editId, this.initial});
+
+  /// Editing a saved test (`PUT /exams/:id`) instead of making one; the
+  /// edit isn't kept on the device.
+  final String? editId;
+  final TestDraft? initial;
 
   @override
   ConsumerState<CreateTestScreen> createState() => _CreateTestScreenState();
@@ -153,12 +159,16 @@ const _stepCount = 5;
 
 class _CreateTestScreenState extends ConsumerState<CreateTestScreen> {
   late TestDraft _d =
-      ref.read(testDraftStoreProvider).load() ?? const TestDraft();
+      widget.initial ??
+      ref.read(testDraftStoreProvider).load() ??
+      const TestDraft();
   bool _saving = false;
+
+  bool get _editing => widget.editId != null;
 
   void _set(TestDraft d) {
     setState(() => _d = d);
-    ref.read(testDraftStoreProvider).save(d);
+    if (!_editing) ref.read(testDraftStoreProvider).save(d);
   }
 
   bool get _personal => !(ref.read(sessionProvider)?.isOrganization ?? false);
@@ -232,12 +242,22 @@ class _CreateTestScreenState extends ConsumerState<CreateTestScreen> {
     final router = GoRouter.of(context);
     setState(() => _saving = true);
     try {
-      final r = await ref
-          .read(apiClientProvider)
-          .post('/exams', data: _d.toBody(DateTime.now()));
-      await ref.read(testDraftStoreProvider).clear();
-      final id = r.payload is Map ? (r.payload! as Map)['id'] as String? : null;
-      _snack(l10n.createTestFooterPublish);
+      final api = ref.read(apiClientProvider);
+      final body = _d.toBody(DateTime.now());
+      final String? id;
+      if (_editing) {
+        await api.put('/exams/${widget.editId}', data: body);
+        id = widget.editId;
+        ref
+          ..invalidate(teacherTestProvider(id!))
+          ..invalidate(teacherTestsProvider);
+        _snack(l10n.createTestFooterSave);
+      } else {
+        final r = await api.post('/exams', data: body);
+        await ref.read(testDraftStoreProvider).clear();
+        id = r.payload is Map ? (r.payload! as Map)['id'] as String? : null;
+        _snack(l10n.createTestFooterPublish);
+      }
       router.go(id == null ? AppRoutes.tests : '${AppRoutes.tests}/$id');
     } on ApiException catch (e) {
       _snack(apiErrorText(l10n, e));
@@ -247,6 +267,10 @@ class _CreateTestScreenState extends ConsumerState<CreateTestScreen> {
   }
 
   Future<void> _cancel() async {
+    if (_editing) {
+      context.go('${AppRoutes.tests}/${widget.editId}');
+      return;
+    }
     await ref.read(testDraftStoreProvider).clear();
     if (mounted) context.go(AppRoutes.tests);
   }
@@ -329,6 +353,8 @@ class _CreateTestScreenState extends ConsumerState<CreateTestScreen> {
                         child: Text(
                           _saving
                               ? l10n.createTestFooterPublishing
+                              : _editing
+                              ? l10n.createTestFooterSave
                               : l10n.createTestFooterPublish,
                         ),
                       ),

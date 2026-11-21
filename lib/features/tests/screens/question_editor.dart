@@ -12,13 +12,7 @@ import 'package:instructor_app/features/tests/data/test_draft.dart';
 
 /// The graded types the web's builder offers for an academic test (IELTS
 /// types come with Stage 5).
-const gradedChoiceTypes = [
-  'multiple-choice',
-  'multiple-response',
-  'true-false',
-  'fill-in-the-blanks',
-  'matching-ordering',
-];
+const gradedChoiceTypes = gradedTypes;
 
 /// The types a question of [type] may take (the web's tabs per category).
 List<String> typesFor(String type) => switch (type) {

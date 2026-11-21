@@ -59,6 +59,9 @@
     "testChooseMatch": "Choose a match",
     "savedCopy": "No internet connection. This was saved on your phone at {time}; pull down to try again.",
     "homeworkPlainText": "Instructions written on the website with bold, links or tables keep their words here, but saving from the app keeps plain text only.",
-    "openOnWebsite": "Open on the website"
+    "openOnWebsite": "Open on the website",
+    "testEditOnWebsiteTitle": "Edit this test on the website",
+    "testEditOnWebsiteBody": "This test has formatting, maths, media or question types the app can't edit yet. To keep it exactly as it is, edit it on the website.",
+    "testEditOnWebsite": "Edit on the website"
   }
 }

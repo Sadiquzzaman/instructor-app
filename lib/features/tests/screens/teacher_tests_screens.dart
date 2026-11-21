@@ -224,9 +224,7 @@ class TeacherClassTests extends ConsumerWidget {
 
 /// A teacher's test (the web's ExamDetails): status, on or off, schedule,
 /// class, duration, questions, passing score and negative marking, and the
-/// subjects; Switch off (asked first) or on before it starts. Editing stays
-/// on the web (Stage 4); the live monitor and marking join as their PRs
-/// land.
+/// subjects; Edit, and Switch off (asked first) or on, before it starts.
 class TeacherTestScreen extends ConsumerStatefulWidget {
   const TeacherTestScreen({required this.id, super.key});
 
@@ -445,6 +443,20 @@ class _TeacherTestScreenState extends ConsumerState<TeacherTestScreen> {
                       context.push('${AppRoutes.tests}/${t.id}/integrity'),
                   icon: const Icon(Icons.verified_user_outlined),
                   label: Text(l10n.testsDetailsIntegrity),
+                ),
+              ),
+            ),
+          if (canModify)
+            Padding(
+              padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+              child: Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: OutlinedButton.icon(
+                  key: const Key('test-edit'),
+                  onPressed: () =>
+                      context.push('${AppRoutes.tests}/${t.id}/edit'),
+                  icon: const Icon(Icons.edit_outlined),
+                  label: Text(l10n.testsDetailsEdit),
                 ),
               ),
             ),
