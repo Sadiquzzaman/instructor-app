@@ -48,6 +48,7 @@ import 'package:instructor_app/features/tests/screens/grading_screens.dart';
 import 'package:instructor_app/features/tests/screens/integrity_screen.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_builder_screen.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_courses_screens.dart';
+import 'package:instructor_app/features/ielts/screens/ielts_marking_screens.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_openings_screen.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_overview_screen.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_students_screens.dart';
@@ -454,6 +455,18 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: AppRoutes.ieltsMy,
             builder: (context, state) => const MyIeltsTestsScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.ieltsMarking,
+            builder: (context, state) => const IeltsMarkingListScreen(),
+            routes: [
+              GoRoute(
+                path: ':id',
+                builder: (context, state) => IeltsMarkWritingScreen(
+                  attemptId: state.pathParameters['id']!,
+                ),
+              ),
+            ],
           ),
           GoRoute(
             path: '/ielts/speaking/:id',
