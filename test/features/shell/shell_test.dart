@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 
+import 'package:instructor_app/core/routing/app_routes.dart';
 import 'package:instructor_app/core/api/api_exception.dart';
 import 'package:instructor_app/core/auth/session.dart';
 import 'package:instructor_app/features/today/screens/today_screen.dart';
@@ -82,13 +83,18 @@ void main() {
     expect(find.text('My attendance'), findsNothing);
   });
 
-  testWidgets('IELTS pages say "use the website for IELTS"', (tester) async {
+  testWidgets('IELTS pages not built yet say "use the website for IELTS"', (
+    tester,
+  ) async {
     await pumpInstructorApp(tester, api: _api(), session: _ielts());
     await _openMenu(tester);
     final ieltsLink = find.byWidgetPredicate(
       (w) =>
           w.key is ValueKey<String> &&
-          (w.key! as ValueKey<String>).value.startsWith('menu-/ielts'),
+          (w.key! as ValueKey<String>).value.startsWith('menu-/ielts') &&
+          !AppRoutes.built.contains(
+            (w.key! as ValueKey<String>).value.substring('menu-'.length),
+          ),
     );
     expect(ieltsLink, findsWidgets);
     await tester.tap(ieltsLink.first);
