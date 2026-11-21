@@ -21,7 +21,12 @@ void main() {
   // Latin text that is right in Bangla too (the same list as the web's).
   // Kept in Latin letters on purpose: the language names, and the exam's
   // name (the web's own Bangla is "IELTS").
-  const latinInBangla = {'languageSwitchTo', 'testsCategoryIelts'};
+  // The web's Bangla keeps these in Latin letters (a language name, IELTS).
+  const latinInBangla = {
+    'languageSwitchTo',
+    'testsCategoryIelts',
+    'createTestCategoriesIelts',
+  };
 
   test('the ARB files are up to date with l10n/ '
       '(run `dart run tool/import_web_messages.dart`)', () {

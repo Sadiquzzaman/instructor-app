@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:instructor_app/features/tests/data/test_draft.dart';
 import 'package:instructor_app/core/api/api_client.dart';
 import 'package:instructor_app/core/api/api_exception.dart';
 import 'package:instructor_app/core/api/api_providers.dart';
@@ -88,5 +89,8 @@ final readCacheProvider = Provider<ReadCache>(
 /// Clears the cache when the person signs out. Kept alive by the app.
 final readCacheJanitorProvider = Provider<void>((ref) {
   final signedIn = ref.watch(sessionProvider) != null;
-  if (!signedIn) ReadCache.clearAll(ref.read(sharedPreferencesProvider));
+  if (!signedIn) {
+    ReadCache.clearAll(ref.read(sharedPreferencesProvider));
+    TestDraftStore.clearAll(ref.read(sharedPreferencesProvider));
+  }
 });

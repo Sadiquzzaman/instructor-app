@@ -115,6 +115,16 @@ class _TeacherTestsScreenState extends ConsumerState<TeacherTestsScreen> {
                 style: text.bodyMedium?.copyWith(color: colors.inkMuted),
               ),
               const SizedBox(height: AppSpacing.md),
+              Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: FilledButton.icon(
+                  key: const Key('tests-create'),
+                  icon: const Icon(Icons.add),
+                  label: Text(l10n.createTestTitle),
+                  onPressed: () => context.push('${AppRoutes.tests}/create'),
+                ),
+              ),
+              const SizedBox(height: AppSpacing.md),
               TextField(
                 key: const Key('tests-search'),
                 controller: _search,

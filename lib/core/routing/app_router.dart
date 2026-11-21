@@ -46,6 +46,7 @@ import 'package:instructor_app/features/results/screens/behaviour_screen.dart';
 import 'package:instructor_app/features/results/screens/paper_exam_screens.dart';
 import 'package:instructor_app/features/tests/screens/grading_screens.dart';
 import 'package:instructor_app/features/tests/screens/integrity_screen.dart';
+import 'package:instructor_app/features/tests/screens/create_test_screen.dart';
 import 'package:instructor_app/features/tests/screens/monitor_screen.dart';
 import 'package:instructor_app/features/tests/screens/teacher_tests_screens.dart';
 import 'package:instructor_app/features/tests/screens/tests_screen.dart';
@@ -234,6 +235,11 @@ final routerProvider = Provider<GoRouter>((ref) {
             path: AppRoutes.tests,
             builder: (context, state) => const TestsScreen(),
             routes: [
+              // Before ':id', so "create" is not taken for an id.
+              GoRoute(
+                path: 'create',
+                builder: (context, state) => const CreateTestScreen(),
+              ),
               // A teacher's test (students open a test to take it, or its
               // result).
               GoRoute(
