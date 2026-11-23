@@ -1,9 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'package:instructor_app/core/routing/app_router.dart';
 import 'package:instructor_app/core/time/clock.dart';
 import 'package:instructor_app/features/ielts/data/attempts.dart';
+import 'package:instructor_app/features/ielts/screens/reading_passage.dart';
 import 'package:instructor_app/l10n/generated/app_localizations_bn.dart';
 import 'package:instructor_app/l10n/generated/app_localizations_en.dart';
 
@@ -259,6 +261,67 @@ void main() {
     expect(find.text(_en.ieltsTakeBandShort('6.5')), findsOneWidget);
     expect(find.text(_en.ieltsTakeAfterPrevious), findsOneWidget);
     expect(find.text(_en.ieltsTakeWithTeacher), findsOneWidget);
+  });
+
+  test('highlights that touch or overlap become one', () {
+    expect(addHighlight(const [], (start: 4, end: 8)), [(start: 4, end: 8)]);
+    expect(
+      addHighlight(
+        const [(start: 0, end: 4), (start: 10, end: 12)],
+        (start: 3, end: 10),
+      ),
+      [(start: 0, end: 12)],
+    );
+    expect(addHighlight(const [(start: 6, end: 9)], (start: 0, end: 2)), [
+      (start: 0, end: 2),
+      (start: 6, end: 9),
+    ]);
+  });
+
+  testWidgets('reading: highlight what I select, clear it; notes are kept', (
+    tester,
+  ) async {
+    await _open(tester, _api(), '/ielts/attempts/x1');
+    final passage = find.byKey(const Key('passage-p1'));
+    expect(passage, findsOneWidget);
+    final highlight = find.byKey(const Key('highlight-p1'));
+    // Nothing selected yet.
+    expect(tester.widget<OutlinedButton>(highlight).onPressed, isNull);
+
+    final editable = tester.state<EditableTextState>(
+      find.descendant(of: passage, matching: find.byType(EditableText)),
+    );
+    editable.userUpdateTextEditingValue(
+      editable.textEditingValue.copyWith(
+        selection: const TextSelection(baseOffset: 0, extentOffset: 4),
+      ),
+      SelectionChangedCause.drag,
+    );
+    await tester.pump();
+    await tester.tap(highlight);
+    await tester.pump();
+    List<InlineSpan> spans() =>
+        tester.widget<SelectableText>(passage).textSpan!.children!;
+    final first = spans().first as TextSpan;
+    expect(first.text, 'Bees');
+    expect(first.style?.backgroundColor, isNotNull);
+    expect((spans()[1] as TextSpan).style?.backgroundColor, isNull);
+
+    await tester.tap(find.byKey(const Key('clear-highlights-p1')));
+    await tester.pump();
+    expect(spans(), hasLength(1));
+
+    await tester.enterText(
+      find.descendant(
+        of: find.byKey(const Key('notes-p1')),
+        matching: find.byType(TextField),
+      ),
+      'para B: city bees',
+    );
+    await tester.pump();
+    final prefs = await SharedPreferences.getInstance();
+    expect(prefs.getString(readingNotesKey('x1', 'p1')), 'para B: city bees');
+    await tester.pump(const Duration(seconds: 2));
   });
 
   testWidgets('reading: answers save after a moment; hand in', (tester) async {

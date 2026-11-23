@@ -21,6 +21,7 @@ import 'package:instructor_app/features/ielts/data/attempts.dart';
 import 'package:instructor_app/features/ielts/data/builder.dart';
 import 'package:instructor_app/features/ielts/data/ielts.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_overview_screen.dart';
+import 'package:instructor_app/features/ielts/screens/reading_passage.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_tests_screens.dart';
 import 'package:instructor_app/features/ielts/screens/listening_player.dart';
 import 'package:instructor_app/features/ielts/screens/speaking_screens.dart';
@@ -575,7 +576,14 @@ class _IeltsAttemptScreenState extends ConsumerState<IeltsAttemptScreen> {
       ],
       if (part.title?.isNotEmpty ?? false)
         Text(part.title!, style: text.titleMedium),
-      if (part.content?.isNotEmpty ?? false)
+      if ((part.content?.isNotEmpty ?? false) && part.module == 'READING')
+        ReadingPassage(
+          key: ValueKey('passage-${v.id}-${part.id}'),
+          attemptId: v.id,
+          partId: part.id,
+          text: htmlToText(part.content!),
+        )
+      else if (part.content?.isNotEmpty ?? false)
         SelectableText(htmlToText(part.content!), style: text.bodyMedium),
       if (part.imageFileId != null)
         Align(
