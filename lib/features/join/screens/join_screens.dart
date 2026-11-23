@@ -11,6 +11,7 @@ import 'package:instructor_app/core/theme/app_metrics.dart';
 import 'package:instructor_app/core/widgets/app_card.dart';
 import 'package:instructor_app/core/widgets/app_text_field.dart';
 import 'package:instructor_app/core/widgets/state_views.dart';
+import 'package:instructor_app/features/classes/data/classes.dart';
 import 'package:instructor_app/features/join/data/join_links.dart';
 
 /// The web's messages break lines with `<br></br>`; the app uses new lines.
@@ -95,6 +96,32 @@ class _JoinClassScreenState extends ConsumerState<JoinClassScreen> {
           data: (c) {
             final teacher = c.teacher ?? '';
             final name = session?.fullName ?? '';
+            // Already a member: say so, and open the class.
+            final mine =
+                student &&
+                (ref.watch(myClassesProvider).value ?? const []).any(
+                  (m) => m.id == widget.id,
+                );
+            if (mine && _pending == null) {
+              return _JoinPage(
+                children: [
+                  Text(
+                    l10n.joinWelcomeTitle(name),
+                    key: const Key('join-already'),
+                    style: text.titleLarge,
+                  ),
+                  const SizedBox(height: AppSpacing.sm),
+                  Text(_lines(l10n.joinJoinedDescription(c.name, teacher))),
+                  const SizedBox(height: AppSpacing.md),
+                  FilledButton(
+                    key: const Key('join-open-class'),
+                    onPressed: () =>
+                        context.go('${AppRoutes.classes}/details/${widget.id}'),
+                    child: Text(l10n.joinContinue),
+                  ),
+                ],
+              );
+            }
             if (_pending != null) {
               return _JoinPage(
                 children: [
@@ -262,6 +289,7 @@ class _JoinWithLinkDialogState extends State<_JoinWithLinkDialog> {
             key: const Key('join-link-field'),
             label: l10n.appJoinLinkField,
             controller: _field,
+            autofocus: true,
             errorText: _error,
             keyboardType: TextInputType.url,
           ),

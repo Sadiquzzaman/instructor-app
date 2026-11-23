@@ -25,6 +25,7 @@ class AppTextField extends StatefulWidget {
     this.hideLabel,
     this.maxLines = 1,
     this.maxLength,
+    this.autofocus = false,
     super.key,
   }) : assert(
          !obscure || (showLabel != null && hideLabel != null),
@@ -50,6 +51,9 @@ class AppTextField extends StatefulWidget {
   /// A character limit, with a counter under the field.
   final int? maxLength;
 
+  /// Takes the focus (and opens the keyboard) when it first shows.
+  final bool autofocus;
+
   @override
   State<AppTextField> createState() => _AppTextFieldState();
 }
@@ -63,6 +67,7 @@ class _AppTextFieldState extends State<AppTextField> {
       padding: const EdgeInsets.only(bottom: AppSpacing.xs),
       child: TextField(
         controller: widget.controller,
+        autofocus: widget.autofocus,
         enabled: widget.enabled,
         keyboardType: widget.keyboardType,
         textInputAction: widget.textInputAction,

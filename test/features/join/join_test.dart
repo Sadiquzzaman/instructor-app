@@ -106,6 +106,34 @@ void main() {
     expect(_location(app), AppRoutes.classes);
   });
 
+  testWidgets('already in the class: says so and opens it', (tester) async {
+    final api = _api()
+      ..on(
+        'GET /student/classes',
+        (_) => ok([
+          {
+            'class': {'id': _class, 'class_name': 'Class 6'},
+            'id': _class,
+            'class_name': 'Class 6',
+          },
+        ]),
+      );
+    final app = await pumpInstructorApp(
+      tester,
+      api: api,
+      session: _as('STUDENT'),
+    );
+    app.read(routerProvider).go('/join/class/$_class');
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('join-already')), findsOneWidget);
+    expect(find.byKey(const Key('join-class')), findsNothing);
+    await tester.tap(find.byKey(const Key('join-open-class')));
+    await tester.pump();
+    expect(_location(app), '${AppRoutes.classes}/details/$_class');
+    expect(api.to('POST /classes/$_class/join'), isEmpty);
+    await tester.pumpAndSettle();
+  });
+
   testWidgets('teachers see the class but cannot join it', (tester) async {
     final app = await pumpInstructorApp(
       tester,
@@ -167,6 +195,8 @@ void main() {
       of: find.byKey(const Key('join-link-field')),
       matching: find.byType(TextField),
     );
+    // Ready to paste: the field has the focus.
+    expect(tester.widget<TextField>(field).autofocus, isTrue);
     await tester.enterText(field, 'https://example.com/whatever');
     await tester.tap(find.byKey(const Key('join-link-open')));
     await tester.pumpAndSettle();
