@@ -2,7 +2,9 @@
 
 Updated in every pull request, so the owner and the backend session can see where the app is.
 
-**Last updated:** 18 Nov 2026
+**Last updated:** 23 Nov 2026
+
+**Full report (23 Nov):** [APP-REPORT.md](APP-REPORT.md) covers how finished the app is, each stage against its plan, what each role can do, quality and checks, backend dependencies, release readiness, packages, and the decisions needed. In short: stages 0–5 are built (#1–#105, all in `develop`, nothing on `main`). Test builds up to 117 couldn't reach the server on a real phone (no INTERNET permission, fixed in #105). The app has not been tried on a real phone or iOS yet.
 
 ## Current stage
 
@@ -129,6 +131,8 @@ Updated in every pull request, so the owner and the backend session can see wher
 | [tes-taker#345](https://github.com/Sadiquzzaman/tes-taker/issues/345) | Error codes for sign-up, OTP and password reset (and login: wrong credentials vs not verified) | Done | No: on beta and used by the app; closed by the backend on 17 Nov |
 | [tes-taker#349](https://github.com/Sadiquzzaman/tes-taker/issues/349) | `POST /files/presign` refuses purpose HOMEWORK (the web's homework uploads fail too) | Done | No: fixed on beta 18 Nov (#350); the app uploads homework files |
 | [tes-taker#351](https://github.com/Sadiquzzaman/tes-taker/issues/351) | A code for "Result has not been published yet" (403 with no code) | Low | No: the app reads any 403 there as "not published yet" |
+| [tes-taker#352](https://github.com/Sadiquzzaman/tes-taker/issues/352) | Demo IELTS accounts on beta | High | IELTS can only be tested on the fake server until then |
+| [tes-taker#353](https://github.com/Sadiquzzaman/tes-taker/issues/353) | The web sends IELTS true/false as `true-false`; the wizard's form accepts only `true-false-not-given` | Medium | No: the app sends the name the server accepts |
 
 ## Waiting on the backend (planned, no issue needed)
 
@@ -141,4 +145,10 @@ Live classes are postponed by the owner and left out of every stage.
 
 ## Decisions needed from the owner
 
-- None right now.
+See [APP-REPORT.md §8](APP-REPORT.md#8-decisions-needed-from-the-owner-and-next-steps):
+- the two audio packages (`just_audio`, `record`);
+- store accounts and the Play upload key;
+- the privacy policy;
+- account deletion (a `mobile-api` issue);
+- the first release to `main`;
+- when to point builds at production.
