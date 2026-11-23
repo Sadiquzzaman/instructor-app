@@ -16,6 +16,7 @@ import 'package:instructor_app/core/time/org_time.dart';
 import 'package:instructor_app/core/time/clock.dart';
 import 'package:instructor_app/core/widgets/app_card.dart';
 import 'package:instructor_app/core/widgets/state_views.dart';
+import 'package:instructor_app/core/widgets/status_pill.dart';
 import 'package:instructor_app/features/ielts/data/attempts.dart';
 import 'package:instructor_app/features/ielts/data/builder.dart';
 import 'package:instructor_app/features/ielts/data/ielts.dart';
@@ -215,11 +216,10 @@ class _MyIeltsTestsScreenState extends ConsumerState<MyIeltsTestsScreen> {
                                         style: text.titleMedium,
                                       ),
                                     ),
-                                    Chip(
-                                      label: Text(
-                                        ieltsPurpose(l10n, o.purpose),
-                                      ),
-                                      visualDensity: VisualDensity.compact,
+                                    // A label, not a button.
+                                    StatusPill(
+                                      key: Key('purpose-${o.id}'),
+                                      label: ieltsPurpose(l10n, o.purpose),
                                     ),
                                   ],
                                 ),

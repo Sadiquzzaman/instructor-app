@@ -219,6 +219,9 @@ void main() {
     final api = _api();
     await _open(tester, api, '/ielts/my');
     expect(find.text('Reading set 1'), findsOneWidget);
+    // The kind is a label, not something to press.
+    expect(find.byKey(const Key('purpose-a1')), findsOneWidget);
+    expect(find.byType(Chip), findsNothing);
     await tester.tap(find.byKey(const Key('ielts-start-a1-READING')));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));

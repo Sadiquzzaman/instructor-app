@@ -369,16 +369,24 @@ class _BandTable extends StatelessWidget {
     final muted = text.bodySmall?.copyWith(
       color: AppColors.of(context).inkMuted,
     );
+    // Figures are never broken across lines; on a narrow phone a heading
+    // like "Listening" shrinks instead of breaking mid-word.
     TableRow row(List<String> cells, TextStyle? style) => TableRow(
       children: [
         for (final (i, c) in cells.indexed)
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: AppSpacing.xs),
-            child: Text(
-              c,
-              style: style,
-              textAlign: i == 0 ? TextAlign.start : TextAlign.end,
+            padding: EdgeInsetsDirectional.only(
+              top: AppSpacing.xs,
+              bottom: AppSpacing.xs,
+              start: i == 0 ? 0 : AppSpacing.xs,
             ),
+            child: i == 0
+                ? Text(c, style: style)
+                : FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: AlignmentDirectional.centerEnd,
+                    child: Text(c, style: style, maxLines: 1, softWrap: false),
+                  ),
           ),
       ],
     );
