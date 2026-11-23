@@ -2,9 +2,9 @@
 
 Updated in every pull request, so the owner and the backend session can see where the app is.
 
-**Last updated:** 23 Nov 2026
+**Last updated:** 24 Nov 2026
 
-**Full report (23 Nov):** [APP-REPORT.md](APP-REPORT.md) covers how finished the app is, each stage against its plan, what each role can do, quality and checks, backend dependencies, release readiness, packages, and the decisions needed. In short: stages 0–5 are built (#1–#105, all in `develop`, nothing on `main`). Test builds up to 117 couldn't reach the server on a real phone (no INTERNET permission, fixed in #105). The app has not been tried on a real phone or iOS yet.
+**Full report (updated 24 Nov):** [APP-REPORT.md](APP-REPORT.md). In short: stages 0–5 are built and every role with a demo account, including IELTS, was walked on beta with a release build (test build 137) on the emulator at phone and tablet size; the phone gaps worth doing are done (join links, discussion editing, notification settings, become a teacher, Reading highlights); store material is ready ([store/](store/), [PRIVACY-DRAFT.md](PRIVACY-DRAFT.md), [RELEASING.md](RELEASING.md)); release 0.1.0 goes to `main`. Left for people: store accounts, approving the privacy policy, the upload key secrets, a real-phone walk, the iPhone check, and the backend's account deletion (tes-taker#358) and web pages (#359).
 
 ## Current stage
 
@@ -130,9 +130,13 @@ Updated in every pull request, so the owner and the backend session can see wher
 | --- | --- | --- | --- |
 | [tes-taker#345](https://github.com/Sadiquzzaman/tes-taker/issues/345) | Error codes for sign-up, OTP and password reset (and login: wrong credentials vs not verified) | Done | No: on beta and used by the app; closed by the backend on 17 Nov |
 | [tes-taker#349](https://github.com/Sadiquzzaman/tes-taker/issues/349) | `POST /files/presign` refuses purpose HOMEWORK (the web's homework uploads fail too) | Done | No: fixed on beta 18 Nov (#350); the app uploads homework files |
-| [tes-taker#351](https://github.com/Sadiquzzaman/tes-taker/issues/351) | A code for "Result has not been published yet" (403 with no code) | Low | No: the app reads any 403 there as "not published yet" |
-| [tes-taker#352](https://github.com/Sadiquzzaman/tes-taker/issues/352) | Demo IELTS accounts on beta | High | IELTS can only be tested on the fake server until then |
-| [tes-taker#353](https://github.com/Sadiquzzaman/tes-taker/issues/353) | The web sends IELTS true/false as `true-false`; the wizard's form accepts only `true-false-not-given` | Medium | No: the app sends the name the server accepts |
+| [tes-taker#351](https://github.com/Sadiquzzaman/tes-taker/issues/351) | A code for "Result has not been published yet" | Done | Closed 24 Nov; the app tells "not published" from "another workspace" (#107) |
+| [tes-taker#352](https://github.com/Sadiquzzaman/tes-taker/issues/352) | Demo IELTS accounts on beta | Done | Closed 24 Nov; IELTS walked on beta (#112) |
+| [tes-taker#353](https://github.com/Sadiquzzaman/tes-taker/issues/353) | IELTS true/false name | Done | Closed 24 Nov; web and app both send `true-false-not-given` |
+| [tes-taker#358](https://github.com/Sadiquzzaman/tes-taker/issues/358) | Account deletion (deactivate and anonymise) | High | Both stores need it; the app's screen comes when it is on beta |
+| [tes-taker#359](https://github.com/Sadiquzzaman/tes-taker/issues/359) | Privacy policy and account-deletion web pages | High | Both stores need the URLs; the text is the owner's to approve |
+| [tes-taker#360](https://github.com/Sadiquzzaman/tes-taker/issues/360) | A branch-manager demo account | Medium | Branch manager not checked on beta |
+| [tes-taker#361](https://github.com/Sadiquzzaman/tes-taker/issues/361) | `assetlinks.json` for share links | Medium | Links open the app only when people choose it, or by pasting |
 
 ## Waiting on the backend (planned, no issue needed)
 
@@ -143,12 +147,9 @@ Updated in every pull request, so the owner and the backend session can see wher
 
 Live classes are postponed by the owner and left out of every stage.
 
-## Decisions needed from the owner
+## Steps left for people
 
-See [APP-REPORT.md §8](APP-REPORT.md#8-decisions-needed-from-the-owner-and-next-steps):
-- the two audio packages (`just_audio`, `record`);
-- store accounts and the Play upload key;
-- the privacy policy;
-- account deletion (a `mobile-api` issue);
-- the first release to `main`;
-- when to point builds at production.
+See [APP-REPORT.md §8](APP-REPORT.md#8-steps-left-for-people):
+- **owner:** store accounts, the upload key's backup and GitHub secrets, approving the privacy draft, listing texts and target age, a real-phone walk, and production when it is live;
+- **Jubaer:** the iPhone check on his Mac, and App Store screenshots;
+- **backend:** #358, #359, #360, #361.
