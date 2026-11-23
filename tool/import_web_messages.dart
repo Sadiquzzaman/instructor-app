@@ -52,6 +52,7 @@ const webNamespaces = [
   'discussions',
   'tests',
   'exam',
+  'join',
   'marks',
   'performance',
   'reportCards',
