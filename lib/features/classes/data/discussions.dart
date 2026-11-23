@@ -236,6 +236,39 @@ class DiscussionsRepository {
   Future<void> deletePost(String classId, String subjectId, String postId) =>
       _api.delete('${_scope(classId, subjectId)}/discussions/$postId');
 
+  /// Changes a post's text; its category and files stay (the author only).
+  Future<void> updatePost(
+    String classId,
+    String subjectId,
+    String postId,
+    String content,
+  ) => _api.patch(
+    '${_scope(classId, subjectId)}/discussions/$postId',
+    data: {'content': content},
+  );
+
+  /// Changes a comment's text (the author only).
+  Future<void> updateComment(
+    String classId,
+    String subjectId,
+    String postId,
+    String commentId,
+    String content,
+  ) => _api.patch(
+    '${_scope(classId, subjectId)}/discussions/$postId/comments/$commentId',
+    data: {'content': content},
+  );
+
+  /// Removes a comment (the author only).
+  Future<void> deleteComment(
+    String classId,
+    String subjectId,
+    String postId,
+    String commentId,
+  ) => _api.delete(
+    '${_scope(classId, subjectId)}/discussions/$postId/comments/$commentId',
+  );
+
   Future<List<DiscussionNote>> comments(
     String classId,
     String subjectId,

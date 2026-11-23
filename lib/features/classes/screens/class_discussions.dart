@@ -402,6 +402,50 @@ class _Files extends ConsumerWidget {
   );
 }
 
+/// Changes a comment's text; the field lives as long as the dialog does.
+class _EditCommentDialog extends StatefulWidget {
+  const _EditCommentDialog({required this.text});
+
+  final String text;
+
+  @override
+  State<_EditCommentDialog> createState() => _EditCommentDialogState();
+}
+
+class _EditCommentDialogState extends State<_EditCommentDialog> {
+  late final _field = TextEditingController(text: widget.text);
+
+  @override
+  void dispose() {
+    _field.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return AlertDialog(
+      title: Text(l10n.discussionsPostEdit),
+      content: AppTextField(
+        key: const Key('comment-edit-field'),
+        label: l10n.discussionsPostReply,
+        controller: _field,
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: Text(l10n.discussionsPostCancel),
+        ),
+        TextButton(
+          key: const Key('comment-edit-save'),
+          onPressed: () => Navigator.of(context).pop(_field.text.trim()),
+          child: Text(l10n.discussionsPostSave),
+        ),
+      ],
+    );
+  }
+}
+
 class _PostCard extends ConsumerStatefulWidget {
   const _PostCard({
     required this.post,
@@ -422,16 +466,103 @@ class _PostCard extends ConsumerStatefulWidget {
 
 class _PostCardState extends ConsumerState<_PostCard> {
   final _reply = TextEditingController();
+  final _edit = TextEditingController();
   List<DiscussionNote>? _comments;
   bool _open = false;
   bool _sending = false;
+
+  /// The post's text is being changed in place.
+  bool _editing = false;
 
   DiscussionsRepository get _repo => ref.read(discussionsRepositoryProvider);
 
   @override
   void dispose() {
     _reply.dispose();
+    _edit.dispose();
     super.dispose();
+  }
+
+  void _failed() {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(context.l10n.discussionsComposerSendFailed)),
+    );
+  }
+
+  Future<void> _savePost() async {
+    final content = _edit.text.trim();
+    if (content.isEmpty) return;
+    setState(() => _sending = true);
+    try {
+      await _repo.updatePost(
+        widget.classId,
+        widget.subjectId,
+        widget.post.id,
+        content,
+      );
+      if (mounted) setState(() => _editing = false);
+      await widget.onChanged();
+    } on ApiException {
+      _failed();
+    } finally {
+      if (mounted) setState(() => _sending = false);
+    }
+  }
+
+  Future<void> _editComment(DiscussionNote c) async {
+    final content = await showDialog<String>(
+      context: context,
+      builder: (_) => _EditCommentDialog(text: c.content),
+    );
+    if (content == null || content.isEmpty || content == c.content) return;
+    try {
+      await _repo.updateComment(
+        widget.classId,
+        widget.subjectId,
+        widget.post.id,
+        c.id,
+        content,
+      );
+      await _loadComments();
+    } on ApiException {
+      _failed();
+    }
+  }
+
+  Future<void> _deleteComment(DiscussionNote c) async {
+    final l10n = context.l10n;
+    final sure = await showDialog<bool>(
+      context: context,
+      builder: (dialog) => AlertDialog(
+        title: Text(l10n.discussionsPostDeleteCommentTitle),
+        actions: [
+          TextButton(
+            autofocus: true,
+            onPressed: () => Navigator.of(dialog).pop(false),
+            child: Text(l10n.discussionsPostCancel),
+          ),
+          TextButton(
+            key: const Key('comment-delete-confirm'),
+            onPressed: () => Navigator.of(dialog).pop(true),
+            child: Text(l10n.discussionsPostDelete),
+          ),
+        ],
+      ),
+    );
+    if (sure != true) return;
+    try {
+      await _repo.deleteComment(
+        widget.classId,
+        widget.subjectId,
+        widget.post.id,
+        c.id,
+      );
+      await _loadComments();
+      await widget.onChanged();
+    } on ApiException {
+      _failed();
+    }
   }
 
   Future<void> _loadComments() async {
@@ -526,16 +657,50 @@ class _PostCardState extends ConsumerState<_PostCard> {
                 ),
               ),
               StatusPill(label: _categoryName(l10n, p.category)),
-              if (mine)
+              if (mine && !_editing) ...[
+                IconButton(
+                  key: Key('post-edit-${p.id}'),
+                  tooltip: l10n.discussionsPostEditLabel,
+                  icon: const Icon(Icons.edit_outlined),
+                  onPressed: () => setState(() {
+                    _edit.text = p.content;
+                    _editing = true;
+                  }),
+                ),
                 IconButton(
                   tooltip: l10n.discussionsPostDelete,
                   icon: const Icon(Icons.delete_outline),
                   onPressed: _delete,
                 ),
+              ],
             ],
           ),
           const SizedBox(height: AppSpacing.xs),
-          SelectableText(p.content, style: text.bodyMedium),
+          if (_editing) ...[
+            AppTextField(
+              key: Key('post-edit-field-${p.id}'),
+              label: l10n.discussionsPostEditLabel,
+              controller: _edit,
+              enabled: !_sending,
+            ),
+            Wrap(
+              spacing: AppSpacing.sm,
+              children: [
+                TextButton(
+                  onPressed: _sending
+                      ? null
+                      : () => setState(() => _editing = false),
+                  child: Text(l10n.discussionsPostCancel),
+                ),
+                FilledButton(
+                  key: Key('post-edit-save-${p.id}'),
+                  onPressed: _sending ? null : _savePost,
+                  child: Text(l10n.discussionsPostSave),
+                ),
+              ],
+            ),
+          ] else
+            SelectableText(p.content, style: text.bodyMedium),
           if (p.files.isNotEmpty) ...[
             const SizedBox(height: AppSpacing.sm),
             _Files(files: p.files),
@@ -557,16 +722,42 @@ class _PostCardState extends ConsumerState<_PostCard> {
               for (final c in _comments!)
                 Padding(
                   padding: const EdgeInsets.only(bottom: AppSpacing.sm),
-                  child: Column(
+                  child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        c.author?.name ?? '',
-                        style: text.bodySmall?.copyWith(
-                          fontWeight: FontWeight.w600,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              c.author?.name ?? '',
+                              style: text.bodySmall?.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Text(c.content, style: text.bodyMedium),
+                          ],
                         ),
                       ),
-                      Text(c.content, style: text.bodyMedium),
+                      // Only the author may change or remove a comment.
+                      if (c.author?.id == ref.watch(sessionProvider)?.userId)
+                        PopupMenuButton<String>(
+                          key: Key('comment-menu-${c.id}'),
+                          onSelected: (v) =>
+                              v == 'edit' ? _editComment(c) : _deleteComment(c),
+                          itemBuilder: (_) => [
+                            PopupMenuItem(
+                              key: const Key('comment-edit'),
+                              value: 'edit',
+                              child: Text(l10n.discussionsPostEdit),
+                            ),
+                            PopupMenuItem(
+                              key: const Key('comment-delete'),
+                              value: 'delete',
+                              child: Text(l10n.discussionsPostDelete),
+                            ),
+                          ],
+                        ),
                     ],
                   ),
                 ),
