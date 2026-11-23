@@ -27,7 +27,6 @@ concurrency:
 env:
   # SHA-256 fingerprint of the test signing certificate (public, not a secret).
   TEST_CERT_SHA256: daf46538e87134120e0918517371c5ae877684d85ac5ad34a991123744c59f8a
-  API_BASE_URL: https://api-beta.instructor.academy/api/v1
 
 jobs:
   build:
@@ -120,7 +119,7 @@ jobs:
         run: >-
           flutter build apk --release
           --build-number=${{ github.run_number }}
-          --dart-define=API_BASE_URL=${{ env.API_BASE_URL }}
+          --dart-define=APP_ENV=beta
 
       - name: Check it is signed with the test key
         run: |
