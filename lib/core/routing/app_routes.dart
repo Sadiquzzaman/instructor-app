@@ -8,6 +8,8 @@ abstract final class AppRoutes {
   static const signUpOrganization = '/signup/organization';
   static const signUpVerify = '/signup/verify';
   static const forgotPassword = '/forgot-password';
+  static const joinClass = '/join/class';
+  static const joinTest = '/join/test';
   static const notifications = '/notifications';
   static const account = '/account';
   static const features = '/features';
@@ -145,6 +147,10 @@ abstract final class AppRoutes {
   /// The page home shows for an account [role]: the dashboard for teachers
   /// (as the web), Today for everyone else.
   static String homePage(String? role) => role == 'TEACHER' ? dashboard : today;
+
+  /// A share link's page (`/join/class/<id>` or `/join/test/<id>`).
+  static bool isJoinLink(String location) =>
+      location.startsWith('$joinClass/') || location.startsWith('$joinTest/');
 
   /// Screens for people who are not signed in.
   static bool isSignedOutOnly(String location) =>

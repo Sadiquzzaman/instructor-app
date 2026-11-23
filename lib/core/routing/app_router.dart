@@ -46,6 +46,7 @@ import 'package:instructor_app/features/results/screens/behaviour_screen.dart';
 import 'package:instructor_app/features/results/screens/paper_exam_screens.dart';
 import 'package:instructor_app/features/tests/screens/grading_screens.dart';
 import 'package:instructor_app/features/tests/screens/integrity_screen.dart';
+import 'package:instructor_app/features/join/screens/join_screens.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_builder_screen.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_courses_screens.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_marking_screens.dart';
@@ -78,14 +79,25 @@ export 'package:instructor_app/core/routing/app_routes.dart';
 /// sits above the router (app.dart).
 final routerProvider = Provider<GoRouter>((ref) {
   final sessions = ref.watch(sessionHolderProvider);
+  // A join link opened while signed out waits here until sign-in.
+  String? pendingJoin;
   final router = GoRouter(
     initialLocation: AppRoutes.home,
     refreshListenable: sessions,
     redirect: (context, state) {
       final signedIn = sessions.current != null;
       final signedOutScreen = AppRoutes.isSignedOutOnly(state.matchedLocation);
-      if (!signedIn) return signedOutScreen ? null : AppRoutes.login;
-      if (signedOutScreen) return AppRoutes.home;
+      if (!signedIn) {
+        if (AppRoutes.isJoinLink(state.matchedLocation)) {
+          pendingJoin = state.matchedLocation;
+        }
+        return signedOutScreen ? null : AppRoutes.login;
+      }
+      if (signedOutScreen) {
+        final next = pendingJoin ?? AppRoutes.home;
+        pendingJoin = null;
+        return next;
+      }
       return null;
     },
     routes: [
@@ -168,6 +180,18 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: AppRoutes.notifications,
             builder: (context, state) => const InboxScreen(),
+          ),
+          // The web's share links (/join/class/:id, /join/test/:id), opened
+          // from another app or pasted into "Join with a link".
+          GoRoute(
+            path: '${AppRoutes.joinClass}/:id',
+            builder: (context, state) =>
+                JoinClassScreen(id: state.pathParameters['id']!),
+          ),
+          GoRoute(
+            path: '${AppRoutes.joinTest}/:id',
+            builder: (context, state) =>
+                JoinTestScreen(id: state.pathParameters['id']!),
           ),
           GoRoute(
             path: AppRoutes.myAttendance,

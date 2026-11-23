@@ -15,6 +15,7 @@ import 'package:instructor_app/core/widgets/state_views.dart';
 import 'package:instructor_app/features/classes/data/classes.dart';
 import 'package:instructor_app/features/classes/screens/class_discussions.dart';
 import 'package:instructor_app/features/classes/screens/teacher_classes_screen.dart';
+import 'package:instructor_app/features/join/screens/join_screens.dart';
 import 'package:instructor_app/features/tests/data/tests.dart';
 import 'package:instructor_app/features/tests/screens/tests_screen.dart';
 
@@ -76,6 +77,17 @@ class ClassesScreen extends ConsumerWidget {
                     ),
                   ),
                   style: text.bodyMedium?.copyWith(color: colors.inkMuted),
+                ),
+                const SizedBox(height: AppSpacing.sm),
+                // A teacher's share link, pasted (links can also open the app).
+                Align(
+                  alignment: AlignmentDirectional.centerStart,
+                  child: OutlinedButton.icon(
+                    key: const Key('classes-join-link'),
+                    icon: const Icon(Icons.link),
+                    label: Text(l10n.appJoinWithLink),
+                    onPressed: () => showJoinWithLink(context),
+                  ),
                 ),
                 const SizedBox(height: AppSpacing.lg),
                 if (list.isEmpty)

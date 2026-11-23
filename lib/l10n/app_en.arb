@@ -4446,6 +4446,73 @@
   "examSubmitWaitingDetail": "Your answers are saved on this device. We'll submit them as soon as the connection is back.",
   "examSubmitOfflineTitle": "Couldn't reach the server",
   "examSubmitOfflineDetail": "Try submitting again. Answers already saved to the server are submitted automatically when time is up.",
+  "joinLoadingTitle": "Loading request",
+  "joinCheckingClass": "Checking your class request.",
+  "joinCheckingTest": "Checking your test join request.",
+  "joinUnavailableTitle": "Request unavailable",
+  "joinNotEligibleTitle": "Not Eligible",
+  "joinNoRequest": "No join request was found for this session.",
+  "joinClassDetailsMissing": "Required join details are missing. Please try the class invite flow again.",
+  "joinTestDetailsMissing": "Required join details are missing. Please try the test join flow again.",
+  "joinIncomplete": "The join information is incomplete.",
+  "joinNotEligible": "You are not eligible to join this test.",
+  "joinUnreadable": "Stored join information could not be read.",
+  "joinPendingTitle": "Request pending {name}",
+  "@joinPendingTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "joinWelcomeTitle": "Welcome {name}",
+  "@joinWelcomeTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "joinPendingDescription": "You have requested to join<br></br>Class: {className}<br></br>Teacher: {teacher}.",
+  "@joinPendingDescription": {
+    "placeholders": {
+      "className": {
+        "type": "String"
+      },
+      "teacher": {
+        "type": "String"
+      }
+    }
+  },
+  "joinJoinedDescription": "You have joined Class: {className}<br></br>Teacher: {teacher}.",
+  "@joinJoinedDescription": {
+    "placeholders": {
+      "className": {
+        "type": "String"
+      },
+      "teacher": {
+        "type": "String"
+      }
+    }
+  },
+  "joinTest": "Test",
+  "joinTeacher": "Teacher",
+  "joinTime": "Time",
+  "joinMinutes": "{minutes, plural, one{{minutes} minute} other{{minutes} minutes}}",
+  "@joinMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "num",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "joinStartTest": "Start Test",
+  "joinClassJoinFailedTitle": "Class Join Failed",
+  "joinClassJoinFailed": "Unable to join this class.",
+  "joinClassJoinedTitle": "Class Join Successful",
+  "joinClassJoined": "You have successfully joined the class.",
+  "joinContinue": "Continue",
   "marksTitle": "Paper exams",
   "marksIntro": "Exams taken on paper: enter each student's marks, then publish them. They count toward performance.",
   "marksMyTitle": "Paper exam results",
@@ -9605,6 +9672,12 @@
   "appAttendanceRefresh": "Refresh",
   "appResultNotPublished": "Your result shows here once your teacher publishes it.",
   "appResultOutsideWorkspace": "This test is in another workspace. Switch to that workspace to see the result.",
+  "appJoinWithLink": "Join with a link",
+  "appJoinWithLinkHint": "Paste the class or test link your teacher sent you.",
+  "appJoinLinkField": "Link",
+  "appJoinLinkInvalid": "That is not a class or test link.",
+  "appJoinOpen": "Open",
+  "appJoinStudentsOnly": "Only students can join a class or take a test from a link.",
   "appResultQuestion": "Question {number}",
   "@appResultQuestion": {
     "placeholders": {

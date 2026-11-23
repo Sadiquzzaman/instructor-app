@@ -32,6 +32,20 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+            <!-- A teacher's share links open the app's join pages. Android
+                 opens them here by itself once the website publishes
+                 /.well-known/assetlinks.json (tes-taker mobile-api issue);
+                 until then people can choose the app, or paste the link. -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https"/>
+                <data android:host="instructor.academy"/>
+                <data android:host="beta.instructor.academy"/>
+                <data android:pathPrefix="/join/class/"/>
+                <data android:pathPrefix="/join/test/"/>
+            </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
