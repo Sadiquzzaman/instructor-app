@@ -30,7 +30,21 @@ Map<String, Object?> _device(
   'current': current,
 };
 
+List<Map<String, Object?>> _prefs({bool absentSms = false}) => [
+  {
+    'event_type': 'attendance.absent',
+    'channels': ['IN_APP', if (absentSms) 'SMS'],
+    'allowed': ['IN_APP', 'SMS', 'EMAIL'],
+  },
+  {
+    'event_type': 'exam.scheduled',
+    'channels': ['IN_APP', 'EMAIL'],
+    'allowed': ['IN_APP', 'EMAIL'],
+  },
+];
+
 FakeApi _api({List<Map<String, Object?>>? devices}) => FakeApi()
+  ..on('GET /me/notification-prefs', (_) => ok(_prefs()))
   ..on('GET /auth/contexts', (_) => ok(<Object>[]))
   ..on('GET /me/entitlements', (_) => ok({'features': <String, bool>{}}))
   ..on('GET /me/notifications/unread-count', (_) => ok({'count': 0}))
@@ -199,6 +213,49 @@ void main() {
     await _openAccount(tester, c);
     await _scrollTo(tester, find.text(l10n.accountDevicesOnlyThisOne));
     expect(find.text(l10n.accountDevicesSignOutOthers), findsNothing);
+  });
+
+  testWidgets('notifications: each message, SMS or email where allowed', (
+    tester,
+  ) async {
+    final api = _api()
+      ..on('PUT /me/notification-prefs', (_) => ok(_prefs(absentSms: true)));
+    final c = await pumpInstructorApp(tester, api: api, session: testSession());
+    await _openAccount(tester, c);
+    await _scrollTo(tester, find.byKey(const Key('pref-exam.scheduled')));
+    expect(find.text(l10n.notificationsPrefsTitle), findsOneWidget);
+    expect(find.text(l10n.messageLogEventsAttendanceAbsent), findsOneWidget);
+    expect(find.text(l10n.messageLogEventsExamScheduled), findsOneWidget);
+    // Exams can only add email; SMS is not offered there.
+    expect(find.byKey(const Key('pref-exam.scheduled-SMS')), findsNothing);
+    expect(find.text(l10n.notificationsPrefsSmsHint), findsOneWidget);
+
+    final sms = find.byKey(const Key('pref-attendance.absent-SMS'));
+    await _scrollTo(tester, sms);
+    await tester.tap(sms);
+    await tester.pumpAndSettle();
+    expect(api.to('PUT /me/notification-prefs').single.body, {
+      'event_type': 'attendance.absent',
+      'channels': ['IN_APP', 'SMS'],
+    });
+    expect(find.text(l10n.notificationsPrefsSaved), findsOneWidget);
+    // The saved answer shows: SMS is now ticked.
+    expect(
+      tester
+          .widget<Checkbox>(
+            find.descendant(of: sms, matching: find.byType(Checkbox)),
+          )
+          .value,
+      isTrue,
+    );
+  });
+
+  testWidgets('notification settings that fail to load say so', (tester) async {
+    final api = _api()..on('GET /me/notification-prefs', (_) => apiError(500));
+    final c = await pumpInstructorApp(tester, api: api, session: testSession());
+    await _openAccount(tester, c);
+    await _scrollTo(tester, find.text(l10n.notificationsPrefsLoadFailed));
+    expect(find.text(l10n.notificationsPrefsLoadFailed), findsOneWidget);
   });
 
   testWidgets('devices that fail to load can be retried', (tester) async {
