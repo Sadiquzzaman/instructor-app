@@ -1,0 +1,474 @@
+// Builds the app's message files (lib/l10n/app_en.arb, app_bn.arb) from the
+// web's wording plus the app's own strings, so both apps say the same thing
+// (CLAUDE.md "Text", STAGE-0-PLAN.md §7).
+//
+//   dart run tool/import_web_messages.dart                         # rebuild the ARB files
+//   dart run tool/import_web_messages.dart ../tes-taker/frontend/messages
+//                       # first refresh l10n/web/ from the web's en.json and bn.json
+//
+// Sources (edit these, never the ARB files):
+//   l10n/web/{en,bn}.json  the web's namespaces listed in [webNamespaces], copied as they are
+//   l10n/app/{en,bn}.json  strings only the app has, under the "app" namespace
+//
+// Keys are flattened to camelCase: auth.logIn → authLogIn. Messages keep the
+// web's ICU syntax with two rewrites Flutter's gen-l10n needs:
+//   {count, number} → {count} (a number placeholder, formatted per language)
+//   # inside a plural branch → {count}
+// Rich tags (<highlight>…</highlight>) and level tokens ([[Classes]]) stay in
+// the text; RichMessage and LevelLabels handle them at runtime.
+//
+// test/l10n/messages_test.dart fails when the ARB files are out of date.
+import 'dart:convert';
+import 'dart:io';
+
+/// The web namespaces the app uses so far. Add a namespace when a screen needs it.
+const webNamespaces = [
+  'common',
+  'language',
+  'ui',
+  'validation',
+  'auth',
+  'shell',
+  'dashboard',
+  'nav',
+  'features',
+  'notifications',
+  'account',
+  'today',
+  'calendar',
+  'myAttendance',
+  'classAttendance',
+  'reports',
+  'register',
+  'plagiarism',
+  'monitor',
+  'integrity',
+  'grading',
+  'behaviour',
+  'leave',
+  'routine',
+  'homework',
+  'classes',
+  'discussions',
+  'tests',
+  'exam',
+  'join',
+  'marks',
+  'performance',
+  'reportCards',
+  'reportCard',
+  'resources',
+  'chat',
+  'organization',
+  'academics',
+  'attendanceSettings',
+  'holidays',
+  'branches',
+  'classSetup',
+  'performanceSettings',
+  'gradingScale',
+  'chatReview',
+  'audit',
+  'messageLog',
+  'billing',
+  'storage',
+  'smsCredits',
+  'levelLabels',
+  'createTest',
+  'ielts',
+  'ieltsTests',
+  'ieltsBands',
+  'ieltsBuilder',
+  'ieltsTake',
+  'ieltsOpenings',
+  'ieltsMarking',
+  'ieltsSpeaking',
+  'ieltsOverview',
+  'ieltsProgress',
+  'ieltsReport',
+  'ieltsConvert',
+  'ieltsCourses',
+];
+
+const locales = ['en', 'bn'];
+
+void main(List<String> args) {
+  if (args.isNotEmpty) {
+    for (final locale in locales) {
+      final all = jsonDecode(
+        File('${args.first}/$locale.json').readAsStringSync(),
+      ) as Map<String, dynamic>;
+      final picked = <String, dynamic>{};
+      for (final ns in webNamespaces) {
+        if (!all.containsKey(ns)) {
+          throw StateError('The web has no "$ns" namespace in $locale.json');
+        }
+        picked[ns] = all[ns];
+      }
+      File('l10n/web/$locale.json').writeAsStringSync(
+        '${const JsonEncoder.withIndent('  ').convert(picked)}\n',
+      );
+      stdout.writeln(
+        'Copied ${webNamespaces.join(', ')} to l10n/web/$locale.json',
+      );
+    }
+  }
+  for (final MapEntry(:key, :value) in buildArbFiles().entries) {
+    File(key).writeAsStringSync(value);
+    stdout.writeln('Wrote $key');
+  }
+  File(featureNamesPath).writeAsStringSync(buildFeatureNames());
+  Process.runSync('dart', ['format', featureNamesPath], runInShell: true);
+  stdout.writeln('Wrote $featureNamesPath');
+  File(logNamesPath).writeAsStringSync(buildLogNames());
+  Process.runSync('dart', ['format', logNamesPath], runInShell: true);
+  stdout.writeln('Wrote $logNamesPath');
+}
+
+/// Where [buildFeatureNames] goes.
+const featureNamesPath = 'lib/features/plan/data/feature_names.g.dart';
+
+/// Where [buildLogNames] goes.
+const logNamesPath = 'lib/features/organization/data/log_names.g.dart';
+
+/// Dart that looks up the activity and message logs' names by the API's
+/// key, as the web does with `t.has(key)` (the web's useAuditText and
+/// MessageLogTable): an action such as `plan.create`, an area, a field, a
+/// channel, a status or an event. Keys the messages do not know return
+/// null; the caller shows the key, as on the web.
+String buildLogNames() {
+  final web = jsonDecode(
+    File('l10n/web/en.json').readAsStringSync(),
+  ) as Map<String, dynamic>;
+  String fn(String name, String doc, List<String> path) {
+    Object? node = web;
+    for (final p in path) {
+      node = node is Map ? node[p] : null;
+    }
+    final cases = StringBuffer();
+    void walk(List<String> rest, Object? v) {
+      if (v is Map) {
+        for (final MapEntry(:key, :value) in v.entries) {
+          walk([...rest, '$key'], value);
+        }
+      } else if (v is String && !v.contains('{')) {
+        cases.writeln(
+          "  '${rest.join('.')}' => l10n.${camelKey([...path, ...rest])},",
+        );
+      }
+    }
+
+    walk([], node);
+    return '''
+/// $doc, or null when the messages do not know [key].
+String? $name(AppLocalizations l10n, String key) => switch (key) {
+$cases  _ => null,
+};
+''';
+  }
+
+  return '''
+// GENERATED by tool/import_web_messages.dart from l10n/web/en.json
+// (audit and messageLog). Do not edit.
+
+import 'package:instructor_app/l10n/generated/app_localizations.dart';
+
+${fn('auditActionName', 'An activity-log action ("plan.create")', ['audit', 'actions'])}
+${fn('auditAreaName', 'An activity-log area', ['audit', 'areas'])}
+${fn('auditFieldName', 'An activity-log field', ['audit', 'fields'])}
+${fn('messageChannelName', 'A message channel', ['messageLog', 'channels'])}
+${fn('messageStatusName', 'A message status', ['messageLog', 'statuses'])}
+${fn('messageAreaName', 'A message area', ['messageLog', 'areas'])}
+${fn('messageEventName', 'A message event ("exam.scheduled")', ['messageLog', 'events'])}
+''';
+}
+
+/// Dart that looks up a plan feature's translated name and description, and a
+/// feature group's name, by the API's key (the web's useFeatureNames). Keys the
+/// messages do not know return null; the caller falls back to the API's label.
+String buildFeatureNames() {
+  final web = jsonDecode(
+    File('l10n/web/en.json').readAsStringSync(),
+  ) as Map<String, dynamic>;
+  final features = web['features'] as Map<String, dynamic>;
+  final catalog = features['catalog'] as Map<String, dynamic>;
+  final groups = features['groups'] as Map<String, dynamic>;
+  String cases(Iterable<(String, String)> pairs) =>
+      pairs.map((p) => "  '${p.$1}' => l10n.${p.$2},\n").join();
+  String part(String field) => cases([
+    for (final MapEntry(:key, :value) in catalog.entries)
+      if ((value as Map).containsKey(field))
+        (key, camelKey(['features', 'catalog', key, field])),
+  ]);
+  return '''
+// GENERATED by tool/import_web_messages.dart from l10n/web/en.json
+// (features.catalog and features.groups). Do not edit.
+
+import 'package:instructor_app/l10n/generated/app_localizations.dart';
+
+/// A plan feature's name, or null when the messages do not know [key].
+String? featureName(AppLocalizations l10n, String key) => switch (key) {
+${part('name')}  _ => null,
+};
+
+/// A plan feature's one-line description, or null.
+String? featureDescription(AppLocalizations l10n, String key) => switch (key) {
+${part('description')}  _ => null,
+};
+
+/// A feature group's name, or null.
+String? featureGroupName(AppLocalizations l10n, String group) => switch (group) {
+${cases([
+    for (final g in groups.keys) (g, camelKey(['features', 'groups', g])),
+  ])}  _ => null,
+};
+''';
+}
+
+/// ARB file path → contents, built from the sources in l10n/.
+Map<String, String> buildArbFiles() {
+  Map<String, dynamic> read(String path) =>
+      jsonDecode(File(path).readAsStringSync()) as Map<String, dynamic>;
+  final template = <String, String>{};
+  final out = <String, String>{};
+  for (final locale in locales) {
+    final merged = <String, dynamic>{
+      ...read('l10n/web/$locale.json'),
+      ...read('l10n/app/$locale.json'),
+    };
+    final flat = flatten(merged);
+    if (locale == 'en') template.addAll(flat);
+    out['lib/l10n/app_$locale.arb'] = toArb(
+      locale,
+      flat,
+      withMetadata: locale == 'en',
+    );
+  }
+  return out;
+}
+
+/// Nested messages → flat camelCase keys, failing on clashes and bad names.
+Map<String, String> flatten(Map<String, dynamic> tree) {
+  final out = <String, String>{};
+  final origin = <String, String>{};
+  void walk(Map<String, dynamic> node, List<String> path) {
+    for (final MapEntry(:key, :value) in node.entries) {
+      final p = [...path, key];
+      if (value is Map<String, dynamic>) {
+        walk(value, p);
+        continue;
+      }
+      final name = camelKey(p);
+      if (!RegExp(r'^[a-z][A-Za-z0-9]*$').hasMatch(name)) {
+        throw FormatException('"${p.join('.')}" makes the invalid key "$name"');
+      }
+      if (origin.containsKey(name)) {
+        throw FormatException(
+          '"${p.join('.')}" and "${origin[name]}" both make "$name"',
+        );
+      }
+      origin[name] = p.join('.');
+      out[name] = value as String;
+    }
+  }
+
+  walk(tree, []);
+  return out;
+}
+
+/// ['ui', 'fileDrop', 'prompt'] → uiFileDropPrompt.
+String camelKey(List<String> path) {
+  final words = path
+      .expand((p) => p.split(RegExp('[-_ ]')))
+      .where((w) => w.isNotEmpty)
+      .toList();
+  return words.first[0].toLowerCase() +
+      words.first.substring(1) +
+      words.skip(1).map((w) => w[0].toUpperCase() + w.substring(1)).join();
+}
+
+String toArb(
+  String locale,
+  Map<String, String> messages, {
+  required bool withMetadata,
+}) {
+  final arb = <String, dynamic>{'@@locale': locale};
+  for (final MapEntry(:key, :value) in messages.entries) {
+    final converted = convertMessage(value, key: key);
+    arb[key] = converted.text;
+    if (withMetadata && converted.placeholders.isNotEmpty) {
+      arb['@$key'] = {
+        'placeholders': {
+          for (final MapEntry(key: name, value: type)
+              in converted.placeholders.entries)
+            name: type == PlaceholderType.number
+                ? {'type': 'num', 'format': 'decimalPattern'}
+                : {'type': 'String'},
+        },
+      };
+    }
+  }
+  return '${const JsonEncoder.withIndent('  ').convert(arb)}\n';
+}
+
+enum PlaceholderType { text, number }
+
+class ConvertedMessage {
+  ConvertedMessage(this.text, this.placeholders);
+  final String text;
+  final Map<String, PlaceholderType> placeholders;
+}
+
+/// Parses one ICU message and rewrites what gen-l10n cannot read.
+ConvertedMessage convertMessage(String message, {String key = ''}) {
+  final parser = _IcuParser(message, key);
+  final text = parser.parseMessage(pluralArg: null);
+  if (parser.pos != message.length) {
+    throw FormatException('Unexpected "}" in $key: $message');
+  }
+  return ConvertedMessage(text, parser.placeholders);
+}
+
+/// Dart's reserved words, which gen-l10n cannot use as parameter names.
+const _dartReserved = {
+  'assert',
+  'break',
+  'case',
+  'catch',
+  'class',
+  'const',
+  'continue',
+  'default',
+  'do',
+  'else',
+  'enum',
+  'extends',
+  'false',
+  'final',
+  'finally',
+  'for',
+  'if',
+  'in',
+  'is',
+  'new',
+  'null',
+  'rethrow',
+  'return',
+  'super',
+  'switch',
+  'this',
+  'throw',
+  'true',
+  'try',
+  'var',
+  'void',
+  'while',
+  'with',
+};
+
+/// A placeholder name gen-l10n can use: a reserved word (the web's `{new}`)
+/// gets "Value" added. Screens pass placeholders by position, so only the
+/// generated parameter's name changes.
+String safePlaceholderName(String name) =>
+    _dartReserved.contains(name) ? '${name}Value' : name;
+
+class _IcuParser {
+  _IcuParser(this.src, this.key);
+  final String src;
+  final String key;
+  int pos = 0;
+  final placeholders = <String, PlaceholderType>{};
+
+  void _type(String name, PlaceholderType type) {
+    // A placeholder used as a number anywhere is a number.
+    if (placeholders[name] != PlaceholderType.number) placeholders[name] = type;
+  }
+
+  /// Text until an unmatched "}" or the end.
+  String parseMessage({required String? pluralArg}) {
+    final b = StringBuffer();
+    while (pos < src.length) {
+      final c = src[pos];
+      if (c == '}') break;
+      if (c == '{') {
+        b.write(_parseArgument());
+      } else if (c == '#' && pluralArg != null) {
+        b.write('{$pluralArg}');
+        pos++;
+      } else {
+        b.write(c);
+        pos++;
+      }
+    }
+    return b.toString();
+  }
+
+  String _parseArgument() {
+    pos++; // {
+    final name = safePlaceholderName(_word());
+    _spaces();
+    if (_peek('}')) {
+      pos++;
+      _type(name, PlaceholderType.text);
+      return '{$name}';
+    }
+    _expect(',');
+    _spaces();
+    final kind = _word();
+    _spaces();
+    switch (kind) {
+      case 'number':
+        _expect('}');
+        _type(name, PlaceholderType.number);
+        return '{$name}';
+      case 'plural' || 'select':
+        _expect(',');
+        final cases = StringBuffer();
+        while (true) {
+          _spaces();
+          if (_peek('}')) break;
+          final selector = _selector();
+          _spaces();
+          _expect('{');
+          final body = parseMessage(pluralArg: kind == 'plural' ? name : null);
+          _expect('}');
+          cases.write(' $selector{$body}');
+        }
+        pos++; // }
+        _type(
+          name,
+          kind == 'plural' ? PlaceholderType.number : PlaceholderType.text,
+        );
+        return '{$name, $kind,$cases}';
+      default:
+        throw FormatException('Unsupported "{$name, $kind}" in $key');
+    }
+  }
+
+  String _word() {
+    final m = RegExp(r'[A-Za-z_][A-Za-z0-9_]*').matchAsPrefix(src, pos);
+    if (m == null) throw FormatException('Expected a name at $pos in $key');
+    pos = m.end;
+    return m[0]!;
+  }
+
+  String _selector() {
+    final m = RegExp(r'=?[A-Za-z0-9_]+').matchAsPrefix(src, pos);
+    if (m == null) throw FormatException('Expected a case at $pos in $key');
+    pos = m.end;
+    return m[0]!;
+  }
+
+  void _spaces() {
+    while (pos < src.length && src[pos].trim().isEmpty) {
+      pos++;
+    }
+  }
+
+  bool _peek(String s) => src.startsWith(s, pos);
+
+  void _expect(String s) {
+    if (!_peek(s)) throw FormatException('Expected "$s" at $pos in $key');
+    pos += s.length;
+  }
+}
