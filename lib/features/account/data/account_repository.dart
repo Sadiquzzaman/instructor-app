@@ -73,6 +73,34 @@ class SignedInDevice {
   }
 }
 
+/// How one kind of message reaches me (`GET /me/notification-prefs`,
+/// FND-12). In-app (the bell) is always on; SMS and email are switchable
+/// where [allowed] lists them.
+@immutable
+class NotificationPref {
+  const NotificationPref({
+    required this.eventType,
+    required this.channels,
+    required this.allowed,
+  });
+
+  /// "attendance.absent", "exam.scheduled" and so on.
+  final String eventType;
+  final List<String> channels;
+  final List<String> allowed;
+
+  static NotificationPref? fromJson(Object? json) {
+    if (json is! Map || json['event_type'] is! String) return null;
+    List<String> list(Object? v) =>
+        v is List ? v.whereType<String>().toList() : const [];
+    return NotificationPref(
+      eventType: json['event_type'] as String,
+      channels: list(json['channels']),
+      allowed: list(json['allowed']),
+    );
+  }
+}
+
 class AccountRepository {
   AccountRepository(this.api);
 
@@ -107,6 +135,25 @@ class AccountRepository {
     return payload.map(SignedInDevice.fromJson).nonNulls.toList();
   }
 
+  Future<List<NotificationPref>> notificationPrefs() async {
+    final payload = (await api.get('/me/notification-prefs')).payload;
+    if (payload is! List) return const [];
+    return payload.map(NotificationPref.fromJson).nonNulls.toList();
+  }
+
+  /// Saves the channels for one kind of message; returns them all again.
+  Future<List<NotificationPref>> saveNotificationPref(
+    String eventType,
+    List<String> channels,
+  ) async {
+    final payload = (await api.put(
+      '/me/notification-prefs',
+      data: {'event_type': eventType, 'channels': channels},
+    )).payload;
+    if (payload is! List) return const [];
+    return payload.map(NotificationPref.fromJson).nonNulls.toList();
+  }
+
   Future<void> signOutDevice(String id) => api.delete('/auth/sessions/$id');
 
   /// Returns how many devices were signed out.
@@ -128,6 +175,12 @@ final profileProvider = FutureProvider.autoDispose<Profile>((ref) {
   ref.watch(sessionProvider.select((s) => s?.userId));
   return ref.read(accountRepositoryProvider).profile();
 }, retry: (retryCount, error) => null);
+
+final notificationPrefsProvider =
+    FutureProvider.autoDispose<List<NotificationPref>>((ref) {
+      ref.watch(sessionProvider.select((s) => s?.userId));
+      return ref.read(accountRepositoryProvider).notificationPrefs();
+    }, retry: (retryCount, error) => null);
 
 final devicesProvider = FutureProvider.autoDispose<List<SignedInDevice>>((ref) {
   ref.watch(sessionProvider.select((s) => s?.userId));

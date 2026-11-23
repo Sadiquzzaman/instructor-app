@@ -14,6 +14,7 @@ import 'package:instructor_app/core/widgets/state_views.dart';
 import 'package:instructor_app/core/widgets/status_pill.dart';
 import 'package:instructor_app/features/account/data/account_repository.dart';
 import 'package:instructor_app/features/account/data/change_password_validation.dart';
+import 'package:instructor_app/features/organization/data/log_names.g.dart';
 
 /// The web's /account: the profile (read only, as on the web), change
 /// password, and the signed-in devices. The language switch is in the top
@@ -32,6 +33,8 @@ class AccountScreen extends ConsumerWidget {
             _ProfileCard(),
             SizedBox(height: AppSpacing.lg),
             _ChangePasswordCard(),
+            SizedBox(height: AppSpacing.lg),
+            _NotificationsCard(),
             SizedBox(height: AppSpacing.lg),
             _DevicesCard(),
           ],
@@ -315,6 +318,153 @@ class _ChangePasswordCardState extends ConsumerState<_ChangePasswordCard> {
       ),
     );
   }
+}
+
+/// The web's "Notifications" card (FND-12): SMS or email for each kind of
+/// message; the bell in the app always gets them.
+class _NotificationsCard extends ConsumerStatefulWidget {
+  const _NotificationsCard();
+
+  @override
+  ConsumerState<_NotificationsCard> createState() => _NotificationsCardState();
+}
+
+class _NotificationsCardState extends ConsumerState<_NotificationsCard> {
+  /// Saved answers, shown until the list is read again.
+  List<NotificationPref>? _saved;
+  bool _saving = false;
+
+  static const _optional = ['SMS', 'EMAIL'];
+
+  Future<void> _toggle(NotificationPref p, String channel, bool on) async {
+    final l10n = context.l10n;
+    final messenger = ScaffoldMessenger.of(context);
+    final channels = on
+        ? [...p.channels, channel]
+        : p.channels.where((c) => c != channel).toList();
+    setState(() => _saving = true);
+    try {
+      final all = await ref
+          .read(accountRepositoryProvider)
+          .saveNotificationPref(p.eventType, channels);
+      if (mounted && all.isNotEmpty) setState(() => _saved = all);
+      messenger.showSnackBar(
+        SnackBar(content: Text(l10n.notificationsPrefsSaved)),
+      );
+    } on Object catch (e) {
+      messenger.showSnackBar(SnackBar(content: Text(apiErrorText(l10n, e))));
+    } finally {
+      if (mounted) setState(() => _saving = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final text = Theme.of(context).textTheme;
+    final colors = AppColors.of(context);
+    return _Section(
+      title: l10n.notificationsPrefsTitle,
+      intro: l10n.notificationsPrefsIntro,
+      child: ref
+          .watch(notificationPrefsProvider)
+          .when(
+            loading: () => const Padding(
+              padding: EdgeInsets.all(AppSpacing.lg),
+              child: Center(child: CircularProgressIndicator()),
+            ),
+            error: (e, _) => ErrorView(
+              title: l10n.notificationsPrefsLoadFailed,
+              retryLabel: l10n.uiErrorRetry,
+              onRetry: () => ref.invalidate(notificationPrefsProvider),
+            ),
+            data: (loaded) {
+              final prefs = _saved ?? loaded;
+              final anySms = prefs.any((p) => p.allowed.contains('SMS'));
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  for (final p in prefs)
+                    Padding(
+                      key: Key('pref-${p.eventType}'),
+                      padding: const EdgeInsets.symmetric(
+                        vertical: AppSpacing.xs,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            messageEventName(l10n, p.eventType) ?? p.eventType,
+                            style: text.bodyMedium?.copyWith(
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            l10n.notificationsPrefsInAppAlways,
+                            style: text.bodySmall?.copyWith(
+                              color: colors.inkMuted,
+                            ),
+                          ),
+                          Wrap(
+                            spacing: AppSpacing.md,
+                            children: [
+                              for (final c in _optional)
+                                if (p.allowed.contains(c))
+                                  _ChannelBox(
+                                    key: Key('pref-${p.eventType}-$c'),
+                                    label: c == 'SMS'
+                                        ? l10n.notificationsPrefsChannelsSMS
+                                        : l10n.notificationsPrefsChannelsEMAIL,
+                                    value: p.channels.contains(c),
+                                    onChanged: _saving
+                                        ? null
+                                        : (on) => _toggle(p, c, on),
+                                  ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  if (anySms)
+                    Text(
+                      l10n.notificationsPrefsSmsHint,
+                      style: text.bodySmall?.copyWith(color: colors.inkMuted),
+                    ),
+                ],
+              );
+            },
+          ),
+    );
+  }
+}
+
+/// A checkbox with its label, the whole row tappable.
+class _ChannelBox extends StatelessWidget {
+  const _ChannelBox({
+    required this.label,
+    required this.value,
+    required this.onChanged,
+    super.key,
+  });
+
+  final String label;
+  final bool value;
+  final ValueChanged<bool>? onChanged;
+
+  @override
+  Widget build(BuildContext context) => InkWell(
+    onTap: onChanged == null ? null : () => onChanged!(!value),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Checkbox(
+          value: value,
+          onChanged: onChanged == null ? null : (v) => onChanged!(v ?? false),
+        ),
+        Text(label),
+      ],
+    ),
+  );
 }
 
 class _DevicesCard extends ConsumerWidget {

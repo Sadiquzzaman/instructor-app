@@ -3,7 +3,7 @@
 Each item: what, and why it waits.
 
 - **iOS-style text menus in Bangla on iOS** are covered by `cupertino_ui`; check them on Jubaer's Mac at the end of Stage 0 (they cannot be seen on Android).
-- **The rest of the web's account page** (notification channels, "become a teacher" request, plan and billing summary, level-labels card, profile photo): Stage 0 PR 12 covers the profile, password and devices only; the others come with the stages that need them (billing shows the plan only, per the owner).
+- **The rest of the web's account page** ("become a teacher" request, plan and billing summary, level-labels card, profile photo): notification channels are in the app since 24 Nov; billing shows the plan only (owner); there is no profile-photo endpoint in the API.
 - Rich text: homework instructions (and later resource notes, discussions) come from the web editor as HTML; the app shows them as plain paragraphs and lists (`core/text/html_text.dart`). Bold, links and tables need an HTML renderer package (owner's approval).
 - Homework photos: the web combines several photos into one PDF before handing in; the app uploads each photo (up to the homework's file limit). Combining needs a PDF package (owner's approval).
 - Class discussions: a teacher-side view (start a conversation with a student) comes with Stage 2. (Editing posts and comments, and deleting comments, are in the app since 24 Nov.)
