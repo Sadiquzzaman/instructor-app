@@ -41,6 +41,7 @@
     "locationOpenSettings": "Open settings",
     "attendanceRefresh": "Refresh",
     "resultNotPublished": "Your result shows here once your teacher publishes it.",
+    "resultOutsideWorkspace": "This test is in another workspace. Switch to that workspace to see the result.",
     "resultQuestion": "Question {number, number}",
     "resultYourAnswer": "Your answer",
     "resultCorrectAnswer": "Correct answer",

@@ -9604,6 +9604,7 @@
   "appLocationOpenSettings": "Open settings",
   "appAttendanceRefresh": "Refresh",
   "appResultNotPublished": "Your result shows here once your teacher publishes it.",
+  "appResultOutsideWorkspace": "This test is in another workspace. Switch to that workspace to see the result.",
   "appResultQuestion": "Question {number}",
   "@appResultQuestion": {
     "placeholders": {

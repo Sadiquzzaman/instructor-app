@@ -123,7 +123,23 @@ FakeApi _api() => FakeApi()
   ..on('GET /student/exams/t3/result', (_) => ok(_result))
   ..on(
     'GET /student/exams/t9/result',
-    (_) => apiError(403, message: 'Result has not been published yet'),
+    (_) => apiError(
+      403,
+      code: 'RESULT_NOT_PUBLISHED',
+      message: 'Result has not been published yet',
+    ),
+  )
+  ..on(
+    'GET /student/exams/t8/result',
+    (_) => apiError(
+      403,
+      code: 'EXAM_OUTSIDE_WORKSPACE',
+      message: 'This exam is outside your selected workspace',
+    ),
+  )
+  ..on(
+    'GET /student/exams/t7/result',
+    (_) => apiError(403, message: 'Forbidden resource'),
   )
   ..on(
     'GET /student/classes/c1',
@@ -214,6 +230,22 @@ void main() {
   testWidgets('a result not published yet says so', (tester) async {
     await _open(tester, '${AppRoutes.tests}/t9/results');
     expect(find.text(_en.appResultNotPublished), findsOneWidget);
+    await tester.pump(const Duration(seconds: 1));
+  });
+
+  testWidgets('a result in another workspace says to switch', (tester) async {
+    await _open(tester, '${AppRoutes.tests}/t8/results');
+    expect(find.text(_en.appResultOutsideWorkspace), findsOneWidget);
+    expect(find.text(_en.appResultNotPublished), findsNothing);
+    await tester.pump(const Duration(seconds: 1));
+  });
+
+  testWidgets('any other refusal is an error, not "not published"', (
+    tester,
+  ) async {
+    await _open(tester, '${AppRoutes.tests}/t7/results');
+    expect(find.text(_en.appResultNotPublished), findsNothing);
+    expect(find.text(_en.testsResultsFailed), findsOneWidget);
     await tester.pump(const Duration(seconds: 1));
   });
 
