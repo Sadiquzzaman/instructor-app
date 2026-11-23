@@ -98,10 +98,19 @@ FakeApi _api({FakeHandler? subjects, FakeHandler? conversations}) {
             'created_at': '2026-11-17T09:00:00Z',
             'author': {'id': 't1', 'name': 'Karim Uddin'},
           },
+          {
+            'id': 'k3',
+            'content': 'I will bring it',
+            'created_at': '2026-11-17T10:00:00Z',
+            'author': {'id': 'user-1', 'name': 'Test Student'},
+          },
         ]),
       ),
     )
     ..on('POST $_scope/discussions/p1/comments', (_) => ok({'id': 'k2'}))
+    ..on('PATCH $_scope/discussions/p1', (_) => ok({'id': 'p1'}))
+    ..on('PATCH $_scope/discussions/p1/comments/k3', (_) => ok({'id': 'k3'}))
+    ..on('DELETE $_scope/discussions/p1/comments/k3', (_) => ok(null))
     ..on(
       'GET $_scope/private-conversations',
       conversations ??
@@ -302,6 +311,79 @@ void main() {
     );
     await tester.pumpAndSettle();
     expect(api.to('DELETE $_scope/discussions/p1'), hasLength(1));
+    await _end(tester);
+  });
+
+  testWidgets('edit my own post in place', (tester) async {
+    final api = _api();
+    await _openDiscussions(tester, api);
+    // Not someone else's.
+    expect(find.byKey(const Key('post-edit-p2')), findsNothing);
+    final edit = find.byKey(const Key('post-edit-p1'));
+    await _scrollTo(tester, edit);
+    await tester.tap(edit);
+    await tester.pumpAndSettle();
+    await tester.enterText(
+      find.descendant(
+        of: find.byKey(const Key('post-edit-field-p1')),
+        matching: find.byType(TextField),
+      ),
+      'When is the test? (Friday?)',
+    );
+    final save = find.byKey(const Key('post-edit-save-p1'));
+    await tester.ensureVisible(save);
+    await tester.pumpAndSettle();
+    await tester.tap(save);
+    await tester.pumpAndSettle();
+    // Only the text goes; the category and files stay.
+    expect(api.to('PATCH $_scope/discussions/p1').single.body, {
+      'content': 'When is the test? (Friday?)',
+    });
+    expect(find.byKey(const Key('post-edit-field-p1')), findsNothing);
+    await _end(tester);
+  });
+
+  testWidgets('edit and delete my own comment, not others', (tester) async {
+    final api = _api();
+    await _openDiscussions(tester, api);
+    final post = find.byKey(const Key('post-p1'));
+    await _scrollTo(tester, post);
+    await tester.tap(
+      find.descendant(
+        of: post,
+        matching: find.text(_en.discussionsPostComments(1)),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('comment-menu-k1')), findsNothing);
+    final menu = find.byKey(const Key('comment-menu-k3'));
+    await _scrollTo(tester, menu);
+    await tester.tap(menu);
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('comment-edit')));
+    await tester.pumpAndSettle();
+    await tester.enterText(
+      find.descendant(
+        of: find.byKey(const Key('comment-edit-field')),
+        matching: find.byType(TextField),
+      ),
+      'I will bring it on Friday',
+    );
+    await tester.tap(find.byKey(const Key('comment-edit-save')));
+    await tester.pumpAndSettle();
+    expect(api.to('PATCH $_scope/discussions/p1/comments/k3').single.body, {
+      'content': 'I will bring it on Friday',
+    });
+
+    await _scrollTo(tester, menu);
+    await tester.tap(menu);
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key('comment-delete')));
+    await tester.pumpAndSettle();
+    expect(find.text(_en.discussionsPostDeleteCommentTitle), findsOneWidget);
+    await tester.tap(find.byKey(const Key('comment-delete-confirm')));
+    await tester.pumpAndSettle();
+    expect(api.to('DELETE $_scope/discussions/p1/comments/k3'), hasLength(1));
     await _end(tester);
   });
 
