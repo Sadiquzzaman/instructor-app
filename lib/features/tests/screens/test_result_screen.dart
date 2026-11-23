@@ -32,12 +32,19 @@ class TestResultScreen extends ConsumerWidget {
         constraints: const BoxConstraints(maxWidth: 720),
         child: result.when(
           loading: () => LoadingView(semanticsLabel: l10n.testsResultsTitle),
-          // 403 "Result has not been published yet" (no code yet, tes-taker issue).
-          error: (e, _) => e is ApiException && e.statusCode == 403
+          // The server says why with a code (tes-taker#351); any other
+          // refusal is an error.
+          error: (e, _) => e is ApiException && e.code == 'RESULT_NOT_PUBLISHED'
               ? EmptyView(
                   icon: Icons.hourglass_empty,
                   title: l10n.testsResultsTitle,
                   message: l10n.appResultNotPublished,
+                )
+              : e is ApiException && e.code == 'EXAM_OUTSIDE_WORKSPACE'
+              ? EmptyView(
+                  icon: Icons.swap_horiz,
+                  title: l10n.testsResultsTitle,
+                  message: l10n.appResultOutsideWorkspace,
                 )
               : ErrorView(
                   title: l10n.testsResultsFailed,

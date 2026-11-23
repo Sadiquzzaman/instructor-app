@@ -41,6 +41,7 @@
     "locationOpenSettings": "সেটিংস খুলুন",
     "attendanceRefresh": "রিফ্রেশ করুন",
     "resultNotPublished": "আপনার শিক্ষক প্রকাশ করলে ফলাফল এখানে দেখাবে।",
+    "resultOutsideWorkspace": "এই টেস্টটি অন্য একটি ওয়ার্কস্পেসের। ফলাফল দেখতে সেই ওয়ার্কস্পেসে যান।",
     "resultQuestion": "প্রশ্ন {number, number}",
     "resultYourAnswer": "আপনার উত্তর",
     "resultCorrectAnswer": "সঠিক উত্তর",

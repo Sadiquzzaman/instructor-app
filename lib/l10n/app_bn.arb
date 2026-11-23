@@ -4633,6 +4633,7 @@
   "appLocationOpenSettings": "সেটিংস খুলুন",
   "appAttendanceRefresh": "রিফ্রেশ করুন",
   "appResultNotPublished": "আপনার শিক্ষক প্রকাশ করলে ফলাফল এখানে দেখাবে।",
+  "appResultOutsideWorkspace": "এই টেস্টটি অন্য একটি ওয়ার্কস্পেসের। ফলাফল দেখতে সেই ওয়ার্কস্পেসে যান।",
   "appResultQuestion": "প্রশ্ন {number}",
   "appResultYourAnswer": "আপনার উত্তর",
   "appResultCorrectAnswer": "সঠিক উত্তর",
