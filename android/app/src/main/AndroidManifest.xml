@@ -1,4 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Every API call and file needs the network. Debug builds add this by
+         themselves; release builds (the test APKs and the stores) only have it
+         when it is declared here. -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <!-- Check-in to in-person classes: one location fix while the app is open (Stage 1). -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
