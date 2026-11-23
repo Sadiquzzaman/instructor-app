@@ -7,7 +7,7 @@
 - **Every stage in the handover (0 to 5) is built and merged into `develop`:** 105 pull requests, none open, nothing on `main` yet.
 - **Students, teachers, owners and IELTS centres** can do almost everything they do on the web. What stays on the web is mostly printing, CSV imports and a few rich-text and media cases (§2).
 - **Can a real school use it on Android today? Not yet, for two reasons.**
-  1. **The network permission.** Until PR #105 (merged 23 Nov), the test APKs had no Android INTERNET permission, so on a real phone they couldn't reach the server. Every check so far ran on the emulator with a debug build, which adds it by itself. Build 118 and later have it. **The app has never been tried on a real phone.**
+  1. **The network permission.** Until PR #105 (merged 23 Nov), the test APKs had no Android INTERNET permission, so on a real phone they couldn't reach the server. Every check so far ran on the emulator with a debug build, which adds it by itself. Build 119 (the first build after the fix, checked with `aapt`) and later have it. **The app has never been tried on a real phone.**
   2. **IELTS has never touched beta.** No demo account has an IELTS workspace (tes-taker#352), so the IELTS screens are tested only against a fake server.
 - **Before a store release:**
   - a real-phone check of each role;
@@ -102,7 +102,7 @@ The written counts (530 + 187) are lower than the 738 run because some tests rep
 
 | Severity | What | State |
 | --- | --- | --- |
-| **Critical** | Test APKs up to build 117 have no INTERNET permission, so they can't reach the server on a real phone | **Fixed in PR #105**; build 118 and later have it, and a test guards it |
+| **Critical** | Test APKs up to build 117 have no INTERNET permission, so they can't reach the server on a real phone | **Fixed in PR #105**; build 119 and later have it (checked), and a test guards it |
 | High | Never run on a real phone or on iOS, so problems only real hardware shows (camera, GPS check-in, microphone, audio, notch, keyboard) are unknown | Open |
 | High | IELTS never run against the real server | Waits for tes-taker#352 |
 | Medium | Web bug: the web sends IELTS True / False / Not Given as `true-false`, which the server's form refuses; the app sends `true-false-not-given` | tes-taker#353, open |
@@ -134,7 +134,7 @@ The written counts (530 + 187) are lower than the 738 run because some tests rep
 
 ### Installing the latest test build
 
-1. On the phone, open [Releases](https://github.com/Sadiquzzaman/instructor-app/releases) and take the newest "Instructor 0.1.0 test build N". **Use build 118 or later.** Builds up to 117 can't reach the server on a real phone (§4).
+1. On the phone, open [Releases](https://github.com/Sadiquzzaman/instructor-app/releases) and take the newest "Instructor 0.1.0 test build N". **Use build 119 or later.** Builds up to 117 can't reach the server on a real phone (§4).
 2. Download the file `instructor-v0.1.0-dev.N.apk` (about 76 MB).
 3. Open it. Android asks once to allow installs from this source (the browser or Files); allow it.
 4. Install. It installs over earlier test builds, because all are signed with the same test key. It talks to beta (api-beta.instructor.academy).
@@ -213,7 +213,7 @@ Every merge into `develop` publishes a new test build automatically.
 
 ### Recommended next steps, in order
 
-1. Install build 118 or later on a real Android phone and walk each role (student, teacher, owner) on beta, including camera, check-in, a test, and chat.
+1. Install build 119 or later on a real Android phone and walk each role (student, teacher, owner) on beta, including camera, check-in, a test, and chat.
 2. Ask the backend to seed IELTS demo accounts (tes-taker#352), then check every IELTS screen on beta, including the microphone and audio on a phone.
 3. Have Jubaer run the iOS build on his Mac and an iPhone. Add the Bangla iOS permission texts there.
 4. Open the account-deletion issue and build the screen once the endpoint exists.
