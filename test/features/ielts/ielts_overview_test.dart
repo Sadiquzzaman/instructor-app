@@ -157,6 +157,17 @@ void main() {
     await _open(tester, _api(), 'OWNER', lang: 'bn');
     expect(find.text(bn.ieltsOverviewTitle), findsWidgets);
     expect(tester.takeException(), isNull);
+    await _open(tester, _api(), 'OWNER');
+    // The band table's headings stay on one line, not "Listenin / g".
+    for (final h in [
+      _en.ieltsTestsModulesShortLISTENING,
+      _en.ieltsTestsModulesShortSPEAKING,
+    ]) {
+      final heading = find.text(h).last;
+      await tester.ensureVisible(heading);
+      final line = tester.getSize(find.text(_en.ieltsOverviewBatch).last);
+      expect(tester.getSize(heading).height, line.height, reason: h);
+    }
     await _open(tester, _api(), 'STUDENT', lang: 'bn');
     expect(tester.takeException(), isNull);
   });

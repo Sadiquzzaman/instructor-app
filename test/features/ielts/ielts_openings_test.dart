@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -84,9 +85,14 @@ FakeApi _api({String status = 'PUBLISHED'}) => FakeApi()
   )
   ..on('POST /ielts/tests/t1/assignments', (_) => ok({'id': 'a2'}))
   ..on('PATCH /ielts/assignments/a1', (_) => ok({'id': 'a1'}))
-  ..on('DELETE /ielts/assignments/a1', (_) => ok(null));
+  ..on('DELETE /ielts/assignments/a1', (_) => ok(null))
+  ..on('POST /ielts/assignments/a1/speaking', (_) => ok({'attempt_id': 'sp1'}));
 
-Future<void> _open(WidgetTester tester, FakeApi api, {String? lang}) async {
+Future<ProviderContainer> _open(
+  WidgetTester tester,
+  FakeApi api, {
+  String? lang,
+}) async {
   final app = await pumpInstructorApp(
     tester,
     api: api,
@@ -97,7 +103,15 @@ Future<void> _open(WidgetTester tester, FakeApi api, {String? lang}) async {
   await tester.pumpAndSettle();
   await tester.pump(Duration.zero);
   await tester.pumpAndSettle();
+  return app;
 }
+
+String _location(ProviderContainer app) => app
+    .read(routerProvider)
+    .routerDelegate
+    .currentConfiguration
+    .last
+    .matchedLocation;
 
 Future<void> _tap(WidgetTester tester, Finder f) async {
   await tester.ensureVisible(f);
@@ -134,6 +148,30 @@ void main() {
       find.text('Speaking: ${_en.ieltsOpeningsNotStarted}'),
       findsOneWidget,
     );
+  });
+
+  testWidgets('a link in the results closes the sheet, then opens the page', (
+    tester,
+  ) async {
+    final app = await _open(tester, _api());
+    await _tap(tester, find.byKey(const Key('opening-results-a1')));
+    await _tap(tester, find.byKey(const Key('report-s1')));
+    expect(find.byKey(const Key('result-s1')), findsNothing);
+    expect(_location(app), '/ielts/report/a1/s1');
+  });
+
+  testWidgets('Examine starts the session, closes the sheet, opens it', (
+    tester,
+  ) async {
+    final api = _api();
+    final app = await _open(tester, api);
+    await _tap(tester, find.byKey(const Key('opening-results-a1')));
+    await _tap(tester, find.byKey(const Key('examine-s1')));
+    expect(api.to('POST /ielts/assignments/a1/speaking').single.body, {
+      'student_id': 's1',
+    });
+    expect(find.byKey(const Key('result-s1')), findsNothing);
+    expect(_location(app), '/ielts/speaking/sp1');
   });
 
   testWidgets('open for another batch: batch and window', (tester) async {

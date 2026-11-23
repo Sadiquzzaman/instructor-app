@@ -22,6 +22,7 @@ import 'package:instructor_app/features/ielts/data/builder.dart';
 import 'package:instructor_app/features/ielts/data/ielts.dart';
 import 'package:instructor_app/features/ielts/data/ielts_tests.dart';
 import 'package:instructor_app/features/ielts/screens/ielts_tests_screens.dart';
+import 'package:instructor_app/features/ielts/screens/speaking_screens.dart';
 import 'package:instructor_app/features/tests/data/exam_to_draft.dart';
 import 'package:instructor_app/features/tests/data/test_draft.dart';
 
@@ -327,6 +328,8 @@ class _IeltsBuilderScreenState extends ConsumerState<IeltsBuilderScreen> {
                       SliverToBoxAdapter(
                         child: TabBar(
                           isScrollable: true,
+                          // From the edge, so all four fit on a phone.
+                          tabAlignment: TabAlignment.start,
                           tabs: [
                             for (final m in t.modules)
                               Tab(
@@ -569,11 +572,12 @@ class _PartCardState extends ConsumerState<_PartCard> {
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
                 if (p.audioFileId != null)
-                  TextButton.icon(
+                  // Played here, not in the browser (the content link needs
+                  // no sign-in, but a browser may not play it).
+                  RecordingButton(
                     key: Key('part-recording-${p.id}'),
-                    icon: const Icon(Icons.play_circle_outline),
-                    label: Text(l10n.ieltsBuilderRecording),
-                    onPressed: () => openFile(context, ref, p.audioFileId!),
+                    fileId: p.audioFileId!,
+                    label: l10n.ieltsBuilderRecording,
                   )
                 else
                   Text(l10n.ieltsBuilderNoRecording, style: muted),

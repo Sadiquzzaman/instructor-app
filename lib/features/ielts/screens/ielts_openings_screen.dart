@@ -518,6 +518,13 @@ class _Results extends ConsumerWidget {
   final IeltsOpening opening;
   final List<String> modules;
 
+  /// Closes this sheet, then opens [path], so the page isn't left under it.
+  void _open(BuildContext context, String path) {
+    final router = GoRouter.of(context);
+    Navigator.of(context).pop();
+    unawaited(router.push(path));
+  }
+
   /// Starts (or resumes) a live Speaking session and opens the examiner.
   Future<void> _examine(
     BuildContext context,
@@ -527,6 +534,7 @@ class _Results extends ConsumerWidget {
     final l10n = context.l10n;
     final messenger = ScaffoldMessenger.of(context);
     final router = GoRouter.of(context);
+    final sheet = Navigator.of(context);
     try {
       final r = await ref
           .read(apiClientProvider)
@@ -535,7 +543,10 @@ class _Results extends ConsumerWidget {
             data: {'student_id': studentId},
           );
       final id = r.payload is Map ? (r.payload! as Map)['attempt_id'] : null;
-      if (id != null) unawaited(router.push('/ielts/speaking/$id'));
+      if (id != null) {
+        sheet.pop();
+        unawaited(router.push('/ielts/speaking/$id'));
+      }
     } catch (e) {
       messenger.showSnackBar(SnackBar(content: Text(apiErrorText(l10n, e))));
     }
@@ -564,7 +575,7 @@ class _Results extends ConsumerWidget {
     if (a.status != 'IN_PROGRESS' && a.band == null) {
       return TextButton(
         key: Key('mark-speaking-${r.studentId}'),
-        onPressed: () => context.push('/ielts/speaking/${a.attemptId}'),
+        onPressed: () => _open(context, '/ielts/speaking/${a.attemptId}'),
         child: Text(l10n.ieltsOpeningsMarkNow),
       );
     }
@@ -627,7 +638,8 @@ class _Results extends ConsumerWidget {
                                   Expanded(
                                     child: InkWell(
                                       key: Key('report-${r.studentId}'),
-                                      onTap: () => context.push(
+                                      onTap: () => _open(
+                                        context,
                                         '/ielts/report/${opening.id}/${r.studentId}',
                                       ),
                                       child: Text(
@@ -666,7 +678,8 @@ class _Results extends ConsumerWidget {
                                         r.modules['WRITING']!.band == null)
                                       TextButton(
                                         key: Key('mark-writing-${r.studentId}'),
-                                        onPressed: () => context.push(
+                                        onPressed: () => _open(
+                                          context,
                                           '/ielts/marking/${r.modules['WRITING']!.attemptId}',
                                         ),
                                         child: Text(l10n.ieltsOpeningsMarkNow),

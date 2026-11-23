@@ -1,8 +1,10 @@
+import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'package:instructor_app/core/routing/app_router.dart';
 import 'package:instructor_app/features/ielts/data/builder.dart';
+import 'package:instructor_app/features/ielts/data/recording.dart';
 import 'package:instructor_app/l10n/generated/app_localizations_bn.dart';
 import 'package:instructor_app/l10n/generated/app_localizations_en.dart';
 
@@ -110,7 +112,25 @@ FakeApi _api({Map<String, Object?>? test, FakeHandler? publish}) => FakeApi()
         ),
   );
 
-Future<void> _open(WidgetTester tester, FakeApi api, {String? lang}) async {
+class _FakePlayer implements RecordingPlayer {
+  final played = <Uri>[];
+
+  @override
+  Future<void> play(Uri uri) async => played.add(uri);
+
+  @override
+  Future<void> stop() async {}
+
+  @override
+  Future<void> dispose() async {}
+}
+
+Future<void> _open(
+  WidgetTester tester,
+  FakeApi api, {
+  String? lang,
+  List<Override> overrides = const [],
+}) async {
   tester.view.physicalSize = const Size(1000, 2400);
   tester.view.devicePixelRatio = 1;
   addTearDown(tester.view.reset);
@@ -119,6 +139,7 @@ Future<void> _open(WidgetTester tester, FakeApi api, {String? lang}) async {
     api: api,
     session: ieltsMember('TEACHER'),
     prefs: {'language': ?lang},
+    overrides: overrides,
   );
   app.read(routerProvider).go('/ielts/tests/t1');
   await tester.pumpAndSettle();
@@ -296,6 +317,23 @@ void main() {
     expect(api.to('PUT /ielts/tests/t1/parts/p1').single.body, {
       'title': 'Bees',
     });
+  });
+
+  testWidgets('the recording of a part plays in the app', (tester) async {
+    final t = _test(status: 'PUBLISHED');
+    final part = (t['parts']! as List).first as Map;
+    part['audio_file_id'] = 'au1';
+    part['module'] = 'LISTENING';
+    t['modules'] = ['LISTENING'];
+    t['durations'] = {'LISTENING': 1800};
+    final player = _FakePlayer();
+    await _open(
+      tester,
+      _api(test: t),
+      overrides: [recordingPlayerProvider.overrideWithValue(() => player)],
+    );
+    await _tap(tester, find.byKey(const Key('recording-au1')));
+    expect(player.played.single.path, endsWith('/files/au1/content'));
   });
 
   testWidgets('published, or someone else\'s: read-only', (tester) async {
