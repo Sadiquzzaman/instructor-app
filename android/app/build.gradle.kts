@@ -56,14 +56,6 @@ android {
                 }
         }
     }
-
-    // Android lint's release check ("lint vital") crashes inside lint itself
-    // (NoSuchMethodError in its Java parser, AGP 9.3.1) when it reads
-    // url_launcher_android's Java source. Skipped until a fixed AGP ships;
-    // see docs/TODO.md. `flutter analyze` and the tests still run.
-    lint {
-        checkReleaseBuilds = false
-    }
 }
 
 kotlin {
