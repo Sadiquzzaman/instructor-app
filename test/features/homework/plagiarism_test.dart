@@ -191,10 +191,15 @@ void main() {
     expect(find.textContaining(_en.plagiarismNotRunYet), findsOneWidget);
     expect(find.text('${_en.plagiarismLevelsHIGH} · 62%'), findsOneWidget);
     expect(find.text(_en.plagiarismNotCheckedTOOSHORT), findsOneWidget);
+    // The report's own list, not whichever scrollable the shell builds first.
+    final list = find.descendant(
+      of: find.byType(SimilarityScreen),
+      matching: find.byType(Scrollable),
+    );
     await tester.scrollUntilVisible(
       find.byKey(const Key('pair-m1')),
       200,
-      scrollable: find.byType(Scrollable).first,
+      scrollable: list.first,
     );
     // A Low pair nobody reviewed is left out.
     expect(find.byKey(const Key('pair-m2')), findsNothing);
@@ -203,7 +208,7 @@ void main() {
     await tester.scrollUntilVisible(
       find.byKey(const Key('plagiarism-run')),
       -200,
-      scrollable: find.byType(Scrollable).first,
+      scrollable: list.first,
     );
     await tester.tap(find.byKey(const Key('plagiarism-run')));
     await tester.pumpAndSettle();
@@ -211,7 +216,11 @@ void main() {
       'scope_type': 'HOMEWORK',
       'scope_id': 'h1',
     });
-    expect(find.textContaining('17'), findsWidgets);
+    expect(find.text(_en.plagiarismRan), findsOneWidget);
+    expect(find.textContaining(_en.plagiarismNotRunYet), findsNothing);
+    // Let the "Check finished" note go before the test ends.
+    await tester.pump(const Duration(seconds: 5));
+    await tester.pumpAndSettle();
   });
 
   testWidgets('a match: both texts marked; review as copied with a note', (
