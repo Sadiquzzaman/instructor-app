@@ -32,6 +32,7 @@ class AccountScreen extends ConsumerWidget {
           children: const [
             _ProfileCard(),
             SizedBox(height: AppSpacing.lg),
+            _TeacherRequestCard(),
             _ChangePasswordCard(),
             SizedBox(height: AppSpacing.lg),
             _NotificationsCard(),
@@ -465,6 +466,129 @@ class _ChannelBox extends StatelessWidget {
       ],
     ),
   );
+}
+
+/// The web's "Become a teacher" card, for students only.
+class _TeacherRequestCard extends ConsumerStatefulWidget {
+  const _TeacherRequestCard();
+
+  @override
+  ConsumerState<_TeacherRequestCard> createState() =>
+      _TeacherRequestCardState();
+}
+
+class _TeacherRequestCardState extends ConsumerState<_TeacherRequestCard> {
+  bool _sending = false;
+
+  Future<void> _ask() async {
+    final l10n = context.l10n;
+    final messenger = ScaffoldMessenger.of(context);
+    setState(() => _sending = true);
+    try {
+      await ref.read(accountRepositoryProvider).askToTeach();
+      messenger.showSnackBar(
+        SnackBar(content: Text(l10n.accountTeacherRequestDoneDetail)),
+      );
+      ref.invalidate(teacherRequestProvider);
+    } on Object catch (e) {
+      messenger.showSnackBar(SnackBar(content: Text(apiErrorText(l10n, e))));
+    } finally {
+      if (mounted) setState(() => _sending = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final role = ref.watch(profileProvider).value?.role;
+    if (role != 'STUDENT') return const SizedBox.shrink();
+    final l10n = context.l10n;
+    final text = Theme.of(context).textTheme;
+    final colors = AppColors.of(context);
+    final language = Localizations.localeOf(context).languageCode;
+    final request = ref.watch(teacherRequestProvider);
+    return Padding(
+      padding: const EdgeInsets.only(bottom: AppSpacing.lg),
+      child: _Section(
+        title: l10n.accountTeacherRequestTitle,
+        intro: l10n.accountTeacherRequestIntro,
+        child: request.when(
+          loading: () => const LinearProgressIndicator(),
+          error: (e, _) => ErrorView(
+            title: apiErrorText(l10n, e),
+            retryLabel: l10n.uiErrorRetry,
+            onRetry: () => ref.invalidate(teacherRequestProvider),
+          ),
+          data: (r) {
+            final canAsk = r == null || r.status == 'rejected';
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (r != null)
+                  Wrap(
+                    spacing: AppSpacing.sm,
+                    runSpacing: AppSpacing.xs,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      Text(
+                        l10n.accountTeacherRequestStatusLabel,
+                        style: text.bodySmall?.copyWith(color: colors.inkMuted),
+                      ),
+                      StatusPill(
+                        key: const Key('teacher-request-status'),
+                        label: switch (r.status) {
+                          'approved' =>
+                            l10n.accountTeacherRequestStatusApproved,
+                          'rejected' =>
+                            l10n.accountTeacherRequestStatusRejected,
+                          _ => l10n.accountTeacherRequestStatusPending,
+                        },
+                        tone: switch (r.status) {
+                          'approved' => StatusTone.success,
+                          'rejected' => StatusTone.danger,
+                          _ => StatusTone.warning,
+                        },
+                      ),
+                      if (r.createdAt != null)
+                        Text(
+                          l10n.accountTeacherRequestSentOn(
+                            OrgTime.date(r.createdAt!, language),
+                          ),
+                          style: text.bodySmall?.copyWith(
+                            color: colors.inkMuted,
+                          ),
+                        ),
+                    ],
+                  ),
+                if (r?.status == 'pending')
+                  Text(
+                    l10n.accountTeacherRequestPendingNote,
+                    style: text.bodySmall?.copyWith(color: colors.inkMuted),
+                  ),
+                if (r?.status == 'approved')
+                  Text(
+                    l10n.accountTeacherRequestApprovedNote,
+                    style: text.bodySmall?.copyWith(color: colors.success),
+                  ),
+                if (canAsk)
+                  Padding(
+                    padding: const EdgeInsets.only(top: AppSpacing.sm),
+                    child: FilledButton(
+                      key: const Key('teacher-request-ask'),
+                      onPressed: _sending ? null : _ask,
+                      child: Text(
+                        r?.status == 'rejected'
+                            ? l10n.accountTeacherRequestAgain
+                            : l10n.accountTeacherRequestSubmit,
+                      ),
+                    ),
+                  ),
+              ],
+            );
+          },
+        ),
+      ),
+    );
+  }
 }
 
 class _DevicesCard extends ConsumerWidget {

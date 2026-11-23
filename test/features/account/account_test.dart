@@ -44,6 +44,7 @@ List<Map<String, Object?>> _prefs({bool absentSms = false}) => [
 ];
 
 FakeApi _api({List<Map<String, Object?>>? devices}) => FakeApi()
+  ..on('GET /teacher-requests/me', (_) => ok(null))
   ..on('GET /me/notification-prefs', (_) => ok(_prefs()))
   ..on('GET /auth/contexts', (_) => ok(<Object>[]))
   ..on('GET /me/entitlements', (_) => ok({'features': <String, bool>{}}))
@@ -256,6 +257,66 @@ void main() {
     await _openAccount(tester, c);
     await _scrollTo(tester, find.text(l10n.notificationsPrefsLoadFailed));
     expect(find.text(l10n.notificationsPrefsLoadFailed), findsOneWidget);
+  });
+
+  testWidgets('a student asks to become a teacher, then sees it waiting', (
+    tester,
+  ) async {
+    Map<String, Object?>? request;
+    final api = _api()
+      ..on('GET /teacher-requests/me', (_) => ok(request))
+      ..on('POST /teacher-requests', (_) {
+        request = {
+          'id': 'r1',
+          'status': 'pending',
+          'note': null,
+          'created_at': '2026-11-24T04:00:00.000Z',
+          'reviewed_at': null,
+        };
+        return ok(request);
+      });
+    final c = await pumpInstructorApp(tester, api: api, session: testSession());
+    await _openAccount(tester, c);
+    final ask = find.byKey(const Key('teacher-request-ask'));
+    await _scrollTo(tester, ask);
+    expect(find.text(l10n.accountTeacherRequestTitle), findsOneWidget);
+    await tester.tap(ask);
+    await tester.pumpAndSettle();
+    expect(api.to('POST /teacher-requests'), hasLength(1));
+    expect(find.text(l10n.accountTeacherRequestDoneDetail), findsOneWidget);
+    expect(find.text(l10n.accountTeacherRequestStatusPending), findsOneWidget);
+    expect(find.text(l10n.accountTeacherRequestPendingNote), findsOneWidget);
+    // One open request at a time.
+    expect(ask, findsNothing);
+  });
+
+  testWidgets('a rejected request can be sent again', (tester) async {
+    final api = _api()
+      ..on(
+        'GET /teacher-requests/me',
+        (_) => ok({
+          'id': 'r1',
+          'status': 'rejected',
+          'created_at': '2026-11-20T04:00:00.000Z',
+        }),
+      );
+    final c = await pumpInstructorApp(tester, api: api, session: testSession());
+    await _openAccount(tester, c);
+    await _scrollTo(tester, find.byKey(const Key('teacher-request-ask')));
+    expect(find.text(l10n.accountTeacherRequestStatusRejected), findsOneWidget);
+    expect(find.text(l10n.accountTeacherRequestAgain), findsOneWidget);
+  });
+
+  testWidgets('teachers are not offered the request', (tester) async {
+    final api = _api()
+      ..on(
+        'GET /auth/profile',
+        (_) => ok({'full_name': 'Rina', 'role': 'TEACHER'}),
+      );
+    final c = await pumpInstructorApp(tester, api: api, session: testSession());
+    await _openAccount(tester, c);
+    expect(find.text(l10n.accountTeacherRequestTitle), findsNothing);
+    expect(api.to('GET /teacher-requests/me'), isEmpty);
   });
 
   testWidgets('devices that fail to load can be retried', (tester) async {

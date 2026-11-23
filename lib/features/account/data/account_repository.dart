@@ -101,6 +101,24 @@ class NotificationPref {
   }
 }
 
+/// A student's request to become a teacher (`/teacher-requests/me`).
+@immutable
+class TeacherRequest {
+  const TeacherRequest({required this.status, this.createdAt});
+
+  /// pending, approved or rejected.
+  final String status;
+  final DateTime? createdAt;
+
+  static TeacherRequest? fromJson(Object? json) {
+    if (json is! Map || json['status'] is! String) return null;
+    return TeacherRequest(
+      status: json['status'] as String,
+      createdAt: DateTime.tryParse((json['created_at'] as String?) ?? ''),
+    );
+  }
+}
+
 class AccountRepository {
   AccountRepository(this.api);
 
@@ -154,6 +172,14 @@ class AccountRepository {
     return payload.map(NotificationPref.fromJson).nonNulls.toList();
   }
 
+  /// My latest request to become a teacher, or null if I never asked.
+  Future<TeacherRequest?> teacherRequest() async =>
+      TeacherRequest.fromJson((await api.get('/teacher-requests/me')).payload);
+
+  Future<TeacherRequest?> askToTeach() async => TeacherRequest.fromJson(
+    (await api.post('/teacher-requests', data: <String, Object?>{})).payload,
+  );
+
   Future<void> signOutDevice(String id) => api.delete('/auth/sessions/$id');
 
   /// Returns how many devices were signed out.
@@ -181,6 +207,13 @@ final notificationPrefsProvider =
       ref.watch(sessionProvider.select((s) => s?.userId));
       return ref.read(accountRepositoryProvider).notificationPrefs();
     }, retry: (retryCount, error) => null);
+
+final teacherRequestProvider = FutureProvider.autoDispose<TeacherRequest?>((
+  ref,
+) {
+  ref.watch(sessionProvider.select((s) => s?.userId));
+  return ref.read(accountRepositoryProvider).teacherRequest();
+}, retry: (retryCount, error) => null);
 
 final devicesProvider = FutureProvider.autoDispose<List<SignedInDevice>>((ref) {
   ref.watch(sessionProvider.select((s) => s?.userId));
